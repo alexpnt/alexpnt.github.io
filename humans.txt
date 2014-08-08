@@ -1,0 +1,24 @@
+/* TEAM */
+	Alexandre Pinto
+	Site: alexpnt.github.io
+	From: Coimbra, Portugal
+
+/* THANKS */
+	
+	Skeleton: A Beautiful Boilerplate for Responsive, Mobile-Friendly Development
+	www.getskeleton.com
+
+	jQuery Lifestream Plug-in: Show a stream of your online activity with jQuery
+	https://github.com/christianv/jquery-lifestream
+
+	nanoScrollerJS jQuery plugin: A jQuery plugin that offers a simplistic way of implementing Lion OS scrollbars.
+	https://github.com/jamesflorentino/nanoScrollerJS
+
+	Font Squirrel
+	http://www.fontsquirrel.com/
+
+/* SITE */
+	Last update:2014/08/
+	Language: English
+	Technologies: HTML5,CSS,jQuery
+	Tools: Sublime Text 2, git, GIMP
