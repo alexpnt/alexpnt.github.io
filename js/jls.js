@@ -42,6 +42,13 @@ $("#lifestream").lifestream({
     }
   },
   {
+    service: 'deviantart',
+    user: 'alexpnt',
+    template: {
+      posted: 'posted <a href="${link}">${title}</a>'
+    }
+  },
+  {
     service: 'lastfm',
     user: 'alexpnt',
     template: {
