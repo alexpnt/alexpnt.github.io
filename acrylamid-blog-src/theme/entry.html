@@ -1,0 +1,29 @@
+<article>
+    <header class="entry-header">
+        <subtitle>
+            <a href="{{ env.path + entry.permalink }}" rel="bookmark canonical">{{ entry.title }} —
+            <time datetime="{{ entry.date.strftime("%Y,%m,%d") }}">
+                {{ entry.date.strftime("%d.%m.%Y") }}
+            </time></a>
+        </subtitle>
+    </header>
+    <br/>
+    {{ entry.content }}
+    <footer class="entry-footer">
+        {% if 'tag' in env.views and entry.tags %}
+            <p>Tags:
+                {% for link in entry.tags | tagify -%}
+                    <a href="{{ env.path + link.href }}" rel="tag">{{ link.title }}</a>
+                    {%- if loop.revindex > 2 -%}
+                    ,
+                    {%- elif loop.revindex == 2 %}
+                    , 
+                    {% endif %}
+                {% endfor %}
+            </p>
+        {% elif not entry.draft %}
+            <!-- <p>untagged</p> -->
+        {% endif %}
+    </footer>
+    <br class="entry-separation"/>
+</article>
