@@ -35,13 +35,6 @@ $("#lifestream").lifestream({
     }
   },
   {
-    service: 'youtube',
-    user: 'alexandpinto',
-    template: {
-      favorited: 'favorited <a href="${video.player.default}" title="${video.description}">${video.title}</a>'
-    }
-  },
-  {
     service: 'deviantart',
     user: 'alexpnt',
     template: {
