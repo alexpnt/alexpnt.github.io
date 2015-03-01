@@ -35,6 +35,21 @@ $("#lifestream").lifestream({
     }
   },
   {
+    service: "youtube",
+    user: 'alexandpinto',
+    template: {
+      posted: 'favorited <a href="${video.player.default}" title="${video.description}">${video.title}</a>'
+    }
+  },
+  {
+    service: 'reddit',
+    user: 'alexpnt',
+    template: {
+      commented: '<a href="http://www.reddit.com/r/${item.data.subreddit}/comments/${item.data.link_id.substring(3)}/u/${item.data.name.substring(3)}?context=3">commented (${score})</a> in <a href="http://www.reddit.com/r/${item.data.subreddit}">${item.data.subreddit}</a>',
+      created: '<a href="http://www.reddit.com${item.data.permalink}">created new thread (${score})</a> in <a href="http://www.reddit.com/r/${item.data.subreddit}">${item.data.subreddit}</a>'
+    }
+  },
+  {
     service: 'deviantart',
     user: 'alexpnt',
     template: {
@@ -50,3 +65,4 @@ $("#lifestream").lifestream({
   }
 ]
 });
+
