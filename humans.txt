@@ -13,6 +13,9 @@
 
 	nanoScrollerJS jQuery plugin: A jQuery plugin that offers a simplistic way of implementing Lion OS scrollbars.
 	https://github.com/jamesflorentino/nanoScrollerJS
+	
+	JavaScript library for HTML5 & CSS3 time sheets.
+	https://github.com/sbstjn/timesheet.js
 
 	Font Squirrel
 	http://www.fontsquirrel.com/
