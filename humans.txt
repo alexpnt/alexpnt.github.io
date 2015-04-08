@@ -21,7 +21,7 @@
 	http://www.fontsquirrel.com/
 
 /* SITE */
-	Last update:03/2015
+	Last update:04/2015
 	Language: English
 	Technologies: HTML5,CSS,jQuery
 	Tools: Sublime Text 2, git, GIMP
