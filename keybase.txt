@@ -1,0 +1,68 @@
+==================================================================
+https://keybase.io/alexpnt
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://alexpnt.github.io
+  * I am alexpnt (https://keybase.io/alexpnt) on keybase.
+  * I have a public key with fingerprint 66D2 5533 D53A 53C1 FC8B  170F 9B49 6838 7A4F B2C6
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "0101c8993d85a1162e873a3e6acbdae7f0ef31b33faf007dfd608bfdc433b3e2b4fc0a",
+            "fingerprint": "66d25533d53a53c1fc8b170f9b4968387a4fb2c6",
+            "host": "keybase.io",
+            "key_id": "9b4968387a4fb2c6",
+            "kid": "0101c8993d85a1162e873a3e6acbdae7f0ef31b33faf007dfd608bfdc433b3e2b4fc0a",
+            "uid": "cf244ca6b56a96f9eddc723691afd619",
+            "username": "alexpnt"
+        },
+        "service": {
+            "hostname": "alexpnt.github.io",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1477424066,
+    "expire_in": 157680000,
+    "prev": "d3e4408e0243470683eb6f01f94acc8f48ef2e9a50db563f8899e562e510c2cb",
+    "seqno": 4,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.58
+Comment: https://keybase.io/crypto
+
+yMIiAnicrVJbSFRBGF4tzbZSwWijqOCEXc3mnJlzW42ooDCIQKIipXVmzsx61Ha3
+s2fVdbtYJGghdi8KekjKAikiujyJu0kFvkgErhH0JFQUFXSjG82xegh6bF6G+ef7
+vv//Pv6hGZN8/pxT6Snna88eIDnD6fMJ3/aim5mURKJWUgqmpEY2cbEmi8XdUKNt
+SUEJyECmhmlCy1CxLGsKM3SIIdMwJRZmOgeMQ5lAyDEHQLe4pQGDcIsiCAlkCkGc
+AiyVSdyOhJkTc+yIK2Q1zVJUFUJLhViFVObUILIOuEmQqRnQ0DHiRKGaINZH4x5D
+DEdwnJXbUVETj9DEeP/A/+e5ExNylCsIUawRVcOmxk1mWVRXoGbKWDBl0wPGmRPB
+u5hA4ybWGhM+95ZJothsU+bl6hn5G1Aett36BPnlKeZE3SiNNonveteNxYMe3U3G
+PHwLI6HfSiFiRyyRpWA0MyduRyNSUBZI6tqetIx0HSkIaFqZJHrYDgvZHkLVNQOI
+4/VhzULSggwhYDCgIIh0IEJkRONA5ibClBocGYwrzMQqsIRpyA0RJlNFjqoMqEKJ
+5HnbHYlKQSTGxGEhGbfDEewmHCbtzQzWTvbl+H35ebnejvn8U4v/bN7o7Ck/Snu6
+S/bVvHm8ZkND+kK683TGOviitXpa3cVrpWsbxunbgvGbDy6nu912RoZz5+6vnqle
+f/jqe9ulVXWh7/MKPjZ+vf1+PLMMbB0p7HmZudGH+pO9c7/syT9R5TvXFTgwtLK4
+t0BrSX02CjdVV/RWLrn37c6xtg75w+ongdTV/qr7C8PXK/sHdTw90Vnh5xey+rvN
+gUDJnh2NVdkro1uOVfwoyuvIn1/2rj3v1ssz4QV1Xamjr7PSs4FvJ9viNdvoU6en
+8PCR7MdblM7x+1Mj69dlnwfW7zuuflk8beej6q0b+8KHSumiWQud8pV3B3pXLGlY
+/mnMGBt8k4ws9TfnxpLbfgISbj73
+=m42+
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/alexpnt
+
+==================================================================
