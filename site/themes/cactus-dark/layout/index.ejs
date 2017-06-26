@@ -8,7 +8,7 @@
       You can find me in many places around the web, such as:
       <ul id="sociallinks">
         <% for(var i in theme.customize.social_links) { %>
-          <li><a target="_blank" href="<%- url_for(theme.customize.social_links[i]) %>" title="<%= i %>"><%= i %>&nbsp;</a><a class="icon fa fa-<%= i %>" target="_blank" href="<%- url_for(theme.customize.social_links[i]) %>" title="<%= i %>">&nbsp;</a></li>
+          <li><a target="_blank" href="<%- url_for(theme.customize.social_links[i]) %>" title="<%= i %>"><%= i %></a>&nbsp;<a class="icon fa fa-<%= i %>" target="_blank" href="<%- url_for(theme.customize.social_links[i]) %>" title="<%= i %>">&nbsp;</a></li>
         <% } %>
       </ul>
 
