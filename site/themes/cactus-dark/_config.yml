@@ -1,0 +1,54 @@
+nav:
+  Home: /
+  CV: /cv/
+  # Blog: /archives/
+  Contact: /contact/
+
+projects_url: http://github.com/probberechts
+
+customize:
+    gravatar:
+        email: alexandpinto@gmail.com
+    logo:
+        enabled: true
+        width: 100  
+        height: 136
+        url: /images/alex.png
+        gravatar: false
+    favicon: 
+      # eg. generate with http://realfavicongenerator.net/
+      desktop:
+        url: /images/favicon.ico
+        gravatar: false
+      android:
+        url: /images/favicon-192x192.png
+        gravator: false
+      apple:
+        url: /images/apple-touch-icon.png
+        gravator: false
+    social_links:
+        github: https://github.com/alexpnt
+        linkedin: https://linkedin.com/in/alexandre-pinto
+        university : https://student.dei.uc.pt/~arpinto/
+        twitter: https://twitter.com/alxpnto
+        facebook: https://facebook.com/alexandpinto
+        instagram: https://instagram.com/alxpnt
+    show_all_posts: false
+    post_count: 5
+    highlight: rainbow
+
+# RSS
+rss: false
+
+# Plugins
+plugins:
+    disqus_shortname: # Disqus Comments Shortname
+    google_analytics: UA-43571022-2 # enter the tracking ID for your Google Analytics
+
+# Miscellaneous
+miscellaneous:
+    open_graph: # see http://ogp.me
+        fb_app_id:
+        fb_admins:
+        twitter_id:
+        google_plus:
