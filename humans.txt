@@ -5,23 +5,13 @@
 
 /* THANKS */
 	
-	Skeleton: A Beautiful Boilerplate for Responsive, Mobile-Friendly Development
-	www.getskeleton.com
+	Hexo: A fast, simple & powerful blog framework
+	https://hexo.io/
 
-	jQuery Lifestream Plug-in: Show a stream of your online activity with jQuery
-	https://github.com/christianv/jquery-lifestream
-
-	nanoScrollerJS jQuery plugin: A jQuery plugin that offers a simplistic way of implementing Lion OS scrollbars.
-	https://github.com/jamesflorentino/nanoScrollerJS
-	
-	Life - a timeline of important events
-	https://github.com/cheeaun/life
-
-	Font Squirrel
-	http://www.fontsquirrel.com/
+	https://probberechts.github.io/cactus-dark/: a theme for the Hexo blogging framework
 
 /* SITE */
-	Last update:04/2015
+	Last update: 03/2017
 	Language: English
-	Technologies: HTML5,CSS,jQuery
-	Tools: Sublime Text 2, git, GIMP
+	Technologies: HTML5,CSS,javascript
+	Tools: Sublime Text 3, git, javascrit
