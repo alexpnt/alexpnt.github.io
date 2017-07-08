@@ -11,8 +11,8 @@ In our daily lifes, we follow a set of principles that guide our behaviour and a
 * Listen.
 * Observe.
 * Exercise.
-* Communicate. 
 * Experiment.  
+* Communicate. 
 * Keep learning.
 * Enjoy moments.
 * Think and Ask.
