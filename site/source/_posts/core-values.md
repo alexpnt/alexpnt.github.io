@@ -10,16 +10,17 @@ In our daily lifes, we follow a set of principles that guide our behaviour and a
 
 * Listen.
 * Observe.
-* Communicate. 
-* Be positive.
-* Enjoy moments.
-* Do not ignore your intuiton.
-* Handle stressful situations with calm and patiente.
-* Things are built by increments. Focus on the small units and in time, you will achieve the bigger picture.
-* You cannot change the past, but you can affect the future.
-* Avoid multitasking.
-* Have a passion.
-* Think and Ask.
-* Keep learning.
-* Experiment.     
 * Exercise.
+* Communicate. 
+* Experiment.  
+* Keep learning.
+* Enjoy moments.
+* Think and Ask.
+* Have a passion.
+* Avoid multitasking.
+* Be positive and motivated.
+* Do not ignore your intuiton.
+* Handle stressful situations calmy and with patience.
+* You cannot change the past, but you can affect the future.
+* Intercalate work with moments of leisure, instead of the opposite.
+* Things are built by increments. Focus on the small units and in time, you will achieve the bigger picture.
