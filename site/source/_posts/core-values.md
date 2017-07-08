@@ -19,6 +19,7 @@ In our daily lifes, we follow a set of principles that guide our behaviour and a
 * You cannot change the past, but you can affect the future.
 * Avoid multitasking.
 * Have a passion.
+* Think and Ask.
 * Keep learning.
 * Experiment.     
 * Exercise.
