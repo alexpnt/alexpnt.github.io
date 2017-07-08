@@ -15,7 +15,7 @@ In our daily lifes, we follow a set of principles that guide our behaviour and a
 * Enjoy moments.
 * Do not ignore your intuiton.
 * Handle stressful situations with calm and patiente.
-* Things are built by increments. So focus on the small units and in time, you will achieve the bigger picture.
+* Things are built by increments. Focus on the small units and in time, you will achieve the bigger picture.
 * You cannot change the past, but you can affect the future.
 * Avoid multitasking.
 * Have a passion.
