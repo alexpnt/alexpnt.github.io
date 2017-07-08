@@ -1,7 +1,7 @@
 nav:
   Home: /
   CV: /cv/
-  # Blog: /archives/
+  Blog: /archives/
   Contact: /contact/
 
 projects_url: http://github.com/probberechts
@@ -36,7 +36,7 @@ customize:
         instagram: https://instagram.com/alxpnt
     show_all_posts: false
     post_count: 5
-    highlight: rainbow
+    highlight: monokai-sublime
 
 # RSS
 rss: false
