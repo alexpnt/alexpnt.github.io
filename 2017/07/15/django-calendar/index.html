@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="What is Django ?Django is a well-known web framework, written in Python, which comes packaged with lots of out of the box features, such as:  An ORM (Object-relational mapping) where you define your">
+<meta name="keywords" content="django,development,python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Getting started with Django - Building a simple calendar">
+<meta property="og:url" content="https://alexpnt.github.io/2017/07/15/django-calendar/index.html">
+<meta property="og:site_name" content="Alexandre Pinto">
+<meta property="og:description" content="What is Django ?Django is a well-known web framework, written in Python, which comes packaged with lots of out of the box features, such as:  An ORM (Object-relational mapping) where you define your">
+<meta property="og:image" content="https://alexpnt.github.io/images/dev.png">
+<meta property="og:image" content="https://alexpnt.github.io/images/add_event.png">
+<meta property="og:image" content="https://alexpnt.github.io/images/overlap.png">
+<meta property="og:image" content="https://alexpnt.github.io/images/calendar.png">
+<meta property="og:image" content="https://alexpnt.github.io/images/events.png">
+<meta property="og:image" content="https://alexpnt.github.io/images/birthday.png">
+<meta property="og:updated_time" content="2017-07-14T01:00:58.977Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Getting started with Django - Building a simple calendar">
+<meta name="twitter:description" content="What is Django ?Django is a well-known web framework, written in Python, which comes packaged with lots of out of the box features, such as:  An ORM (Object-relational mapping) where you define your">
+<meta name="twitter:image" content="https://alexpnt.github.io/images/dev.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Getting started with Django - Building a simple calendar</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/cv/">CV</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/contact/">Contact</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2017/07/02/core-values/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://alexpnt.github.io/2017/07/15/django-calendar/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://alexpnt.github.io/2017/07/15/django-calendar/&text=Getting started with Django - Building a simple calendar"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://alexpnt.github.io/2017/07/15/django-calendar/&title=Getting started with Django - Building a simple calendar"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://alexpnt.github.io/2017/07/15/django-calendar/&is_video=false&description=Getting started with Django - Building a simple calendar"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Getting started with Django - Building a simple calendar&body=Check out this article: https://alexpnt.github.io/2017/07/15/django-calendar/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://alexpnt.github.io/2017/07/15/django-calendar/&title=Getting started with Django - Building a simple calendar"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://alexpnt.github.io/2017/07/15/django-calendar/&title=Getting started with Django - Building a simple calendar"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://alexpnt.github.io/2017/07/15/django-calendar/&title=Getting started with Django - Building a simple calendar"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://alexpnt.github.io/2017/07/15/django-calendar/&title=Getting started with Django - Building a simple calendar"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://alexpnt.github.io/2017/07/15/django-calendar/&name=Getting started with Django - Building a simple calendar&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-Django"><span class="toc-number">1.</span> <span class="toc-text">What is Django ?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Getting-started"><span class="toc-number">2.</span> <span class="toc-text">Getting started</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Events"><span class="toc-number">3.</span> <span class="toc-text">Events</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Calendar"><span class="toc-number">4.</span> <span class="toc-text">Calendar</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Getting started with Django - Building a simple calendar
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Alexandre Pinto</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-07-14T23:39:00.000Z" itemprop="datePublished">2017-07-15</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/development/">development</a>, <a class="tag-link" href="/tags/django/">django</a>, <a class="tag-link" href="/tags/python/">python</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="/images/dev.png" alt=""></p>
+<h2 id="What-is-Django"><a href="#What-is-Django" class="headerlink" title="What is Django ?"></a>What is Django ?</h2><p>Django is a well-known web framework, written in Python, which comes packaged with lots of out of the box features, such as:</p>
+<ul>
+<li>An ORM (Object-relational mapping) where you define your data models and get access to a high-level API that lets you manage your data, instead of writing raw SQL.</li>
+<li>A template system for writing the front end, extending the basic HTML functionality. </li>
+<li>An admin panel where you can manage your data models.</li>
+<li>Security measures.</li>
+<li>Authentication, Form handling and URL routing.</li>
+</ul>
+<p>This speeds up your development, since the most basic and common tasks are already provided to you and ready to be used, letting you focus on the logic that makes your product unique.   </p>
+<h2 id="Getting-started"><a href="#Getting-started" class="headerlink" title="Getting started"></a>Getting started</h2><p><strong>Installing and activating a virtual environment</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget https://bootstrap.pypa.io/get-pip.py</div><div class="line">sudo python get-pip.py</div><div class="line">sudo pip install virtualenv</div><div class="line">virtualenv venv</div><div class="line"><span class="built_in">source</span> venv/bin/activate</div></pre></td></tr></table></figure>
+<p><strong>Installing Django</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install django==1.11.3</div></pre></td></tr></table></figure>
+<p><strong>Creating the project directory structure</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">django-admin startproject mycalendar</div><div class="line"><span class="built_in">cd</span> mycalendar</div><div class="line">python manage.py startapp events</div></pre></td></tr></table></figure>
+<p><strong>Aplplying the migrations, creating the admin account and running the web server</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">python manage.py migrate</div><div class="line">python manage.py createsuperuser</div><div class="line">python manage.py runserver</div></pre></td></tr></table></figure></p>
+<p>If you head over to <a href="http://localhost:8000/admin" target="_blank" rel="external">http://localhost:8000/admin</a>, you will see a simple administration interface.</p>
+<h2 id="Events"><a href="#Events" class="headerlink" title="Events"></a>Events</h2><p>The basic unit of our calendar will be the event, so we start by writting our event model in <em>mycalendar/events/models.py</em>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> unicode_literals</div><div class="line"></div><div class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Event</span><span class="params">(models.Model)</span>:</span></div><div class="line">    day = models.DateField(<span class="string">u'Day of the event'</span>, help_text=<span class="string">u'Day of the event'</span>)</div><div class="line">    start_time = models.TimeField(<span class="string">u'Starting time'</span>, help_text=<span class="string">u'Starting time'</span>)</div><div class="line">    end_time = models.TimeField(<span class="string">u'Final time'</span>, help_text=<span class="string">u'Final time'</span>)</div><div class="line">    notes = models.TextField(<span class="string">u'Textual Notes'</span>, help_text=<span class="string">u'Textual Notes'</span>, blank=<span class="keyword">True</span>, null=<span class="keyword">True</span>)</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></div><div class="line">        verbose_name = <span class="string">u'Scheduling'</span></div><div class="line">        verbose_name_plural = <span class="string">u'Scheduling'</span></div></pre></td></tr></table></figure>
+<p>After this step we need to tell django about our new app in <em>mycalendar/settings.py</em>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">(...)</div><div class="line"></div><div class="line"><span class="comment"># Application definition</span></div><div class="line"></div><div class="line">INSTALLED_APPS = [</div><div class="line">    <span class="string">'django.contrib.admin'</span>,</div><div class="line">    <span class="string">'django.contrib.auth'</span>,</div><div class="line">    <span class="string">'django.contrib.contenttypes'</span>,</div><div class="line">    <span class="string">'django.contrib.sessions'</span>,</div><div class="line">    <span class="string">'django.contrib.messages'</span>,</div><div class="line">    <span class="string">'django.contrib.staticfiles'</span>,</div><div class="line">    <span class="string">'events'</span></div><div class="line">]</div><div class="line"></div><div class="line">(...)</div></pre></td></tr></table></figure>
+<p>And in <em>mycalendar/events/admin.py</em> we register the model.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> unicode_literals</div><div class="line"></div><div class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</div><div class="line"><span class="keyword">from</span> models <span class="keyword">import</span> Event</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">EventAdmin</span><span class="params">(admin.ModelAdmin)</span>:</span></div><div class="line">    list_display = [<span class="string">'day'</span>, <span class="string">'start_time'</span>, <span class="string">'end_time'</span>, <span class="string">'notes'</span>]</div></pre></td></tr></table></figure></p>
+<p>Finally, we apply the changes to the database and run the app:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">python manage.py makemigrations</div><div class="line">python manage.py migrate</div><div class="line">python manage.py runserver</div></pre></td></tr></table></figure></p>
+<p>We are now able to add simple events:</p>
+<p><img src="/images/add_event.png" alt=""></p>
+<p>However, our current model does not have any validations, such as overlapping events. We can add these kind of validations in the <em>clean()</em> method of our model,  which iterates over our events and checks if there are collisions.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> unicode_literals</div><div class="line"></div><div class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</div><div class="line"><span class="keyword">from</span> django.core.exceptions <span class="keyword">import</span> ValidationError</div><div class="line"><span class="keyword">from</span> django.core.urlresolvers <span class="keyword">import</span> reverse</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Event</span><span class="params">(models.Model)</span>:</span></div><div class="line">    day = models.DateField(<span class="string">u'Day of the event'</span>, help_text=<span class="string">u'Day of the event'</span>)</div><div class="line">    start_time = models.TimeField(<span class="string">u'Starting time'</span>, help_text=<span class="string">u'Starting time'</span>)</div><div class="line">    end_time = models.TimeField(<span class="string">u'Final time'</span>, help_text=<span class="string">u'Final time'</span>)</div><div class="line">    notes = models.TextField(<span class="string">u'Textual Notes'</span>, help_text=<span class="string">u'Textual Notes'</span>, blank=<span class="keyword">True</span>, null=<span class="keyword">True</span>)</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></div><div class="line">        verbose_name = <span class="string">u'Scheduling'</span></div><div class="line">        verbose_name_plural = <span class="string">u'Scheduling'</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">check_overlap</span><span class="params">(self, fixed_start, fixed_end, new_start, new_end)</span>:</span></div><div class="line">        overlap = <span class="keyword">False</span></div><div class="line">        <span class="keyword">if</span> new_start == fixed_end <span class="keyword">or</span> new_end == fixed_start:    <span class="comment">#edge case</span></div><div class="line">            overlap = <span class="keyword">False</span></div><div class="line">        <span class="keyword">elif</span> (new_start &gt;= fixed_start <span class="keyword">and</span> new_start &lt;= fixed_end) <span class="keyword">or</span> (new_end &gt;= fixed_start <span class="keyword">and</span> new_end &lt;= fixed_end): <span class="comment">#innner limits</span></div><div class="line">            overlap = <span class="keyword">True</span></div><div class="line">        <span class="keyword">elif</span> new_start &lt;= fixed_start <span class="keyword">and</span> new_end &gt;= fixed_end: <span class="comment">#outter limits</span></div><div class="line">            overlap = <span class="keyword">True</span></div><div class="line"></div><div class="line">        <span class="keyword">return</span> overlap</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_absolute_url</span><span class="params">(self)</span>:</span></div><div class="line">        url = reverse(<span class="string">'admin:%s_%s_change'</span> % (self._meta.app_label, self._meta.model_name), args=[self.id])</div><div class="line">        <span class="keyword">return</span> <span class="string">u'&lt;a href="%s"&gt;%s&lt;/a&gt;'</span> % (url, str(self.start_time))</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">clean</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.end_time &lt;= self.start_time:</div><div class="line">            <span class="keyword">raise</span> ValidationError(<span class="string">'Ending times must after starting times'</span>)</div><div class="line"></div><div class="line">        events = Event.objects.filter(day=self.day)</div><div class="line">        <span class="keyword">if</span> events.exists():</div><div class="line">            <span class="keyword">for</span> event <span class="keyword">in</span> events:</div><div class="line">                <span class="keyword">if</span> self.check_overlap(event.start_time, event.end_time, self.start_time, self.end_time):</div><div class="line">                    <span class="keyword">raise</span> ValidationError(</div><div class="line">                        <span class="string">'There is an overlap with another event: '</span> + str(event.day) + <span class="string">', '</span> + str(</div><div class="line">                            event.start_time) + <span class="string">'-'</span> + str(event.end_time))</div></pre></td></tr></table></figure>
+<p>Our app now detects collisions.</p>
+<p><img src="/images/overlap.png" alt=""></p>
+<h2 id="Calendar"><a href="#Calendar" class="headerlink" title="Calendar"></a>Calendar</h2><p>It would be nice to add a monthly view of our events. There are some third-party packages available, but for the sake of simplicity we will stick to the built-in <em>HTMLCalendar</em> class provided by python.</p>
+<p>We first need to override the <em>change_list.html</em> admin template by creating a file in <em>events/templates/admin/events/change_list.html</em> with the exactly the same content installed in <em>site-packages/django/contrib/admin/templates/admin/</em> .</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">(...)</div><div class="line">&#123;% block content %&#125;</div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"content-main"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"object-tools"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&#123;&#123;</span> <span class="attr">previous_month</span> &#125;&#125;&gt;</span></div><div class="line">                    Previous month</div><div class="line">                <span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&#123;&#123;</span> <span class="attr">next_month</span> &#125;&#125;&gt;</span></div><div class="line">                    Next month</div><div class="line">                <span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"></div><div class="line">        &#123;&#123; calendar &#125;&#125;</div><div class="line">(...)</div></pre></td></tr></table></figure>
+<p>We will now dynamically define the context variables such as previous_month, next_month and calendar in <em>events/admin.py</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> unicode_literals</div><div class="line"></div><div class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</div><div class="line"><span class="keyword">from</span> models <span class="keyword">import</span> Event</div><div class="line"><span class="keyword">import</span> datetime</div><div class="line"><span class="keyword">import</span> calendar</div><div class="line"><span class="keyword">from</span> django.core.urlresolvers <span class="keyword">import</span> reverse</div><div class="line"><span class="keyword">from</span> calendar <span class="keyword">import</span> HTMLCalendar</div><div class="line"><span class="keyword">from</span> django.utils.safestring <span class="keyword">import</span> mark_safe</div><div class="line"></div><div class="line"><span class="comment"># Register your models here.</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">EventAdmin</span><span class="params">(admin.ModelAdmin)</span>:</span></div><div class="line">    list_display = [<span class="string">'day'</span>, <span class="string">'start_time'</span>, <span class="string">'end_time'</span>, <span class="string">'notes'</span>]</div><div class="line">    change_list_template = <span class="string">'admin/events/change_list.html'</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">changelist_view</span><span class="params">(self, request, extra_context=None)</span>:</span></div><div class="line">        after_day = request.GET.get(<span class="string">'day__gte'</span>, <span class="keyword">None</span>)</div><div class="line">        extra_context = extra_context <span class="keyword">or</span> &#123;&#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> after_day:</div><div class="line">            d = datetime.date.today()</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">try</span>:</div><div class="line">                split_after_day = after_day.split(<span class="string">'-'</span>)</div><div class="line">                d = datetime.date(year=int(split_after_day[<span class="number">0</span>]), month=int(split_after_day[<span class="number">1</span>]), day=<span class="number">1</span>)</div><div class="line">            <span class="keyword">except</span>:</div><div class="line">                d = datetime.date.today()</div><div class="line"></div><div class="line">        previous_month = datetime.date(year=d.year, month=d.month, day=<span class="number">1</span>)  <span class="comment"># find first day of current month</span></div><div class="line">        previous_month = previous_month - datetime.timedelta(days=<span class="number">1</span>)  <span class="comment"># backs up a single day</span></div><div class="line">        previous_month = datetime.date(year=previous_month.year, month=previous_month.month,</div><div class="line">                                       day=<span class="number">1</span>)  <span class="comment"># find first day of previous month</span></div><div class="line"></div><div class="line">        last_day = calendar.monthrange(d.year, d.month)</div><div class="line">        next_month = datetime.date(year=d.year, month=d.month, day=last_day[<span class="number">1</span>])  <span class="comment"># find last day of current month</span></div><div class="line">        next_month = next_month + datetime.timedelta(days=<span class="number">1</span>)  <span class="comment"># forward a single day</span></div><div class="line">        next_month = datetime.date(year=next_month.year, month=next_month.month,</div><div class="line">                                   day=<span class="number">1</span>)  <span class="comment"># find first day of next month</span></div><div class="line"></div><div class="line">        extra_context[<span class="string">'previous_month'</span>] = reverse(<span class="string">'admin:events_event_changelist'</span>) + <span class="string">'?day__gte='</span> + str(</div><div class="line">            previous_month)</div><div class="line">        extra_context[<span class="string">'next_month'</span>] = reverse(<span class="string">'admin:events_event_changelist'</span>) + <span class="string">'?day__gte='</span> + str(next_month)</div><div class="line"></div><div class="line">        cal = HTMLCalendar()</div><div class="line">        html_calendar = cal.formatmonth(d.year, d.month, withyear=<span class="keyword">True</span>)</div><div class="line">        html_calendar = html_calendar.replace(<span class="string">'&lt;td '</span>, <span class="string">'&lt;td  width="150" height="150"'</span>)</div><div class="line">        extra_context[<span class="string">'calendar'</span>] = mark_safe(html_calendar)</div><div class="line">        <span class="keyword">return</span> super(EventAdmin, self).changelist_view(request, extra_context)</div><div class="line"></div><div class="line">admin.site.register(Event, EventAdmin)</div></pre></td></tr></table></figure>
+<p>With this addition, our app now displays a monthly calendar.</p>
+<p><img src="/images/calendar.png" alt=""></p>
+<p>However, our app still does not display the events in each cell. We can tweak the <em>HTMLCalendar</em> class by extending it and override the methods responsible for drawing the table cells. Our little tweak will be the introduction of the list of events and displaying them in their corresponding cell. We will now create a new class in <em>utils.py</em> .</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> calendar <span class="keyword">import</span> HTMLCalendar</div><div class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime <span class="keyword">as</span> dtime, date, time</div><div class="line"><span class="keyword">import</span> datetime</div><div class="line"><span class="keyword">from</span> models <span class="keyword">import</span> Event</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">EventCalendar</span><span class="params">(HTMLCalendar)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, events=None)</span>:</span></div><div class="line">        super(EventCalendar, self).__init__()</div><div class="line">        self.events = events</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">formatday</span><span class="params">(self, day, weekday, events)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Return a day as a table cell.</div><div class="line">        """</div><div class="line">        events_from_day = events.filter(day__day=day)</div><div class="line">        events_html = <span class="string">"&lt;ul&gt;"</span></div><div class="line">        <span class="keyword">for</span> event <span class="keyword">in</span> events_from_day:</div><div class="line">            events_html += event.get_absolute_url() + <span class="string">"&lt;br&gt;"</span></div><div class="line">        events_html += <span class="string">"&lt;/ul&gt;"</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span> day == <span class="number">0</span>:</div><div class="line">            <span class="keyword">return</span> <span class="string">'&lt;td class="noday"&gt;&amp;nbsp;&lt;/td&gt;'</span>  <span class="comment"># day outside month</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> <span class="string">'&lt;td class="%s"&gt;%d%s&lt;/td&gt;'</span> % (self.cssclasses[weekday], day, events_html)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">formatweek</span><span class="params">(self, theweek, events)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Return a complete week as a table row.</div><div class="line">        """</div><div class="line">        s = <span class="string">''</span>.join(self.formatday(d, wd, events) <span class="keyword">for</span> (d, wd) <span class="keyword">in</span> theweek)</div><div class="line">        <span class="keyword">return</span> <span class="string">'&lt;tr&gt;%s&lt;/tr&gt;'</span> % s</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">formatmonth</span><span class="params">(self, theyear, themonth, withyear=True)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Return a formatted month as a table.</div><div class="line">        """</div><div class="line"></div><div class="line">        events = Event.objects.filter(day__month=themonth)</div><div class="line"></div><div class="line">        v = []</div><div class="line">        a = v.append</div><div class="line">        a(<span class="string">'&lt;table border="0" cellpadding="0" cellspacing="0" class="month"&gt;'</span>)</div><div class="line">        a(<span class="string">'\n'</span>)</div><div class="line">        a(self.formatmonthname(theyear, themonth, withyear=withyear))</div><div class="line">        a(<span class="string">'\n'</span>)</div><div class="line">        a(self.formatweekheader())</div><div class="line">        a(<span class="string">'\n'</span>)</div><div class="line">        <span class="keyword">for</span> week <span class="keyword">in</span> self.monthdays2calendar(theyear, themonth):</div><div class="line">            a(self.formatweek(week, events))</div><div class="line">            a(<span class="string">'\n'</span>)</div><div class="line">        a(<span class="string">'&lt;/table&gt;'</span>)</div><div class="line">        a(<span class="string">'\n'</span>)</div><div class="line">        <span class="keyword">return</span> <span class="string">''</span>.join(v)</div></pre></td></tr></table></figure>
+<p>We can now use this new calendar in our admin view:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">(...)</div><div class="line"><span class="keyword">from</span> utils <span class="keyword">import</span> EventCalendar</div><div class="line"></div><div class="line"></div><div class="line">(...)</div><div class="line">cal = EventCalendar()</div><div class="line"></div><div class="line">(...)</div></pre></td></tr></table></figure>
+<p>Our monthly view now displays the events in their corresponding cells.</p>
+<p><img src="/images/events.png" alt=""></p>
+<p>We can see a lot of events happening at 15th July. Fortunately, our new calendar also display links to their details.</p>
+<p><img src="/images/birthday.png" alt=""></p>
+<p>Someone is having a very special day!</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/cv/">CV</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/contact/">Contact</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-Django"><span class="toc-number">1.</span> <span class="toc-text">What is Django ?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Getting-started"><span class="toc-number">2.</span> <span class="toc-text">Getting started</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Events"><span class="toc-number">3.</span> <span class="toc-text">Events</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Calendar"><span class="toc-number">4.</span> <span class="toc-text">Calendar</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://alexpnt.github.io/2017/07/15/django-calendar/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://alexpnt.github.io/2017/07/15/django-calendar/&text=Getting started with Django - Building a simple calendar"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://alexpnt.github.io/2017/07/15/django-calendar/&title=Getting started with Django - Building a simple calendar"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://alexpnt.github.io/2017/07/15/django-calendar/&is_video=false&description=Getting started with Django - Building a simple calendar"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Getting started with Django - Building a simple calendar&body=Check out this article: https://alexpnt.github.io/2017/07/15/django-calendar/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://alexpnt.github.io/2017/07/15/django-calendar/&title=Getting started with Django - Building a simple calendar"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://alexpnt.github.io/2017/07/15/django-calendar/&title=Getting started with Django - Building a simple calendar"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://alexpnt.github.io/2017/07/15/django-calendar/&title=Getting started with Django - Building a simple calendar"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://alexpnt.github.io/2017/07/15/django-calendar/&title=Getting started with Django - Building a simple calendar"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://alexpnt.github.io/2017/07/15/django-calendar/&name=Getting started with Django - Building a simple calendar&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 Alexandre Pinto
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/cv/">CV</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/contact/">Contact</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-43571022-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+
