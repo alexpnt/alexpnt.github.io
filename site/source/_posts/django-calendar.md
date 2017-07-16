@@ -344,6 +344,8 @@ We can see a lot of events happening at 15th July. Fortunately, our new calendar
 
 Someone is having a very special day!
 
+You can find the source code of this example [here](https://github.com/AlexPnt/django-calendar).
+
 
 
 

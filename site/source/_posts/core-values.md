@@ -4,7 +4,7 @@ date: 2017-07-02 13:37:48
 tags:
 ---
 
-![Image of Yaktocat](https://instagram.fopo1-1.fna.fbcdn.net/t51.2885-15/e35/15625571_856037461205178_8153948961384693760_n.jpg)
+[![](https://instagram.fopo1-1.fna.fbcdn.net/t51.2885-15/e35/15625571_856037461205178_8153948961384693760_n.jpg)](https://www.instagram.com/p/BOXisP8lYGY/?taken-by=alxpnt)
 
 In our daily lifes, we follow a set of principles that guide our behaviour and actions. They help us define and distinguish the right from wrong, deal with many situations, and follow what we believe to be the right path. Therefore, I like to keep a list of personal core values that I enjoy following. 
 
