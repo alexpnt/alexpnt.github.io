@@ -70,3 +70,16 @@ theme: cactus-dark
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type:
+
+
+# Instagram Wall
+instagramWall:  
+  enable: true  
+  access_token: INSTAGRAM_WALL_TOKEN
+  requestedCount: 27  
+  itemsPerRow: 3  
+  showCaption: false  
+  displayStyle: 'column'
+  gutterSize: '5px'  
+  overlayColor: 'black'  
+  textColor: 'white'   
