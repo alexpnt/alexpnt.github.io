@@ -62,15 +62,15 @@ The basic unit of our calendar will be the event, so we start by writting our ev
 ```python
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+ 
 from django.db import models
-
+ 
 class Event(models.Model):
     day = models.DateField(u'Day of the event', help_text=u'Day of the event')
     start_time = models.TimeField(u'Starting time', help_text=u'Starting time')
     end_time = models.TimeField(u'Final time', help_text=u'Final time')
     notes = models.TextField(u'Textual Notes', help_text=u'Textual Notes', blank=True, null=True)
-
+ 
     class Meta:
         verbose_name = u'Scheduling'
         verbose_name_plural = u'Scheduling'
@@ -82,9 +82,9 @@ After this step we need to tell django about our new app in *mycalendar/settings
 ```python
 
 (...)
-
+ 
 # Application definition
-
+ 
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -94,7 +94,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'events'
 ]
-
+ 
 (...)
 ```
 
@@ -102,10 +102,10 @@ And in *mycalendar/events/admin.py* we register the model.
 ```python
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+ 
 from django.contrib import admin
 from models import Event
-
+ 
 class EventAdmin(admin.ModelAdmin):
     list_display = ['day', 'start_time', 'end_time', 'notes']
 ```
@@ -127,21 +127,21 @@ However, our current model does not have any validations, such as overlapping ev
 ```python
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+ 
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
-
+ 
 class Event(models.Model):
     day = models.DateField(u'Day of the event', help_text=u'Day of the event')
     start_time = models.TimeField(u'Starting time', help_text=u'Starting time')
     end_time = models.TimeField(u'Final time', help_text=u'Final time')
     notes = models.TextField(u'Textual Notes', help_text=u'Textual Notes', blank=True, null=True)
-
+ 
     class Meta:
         verbose_name = u'Scheduling'
         verbose_name_plural = u'Scheduling'
-
+ 
     def check_overlap(self, fixed_start, fixed_end, new_start, new_end):
         overlap = False
         if new_start == fixed_end or new_end == fixed_start:    #edge case
@@ -150,17 +150,17 @@ class Event(models.Model):
             overlap = True
         elif new_start <= fixed_start and new_end >= fixed_end: #outter limits
             overlap = True
-
+ 
         return overlap
-
+ 
     def get_absolute_url(self):
         url = reverse('admin:%s_%s_change' % (self._meta.app_label, self._meta.model_name), args=[self.id])
         return u'<a href="%s">%s</a>' % (url, str(self.start_time))
-
+ 
     def clean(self):
         if self.end_time <= self.start_time:
             raise ValidationError('Ending times must after starting times')
-
+ 
         events = Event.objects.filter(day=self.day)
         if events.exists():
             for event in events:
@@ -206,7 +206,7 @@ We will now dynamically define the context variables such as previous_month, nex
 ```python
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+ 
 from django.contrib import admin
 from models import Event
 import datetime
@@ -214,17 +214,17 @@ import calendar
 from django.core.urlresolvers import reverse
 from calendar import HTMLCalendar
 from django.utils.safestring import mark_safe
-
+ 
 # Register your models here.
-
+ 
 class EventAdmin(admin.ModelAdmin):
     list_display = ['day', 'start_time', 'end_time', 'notes']
     change_list_template = 'admin/events/change_list.html'
-
+ 
     def changelist_view(self, request, extra_context=None):
         after_day = request.GET.get('day__gte', None)
         extra_context = extra_context or {}
-
+ 
         if not after_day:
             d = datetime.date.today()
         else:
@@ -233,28 +233,28 @@ class EventAdmin(admin.ModelAdmin):
                 d = datetime.date(year=int(split_after_day[0]), month=int(split_after_day[1]), day=1)
             except:
                 d = datetime.date.today()
-
+ 
         previous_month = datetime.date(year=d.year, month=d.month, day=1)  # find first day of current month
         previous_month = previous_month - datetime.timedelta(days=1)  # backs up a single day
         previous_month = datetime.date(year=previous_month.year, month=previous_month.month,
                                        day=1)  # find first day of previous month
-
+ 
         last_day = calendar.monthrange(d.year, d.month)
         next_month = datetime.date(year=d.year, month=d.month, day=last_day[1])  # find last day of current month
         next_month = next_month + datetime.timedelta(days=1)  # forward a single day
         next_month = datetime.date(year=next_month.year, month=next_month.month,
                                    day=1)  # find first day of next month
-
+ 
         extra_context['previous_month'] = reverse('admin:events_event_changelist') + '?day__gte=' + str(
             previous_month)
         extra_context['next_month'] = reverse('admin:events_event_changelist') + '?day__gte=' + str(next_month)
-
+ 
         cal = HTMLCalendar()
         html_calendar = cal.formatmonth(d.year, d.month, withyear=True)
         html_calendar = html_calendar.replace('<td ', '<td  width="150" height="150"')
         extra_context['calendar'] = mark_safe(html_calendar)
         return super(EventAdmin, self).changelist_view(request, extra_context)
-
+ 
 admin.site.register(Event, EventAdmin)
 ```
 
@@ -269,13 +269,13 @@ from calendar import HTMLCalendar
 from datetime import datetime as dtime, date, time
 import datetime
 from models import Event
-
-
+ 
+ 
 class EventCalendar(HTMLCalendar):
     def __init__(self, events=None):
         super(EventCalendar, self).__init__()
         self.events = events
-
+ 
     def formatday(self, day, weekday, events):
         """
         Return a day as a table cell.
@@ -285,26 +285,26 @@ class EventCalendar(HTMLCalendar):
         for event in events_from_day:
             events_html += event.get_absolute_url() + "<br>"
         events_html += "</ul>"
-
+ 
         if day == 0:
             return '<td class="noday">&nbsp;</td>'  # day outside month
         else:
             return '<td class="%s">%d%s</td>' % (self.cssclasses[weekday], day, events_html)
-
+ 
     def formatweek(self, theweek, events):
         """
         Return a complete week as a table row.
         """
         s = ''.join(self.formatday(d, wd, events) for (d, wd) in theweek)
         return '<tr>%s</tr>' % s
-
+ 
     def formatmonth(self, theyear, themonth, withyear=True):
         """
         Return a formatted month as a table.
         """
-
+ 
         events = Event.objects.filter(day__month=themonth)
-
+ 
         v = []
         a = v.append
         a('<table border="0" cellpadding="0" cellspacing="0" class="month">')
@@ -326,11 +326,11 @@ We can now use this new calendar in our admin view:
 ```python
 (...)
 from utils import EventCalendar
-
-
+ 
+ 
 (...)
 cal = EventCalendar()
-
+ 
 (...)
 ```
 
