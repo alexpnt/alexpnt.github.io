@@ -4,6 +4,8 @@ tags: setup
 date: 2017-07-22 16:20:06
 ---
 
+![](/images/dev.png)
+
 As a developer, one of the first steps before attempting to do any work is to create a good development environment. This involves choosing a set of tools that we will spend most of our time using. Therefore, I compiled a list of the tools that I use or have used on my daily routine.
 
 Regarding operative systems, I started out with the initial Windows versions, but moved to the GNU/Linux ecosystem. I have distro-hopped between some distributions such as [Ubuntu](https://www.ubuntu.com/), [Xubuntu](https://xubuntu.org/), [Debian](https://www.debian.org/), [CrunchBang](https://www.bunsenlabs.org/) (now called BunsenLabs) and [ArchLinux](https://www.archlinux.org/). 
