@@ -1,7 +1,7 @@
 ---
 title: A brave new blog
 date: 2017-07-01 13:37:48
-tags :
+tags:
 - walkthrough
 - hexo
 ---

@@ -1,7 +1,8 @@
 ---
 title: Interview - The Setup
-tags: setup
 date: 2017-07-22 16:20:06
+tags: 
+- setup
 ---
 
 ![](/images/dev.png)

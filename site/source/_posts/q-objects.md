@@ -1,7 +1,10 @@
 ---
 title: Complex lookups with Q objects in Django
 date: 2017-07-19 22:26:02
-tags: django, python, development
+tags:
+- django
+- python
+- development
 ---
 
 ![](/images/dev.png)

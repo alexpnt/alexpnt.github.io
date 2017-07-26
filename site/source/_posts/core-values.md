@@ -2,6 +2,7 @@
 title: A set of core values
 date: 2017-07-02 13:37:48
 tags:
+- values
 ---
 
 [![](https://instagram.fopo1-1.fna.fbcdn.net/t51.2885-15/e35/15625571_856037461205178_8153948961384693760_n.jpg)](https://www.instagram.com/p/BOXisP8lYGY/?taken-by=alxpnt)

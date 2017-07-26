@@ -1,7 +1,9 @@
 ---
 title: Problem solving techniques 
 date: 2017-07-16 15:04:26
-tags: problem-solving,problems
+tags:
+- problem-solving
+- problems
 ---
 
 [![](https://instagram.fopo1-1.fna.fbcdn.net/t51.2885-15/e35/18646051_1682780288417811_6149155933822910464_n.jpg)](https://www.instagram.com/p/BUmPQkejl8s/?taken-by=alxpnt)
