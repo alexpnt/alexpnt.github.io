@@ -12,7 +12,7 @@ Occasionally, there is the need to access files from a remote host which uses a 
 On a Linux/UNIX box we can mount our shared folder as follows:
 
 ```bash
-sudo mount -t cifs //remoteserver/shared /mnt/shared/ -o username=alexpnt,password=cifs2017 --verbose
+sudo mount -t cifs //remoteserver/shared /mnt/shared/ -o username=myusername,password=mypassword --verbose
 ```
 
 where:
