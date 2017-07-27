@@ -23,6 +23,6 @@ where:
 
 */mnt/shared/* is the local folder that will be mounted
 
-*-o username=alexpnt,password=cifs2017* are the authentication credentials
+*-o username=myusername,password=mypassword * are the authentication credentials
 
 __Disclaimer:__ You might need to install CIFS utilities before attempting to run the above command.
