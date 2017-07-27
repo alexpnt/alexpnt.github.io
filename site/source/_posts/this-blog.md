@@ -58,6 +58,10 @@ After this, go ahead and customize it to your needs. There is a basic folder str
 └── themes      - (custom themes of your site)
 ```
 
+__Deploy:__
+
+The last step is to deploy your generated static site to a remote server and start serving it. In my case, I simply push the public folder to my github repository.
+
 For more details, head over to the great [hexo documentation](https://hexo.io/docs/).
 
 
