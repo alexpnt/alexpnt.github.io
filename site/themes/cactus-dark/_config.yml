@@ -36,7 +36,7 @@ customize:
         facebook: https://facebook.com/alexandpinto
         instagram: https://instagram.com/alxpnt
     show_all_posts: false
-    post_count: 5
+    post_count: 10
     highlight: monokai-sublime
 
 # RSS
