@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Alexandre Pinto</title>
+  <subtitle>Software Enginner, Reader, Knowledge-seeker</subtitle>
+  <link href="/rss.xml" rel="self"/>
+  
+  <link href="https://alexpnt.github.io/"/>
+  <updated>2017-07-29T14:11:19.975Z</updated>
+  <id>https://alexpnt.github.io/</id>
+  
+  <author>
+    <name>Alexandre Pinto</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Mouting CIFS shares on a Linux/UNIX box</title>
+    <link href="https://alexpnt.github.io/2017/07/23/mount-cifs-shares/"/>
+    <id>https://alexpnt.github.io/2017/07/23/mount-cifs-shares/</id>
+    <published>2017-07-23T15:11:15.000Z</published>
+    <updated>2017-07-29T14:11:19.975Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Occasionally, there is the need to access files from a remote host which uses a diferent operating system or is located in a different ne
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://alexpnt.github.io/tags/linux/"/>
+    
+      <category term="cifs" scheme="https://alexpnt.github.io/tags/cifs/"/>
+    
+      <category term="windows" scheme="https://alexpnt.github.io/tags/windows/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Interview - The Setup</title>
+    <link href="https://alexpnt.github.io/2017/07/22/the-setup/"/>
+    <id>https://alexpnt.github.io/2017/07/22/the-setup/</id>
+    <published>2017-07-22T15:20:06.000Z</published>
+    <updated>2017-07-29T14:11:19.975Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;As a developer, one of the first steps before attempting to do any work is to create a good dev
+    
+    </summary>
+    
+    
+      <category term="setup" scheme="https://alexpnt.github.io/tags/setup/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Complex lookups with Q objects in Django</title>
+    <link href="https://alexpnt.github.io/2017/07/19/q-objects/"/>
+    <id>https://alexpnt.github.io/2017/07/19/q-objects/</id>
+    <published>2017-07-19T21:26:02.000Z</published>
+    <updated>2017-07-29T14:11:19.975Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;One of the great offers of Django is the high-level database API, which lets us manipulate our 
+    
+    </summary>
+    
+    
+      <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
+    
+      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
+    
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Problem solving techniques</title>
+    <link href="https://alexpnt.github.io/2017/07/16/problem-solving/"/>
+    <id>https://alexpnt.github.io/2017/07/16/problem-solving/</id>
+    <published>2017-07-16T14:04:26.000Z</published>
+    <updated>2017-07-29T14:11:19.975Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://www.instagram.com/p/BUmPQkejl8s/?taken-by=alxpnt&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;img src=&quot;https://instagram.fopo1-1.fna
+    
+    </summary>
+    
+    
+      <category term="problem-solving" scheme="https://alexpnt.github.io/tags/problem-solving/"/>
+    
+      <category term="problems" scheme="https://alexpnt.github.io/tags/problems/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Getting started with Django - Building a simple calendar</title>
+    <link href="https://alexpnt.github.io/2017/07/15/django-calendar/"/>
+    <id>https://alexpnt.github.io/2017/07/15/django-calendar/</id>
+    <published>2017-07-14T23:39:00.000Z</published>
+    <updated>2017-07-19T22:30:25.293Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;What-is-Django&quot;&gt;&lt;a href=&quot;#What-is-Django&quot; class=&quot;headerlink&quot; title=&quot;What is Django ?&quot;&gt;&lt;/a&gt;
+    
+    </summary>
+    
+    
+      <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
+    
+      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
+    
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>A set of core values</title>
+    <link href="https://alexpnt.github.io/2017/07/02/core-values/"/>
+    <id>https://alexpnt.github.io/2017/07/02/core-values/</id>
+    <published>2017-07-02T12:37:48.000Z</published>
+    <updated>2017-07-29T14:11:19.975Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://www.instagram.com/p/BOXisP8lYGY/?taken-by=alxpnt&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;img src=&quot;https://instagram.fopo1-1.fna
+    
+    </summary>
+    
+    
+      <category term="values" scheme="https://alexpnt.github.io/tags/values/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>A brave new blog</title>
+    <link href="https://alexpnt.github.io/2017/07/01/this-blog/"/>
+    <id>https://alexpnt.github.io/2017/07/01/this-blog/</id>
+    <published>2017-07-01T12:37:48.000Z</published>
+    <updated>2017-07-29T14:11:19.989Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;I always enjoyed the idea of keeping a journal where ideas, tips and tricks from my daily life could be shared. With this first post I in
+    
+    </summary>
+    
+    
+      <category term="walkthrough" scheme="https://alexpnt.github.io/tags/walkthrough/"/>
+    
+      <category term="hexo" scheme="https://alexpnt.github.io/tags/hexo/"/>
+    
+  </entry>
+  
+</feed>
