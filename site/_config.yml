@@ -83,3 +83,10 @@ instagramWall:
   gutterSize: '5px'  
   overlayColor: 'black'  
   textColor: 'white'   
+
+feed:
+  type: rss
+  path: rss.xml
+  limit: 20
+  hub:
+  content:
