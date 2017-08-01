@@ -7,6 +7,8 @@ tags:
 - windows
 ---
 
+<img src="/images/dev.jpg" alt="" style="height: 512px;"/>
+
 Occasionally, there is the need to access files from a remote host which uses a diferent operating system or is located in a different network. The CIFS (Common Internet File System) is a sharing protocol that lets users share files across different systems. 
 
 On a Linux/UNIX box we can mount our shared folder as follows:

@@ -7,7 +7,7 @@ tags:
 - development
 ---
 
-![](/images/dev.png)
+<img src="/images/dev.jpg" alt="" style="height: 512px;"/>
 
 One of the great offers of Django is the high-level database API, which lets us manipulate our data using an object oriented approach. 
 
