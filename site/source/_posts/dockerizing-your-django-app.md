@@ -21,4 +21,48 @@ On the other hand, microservices are independent and isolated services with spec
 
 ## Docker Containerization
 
+Containers are a way of isolating services, just like virtual machines but with some important differences. While virtual machines create an isolated full stack, from the host operating system to the user application, containers share the host operating system, adding only the necessary libraries and applications, creating a lightweight sandbox on our system, with its own layered filesystem and network management. [Docker](https://www.docker.com/) is a popular container system which uses Linux containers(LXC) under the hood, a native feature of Linux systems, to provide isolation of microservices.
 
+
+## Installing Docker
+
+To install docker on a Debian based box, we simply run these commands.
+
+```bash
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+ 
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ 
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+ 
+sudo apt-get update
+sudo apt-get install docker-ce
+sudo groupadd docker
+```
+
+## Installing Docker Compose
+
+Docker Compose is a useful tool that let us configure and run multiple containers.
+
+```bash
+pip install docker-compose
+```
+
+## Downloading our example application that we will dockerize
+
+```bash
+mkdir dockerize-musicwallet
+cd dockerize-musicwallet
+git clone https://github.com/AlexPnt/MusicWallet.git
+```
+
+We now have a code base from a web application that let us manage users and their favourite musics, with a REST API, built with Django and the Django Rest Framework.
+
+In the [next post](), we will turn this application into a docker container.
