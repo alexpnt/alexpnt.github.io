@@ -63,6 +63,6 @@ cd dockerize-musicwallet
 git clone https://github.com/AlexPnt/MusicWallet.git
 ```
 
-We now have a code base from a web application that let us manage users and their favourite musics, with a REST API, built with Django and the Django Rest Framework.
+We now have a code base from a [web application](https://github.com/AlexPnt/MusicWallet) that let us manage users and their favourite musics, with a REST API, built with Django and the Django Rest Framework.
 
 In the [next post](), we will turn this application into a docker container.
