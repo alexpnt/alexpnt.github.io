@@ -13,12 +13,12 @@
 <meta property="og:url" content="https://alexpnt.github.io/2017/07/19/q-objects/index.html">
 <meta property="og:site_name" content="Alexandre Pinto">
 <meta property="og:description" content="One of the great offers of Django is the high-level database API, which lets us manipulate our data using an object oriented approach.  For instance given the following model: 12345from django.db imp">
-<meta property="og:image" content="https://alexpnt.github.io/images/dev.png">
-<meta property="og:updated_time" content="2017-07-29T14:11:19.975Z">
+<meta property="og:image" content="https://alexpnt.github.io/images/dev.jpg">
+<meta property="og:updated_time" content="2017-07-31T23:02:34.508Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Complex lookups with Q objects in Django">
 <meta name="twitter:description" content="One of the great offers of Django is the high-level database API, which lets us manipulate our data using an object oriented approach.  For instance given the following model: 12345from django.db imp">
-<meta name="twitter:image" content="https://alexpnt.github.io/images/dev.png">
+<meta name="twitter:image" content="https://alexpnt.github.io/images/dev.jpg">
     
     
         
@@ -141,7 +141,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><img src="/images/dev.png" alt=""></p>
+    <p><img src="/images/dev.jpg" alt="" style="height: 512px;"></p>
 <p>One of the great offers of Django is the high-level database API, which lets us manipulate our data using an object oriented approach. </p>
 <p>For instance given the following model:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</div><div class="line"> </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Grade</span><span class="params">(models.Model)</span>:</span></div><div class="line">    student_code = models.CharField(<span class="string">u'Student Code'</span>, max_length=<span class="number">30</span>)</div><div class="line">    course_code = models.CharField(<span class="string">u'Course code'</span>, max_length=<span class="number">30</span>)</div></pre></td></tr></table></figure>

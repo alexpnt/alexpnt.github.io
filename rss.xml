@@ -5,7 +5,7 @@
   <link href="/rss.xml" rel="self"/>
   
   <link href="https://alexpnt.github.io/"/>
-  <updated>2017-07-29T14:11:19.975Z</updated>
+  <updated>2017-08-02T22:08:48.024Z</updated>
   <id>https://alexpnt.github.io/</id>
   
   <author>
@@ -16,15 +16,43 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Microservices, Docker and Django - Part I</title>
+    <link href="https://alexpnt.github.io/2017/07/31/dockerizing-your-django-app/"/>
+    <id>https://alexpnt.github.io/2017/07/31/dockerizing-your-django-app/</id>
+    <published>2017-07-31T22:16:17.000Z</published>
+    <updated>2017-08-02T22:08:48.024Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/images/dev.jpg&quot; alt=&quot;&quot; style=&quot;height: 512px;&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Monolithic-vs-Microservices&quot;&gt;&lt;a href=&quot;#Monolithic-vs-Microservices&quot;
+    
+    </summary>
+    
+    
+      <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
+    
+      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
+    
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+    
+      <category term="microservices" scheme="https://alexpnt.github.io/tags/microservices/"/>
+    
+      <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Mouting CIFS shares on a Linux/UNIX box</title>
     <link href="https://alexpnt.github.io/2017/07/23/mount-cifs-shares/"/>
     <id>https://alexpnt.github.io/2017/07/23/mount-cifs-shares/</id>
     <published>2017-07-23T15:11:15.000Z</published>
-    <updated>2017-07-29T14:11:19.975Z</updated>
+    <updated>2017-07-31T23:02:59.232Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;Occasionally, there is the need to access files from a remote host which uses a diferent operating system or is located in a different ne
+      &lt;p&gt;&lt;img src=&quot;/images/dev.jpg&quot; alt=&quot;&quot; style=&quot;height: 512px;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Occasionally, there is the need to access files from a remote host which
     
     </summary>
     
@@ -42,12 +70,12 @@
     <link href="https://alexpnt.github.io/2017/07/22/the-setup/"/>
     <id>https://alexpnt.github.io/2017/07/22/the-setup/</id>
     <published>2017-07-22T15:20:06.000Z</published>
-    <updated>2017-07-29T14:11:19.975Z</updated>
+    <updated>2017-07-31T23:02:27.325Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;As a developer, one of the first steps before attempting to do any work is to create a good dev
+      &lt;p&gt;&lt;img src=&quot;/images/dev.jpg&quot; alt=&quot;&quot; style=&quot;height: 512px;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;As a developer, one of the first steps before attempting to do any work 
     
     </summary>
     
@@ -61,12 +89,12 @@
     <link href="https://alexpnt.github.io/2017/07/19/q-objects/"/>
     <id>https://alexpnt.github.io/2017/07/19/q-objects/</id>
     <published>2017-07-19T21:26:02.000Z</published>
-    <updated>2017-07-29T14:11:19.975Z</updated>
+    <updated>2017-07-31T23:02:34.508Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;One of the great offers of Django is the high-level database API, which lets us manipulate our 
+      &lt;p&gt;&lt;img src=&quot;/images/dev.jpg&quot; alt=&quot;&quot; style=&quot;height: 512px;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;One of the great offers of Django is the high-level database API, which 
     
     </summary>
     
@@ -104,12 +132,12 @@
     <link href="https://alexpnt.github.io/2017/07/15/django-calendar/"/>
     <id>https://alexpnt.github.io/2017/07/15/django-calendar/</id>
     <published>2017-07-14T23:39:00.000Z</published>
-    <updated>2017-07-19T22:30:25.293Z</updated>
+    <updated>2017-07-31T23:04:30.024Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;What-is-Django&quot;&gt;&lt;a href=&quot;#What-is-Django&quot; class=&quot;headerlink&quot; title=&quot;What is Django ?&quot;&gt;&lt;/a&gt;
+      &lt;p&gt;&lt;img src=&quot;/images/dev.jpg&quot; alt=&quot;&quot; style=&quot;height: 512px;&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;What-is-Django&quot;&gt;&lt;a href=&quot;#What-is-Django&quot; class=&quot;headerlink&quot; title=
     
     </summary>
     
