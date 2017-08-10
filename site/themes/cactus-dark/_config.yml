@@ -37,7 +37,7 @@ customize:
         instagram: https://instagram.com/alxpnt
     show_all_posts: false
     post_count: 10
-    highlight: monokai-sublime
+    highlight: atelier-lakeside-dark
 
 # RSS
 rss: false

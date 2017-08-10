@@ -21,7 +21,9 @@ On the other hand, microservices are independent and isolated services with spec
 
 ## Docker Containerization
 
-Containers are a way of isolating services, just like virtual machines but with some important differences. While virtual machines create an isolated full stack, from the host operating system to the user application, containers share the host operating system, adding only the necessary libraries and applications, creating a lightweight sandbox on our system, with its own layered filesystem and network management. [Docker](https://www.docker.com/) is a popular container system which uses Linux containers(LXC) under the hood, a native feature of Linux systems, to provide isolation of microservices.
+Containers are a way of isolating services, just like virtual machines but with some important differences. While virtual machines create an isolated full stack, from the host operating system to the user application, containers share the host operating system, adding only the necessary libraries and applications, creating a lightweight sandbox on our system, with its own layered filesystem and network management. [Docker](https://www.docker.com/) is a popular container system which uses Linux containers(LXC) under the hood, a native feature of Linux systems, in order to provide isolation of microservices. 
+
+With docker we can quickly change to different environment setups,   
 
 
 ## Installing Docker
@@ -60,7 +62,7 @@ pip install docker-compose
 ```bash
 mkdir dockerize-musicwallet
 cd dockerize-musicwallet
-git clone https://github.com/AlexPnt/MusicWallet.git
+git clone -b postgres https://github.com/AlexPnt/MusicWallet.git
 ```
 
 We now have a code base from a [web application](https://github.com/AlexPnt/MusicWallet) that let us manage users and their favourite musics, with a REST API, built with Django and the Django Rest Framework.
