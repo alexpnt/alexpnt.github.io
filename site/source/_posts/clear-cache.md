@@ -13,12 +13,12 @@ Running out of memory can be an issue when you are running a lot services on you
 sync; echo 3 > /proc/sys/vm/drop_caches
 ```
 
-Basically,  the initial *sync* command writes pending data in memory back to disk. After this synchronization, we can release memory by dropping cached objects. 
+Basically,  the initial *sync* command writes pending data in memory back to disk. After this synchronization, we can release memory by dropping cached objects.  The value '3' is just an internal argument used to specify the type of caches that will be freed. The writing event triggers the cleaning task. 
 You can see its effects by checking your memory in real time:
 
 Before:
 ```bash
-free -h -t
+watch free -h -t
               total        used        free      shared  buff/cache   available
 Mem:           3.8G        2.0G        1.1G        134M        622M        1.4G
 Swap:          2.0G        531M        1.5G
@@ -27,7 +27,7 @@ Total:         5.8G        2.5G        2.6G
 
 After:
 ```bash
-free -h -t
+watch free -h -t
               total        used        free      shared  buff/cache   available
 Mem:           3.8G        2.0G        1.4G        133M        375M        1.4G
 Swap:          2.0G        532M        1.5G
