@@ -1244,68 +1244,51 @@ article .content .caption {
   color: #eee;
 }
 .highlight {
-  color: #f8f8f2;
-  background: #23241f;
+  color: #7ea2b4;
+  background: #161b1d;
 }
-.highlight .code .highlight,
+.highlight .code .comment,
+.highlight .code .quote {
+  color: #7195a8;
+}
+.highlight .code .variable,
+.highlight .code .template-variable,
+.highlight .code .attribute,
 .highlight .code .tag,
-.highlight .code .subst {
-  color: #f8f8f2;
-}
-.highlight .code .strong,
-.highlight .code .emphasis {
-  color: #a8a8a2;
-}
-.highlight .code .bullet,
-.highlight .code .quote,
-.highlight .code .number,
+.highlight .code .name,
 .highlight .code .regexp,
-.highlight .code .literal,
-.highlight .code .link {
-  color: #ae81ff;
-}
-.highlight .code .code,
-.highlight .code .title,
-.highlight .code .section,
+.highlight .code .link,
+.highlight .code .selector-id,
 .highlight .code .selector-class {
-  color: #a6e22e;
+  color: #d22d72;
 }
-.highlight .code .strong {
-  font-weight: bold;
+.highlight .code .number,
+.highlight .code .meta,
+.highlight .code .built_in,
+.highlight .code .builtin-name,
+.highlight .code .literal,
+.highlight .code .type,
+.highlight .code .params {
+  color: #935c25;
+}
+.highlight .code .string,
+.highlight .code .symbol,
+.highlight .code .bullet {
+  color: #568c3b;
+}
+.highlight .code .title,
+.highlight .code .section {
+  color: #257fad;
+}
+.highlight .code .keyword,
+.highlight .code .selector-tag {
+  color: #6b6bb8;
 }
 .highlight .code .emphasis {
   font-style: italic;
 }
-.highlight .code .keyword,
-.highlight .code .selector-tag,
-.highlight .code .name,
-.highlight .code .attr {
-  color: #f92672;
-}
-.highlight .code .symbol,
-.highlight .code .attribute {
-  color: #66d9ef;
-}
-.highlight .code .params,
-.highlight .code .class .title {
-  color: #f8f8f2;
-}
-.highlight .code .string,
-.highlight .code .type,
-.highlight .code .built_in,
-.highlight .code .builtin-name,
-.highlight .code .selector-id,
-.highlight .code .selector-attr,
-.highlight .code .selector-pseudo,
-.highlight .code .addition,
-.highlight .code .variable,
-.highlight .code .template-variable {
-  color: #e6db74;
-}
-.highlight .code .comment,
-.highlight .code .deletion,
-.highlight .code .meta {
-  color: #75715e;
+.highlight .code .strong {
+  font-weight: bold;
 }
 pre {
   font-family: "Menlo", "Meslo LG", monospace;

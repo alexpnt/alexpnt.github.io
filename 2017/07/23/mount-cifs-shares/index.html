@@ -6,19 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Occasionally, there is the need to access files from a remote host which uses a diferent operating system or is located in a different network. The CIFS (Common Internet File System) is a sharing pro">
+    <meta name="description" content="Occasionally, there is the need to access files from a remote host which uses a diferent operating system or is located in a different network. The CIFS (Common Internet File System) is a sharing prot">
 <meta name="keywords" content="linux,cifs,windows">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mouting CIFS shares on a Linux&#x2F;UNIX box">
 <meta property="og:url" content="https://alexpnt.github.io/2017/07/23/mount-cifs-shares/index.html">
 <meta property="og:site_name" content="Alexandre Pinto">
-<meta property="og:description" content="Occasionally, there is the need to access files from a remote host which uses a diferent operating system or is located in a different network. The CIFS (Common Internet File System) is a sharing pro">
-<meta property="og:image" content="https://alexpnt.github.io/images/dev.jpg">
-<meta property="og:updated_time" content="2017-07-31T23:02:59.232Z">
+<meta property="og:description" content="Occasionally, there is the need to access files from a remote host which uses a diferent operating system or is located in a different network. The CIFS (Common Internet File System) is a sharing prot">
+<meta property="og:updated_time" content="2017-08-14T23:16:50.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mouting CIFS shares on a Linux&#x2F;UNIX box">
-<meta name="twitter:description" content="Occasionally, there is the need to access files from a remote host which uses a diferent operating system or is located in a different network. The CIFS (Common Internet File System) is a sharing pro">
-<meta name="twitter:image" content="https://alexpnt.github.io/images/dev.jpg">
+<meta name="twitter:description" content="Occasionally, there is the need to access files from a remote host which uses a diferent operating system or is located in a different network. The CIFS (Common Internet File System) is a sharing prot">
     
     
         
@@ -141,8 +139,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><img src="/images/dev.jpg" alt="" style="height: 512px;"></p>
-<p>Occasionally, there is the need to access files from a remote host which uses a diferent operating system or is located in a different network. The CIFS (Common Internet File System) is a sharing protocol that lets users share files across different systems. </p>
+    <p>Occasionally, there is the need to access files from a remote host which uses a diferent operating system or is located in a different network. The CIFS (Common Internet File System) is a sharing protocol that lets users share files across different systems. </p>
 <p>On a Linux/UNIX box we can mount our shared folder as follows:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mount -t cifs //remoteserver/shared /mnt/shared/ -o username=myusername,password=mypassword --verbose</div></pre></td></tr></table></figure>
 <p>where:</p>

@@ -5,7 +5,7 @@
   <link href="/rss.xml" rel="self"/>
   
   <link href="https://alexpnt.github.io/"/>
-  <updated>2017-08-10T23:07:57.563Z</updated>
+  <updated>2017-08-14T23:11:20.916Z</updated>
   <id>https://alexpnt.github.io/</id>
   
   <author>
@@ -14,6 +14,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Free up memory by cleaning caches</title>
+    <link href="https://alexpnt.github.io/2017/08/12/clear-cache/"/>
+    <id>https://alexpnt.github.io/2017/08/12/clear-cache/</id>
+    <published>2017-08-11T23:39:00.000Z</published>
+    <updated>2017-08-14T23:11:20.916Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Running out of memory can be an issue when you are running a lot services on your development box, such as web services, databases, edito
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://alexpnt.github.io/tags/linux/"/>
+    
+      <category term="unix" scheme="https://alexpnt.github.io/tags/unix/"/>
+    
+      <category term="memory" scheme="https://alexpnt.github.io/tags/memory/"/>
+    
+  </entry>
   
   <entry>
     <title>Microservices, Docker and Django - Part II</title>
@@ -30,13 +52,13 @@
     </summary>
     
     
-      <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
-    
-      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
-    
       <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
     
       <category term="microservices" scheme="https://alexpnt.github.io/tags/microservices/"/>
+    
+      <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
+    
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
       <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
     
@@ -57,13 +79,13 @@
     </summary>
     
     
-      <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
-    
-      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
-    
       <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
     
       <category term="microservices" scheme="https://alexpnt.github.io/tags/microservices/"/>
+    
+      <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
+    
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
       <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
     
@@ -74,12 +96,11 @@
     <link href="https://alexpnt.github.io/2017/07/23/mount-cifs-shares/"/>
     <id>https://alexpnt.github.io/2017/07/23/mount-cifs-shares/</id>
     <published>2017-07-23T15:11:15.000Z</published>
-    <updated>2017-07-31T23:02:59.232Z</updated>
+    <updated>2017-08-14T23:16:50.826Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;img src=&quot;/images/dev.jpg&quot; alt=&quot;&quot; style=&quot;height: 512px;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Occasionally, there is the need to access files from a remote host which
+      &lt;p&gt;Occasionally, there is the need to access files from a remote host which uses a diferent operating system or is located in a different ne
     
     </summary>
     
@@ -126,11 +147,11 @@
     </summary>
     
     
+      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
+    
       <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
     
       <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
-    
-      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
     
   </entry>
   
@@ -169,11 +190,11 @@
     </summary>
     
     
+      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
+    
       <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
     
       <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
-    
-      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
     
   </entry>
   
