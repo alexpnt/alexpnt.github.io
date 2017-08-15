@@ -31,22 +31,22 @@ With docker we can quickly change to different environment setups,
 To install docker on a Debian based box, we simply run these commands.
 
 ```bash
-sudo apt-get install \
+$ sudo apt-get install \
     apt-transport-https \
     ca-certificates \
     curl \
     software-properties-common
  
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
  
-sudo add-apt-repository \
+$ sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
    stable"
  
-sudo apt-get update
-sudo apt-get install docker-ce
-sudo groupadd docker
+$ sudo apt-get update
+$ sudo apt-get install docker-ce
+$ sudo groupadd docker
 ```
 
 ## Installing Docker Compose
@@ -54,15 +54,15 @@ sudo groupadd docker
 Docker Compose is a useful tool that let us configure and run multiple containers.
 
 ```bash
-pip install docker-compose
+$ pip install docker-compose
 ```
 
 ## Downloading our example application that we will dockerize
 
 ```bash
-mkdir dockerize-musicwallet
-cd dockerize-musicwallet
-git clone -b postgres https://github.com/AlexPnt/MusicWallet.git
+$ mkdir dockerize-musicwallet
+$ cd dockerize-musicwallet
+$ git clone -b postgres https://github.com/AlexPnt/MusicWallet.git
 ```
 
 We now have a code base from a [web application](https://github.com/AlexPnt/MusicWallet) that let us manage users and their favourite musics, with a REST API, built with Django and the Django Rest Framework.

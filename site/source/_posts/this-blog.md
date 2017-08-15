@@ -24,16 +24,16 @@ __Setting up hexo:__
 
 
 ```bash
-npm install hexo-cli -g
-hexo init mysite
-cd mysite
-npm install
+$ npm install hexo-cli -g
+$ hexo init mysite
+$ cd mysite
+$ npm install
 ```
 
 __Installing the cactus-dark theme:__
 ```bash
-git clone https://github.com/probberechts/cactus-dark.git themes/cactus-dark
-npm install hexo-pagination --save
+$ git clone https://github.com/probberechts/cactus-dark.git themes/cactus-dark
+$ npm install hexo-pagination --save
 ```
 
 In your config.yml file, change the theme setting:
@@ -43,8 +43,8 @@ theme: cactus-dark
 
 __Start serving your new site:__
 ```bash
-hexo generate
-hexo serve
+$ hexo generate
+$ hexo serve
 ```
 
 Head over to http://localhost:4000 to see it in action! 

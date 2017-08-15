@@ -16,8 +16,8 @@ A typical web application has a set of components that work together such as the
 We start by getting a copy of our code base:
 
 ```bash
-git clone -b postgres https://github.com/AlexPnt/MusicWallet.git
-cd MusicWallet
+$ git clone -b postgres https://github.com/AlexPnt/MusicWallet.git
+$ cd MusicWallet
 ```
 
 Our project structure is as follows:
@@ -102,19 +102,19 @@ python manage.py runserver 0.0.0.0:8000 --settings=musicwalletproject.settings.d
 
 We are now ready to launch our services. Starting with the database service, with these docker commands we can quickly launch our new database container and create our new database:   
 ```bash
-docker-compose up db
-docker-compose run --rm db psql -h db -U postgres -c "CREATE DATABASE musicwallet_db" 
+$ docker-compose up db
+$ docker-compose run --rm db psql -h db -U postgres -c "CREATE DATABASE musicwallet_db" 
 ```
 
 Similarly, we build our web application and launch it:
 ```bash
-docker-compose build web
-docker-compose up web
+$ docker-compose build web
+$ docker-compose up web
 ```
 
 If we want to inspect if our services are running, we can use the docker-compose command _ps_:
 ```bash
-docker-compose ps
+$ docker-compose ps
   
       Name                     Command               State           Ports          
 -----------------------------------------------------------------------------------
@@ -125,7 +125,7 @@ musicwallet_web_1   /docker-entrypoint.sh pyth ...   Up      0.0.0.0:8000->8000/
 It seems to be working. We can further inspect the logs to see if any error occurred during launch:
 
 ```bash
-docker-compose up
+$ docker-compose up
  
 Starting musicwallet_db_1
 Starting musicwallet_web_1
@@ -164,52 +164,52 @@ Alternatively, you can use perform REST calls using the [httpie](https://httpie.
 Obtaining the authentication token:
 
 ```bash
-http --json POST localhost:8000/api-token-auth/ username=myuser password=mypassword
+$ http --json POST localhost:8000/api-token-auth/ username=myuser password=mypassword
 ```
 
 List users:
 ```bash
-http GET localhost:8000/api/users/ Authorization:"Token <token_id>"
+$ http GET localhost:8000/api/users/ Authorization:"Token <token_id>"
 ```
 Get details from a user
 ```bash
-http GET localhost:8000/api/users/<id>/ Authorization:"Token <token_id>"
+$ http GET localhost:8000/api/users/<id>/ Authorization:"Token <token_id>"
 ```
 Edit an existing user by sending a request with json data in the body of the request.
 ```bash
-http --json PUT localhost:8000/api/users/<id>/ username=newname email=newemail password=newpassword Authorization:"Token <token_id>"
+$ http --json PUT localhost:8000/api/users/<id>/ username=newname email=newemail password=newpassword Authorization:"Token <token_id>"
 ```
 Delete an existing user.
 ```bash
-http DELETE localhost:8000/api/users/<id>/ Authorization:"Token <token_id>"
+$ http DELETE localhost:8000/api/users/<id>/ Authorization:"Token <token_id>"
 ```
 List musics:
 ```bash
-http GET localhost:8000/api/musics/ Authorization:"Token <token_id>"
+$ http GET localhost:8000/api/musics/ Authorization:"Token <token_id>"
 ```
 Get details from a music.
 ```bash
-http GET localhost:8000/api/musics/<id>/ Authorization:"Token <token_id>"
+$ http GET localhost:8000/api/musics/<id>/ Authorization:"Token <token_id>"
 ```
 Create a new music by sending a request with json data in the body of the request.
 ```bash
-http --json POST localhost:8000/api/musics/ title=mytitle artist=myartist album=myalbum Authorization:"Token <token_id>"
+$ http --json POST localhost:8000/api/musics/ title=mytitle artist=myartist album=myalbum Authorization:"Token <token_id>"
 ```
 Edit an existing music by sending a request with json data in the body of the request.
 ```bash
-http --json PUT localhost:8000/api/musics/<id>/ title=newtitle artist=newartist album=newalbum Authorization:"Token <token_id>"
+$ http --json PUT localhost:8000/api/musics/<id>/ title=newtitle artist=newartist album=newalbum Authorization:"Token <token_id>"
 ```
 Delete an existing music.
 ```bash
-http DELETE localhost:8000/api/musics/<id>/ Authorization:"Token <token_id>"
+$ http DELETE localhost:8000/api/musics/<id>/ Authorization:"Token <token_id>"
 ```
 Add an existing music to the list of favourites from an existing user.
 ```bash
-http POST localhost:8000/api/users/<music_id>/add_fav_music/ Authorization:"Token <token_id>"
+$ http POST localhost:8000/api/users/<music_id>/add_fav_music/ Authorization:"Token <token_id>"
 ```
 Delete a favourite music from the list of favourites from an existing user.
 ```bash
-http DELETE localhost:8000/api/users/<music_id>/remove_fav_music/ Authorization:"Token <token_id>"
+$ http DELETE localhost:8000/api/users/<music_id>/remove_fav_music/ Authorization:"Token <token_id>"
 ```
 
 

@@ -25,32 +25,32 @@ This speeds up your development, since the most basic and common tasks are alrea
 __Installing and activating a virtual environment__
 
 ```bash
-wget https://bootstrap.pypa.io/get-pip.py
-sudo python get-pip.py
-sudo pip install virtualenv
-virtualenv venv
-source venv/bin/activate
+$ wget https://bootstrap.pypa.io/get-pip.py
+$ sudo python get-pip.py
+$ sudo pip install virtualenv
+$ virtualenv venv
+$ source venv/bin/activate
 ```
 
 __Installing Django__
 
 ```bash
-pip install django==1.11.3
+$ pip install django==1.11.3
 ```
 
 __Creating the project directory structure__
 
 ```bash
-django-admin startproject mycalendar
-cd mycalendar
-python manage.py startapp events
+$ django-admin startproject mycalendar
+$ cd mycalendar
+$ python manage.py startapp events
 ```
 
 __Aplplying the migrations, creating the admin account and running the web server__
 ```bash
-python manage.py migrate
-python manage.py createsuperuser
-python manage.py runserver
+$ python manage.py migrate
+$ python manage.py createsuperuser
+$ python manage.py runserver
 ```
 
 If you head over to http://localhost:8000/admin, you will see a simple administration interface.
@@ -112,9 +112,9 @@ class EventAdmin(admin.ModelAdmin):
 
 Finally, we apply the changes to the database and run the app:
 ```bash
-python manage.py makemigrations
-python manage.py migrate
-python manage.py runserver
+$ python manage.py makemigrations
+$ python manage.py migrate
+$ python manage.py runserver
 ```
 
 We are now able to add simple events:
