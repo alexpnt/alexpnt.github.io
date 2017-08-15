@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://alexpnt.github.io/2017/08/15/docker-cleanup/index.html">
 <meta property="og:site_name" content="Alexandre Pinto">
 <meta property="og:description" content="Docker is a great tool to create isolated micro services and environments. However, over time the number of intermediate image layers, size of log files used by the containers and volumes increases wh">
-<meta property="og:updated_time" content="2017-08-15T23:20:47.521Z">
+<meta property="og:updated_time" content="2017-08-15T23:41:40.458Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Reclaiming disk space from docker">
 <meta name="twitter:description" content="Docker is a great tool to create isolated micro services and environments. However, over time the number of intermediate image layers, size of log files used by the containers and volumes increases wh">
@@ -147,10 +147,10 @@
 <p>We can also remove data volumes from containers that do not exist anymore, i.e., dangling volumes that are not automatically removed.</p>
 <p><strong>List dangling volumes</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker volume ls -f dangling=<span class="literal">true</span></div></pre></td></tr></table></figure></p>
 <p><strong>Removing dangling volumes</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker volume rm $(docker volume ls -q -f dangling=<span class="literal">true</span>)</div></pre></td></tr></table></figure></p>
-<p>Another good practice to minimize disk space usage is to periodically rotate the docker output logs. We can use the built-in utility logrotate by simply creating a configuration file in /etc/logrotate.d/ </p>
+<p>Another good practice to minimize disk space usage is to periodically rotate the docker output logs. We can use the built-in utility logrotate by simply creating a configuration file in /etc/logrotate.d/ .</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ vim /etc/logrotate.d/docker-log</div><div class="line"> </div><div class="line">/var/lib/docker/containers/*/*.<span class="built_in">log</span> &#123;</div><div class="line">  rotate 10</div><div class="line">  daily</div><div class="line">  compress</div><div class="line">  size=50M</div><div class="line">  missingok</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>The above configuration archives and compress the logs when they reach a size of 50M. This rotations is performed daily and after 10 archived logs, the oldest one is removed.</p>
-<p>It is important to be aware of the disk space consumed by by docker or we might end up with some space issues.</p>
+<p>The above configuration archives and compress the logs when they reach a size of 50M. This rotation is performed daily and after 10 archived logs, the oldest one is removed.</p>
+<p>It is important to be aware of the disk space consumed by docker and perform some cleaning tasks once in a while or we might end up with some space issues. Docker also offers a great <a href="https://docs.docker.com/" target="_blank" rel="external">documentation</a> where we can further inspect its options.</p>
 
   </div>
 </article>
