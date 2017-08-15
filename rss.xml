@@ -5,7 +5,7 @@
   <link href="/rss.xml" rel="self"/>
   
   <link href="https://alexpnt.github.io/"/>
-  <updated>2017-08-14T23:30:08.455Z</updated>
+  <updated>2017-08-15T13:29:34.868Z</updated>
   <id>https://alexpnt.github.io/</id>
   
   <author>
@@ -14,6 +14,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Reattaching shell sessions</title>
+    <link href="https://alexpnt.github.io/2017/08/15/reattaching-sessions/"/>
+    <id>https://alexpnt.github.io/2017/08/15/reattaching-sessions/</id>
+    <published>2017-08-15T11:44:36.000Z</published>
+    <updated>2017-08-15T13:29:34.868Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Ever started a shell session running a process, quickly realizing that will take longer than you expected to finish? For instance, a remo
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://alexpnt.github.io/tags/linux/"/>
+    
+      <category term="shell" scheme="https://alexpnt.github.io/tags/shell/"/>
+    
+  </entry>
   
   <entry>
     <title>Free up memory by cleaning caches</title>
@@ -42,7 +62,7 @@
     <link href="https://alexpnt.github.io/2017/08/06/dockerizing-your-django-app-2/"/>
     <id>https://alexpnt.github.io/2017/08/06/dockerizing-your-django-app-2/</id>
     <published>2017-08-06T14:02:07.000Z</published>
-    <updated>2017-08-10T23:07:57.563Z</updated>
+    <updated>2017-08-15T13:00:12.351Z</updated>
     
     <summary type="html">
     
@@ -69,7 +89,7 @@
     <link href="https://alexpnt.github.io/2017/07/31/dockerizing-your-django-app/"/>
     <id>https://alexpnt.github.io/2017/07/31/dockerizing-your-django-app/</id>
     <published>2017-07-31T22:16:17.000Z</published>
-    <updated>2017-08-09T23:51:25.261Z</updated>
+    <updated>2017-08-15T12:58:15.339Z</updated>
     
     <summary type="html">
     
@@ -96,7 +116,7 @@
     <link href="https://alexpnt.github.io/2017/07/23/mount-cifs-shares/"/>
     <id>https://alexpnt.github.io/2017/07/23/mount-cifs-shares/</id>
     <published>2017-07-23T15:11:15.000Z</published>
-    <updated>2017-08-14T23:16:50.826Z</updated>
+    <updated>2017-08-15T13:00:18.411Z</updated>
     
     <summary type="html">
     
@@ -180,7 +200,7 @@
     <link href="https://alexpnt.github.io/2017/07/15/django-calendar/"/>
     <id>https://alexpnt.github.io/2017/07/15/django-calendar/</id>
     <published>2017-07-14T23:39:00.000Z</published>
-    <updated>2017-07-31T23:04:30.024Z</updated>
+    <updated>2017-08-15T12:57:51.325Z</updated>
     
     <summary type="html">
     
@@ -221,7 +241,7 @@
     <link href="https://alexpnt.github.io/2017/07/01/this-blog/"/>
     <id>https://alexpnt.github.io/2017/07/01/this-blog/</id>
     <published>2017-07-01T12:37:48.000Z</published>
-    <updated>2017-07-29T14:11:19.989Z</updated>
+    <updated>2017-08-15T12:56:40.025Z</updated>
     
     <summary type="html">
     
