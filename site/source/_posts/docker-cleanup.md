@@ -42,7 +42,7 @@ __Removing dangling volumes__
 $ docker volume rm $(docker volume ls -q -f dangling=true)
 ```
 
-Another good practice to minimize disk space usage is to periodically rotate the docker output logs. We can use the built-in utility logrotate by simply creating a configuration file in /etc/logrotate.d/ 
+Another good practice to minimize disk space usage is to periodically rotate the docker output logs. We can use the built-in utility logrotate by simply creating a configuration file in /etc/logrotate.d/ .
 
 ```bash
 $ vim /etc/logrotate.d/docker-log
@@ -56,6 +56,6 @@ $ vim /etc/logrotate.d/docker-log
 }
 ```
 
-The above configuration archives and compress the logs when they reach a size of 50M. This rotations is performed daily and after 10 archived logs, the oldest one is removed.
+The above configuration archives and compress the logs when they reach a size of 50M. This rotation is performed daily and after 10 archived logs, the oldest one is removed.
 
-It is important to be aware of the disk space consumed by docker and perform some cleaning tasks once in a while or we might end up with some space issues.
+It is important to be aware of the disk space consumed by docker and perform some cleaning tasks once in a while or we might end up with some space issues. Docker also offers a great [documentation](https://docs.docker.com/) where we can further inspect its options.
