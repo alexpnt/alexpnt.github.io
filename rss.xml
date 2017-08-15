@@ -5,7 +5,7 @@
   <link href="/rss.xml" rel="self"/>
   
   <link href="https://alexpnt.github.io/"/>
-  <updated>2017-08-15T13:29:34.868Z</updated>
+  <updated>2017-08-15T23:20:47.521Z</updated>
   <id>https://alexpnt.github.io/</id>
   
   <author>
@@ -14,6 +14,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Reclaiming disk space from docker</title>
+    <link href="https://alexpnt.github.io/2017/08/15/docker-cleanup/"/>
+    <id>https://alexpnt.github.io/2017/08/15/docker-cleanup/</id>
+    <published>2017-08-15T13:37:54.000Z</published>
+    <updated>2017-08-15T23:20:47.521Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Docker is a great tool to create isolated micro services and environments. However, over time the number of intermediate image layers, si
+    
+    </summary>
+    
+    
+      <category term="memory" scheme="https://alexpnt.github.io/tags/memory/"/>
+    
+      <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
+    
+      <category term="disk" scheme="https://alexpnt.github.io/tags/disk/"/>
+    
+  </entry>
   
   <entry>
     <title>Reattaching shell sessions</title>
@@ -72,15 +94,15 @@
     </summary>
     
     
-      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
-    
-      <category term="microservices" scheme="https://alexpnt.github.io/tags/microservices/"/>
+      <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
     
       <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
     
+      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
+    
       <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
-      <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
+      <category term="microservices" scheme="https://alexpnt.github.io/tags/microservices/"/>
     
   </entry>
   
@@ -99,15 +121,15 @@
     </summary>
     
     
-      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
-    
-      <category term="microservices" scheme="https://alexpnt.github.io/tags/microservices/"/>
+      <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
     
       <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
     
+      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
+    
       <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
-      <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
+      <category term="microservices" scheme="https://alexpnt.github.io/tags/microservices/"/>
     
   </entry>
   
@@ -167,9 +189,9 @@
     </summary>
     
     
-      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
-    
       <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
+    
+      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
     
       <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
@@ -210,9 +232,9 @@
     </summary>
     
     
-      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
-    
       <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
+    
+      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
     
       <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
