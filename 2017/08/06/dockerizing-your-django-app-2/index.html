@@ -13,13 +13,13 @@
 <meta property="og:url" content="https://alexpnt.github.io/2017/08/06/dockerizing-your-django-app-2/index.html">
 <meta property="og:site_name" content="Alexandre Pinto">
 <meta property="og:description" content="A typical web application has a set of components that work together such as the application backend, the frontend, the database or other components such as cache services, proxy servers, etc. Docker">
-<meta property="og:image" content="https://alexpnt.github.io/images/dev.jpg">
+<meta property="og:image" content="https://alexpnt.github.io/images/dev.png">
 <meta property="og:image" content="https://alexpnt.github.io/images/musicwallet.png">
-<meta property="og:updated_time" content="2017-08-15T13:00:12.351Z">
+<meta property="og:updated_time" content="2017-08-16T23:46:58.120Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Microservices, Docker and Django - Part II">
 <meta name="twitter:description" content="A typical web application has a set of components that work together such as the application backend, the frontend, the database or other components such as cache services, proxy servers, etc. Docker">
-<meta name="twitter:image" content="https://alexpnt.github.io/images/dev.jpg">
+<meta name="twitter:image" content="https://alexpnt.github.io/images/dev.png">
     
     
         
@@ -142,7 +142,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><img src="/images/dev.jpg" alt="" style="height: 512px;"></p>
+    <p><img src="/images/dev.png" alt=""></p>
 <p>A typical web application has a set of components that work together such as the application backend, the frontend, the database or other components such as cache services, proxy servers, etc. Docker is a great tool to decouple our different services and isolate them. In this post we will decouple our web application  into  two services, the application and the database.</p>
 <p>We start by getting a copy of our code base:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> -b postgres https://github.com/AlexPnt/MusicWallet.git</div><div class="line">$ <span class="built_in">cd</span> MusicWallet</div></pre></td></tr></table></figure>
