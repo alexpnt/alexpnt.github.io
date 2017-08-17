@@ -7,7 +7,7 @@ tags:
 - python
 ---
 
-<img src="/images/dev.jpg" alt="" style="height: 512px;"/>
+![](/images/dev.png)
 
 ## What is Django ? 
 

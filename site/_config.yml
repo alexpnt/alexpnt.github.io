@@ -84,6 +84,18 @@ instagramWall:
   overlayColor: 'black'  
   textColor: 'white'   
 
+asset_pipeline:
+  revisioning:
+    enable: true
+  clean_css:
+    enable: true
+  uglify_js:
+    enable: true
+  imagemin:
+    enable: true
+  html_minifier:
+    enable: true
+    
 feed:
   type: rss
   path: rss.xml

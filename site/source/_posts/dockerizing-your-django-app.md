@@ -9,7 +9,7 @@ tags:
 - docker
 ---
 
-<img src="/images/dev.jpg" alt="" style="height: 512px;"/>
+![](/images/dev.png)
 
 ## Monolithic vs Microservices 
 
