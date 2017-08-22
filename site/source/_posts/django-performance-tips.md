@@ -106,11 +106,13 @@ Here is an example of an hypothetical processing of electronic consumption bills
 
 
 ```python
+from django.conf import settings
+from django.core.management.base import BaseCommand, CommandError
+from django.db import transaction
+from consumption.models import ElectricConsumption
+ 
 import trollius as asyncio
 from trollius import From
-from django.core.management.base import BaseCommand, CommandError
-from consumption.models import ElectricConsumption
-from django.db import transaction
  
 COUNTER = 0
  
@@ -160,7 +162,7 @@ class Command(BaseCommand):
 ```
 
 ```bash
-$ python manage.py electronic_bills.py
+$ python manage.py electric_bills.py
  
 Scheduled processing of client 4521
 Scheduled processing of client 4174
