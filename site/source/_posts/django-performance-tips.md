@@ -85,8 +85,6 @@ These methods retrieve additional objects, to avoid fetching them later. This al
 ## Page results
 
 ```python
-from django.core.paginator import Paginator
- 
 musics = Music.objects.all()
 
 paginator = Paginator(musics, per_page = 2000)
@@ -97,6 +95,14 @@ for page in paginator.page_range:
 
 Pagination avoids loading all the objects into memory. This will drastically reduce the memory usage since it fetches slices of our dataset, one chunk of rows at a time, from the database.
 
+
+## Use bulk_create() to insert a batch of records
+
+```python
+Music.objects.bulk_create(musics)
+```
+
+Each time we call the *.save()* method on a model instance, a round trip to the database is performed. Besides, signals are sent for each save operation. This can quickly bring an huge overhead when dealing with thousands or millions of records. A possible workaround is to use the *bulk_create* method which inserts records in a single query. We only need to give the list of objects we wish to write back to disk in a single database round trip. However, it is important to note that custom *save()* methods and signals will not be called.
 
 ## Use distributed and asynchronous processing
 
