@@ -5,7 +5,7 @@
   <link href="/rss.xml" rel="self"/>
   
   <link href="https://alexpnt.github.io/"/>
-  <updated>2017-08-15T23:41:40.458Z</updated>
+  <updated>2017-08-24T22:57:42.720Z</updated>
   <id>https://alexpnt.github.io/</id>
   
   <author>
@@ -16,11 +16,57 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Performance tips for Django applications</title>
+    <link href="https://alexpnt.github.io/2017/08/18/django-performance-tips/"/>
+    <id>https://alexpnt.github.io/2017/08/18/django-performance-tips/</id>
+    <published>2017-08-18T21:06:19.000Z</published>
+    <updated>2017-08-24T22:57:42.720Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Performance is an typical concern when developing applications. In order to have a good back-end performance it is important to be aware 
+    
+    </summary>
+    
+    
+      <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
+    
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+    
+      <category term="performance" scheme="https://alexpnt.github.io/tags/performance/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Populating a PostgreSQL database</title>
+    <link href="https://alexpnt.github.io/2017/08/17/populating-postgres/"/>
+    <id>https://alexpnt.github.io/2017/08/17/populating-postgres/</id>
+    <published>2017-08-17T21:30:56.000Z</published>
+    <updated>2017-08-25T20:05:23.480Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;It is often the case that we need to populate a table with initial data. A typical approach is to run an sql script to perform a bulk ins
+    
+    </summary>
+    
+    
+      <category term="database" scheme="https://alexpnt.github.io/tags/database/"/>
+    
+      <category term="performance" scheme="https://alexpnt.github.io/tags/performance/"/>
+    
+      <category term="sql" scheme="https://alexpnt.github.io/tags/sql/"/>
+    
+      <category term="postgres" scheme="https://alexpnt.github.io/tags/postgres/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Reclaiming disk space from docker</title>
     <link href="https://alexpnt.github.io/2017/08/15/docker-cleanup/"/>
     <id>https://alexpnt.github.io/2017/08/15/docker-cleanup/</id>
     <published>2017-08-15T13:37:54.000Z</published>
-    <updated>2017-08-15T23:41:40.458Z</updated>
+    <updated>2017-08-15T23:43:56.492Z</updated>
     
     <summary type="html">
     
@@ -94,13 +140,13 @@
     </summary>
     
     
-      <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
-    
       <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
     
       <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
     
       <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+    
+      <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
     
       <category term="microservices" scheme="https://alexpnt.github.io/tags/microservices/"/>
     
@@ -121,13 +167,13 @@
     </summary>
     
     
-      <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
-    
       <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
     
       <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
     
       <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+    
+      <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
     
       <category term="microservices" scheme="https://alexpnt.github.io/tags/microservices/"/>
     
