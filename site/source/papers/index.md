@@ -19,6 +19,8 @@ Aldous Huxley, Brave New World
 
 [Classification of Social Media Posts according to their Relevance, 2016](https://docs.google.com/viewer?url=https://github.com/AlexPnt/Master-Thesis/raw/master/reminds-thesis.pdf)
 
-<!-- ## Drafts -->
+## Drafts
+
+[Notes on Automated University Timetabling](https://docs.google.com/viewer?url=https://github.com/AlexPnt/university-timetabling/raw/master/timetabling-notes.pdf)
 
 <!-- ## Papers I like -->
