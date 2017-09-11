@@ -8,8 +8,6 @@ tags:
 - qt5
 ---
 
-![](/images/dev.png)
-
 The assessment and visualization of the distribution of the features is an useful task to better get a sense of the discriminative capability of the features and how they relate with each other. In [part II](/2017/09/02/ml-pipeline-2/) we talked about the dataset and the data collecting process. In this post we take a look at some common tasks such as:
 
 * **Normalized Histogram Distribution** - A normalized histogram (bin counts divided by total sum) showing the proportion of each feature value is shown for a certain feature where bars are grouped by class.
@@ -40,4 +38,4 @@ The assessment and visualization of the distribution of the features is an usefu
 
 ![](/images/ml-pipeline/feature-inspection-lda.png)
 
-The [next post]() will be about preprocessing methods that we can apply to our data. Stay tuned.
+The [next post](/2017/09/09/ml-pipeline-4/) will be about preprocessing methods that we can apply to our data. Stay tuned.

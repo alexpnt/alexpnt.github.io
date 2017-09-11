@@ -8,8 +8,6 @@ tags:
 - qt5
 ---
 
-![](/images/dev.png)
-
 In machine learning problems, we usually describe the objects that we wish to recognize by a set of variables called features, consisting of information that we extract from the study objects. Such features are then collected in vectors of dimension d, called feature vectors, usually denoted by x. They represent points in a d dimensional space, called feature space. Each point belongs to a class, usually denoted by w and the combination of the feature vectors and their corresponding class are called patterns. If we only have two target classes, we are in the presence of a binary classification problem. Classification problems may be trivial for humans but are usually quite challenging for automated systems, since we need to deal with a lot of issues such as finding a reasonable number of distinguishing features good enough for classification, that are able to separate the target classes, or finding models that have good generalization capabilities (perform well on unseen data), avoiding overfitting of the model to the training data. The main goal is then to find the best decision boundary that results in the best generalization on testing data.
 
 The figure below shows an hypothetical problem with two classes and two features. The main goal is then to find the best decision boundary that results in the best generalization on testing data.

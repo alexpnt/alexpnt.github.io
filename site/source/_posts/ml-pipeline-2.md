@@ -8,8 +8,6 @@ tags:
 - qt5
 ---
 
-![](/images/dev.png)
-
 In order to run experiments, we need a [data](https://archive.ics.uci.edu/ml/datasets/default+of+credit+card+clients). This dataset was the same used in a [research study](http://www.sciencedirect.com/science/article/pii/S0957417407006719), consisting of data payments gathered during October, 2005, from a bank in Taiwan, using the credit card holders from that bank as the study targets. 
 
 In the [first part](/2017/09/02/ml-pipeline-1/) we talked about the process of machine learning. This post will discuss data gathering and the dataset.
