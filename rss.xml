@@ -5,7 +5,7 @@
   <link href="/rss.xml" rel="self"/>
   
   <link href="https://alexpnt.github.io/"/>
-  <updated>2017-08-24T22:57:42.720Z</updated>
+  <updated>2017-09-11T19:07:35.949Z</updated>
   <id>https://alexpnt.github.io/</id>
   
   <author>
@@ -14,6 +14,174 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Building a machine-learning pipeline with scikit-learn and Qt - Part VI</title>
+    <link href="https://alexpnt.github.io/2017/09/10/ml-pipeline-6/"/>
+    <id>https://alexpnt.github.io/2017/09/10/ml-pipeline-6/</id>
+    <published>2017-09-10T09:30:41.000Z</published>
+    <updated>2017-09-11T19:07:35.949Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;In the learning phase a set of examples are shown to the classifier, with class labels (supervised learning) or without them (unsupervise
+    
+    </summary>
+    
+    
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+    
+      <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
+    
+      <category term="scikit-learn" scheme="https://alexpnt.github.io/tags/scikit-learn/"/>
+    
+      <category term="qt5" scheme="https://alexpnt.github.io/tags/qt5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Building a machine-learning pipeline with scikit-learn and Qt - Part V</title>
+    <link href="https://alexpnt.github.io/2017/09/09/ml-pipeline-5/"/>
+    <id>https://alexpnt.github.io/2017/09/09/ml-pipeline-5/</id>
+    <published>2017-09-09T17:15:41.000Z</published>
+    <updated>2017-09-11T19:07:35.949Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;In &lt;a href=&quot;/2017/09/02/ml-pipeline-2/&quot;&gt;part II&lt;/a&gt; some data preprocessing techniques were shown. After we have clean data, it is import
+    
+    </summary>
+    
+    
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+    
+      <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
+    
+      <category term="scikit-learn" scheme="https://alexpnt.github.io/tags/scikit-learn/"/>
+    
+      <category term="qt5" scheme="https://alexpnt.github.io/tags/qt5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Building a machine-learning pipeline with scikit-learn and Qt - Part IV</title>
+    <link href="https://alexpnt.github.io/2017/09/09/ml-pipeline-4/"/>
+    <id>https://alexpnt.github.io/2017/09/09/ml-pipeline-4/</id>
+    <published>2017-09-09T09:15:41.000Z</published>
+    <updated>2017-09-11T19:07:35.949Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;/2017/09/03/ml-pipeline-3/&quot;&gt;Part III&lt;/a&gt; explored data visualization and distribution methods. This article shows a list of comm
+    
+    </summary>
+    
+    
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+    
+      <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
+    
+      <category term="scikit-learn" scheme="https://alexpnt.github.io/tags/scikit-learn/"/>
+    
+      <category term="qt5" scheme="https://alexpnt.github.io/tags/qt5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Building a machine-learning pipeline with scikit-learn and Qt - Part III</title>
+    <link href="https://alexpnt.github.io/2017/09/03/ml-pipeline-3/"/>
+    <id>https://alexpnt.github.io/2017/09/03/ml-pipeline-3/</id>
+    <published>2017-09-03T09:15:41.000Z</published>
+    <updated>2017-09-11T19:07:35.949Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;The assessment and visualization of the distribution of the features is an useful task to better get a sense of the discriminative capabi
+    
+    </summary>
+    
+    
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+    
+      <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
+    
+      <category term="scikit-learn" scheme="https://alexpnt.github.io/tags/scikit-learn/"/>
+    
+      <category term="qt5" scheme="https://alexpnt.github.io/tags/qt5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Building a machine-learning pipeline with scikit-learn and Qt - Part II</title>
+    <link href="https://alexpnt.github.io/2017/09/02/ml-pipeline-2/"/>
+    <id>https://alexpnt.github.io/2017/09/02/ml-pipeline-2/</id>
+    <published>2017-09-02T14:40:32.000Z</published>
+    <updated>2017-09-11T19:07:35.949Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;In order to run experiments, we need a &lt;a href=&quot;https://archive.ics.uci.edu/ml/datasets/default+of+credit+card+clients&quot; target=&quot;_blank&quot; r
+    
+    </summary>
+    
+    
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+    
+      <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
+    
+      <category term="scikit-learn" scheme="https://alexpnt.github.io/tags/scikit-learn/"/>
+    
+      <category term="qt5" scheme="https://alexpnt.github.io/tags/qt5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Building a machine-learning pipeline with scikit-learn and Qt - Part I</title>
+    <link href="https://alexpnt.github.io/2017/09/02/ml-pipeline-1/"/>
+    <id>https://alexpnt.github.io/2017/09/02/ml-pipeline-1/</id>
+    <published>2017-09-02T09:33:32.000Z</published>
+    <updated>2017-09-11T19:07:35.949Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;In machine learning problems, we usually describe the objects that we wish to recognize by a set of variables called features, consisting
+    
+    </summary>
+    
+    
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+    
+      <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
+    
+      <category term="scikit-learn" scheme="https://alexpnt.github.io/tags/scikit-learn/"/>
+    
+      <category term="qt5" scheme="https://alexpnt.github.io/tags/qt5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Performance of Different NLP Toolkits in Formal and Social Text</title>
+    <link href="https://alexpnt.github.io/2017/08/27/nlp-performance/"/>
+    <id>https://alexpnt.github.io/2017/08/27/nlp-performance/</id>
+    <published>2017-08-27T14:11:36.000Z</published>
+    <updated>2017-09-11T19:07:35.949Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Motivation-for-this-work&quot;&gt;&lt;a href=&quot;#Motivation-for-this-work&quot; class=&quot;headerlink&quot; title=&quot;Motivation for this work&quot;&gt;&lt;/a&gt;Motivation for
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="https://alexpnt.github.io/tags/nlp/"/>
+    
+      <category term="natural-language-processing" scheme="https://alexpnt.github.io/tags/natural-language-processing/"/>
+    
+      <category term="research" scheme="https://alexpnt.github.io/tags/research/"/>
+    
+      <category term="benchmark" scheme="https://alexpnt.github.io/tags/benchmark/"/>
+    
+  </entry>
   
   <entry>
     <title>Performance tips for Django applications</title>
@@ -301,26 +469,6 @@
     
     
       <category term="values" scheme="https://alexpnt.github.io/tags/values/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>A brave new blog</title>
-    <link href="https://alexpnt.github.io/2017/07/01/this-blog/"/>
-    <id>https://alexpnt.github.io/2017/07/01/this-blog/</id>
-    <published>2017-07-01T12:37:48.000Z</published>
-    <updated>2017-08-15T12:56:40.025Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;I always enjoyed the idea of keeping a journal where ideas, tips and tricks from my daily life could be shared. With this first post I in
-    
-    </summary>
-    
-    
-      <category term="walkthrough" scheme="https://alexpnt.github.io/tags/walkthrough/"/>
-    
-      <category term="hexo" scheme="https://alexpnt.github.io/tags/hexo/"/>
     
   </entry>
   
