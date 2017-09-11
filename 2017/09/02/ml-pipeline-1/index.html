@@ -6,21 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="In machine learning problems, we usually describe the objects that we wish to recognize by a set of variables called features, consisting of information that we extract from the study objects. Such f">
+    <meta name="description" content="In machine learning problems, we usually describe the objects that we wish to recognize by a set of variables called features, consisting of information that we extract from the study objects. Such fe">
 <meta name="keywords" content="python,machine-learning,scikit-learn,qt5">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Building a machine-learning pipeline with scikit-learn and Qt - Part I">
 <meta property="og:url" content="https://alexpnt.github.io/2017/09/02/ml-pipeline-1/index.html">
 <meta property="og:site_name" content="Alexandre Pinto">
-<meta property="og:description" content="In machine learning problems, we usually describe the objects that we wish to recognize by a set of variables called features, consisting of information that we extract from the study objects. Such f">
-<meta property="og:image" content="https://alexpnt.github.io/images/dev.png">
+<meta property="og:description" content="In machine learning problems, we usually describe the objects that we wish to recognize by a set of variables called features, consisting of information that we extract from the study objects. Such fe">
 <meta property="og:image" content="https://alexpnt.github.io/images/ml-pipeline/decision_boundary.png">
 <meta property="og:image" content="https://alexpnt.github.io/images/ml-pipeline/ml-pipeline.png">
-<meta property="og:updated_time" content="2017-09-08T16:15:28.945Z">
+<meta property="og:updated_time" content="2017-09-11T16:18:58.868Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Building a machine-learning pipeline with scikit-learn and Qt - Part I">
-<meta name="twitter:description" content="In machine learning problems, we usually describe the objects that we wish to recognize by a set of variables called features, consisting of information that we extract from the study objects. Such f">
-<meta name="twitter:image" content="https://alexpnt.github.io/images/dev.png">
+<meta name="twitter:description" content="In machine learning problems, we usually describe the objects that we wish to recognize by a set of variables called features, consisting of information that we extract from the study objects. Such fe">
+<meta name="twitter:image" content="https://alexpnt.github.io/images/ml-pipeline/decision_boundary.png">
     
     
         
@@ -145,8 +144,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><img src="/images/dev.png" alt=""></p>
-<p>In machine learning problems, we usually describe the objects that we wish to recognize by a set of variables called features, consisting of information that we extract from the study objects. Such features are then collected in vectors of dimension d, called feature vectors, usually denoted by x. They represent points in a d dimensional space, called feature space. Each point belongs to a class, usually denoted by w and the combination of the feature vectors and their corresponding class are called patterns. If we only have two target classes, we are in the presence of a binary classification problem. Classification problems may be trivial for humans but are usually quite challenging for automated systems, since we need to deal with a lot of issues such as finding a reasonable number of distinguishing features good enough for classification, that are able to separate the target classes, or finding models that have good generalization capabilities (perform well on unseen data), avoiding overfitting of the model to the training data. The main goal is then to find the best decision boundary that results in the best generalization on testing data.</p>
+    <p>In machine learning problems, we usually describe the objects that we wish to recognize by a set of variables called features, consisting of information that we extract from the study objects. Such features are then collected in vectors of dimension d, called feature vectors, usually denoted by x. They represent points in a d dimensional space, called feature space. Each point belongs to a class, usually denoted by w and the combination of the feature vectors and their corresponding class are called patterns. If we only have two target classes, we are in the presence of a binary classification problem. Classification problems may be trivial for humans but are usually quite challenging for automated systems, since we need to deal with a lot of issues such as finding a reasonable number of distinguishing features good enough for classification, that are able to separate the target classes, or finding models that have good generalization capabilities (perform well on unseen data), avoiding overfitting of the model to the training data. The main goal is then to find the best decision boundary that results in the best generalization on testing data.</p>
 <p>The figure below shows an hypothetical problem with two classes and two features. The main goal is then to find the best decision boundary that results in the best generalization on testing data.</p>
 <p><img src="/images/ml-pipeline/decision_boundary.png" alt=""></p>
 <p>The next figure shows the workflow of a typical machine learning application. Usually, classification involves steps such as data gathering, preprocessing, feature selection/reduction, training, testing and the final evaluation. The main goal is to assign, with the best accuracy possible, new labels to new instances.</p>
