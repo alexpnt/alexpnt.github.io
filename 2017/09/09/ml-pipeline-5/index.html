@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="In part II some data preprocessing techniques were shown. After we have clean data, it is important to choose a set of features to use. This post presents an overview of some of the available methods">
+    <meta name="description" content="In part IV some data preprocessing techniques were shown. After we have clean data, it is important to choose a set of features to use. This post presents an overview of some of the available methods">
 <meta name="keywords" content="python,machine-learning,scikit-learn,qt5">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Building a machine-learning pipeline with scikit-learn and Qt - Part V">
 <meta property="og:url" content="https://alexpnt.github.io/2017/09/09/ml-pipeline-5/index.html">
 <meta property="og:site_name" content="Alexandre Pinto">
-<meta property="og:description" content="In part II some data preprocessing techniques were shown. After we have clean data, it is important to choose a set of features to use. This post presents an overview of some of the available methods">
+<meta property="og:description" content="In part IV some data preprocessing techniques were shown. After we have clean data, it is important to choose a set of features to use. This post presents an overview of some of the available methods">
 <meta property="og:image" content="https://alexpnt.github.io/images/ml-pipeline/feature_selection.png">
-<meta property="og:updated_time" content="2017-09-11T16:29:34.403Z">
+<meta property="og:updated_time" content="2017-09-12T11:05:12.659Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Building a machine-learning pipeline with scikit-learn and Qt - Part V">
-<meta name="twitter:description" content="In part II some data preprocessing techniques were shown. After we have clean data, it is important to choose a set of features to use. This post presents an overview of some of the available methods">
+<meta name="twitter:description" content="In part IV some data preprocessing techniques were shown. After we have clean data, it is important to choose a set of features to use. This post presents an overview of some of the available methods">
 <meta name="twitter:image" content="https://alexpnt.github.io/images/ml-pipeline/feature_selection.png">
     
     
@@ -143,7 +143,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>In <a href="/2017/09/02/ml-pipeline-2/">part II</a> some data preprocessing techniques were shown. After we have clean data, it is important to choose a set of features to use. This post presents an overview of some of the available methods that we can use. </p>
+    <p>In <a href="/2017/09/09/ml-pipeline-4/">part IV</a> some data preprocessing techniques were shown. After we have clean data, it is important to choose a set of features to use. This post presents an overview of some of the available methods that we can use. </p>
 <p><img src="/images/ml-pipeline/feature_selection.png" alt=""></p>
 <h2 id="Feature-Selection"><a href="#Feature-Selection" class="headerlink" title="Feature Selection"></a>Feature Selection</h2><p>Feature selection usually involves selecting a subset of the original set of features that provide the biggest discriminatory power, i.e., are able to provide the best separation between classes, result in the best performance of the classifier when trained and avoid the curse of dimensionality. In fact, it has been said that exists a critical feature dimension from where the performance degrades rapidly. Feature selection helps in removing irrelevant and redundant features and is usually divided into filter methods, where a subset of features is selected, without considering the predictive model and wrapper methods which use the classifier to rank and choose the best feature set. This step, in conjunction with feature reduction, is likely to be one of the most important steps in the pipeline. The following list shows common techniques employed in feature selection:</p>
 <ul>
