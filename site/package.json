@@ -15,7 +15,6 @@
     "hexo-generator-tag": "^0.2.0",
     "hexo-inject": "^1.0.0",
     "hexo-instagram-wall": "^1.1.1",
-    "hexo-katex": "0.0.8",
     "hexo-renderer-ejs": "^0.2.0",
     "hexo-renderer-marked": "^0.2.10",
     "hexo-renderer-pandoc": "^0.1.1",

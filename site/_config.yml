@@ -102,6 +102,3 @@ feed:
   limit: 20
   hub:
   content:
-
-pandoc:
-  mathEngine: katex
