@@ -16,11 +16,12 @@ tags:
 
 Some learning algorithms do not deal with certain types of data. In order to be able to use them, the type of the attributes might be transformed to another suitable type. For example converting symbolic features to equivalent numeric features, or the other way around. Another important issue to consider is the normalization of the data, such as converting different attributes to the same scale, avoiding the dominance of some attributes and decreasing the dispersion of the data. 
 
-* **Standardization** - Standardization transforms each feature by removing their mean and diving non-constant features by their standard deviation, obtaining data normally distributed with zero mean and unit variance.
+* **Standardization** - Standardization transforms each feature by removing their mean and diving non-constant features by their standard deviation, obtaining data normally distributed with zero mean and unit variance (_ρ<sub>Xstd</sub> = 0_, _σ<sub>Xstd</sub> = 1_). $$ x' = { x - ρX \over σX } $$
 
-* **Normalization** - Normalization involves scaling samples/features vectors to have unit norm, usually achieved by diving by the euclidean norm of the vector.
 
-* **Scaling** - Scaling transform the features to lie between a minimum and a maximum value. Typical ranges are [0,1] or [-1,1].
+* **Normalization** - Normalization involves scaling samples/features vectors to have unit norm, usually achieved by diving by the euclidean norm of the vector. $$ x' = { x  \over \sqrt \sum x_i^2 } $$
+
+* **Scaling** - Scaling transform the features to lie between a minimum and a maximum value. Typical ranges are [0,1] or [-1,1]. $$ x'_{[0,1]} = { x - min_x \over max_x - min_x } $$
 
 ## Dataset Balancing
 
