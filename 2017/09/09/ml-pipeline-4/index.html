@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Alexandre Pinto">
 <meta property="og:description" content="Part III explored data visualization and distribution methods. This article shows a list of common preprocessing methods that may be applied.  Dataset TransformationSome learning algorithms do not dea">
 <meta property="og:image" content="https://alexpnt.github.io/images/ml-pipeline/preprocessing.png">
-<meta property="og:updated_time" content="2017-09-11T16:18:43.068Z">
+<meta property="og:updated_time" content="2017-09-12T16:41:53.942Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Building a machine-learning pipeline with scikit-learn and Qt - Part IV">
 <meta name="twitter:description" content="Part III explored data visualization and distribution methods. This article shows a list of common preprocessing methods that may be applied.  Dataset TransformationSome learning algorithms do not dea">
@@ -147,11 +147,12 @@
 <p><img src="/images/ml-pipeline/preprocessing.png" alt=""></p>
 <h2 id="Dataset-Transformation"><a href="#Dataset-Transformation" class="headerlink" title="Dataset Transformation"></a>Dataset Transformation</h2><p>Some learning algorithms do not deal with certain types of data. In order to be able to use them, the type of the attributes might be transformed to another suitable type. For example converting symbolic features to equivalent numeric features, or the other way around. Another important issue to consider is the normalization of the data, such as converting different attributes to the same scale, avoiding the dominance of some attributes and decreasing the dispersion of the data. </p>
 <ul>
-<li><p><strong>Standardization</strong> - Standardization transforms each feature by removing their mean and diving non-constant features by their standard deviation, obtaining data normally distributed with zero mean and unit variance.</p>
+<li><strong>Standardization</strong> - Standardization transforms each feature by removing their mean and diving non-constant features by their standard deviation, obtaining data normally distributed with zero mean and unit variance (<em>ρ<sub>Xstd</sub> = 0</em>, <em>σ<sub>Xstd</sub> = 1</em>). $$ x’ = { x - ρX \over σX } $$</li>
+</ul>
+<ul>
+<li><p><strong>Normalization</strong> - Normalization involves scaling samples/features vectors to have unit norm, usually achieved by diving by the euclidean norm of the vector. $$ x’ = { x  \over \sqrt \sum x_i^2 } $$</p>
 </li>
-<li><p><strong>Normalization</strong> - Normalization involves scaling samples/features vectors to have unit norm, usually achieved by diving by the euclidean norm of the vector.</p>
-</li>
-<li><p><strong>Scaling</strong> - Scaling transform the features to lie between a minimum and a maximum value. Typical ranges are [0,1] or [-1,1].</p>
+<li><p><strong>Scaling</strong> - Scaling transform the features to lie between a minimum and a maximum value. Typical ranges are [0,1] or [-1,1]. $$ x’_{[0,1]} = { x - min_x \over max_x - min_x } $$</p>
 </li>
 </ul>
 <h2 id="Dataset-Balancing"><a href="#Dataset-Balancing" class="headerlink" title="Dataset Balancing"></a>Dataset Balancing</h2><p>The original dataset contain an imbalance between the two classes, that is, there is 23364(∼78%) samples from class ’0’ and 6636(∼22%) from class ’1’, which can affect the classifier prediction ability. In order to address this issue, 2 groups of methods may be employed, i.e, methods based on the undersampling of the majority class and methods based on the oversampling of the minority class:</p>
