@@ -8,7 +8,7 @@ tags:
 - qt5
 ---
 
-In [part II](/2017/09/02/ml-pipeline-2/) some data preprocessing techniques were shown. After we have clean data, it is important to choose a set of features to use. This post presents an overview of some of the available methods that we can use. 
+In [part IV](/2017/09/09/ml-pipeline-4/) some data preprocessing techniques were shown. After we have clean data, it is important to choose a set of features to use. This post presents an overview of some of the available methods that we can use. 
 
 ![](/images/ml-pipeline/feature_selection.png)
 
