@@ -9,7 +9,7 @@ Aldous Huxley, Brave New World
 
 ## Journal Articles:
 
-[Predicting the Relevance of Social Media Posts Based on Linguistic Features and Journalistic Criteria, New Generation Computing, 2017 ](https://link.springer.com/article/10.1007%2Fs00354-017-0015-1)
+[Predicting the Relevance of Social Media Posts Based on Linguistic Features and Journalistic Criteria, New Generation Computing, 2017 ](http://rdcu.be/wAl5)
 
 ## Conference Articles:
 
