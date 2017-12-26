@@ -13,9 +13,10 @@
 <meta property="og:url" content="https://alexpnt.github.io/2017/09/02/ml-pipeline-1/index.html">
 <meta property="og:site_name" content="Alexandre Pinto">
 <meta property="og:description" content="In machine learning problems, we usually describe the objects that we wish to recognize by a set of variables called features, consisting of information that we extract from the study objects. Such fe">
+<meta property="og:locale" content="default">
 <meta property="og:image" content="https://alexpnt.github.io/images/ml-pipeline/decision_boundary.png">
 <meta property="og:image" content="https://alexpnt.github.io/images/ml-pipeline/ml-pipeline.png">
-<meta property="og:updated_time" content="2017-09-11T19:07:35.949Z">
+<meta property="og:updated_time" content="2018-03-05T13:50:22.056Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Building a machine-learning pipeline with scikit-learn and Qt - Part I">
 <meta name="twitter:description" content="In machine learning problems, we usually describe the objects that we wish to recognize by a set of variables called features, consisting of information that we extract from the study objects. Such fe">
@@ -146,11 +147,17 @@
   <div class="content" itemprop="articleBody">
     <p>In machine learning problems, we usually describe the objects that we wish to recognize by a set of variables called features, consisting of information that we extract from the study objects. Such features are then collected in vectors of dimension d, called feature vectors, usually denoted by x. They represent points in a d dimensional space, called feature space. Each point belongs to a class, usually denoted by w and the combination of the feature vectors and their corresponding class are called patterns. If we only have two target classes, we are in the presence of a binary classification problem. Classification problems may be trivial for humans but are usually quite challenging for automated systems, since we need to deal with a lot of issues such as finding a reasonable number of distinguishing features good enough for classification, that are able to separate the target classes, or finding models that have good generalization capabilities (perform well on unseen data), avoiding overfitting of the model to the training data. The main goal is then to find the best decision boundary that results in the best generalization on testing data.</p>
 <p>The figure below shows an hypothetical problem with two classes and two features. The main goal is then to find the best decision boundary that results in the best generalization on testing data.</p>
-<p><img src="/images/ml-pipeline/decision_boundary.png" alt=""></p>
+<div class="figure">
+<img src="/images/ml-pipeline/decision_boundary.png">
+
+</div>
 <p>The next figure shows the workflow of a typical machine learning application. Usually, classification involves steps such as data gathering, preprocessing, feature selection/reduction, training, testing and the final evaluation. The main goal is to assign, with the best accuracy possible, new labels to new instances.</p>
-<p><img src="/images/ml-pipeline/ml-pipeline.png" alt=""></p>
+<div class="figure">
+<img src="/images/ml-pipeline/ml-pipeline.png">
+
+</div>
 <p>In this post, we will see how we can recognize credit card frauds using classic algorithms. Default credit cards are an important issue that bring negative consequences to both sides, i.e, banks and customer. If a customer does not pay his obligations, banks loose money, the customer will lose credibility in future payments, collection calls start to be made and in last resort, the case may go into the court. In order to avoid all of that trouble, effective methods that are able to predict the default of credit cards are needed. Therefore, default credit card prediction is an important, challenging and useful task that should be addressed.</p>
-<p>Python is a great choice for the development of this kind of applications, along with a series of helpful packages containing statistical and learning methods, namely the <a href="http://www.numpy.org/" target="_blank" rel="external">numpy</a> and <a href="https://www.scipy.org/" target="_blank" rel="external">scipy</a> packages for numerical computations, <a href="http://matplotlib.org/" target="_blank" rel="external">matplotlib</a> , <a href="http://pandas.pydata.org/" target="_blank" rel="external">pandas</a> and <a href="http://seaborn.pydata.org/" target="_blank" rel="external">seaborn</a> for data visualization, <a href="http://scikit-learn.org/stable/" target="_blank" rel="external">sklearn</a>, <a href="https://github.com/rasbt/mlxtend" target="_blank" rel="external">mlxtend</a> and <a href="https://github.com/scikit-learn-contrib/imbalanced-learn" target="_blank" rel="external">unbalanced dataset</a> for the learning and feature selection / reduction methods and finally the <a href="https://www.riverbankcomputing.com/software/pyqt/intro" target="_blank" rel="external">PyQt5</a> and <a href="http://doc.qt.io/qt-5/qtdesigner-manual.html" target="_blank" rel="external">Qt Designer</a> for the Graphical User Interface (GUI).</p>
+<p>Python is a great choice for the development of this kind of applications, along with a series of helpful packages containing statistical and learning methods, namely the <a href="http://www.numpy.org/" target="_blank" rel="noopener">numpy</a> and <a href="https://www.scipy.org/" target="_blank" rel="noopener">scipy</a> packages for numerical computations, <a href="http://matplotlib.org/" target="_blank" rel="noopener">matplotlib</a> , <a href="http://pandas.pydata.org/" target="_blank" rel="noopener">pandas</a> and <a href="http://seaborn.pydata.org/" target="_blank" rel="noopener">seaborn</a> for data visualization, <a href="http://scikit-learn.org/stable/" target="_blank" rel="noopener">sklearn</a>, <a href="https://github.com/rasbt/mlxtend" target="_blank" rel="noopener">mlxtend</a> and <a href="https://github.com/scikit-learn-contrib/imbalanced-learn" target="_blank" rel="noopener">unbalanced dataset</a> for the learning and feature selection / reduction methods and finally the <a href="https://www.riverbankcomputing.com/software/pyqt/intro" target="_blank" rel="noopener">PyQt5</a> and <a href="http://doc.qt.io/qt-5/qtdesigner-manual.html" target="_blank" rel="noopener">Qt Designer</a> for the Graphical User Interface (GUI).</p>
 <p><a href="/2017/09/02/ml-pipeline-2/">Part II will look at the first step of the process: Data Gathering</a>.</p>
 
   </div>
@@ -222,7 +229,7 @@
     
     <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2017 Alexandre Pinto
+    Copyright &copy; 2018 Alexandre Pinto
   </div>
   <div class="footer-right">
     <nav>

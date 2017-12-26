@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Nowadays, there are have massive amounts of structured and unstructured data and good hardware resources, which makes it ideal for resource-hungry algorithms, such as deep neural networks, that usuall">
+<meta name="keywords" content="performance,machine-learning,gpu,cuda,nvidia,tensorflow,deep-learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Setting up tensorflow to run on a nvidia gpu">
+<meta property="og:url" content="https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/index.html">
+<meta property="og:site_name" content="Alexandre Pinto">
+<meta property="og:description" content="Nowadays, there are have massive amounts of structured and unstructured data and good hardware resources, which makes it ideal for resource-hungry algorithms, such as deep neural networks, that usuall">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-23T13:34:45.124Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Setting up tensorflow to run on a nvidia gpu">
+<meta name="twitter:description" content="Nowadays, there are have massive amounts of structured and unstructured data and good hardware resources, which makes it ideal for resource-hungry algorithms, such as deep neural networks, that usuall">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Setting up tensorflow to run on a nvidia gpu</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+    
+</head>
+
+<body>
+    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/cv/">CV</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/papers/">Papers</a></li>
+         
+          <li><a href="/gallery/">Gallery</a></li>
+         
+          <li><a href="/contact/">Contact</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/10/19/speeding-up-python/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/01/06/fast-inference-falcon-bjoern/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/&text=Setting up tensorflow to run on a nvidia gpu"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/&title=Setting up tensorflow to run on a nvidia gpu"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/&is_video=false&description=Setting up tensorflow to run on a nvidia gpu"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Setting up tensorflow to run on a nvidia gpu&body=Check out this article: https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/&title=Setting up tensorflow to run on a nvidia gpu"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/&title=Setting up tensorflow to run on a nvidia gpu"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/&title=Setting up tensorflow to run on a nvidia gpu"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/&title=Setting up tensorflow to run on a nvidia gpu"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/&name=Setting up tensorflow to run on a nvidia gpu&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#install-the-cuda-toolkit"><span class="toc-number">1.</span> <span class="toc-text">Install the CUDA Toolkit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setup-the-environment-variables"><span class="toc-number">2.</span> <span class="toc-text">Setup the environment variables</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#compile-samples-and-test-them"><span class="toc-number">3.</span> <span class="toc-text">Compile samples and test them</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#check-installation-by-running-devicequery-and-bandwidthtest"><span class="toc-number">4.</span> <span class="toc-text">Check installation by running deviceQuery and bandwidthTest</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install-cudnn"><span class="toc-number">5.</span> <span class="toc-text">Install cuDNN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#compile-samples-and-test-them-1"><span class="toc-number">6.</span> <span class="toc-text">Compile samples and test them</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#check-installation-by-running-mnistcudnn"><span class="toc-number">7.</span> <span class="toc-text">Check installation by running mnistCUDNN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install-final-command-line-utilities-and-setup-ld_library_path"><span class="toc-number">8.</span> <span class="toc-text">Install final command line utilities and setup LD_LIBRARY_PATH</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#check-tensorflow-is-running-on-a-gpu"><span class="toc-number">9.</span> <span class="toc-text">Check tensorflow is running on a GPU</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Setting up tensorflow to run on a nvidia gpu
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Alexandre Pinto</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-01-27T17:26:57.000Z" itemprop="datePublished">2018-01-27</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/cuda/">cuda</a>, <a class="tag-link" href="/tags/deep-learning/">deep-learning</a>, <a class="tag-link" href="/tags/gpu/">gpu</a>, <a class="tag-link" href="/tags/machine-learning/">machine-learning</a>, <a class="tag-link" href="/tags/nvidia/">nvidia</a>, <a class="tag-link" href="/tags/performance/">performance</a>, <a class="tag-link" href="/tags/tensorflow/">tensorflow</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Nowadays, there are have massive amounts of structured and unstructured data and good hardware resources, which makes it ideal for resource-hungry algorithms, such as deep neural networks, that usually need huge amounts of data. Furthermore, libraries such as <a href="https://www.tensorflow.org" target="_blank" rel="noopener">Tensorflow</a> are a great boost in the development and deploy of accurate models. While Tensorflow can run on a typical CPU, for the best performance and reduced training/inference time we may run it on a GPU. Libraries such as NVIDIA CUDA Deep Neural Network library (cuDNN) greatly optimize low-level computations, such as complex matrix operations and deliver very good performance speedups. Before we can use Tensorflow we need to setup the cuDNN library. This post demonstrates a common scenario where we setup an Amazon GPU instance (p3.2xlarge), running a Ubuntu 16.04 x86_64 distribution with a NVIDIA Tesla V100.</p>
+<h2 id="install-the-cuda-toolkit">Install the CUDA Toolkit</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mkdir cuda</span><br><span class="line"><span class="built_in">cd</span> cuda</span><br><span class="line">wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.0.176-1_amd64.deb</span><br><span class="line">sudo dpkg -i cuda-repo-ubuntu1604_9.0.176-1_amd64.deb</span><br><span class="line">sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install cuda-9-0</span><br></pre></td></tr></table></figure>
+<h2 id="setup-the-environment-variables">Setup the environment variables</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/cuda-9.0/bin<span class="variable">$&#123;PATH:+:$&#123;PATH&#125;</span>&#125;</span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/<span class="built_in">local</span>/cuda-9.0/lib64<span class="variable">$&#123;LD_LIBRARY_PATH:+:$&#123;LD_LIBRARY_PATH&#125;</span>&#125;</span><br><span class="line"><span class="built_in">export</span> CUDA_HOME=/usr/<span class="built_in">local</span>/cuda-9.0/</span><br></pre></td></tr></table></figure>
+<h2 id="compile-samples-and-test-them">Compile samples and test them</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp -r /usr/<span class="built_in">local</span>/cuda-9.0/samples <span class="variable">$HOME</span>/cuda</span><br><span class="line"><span class="built_in">cd</span> samples</span><br><span class="line">make clean &amp;&amp; make</span><br></pre></td></tr></table></figure>
+<h2 id="check-installation-by-running-devicequery-and-bandwidthtest">Check installation by running <em>deviceQuery</em> and <em>bandwidthTest</em></h2>
+<p>You should see an output similar to these ones:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">cd bin/</span><br><span class="line">./deviceQuery</span><br><span class="line"></span><br><span class="line">	./deviceQuery Starting...</span><br><span class="line"></span><br><span class="line">	 CUDA Device Query (Runtime API) version (CUDART static linking)</span><br><span class="line"></span><br><span class="line">	Detected 1 CUDA Capable device(s)</span><br><span class="line"></span><br><span class="line">	Device 0: &quot;Tesla V100-SXM2-16GB&quot;</span><br><span class="line">	  CUDA Driver Version / Runtime Version          9.0 / 9.0</span><br><span class="line">	  CUDA Capability Major/Minor version number:    7.0</span><br><span class="line">	  Total amount of global memory:                 16160 MBytes (16945512448 bytes)</span><br><span class="line">	  (80) Multiprocessors, ( 64) CUDA Cores/MP:     5120 CUDA Cores</span><br><span class="line">	  GPU Max Clock rate:                            1530 MHz (1.53 GHz)</span><br><span class="line">	  Memory Clock rate:                             877 Mhz</span><br><span class="line">	  Memory Bus Width:                              4096-bit</span><br><span class="line">	  L2 Cache Size:                                 6291456 bytes</span><br><span class="line">	  Maximum Texture Dimension Size (x,y,z)         1D=(131072), 2D=(131072, 65536), 3D=(16384, 16384, 16384)</span><br><span class="line">	  Maximum Layered 1D Texture Size, (num) layers  1D=(32768), 2048 layers</span><br><span class="line">	  Maximum Layered 2D Texture Size, (num) layers  2D=(32768, 32768), 2048 layers</span><br><span class="line">	  Total amount of constant memory:               65536 bytes</span><br><span class="line">	  Total amount of shared memory per block:       49152 bytes</span><br><span class="line">	  Total number of registers available per block: 65536</span><br><span class="line">	  Warp size:                                     32</span><br><span class="line">	  Maximum number of threads per multiprocessor:  2048</span><br><span class="line">	  Maximum number of threads per block:           1024</span><br><span class="line">	  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)</span><br><span class="line">	  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)</span><br><span class="line">	  Maximum memory pitch:                          2147483647 bytes</span><br><span class="line">	  Texture alignment:                             512 bytes</span><br><span class="line">	  Concurrent copy and kernel execution:          Yes with 2 copy engine(s)</span><br><span class="line">	  Run time limit on kernels:                     No</span><br><span class="line">	  Integrated GPU sharing Host Memory:            No</span><br><span class="line">	  Support host page-locked memory mapping:       Yes</span><br><span class="line">	  Alignment requirement for Surfaces:            Yes</span><br><span class="line">	  Device has ECC support:                        Enabled</span><br><span class="line">	  Device supports Unified Addressing (UVA):      Yes</span><br><span class="line">	  Supports Cooperative Kernel Launch:            Yes</span><br><span class="line">	  Supports MultiDevice Co-op Kernel Launch:      Yes</span><br><span class="line">	  Device PCI Domain ID / Bus ID / location ID:   0 / 0 / 30</span><br><span class="line">	  Compute Mode:</span><br><span class="line">	     &lt; Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) &gt;</span><br><span class="line"></span><br><span class="line">	deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 9.0, CUDA Runtime Version = 9.0, NumDevs = 1</span><br><span class="line">	Result = PASS</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">./bandwidthTest</span><br><span class="line"></span><br><span class="line">	[CUDA Bandwidth Test] - Starting...</span><br><span class="line">	Running on...</span><br><span class="line"></span><br><span class="line">	 Device 0: Tesla V100-SXM2-16GB</span><br><span class="line">	 Quick Mode</span><br><span class="line"></span><br><span class="line">	 Host to Device Bandwidth, 1 Device(s)</span><br><span class="line">	 PINNED Memory Transfers</span><br><span class="line">	   Transfer Size (Bytes)	Bandwidth(MB/s)</span><br><span class="line">	   33554432			10817.1</span><br><span class="line"></span><br><span class="line">	 Device to Host Bandwidth, 1 Device(s)</span><br><span class="line">	 PINNED Memory Transfers</span><br><span class="line">	   Transfer Size (Bytes)	Bandwidth(MB/s)</span><br><span class="line">	   33554432			12143.6</span><br><span class="line"></span><br><span class="line">	 Device to Device Bandwidth, 1 Device(s)</span><br><span class="line">	 PINNED Memory Transfers</span><br><span class="line">	   Transfer Size (Bytes)	Bandwidth(MB/s)</span><br><span class="line">	   33554432			742271.1</span><br><span class="line"></span><br><span class="line">	Result = PASS</span><br><span class="line"></span><br><span class="line">	NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.</span><br></pre></td></tr></table></figure>
+<h2 id="install-cudnn">Install cuDNN</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v7.1.1/prod/9.1_20180214/Ubuntu16_04-x64/libcudnn7_7.1.1.5-1+cuda9.1_amd64</span><br><span class="line">wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v7.1.1/prod/9.1_20180214/Ubuntu16_04-x64/libcudnn7-dev_7.1.1.5-1+cuda9.1_amd64</span><br><span class="line">wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v7.1.1/prod/9.1_20180214/Ubuntu16_04-x64/libcudnn7-doc_7.1.1.5-1+cuda9.1_amd64</span><br><span class="line"></span><br><span class="line">sudo dpkg -i libcudnn7_7.1.1.5-1+cuda9.1_amd64.deb</span><br><span class="line">sudo dpkg -i libcudnn7-dev_7.1.1.5-1+cuda9.1_amd64.deb</span><br><span class="line">sudo dpkg -i libcudnn7-doc_7.1.1.5-1+cuda9.1_amd64.deb</span><br></pre></td></tr></table></figure>
+<h2 id="compile-samples-and-test-them-1">Compile samples and test them</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp -r /usr/src/cudnn_samples_v7/ <span class="variable">$HOME</span>/cuda</span><br><span class="line"><span class="built_in">cd</span> cudnn_samples_v7/mnistCUDNN/</span><br><span class="line">make clean &amp;&amp; make</span><br></pre></td></tr></table></figure>
+<h2 id="check-installation-by-running-mnistcudnn">Check installation by running <em>mnistCUDNN</em></h2>
+<p>You should see an output similar to these ones:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">./mnistCUDNN</span><br><span class="line">	cudnnGetVersion() : 7101 , CUDNN_VERSION from cudnn.h : 7101 (7.1.1)</span><br><span class="line">	Host compiler version : GCC 5.4.0</span><br><span class="line">	There are 1 CUDA capable devices on your machine :</span><br><span class="line">	device 0 : sms 80  Capabilities 7.0, SmClock 1530.0 Mhz, MemSize (Mb) 16160, MemClock 877.0 Mhz, Ecc=1, boardGroupID=0</span><br><span class="line">	Using device 0</span><br><span class="line"></span><br><span class="line">	Testing single precision</span><br><span class="line">	Loading image data/one_28x28.pgm</span><br><span class="line">	Performing forward propagation ...</span><br><span class="line">	Testing cudnnGetConvolutionForwardAlgorithm ...</span><br><span class="line">	Fastest algorithm is Algo 5</span><br><span class="line">	Testing cudnnFindConvolutionForwardAlgorithm ...</span><br><span class="line">	^^^^ CUDNN_STATUS_SUCCESS <span class="keyword">for</span> Algo 0: 0.026624 time requiring 0 memory</span><br><span class="line">	^^^^ CUDNN_STATUS_SUCCESS <span class="keyword">for</span> Algo 1: 0.046080 time requiring 3464 memory</span><br><span class="line">	^^^^ CUDNN_STATUS_SUCCESS <span class="keyword">for</span> Algo 2: 0.046080 time requiring 57600 memory</span><br><span class="line">	^^^^ CUDNN_STATUS_SUCCESS <span class="keyword">for</span> Algo 7: 0.062464 time requiring 2057744 memory</span><br><span class="line">	^^^^ CUDNN_STATUS_SUCCESS <span class="keyword">for</span> Algo 5: 0.078848 time requiring 203008 memory</span><br><span class="line">	Resulting weights from Softmax:</span><br><span class="line">	0.0000000 0.9999399 0.0000000 0.0000000 0.0000561 0.0000000 0.0000012 0.0000017 0.0000010 0.0000000 </span><br><span class="line">	Loading image data/three_28x28.pgm</span><br><span class="line">	Performing forward propagation ...</span><br><span class="line">	Resulting weights from Softmax:</span><br><span class="line">	0.0000000 0.0000000 0.0000000 0.9999288 0.0000000 0.0000711 0.0000000 0.0000000 0.0000000 0.0000000 </span><br><span class="line">	Loading image data/five_28x28.pgm</span><br><span class="line">	Performing forward propagation ...</span><br><span class="line">	Resulting weights from Softmax:</span><br><span class="line">	0.0000000 0.0000008 0.0000000 0.0000002 0.0000000 0.9999820 0.0000154 0.0000000 0.0000012 0.0000006 </span><br><span class="line"></span><br><span class="line">	Result of classification: 1 3 5</span><br><span class="line"></span><br><span class="line">	Test passed!</span><br><span class="line"></span><br><span class="line">	Testing half precision (math <span class="keyword">in</span> single precision)</span><br><span class="line">	Loading image data/one_28x28.pgm</span><br><span class="line">	Performing forward propagation ...</span><br><span class="line">	Testing cudnnGetConvolutionForwardAlgorithm ...</span><br><span class="line">	Fastest algorithm is Algo 5</span><br><span class="line">	Testing cudnnFindConvolutionForwardAlgorithm ...</span><br><span class="line">	^^^^ CUDNN_STATUS_SUCCESS <span class="keyword">for</span> Algo 0: 0.024576 time requiring 0 memory</span><br><span class="line">	^^^^ CUDNN_STATUS_SUCCESS <span class="keyword">for</span> Algo 2: 0.044032 time requiring 28800 memory</span><br><span class="line">	^^^^ CUDNN_STATUS_SUCCESS <span class="keyword">for</span> Algo 1: 0.048128 time requiring 3464 memory</span><br><span class="line">	^^^^ CUDNN_STATUS_SUCCESS <span class="keyword">for</span> Algo 7: 0.058368 time requiring 2057744 memory</span><br><span class="line">	^^^^ CUDNN_STATUS_SUCCESS <span class="keyword">for</span> Algo 5: 0.077824 time requiring 203008 memory</span><br><span class="line">	Resulting weights from Softmax:</span><br><span class="line">	0.0000001 1.0000000 0.0000001 0.0000000 0.0000558 0.0000001 0.0000011 0.0000017 0.0000010 0.0000001 </span><br><span class="line">	Loading image data/three_28x28.pgm</span><br><span class="line">	Performing forward propagation ...</span><br><span class="line">	Resulting weights from Softmax:</span><br><span class="line">	0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000703 0.0000000 0.0000000 0.0000000 0.0000000 </span><br><span class="line">	Loading image data/five_28x28.pgm</span><br><span class="line">	Performing forward propagation ...</span><br><span class="line">	Resulting weights from Softmax:</span><br><span class="line">	0.0000000 0.0000008 0.0000000 0.0000002 0.0000000 1.0000000 0.0000154 0.0000000 0.0000012 0.0000006 </span><br><span class="line"></span><br><span class="line">	Result of classification: 1 3 5</span><br><span class="line"></span><br><span class="line">	Test passed!</span><br></pre></td></tr></table></figure>
+<h2 id="install-final-command-line-utilities-and-setup-ld_library_path">Install final command line utilities and setup LD_LIBRARY_PATH</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install cuda-command-line-tools-9-1</span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=<span class="variable">$LD_LIBRARY_PATH</span>:/usr/<span class="built_in">local</span>/cuda/extras/CUPTI/lib64</span><br></pre></td></tr></table></figure>
+<h2 id="check-tensorflow-is-running-on-a-gpu">Check tensorflow is running on a GPU</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade tensorflow-gpu</span><br><span class="line">python</span><br><span class="line"></span><br><span class="line">import tensorflow as tf</span><br><span class="line">sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))</span><br><span class="line"></span><br><span class="line">	2018-03-20 16:43:50.112739: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:898] successful NUMA node <span class="built_in">read</span> from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero</span><br><span class="line">	2018-03-20 16:43:50.112955: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1212] Found device 0 with properties: </span><br><span class="line">	name: Tesla V100-SXM2-16GB major: 7 minor: 0 memoryClockRate(GHz): 1.53</span><br><span class="line">	pciBusID: 0000:00:1e.0</span><br><span class="line">	totalMemory: 15.78GiB freeMemory: 307.94MiB</span><br><span class="line">	2018-03-20 16:43:50.112982: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1312] Adding visible gpu devices: 0</span><br><span class="line">	2018-03-20 16:43:50.802739: I tensorflow/core/common_runtime/gpu/gpu_device.cc:993] Creating TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 10 MB memory) -&gt; physical GPU (device: 0, name: Tesla V100-SXM2-16GB, pci bus id: 0000:00:1e.0, compute capability: 7.0)</span><br><span class="line">	Device mapping:</span><br><span class="line">	/job:localhost/replica:0/task:0/device:GPU:0 -&gt; device: 0, name: Tesla V100-SXM2-16GB, pci bus id: 0000:00:1e.0, compute capability: 7.0</span><br><span class="line">	2018-03-20 16:43:50.805298: I tensorflow/core/common_runtime/direct_session.cc:297] Device mapping:</span><br><span class="line">	/job:localhost/replica:0/task:0/device:GPU:0 -&gt; device: 0, name: Tesla V100-SXM2-16GB, pci bus id: 0000:00:1e.0, compute capability: 7.0</span><br></pre></td></tr></table></figure>
+<p>From the output logs, we can see that Tensorflow detected our GPU device. We can now train our models on the GPU and accelerate the training time.</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+    </div>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/cv/">CV</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/papers/">Papers</a></li>
+         
+          <li><a href="/gallery/">Gallery</a></li>
+         
+          <li><a href="/contact/">Contact</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#install-the-cuda-toolkit"><span class="toc-number">1.</span> <span class="toc-text">Install the CUDA Toolkit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setup-the-environment-variables"><span class="toc-number">2.</span> <span class="toc-text">Setup the environment variables</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#compile-samples-and-test-them"><span class="toc-number">3.</span> <span class="toc-text">Compile samples and test them</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#check-installation-by-running-devicequery-and-bandwidthtest"><span class="toc-number">4.</span> <span class="toc-text">Check installation by running deviceQuery and bandwidthTest</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install-cudnn"><span class="toc-number">5.</span> <span class="toc-text">Install cuDNN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#compile-samples-and-test-them-1"><span class="toc-number">6.</span> <span class="toc-text">Compile samples and test them</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#check-installation-by-running-mnistcudnn"><span class="toc-number">7.</span> <span class="toc-text">Check installation by running mnistCUDNN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#install-final-command-line-utilities-and-setup-ld_library_path"><span class="toc-number">8.</span> <span class="toc-text">Install final command line utilities and setup LD_LIBRARY_PATH</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#check-tensorflow-is-running-on-a-gpu"><span class="toc-number">9.</span> <span class="toc-text">Check tensorflow is running on a GPU</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/&text=Setting up tensorflow to run on a nvidia gpu"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/&title=Setting up tensorflow to run on a nvidia gpu"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/&is_video=false&description=Setting up tensorflow to run on a nvidia gpu"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Setting up tensorflow to run on a nvidia gpu&body=Check out this article: https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/&title=Setting up tensorflow to run on a nvidia gpu"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/&title=Setting up tensorflow to run on a nvidia gpu"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/&title=Setting up tensorflow to run on a nvidia gpu"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/&title=Setting up tensorflow to run on a nvidia gpu"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/&name=Setting up tensorflow to run on a nvidia gpu&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Alexandre Pinto
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/cv/">CV</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/papers/">Papers</a></li>
+         
+          <li><a href="/gallery/">Gallery</a></li>
+         
+          <li><a href="/contact/">Contact</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-43571022-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'alexpnt';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+

@@ -6,18 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="One of the great offers of Django is the high-level database API, which lets us manipulate our data using an object oriented approach.  For instance given the following model: 12345from django.db imp">
-<meta name="keywords" content="django,development,python">
+    <meta name="description" content="One of the great offers of Django is the high-level database API, which lets us manipulate our data using an object oriented approach. For instance given the following model: 12345from django.db i">
+<meta name="keywords" content="django,python,development">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Complex lookups with Q objects in Django">
 <meta property="og:url" content="https://alexpnt.github.io/2017/07/19/q-objects/index.html">
 <meta property="og:site_name" content="Alexandre Pinto">
-<meta property="og:description" content="One of the great offers of Django is the high-level database API, which lets us manipulate our data using an object oriented approach.  For instance given the following model: 12345from django.db imp">
+<meta property="og:description" content="One of the great offers of Django is the high-level database API, which lets us manipulate our data using an object oriented approach. For instance given the following model: 12345from django.db i">
+<meta property="og:locale" content="default">
 <meta property="og:image" content="https://alexpnt.github.io/images/dev.png">
-<meta property="og:updated_time" content="2017-08-16T23:47:54.434Z">
+<meta property="og:updated_time" content="2018-03-05T13:50:22.056Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Complex lookups with Q objects in Django">
-<meta name="twitter:description" content="One of the great offers of Django is the high-level database API, which lets us manipulate our data using an object oriented approach.  For instance given the following model: 12345from django.db imp">
+<meta name="twitter:description" content="One of the great offers of Django is the high-level database API, which lets us manipulate our data using an object oriented approach. For instance given the following model: 12345from django.db i">
 <meta name="twitter:image" content="https://alexpnt.github.io/images/dev.png">
     
     
@@ -143,15 +144,18 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><img src="/images/dev.png" alt=""></p>
-<p>One of the great offers of Django is the high-level database API, which lets us manipulate our data using an object oriented approach. </p>
+    <div class="figure">
+<img src="/images/dev.png">
+
+</div>
+<p>One of the great offers of Django is the high-level database API, which lets us manipulate our data using an object oriented approach.</p>
 <p>For instance given the following model:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</div><div class="line"> </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Grade</span><span class="params">(models.Model)</span>:</span></div><div class="line">    student_code = models.CharField(<span class="string">u'Student Code'</span>, max_length=<span class="number">30</span>)</div><div class="line">    course_code = models.CharField(<span class="string">u'Course code'</span>, max_length=<span class="number">30</span>)</div></pre></td></tr></table></figure>
-<p>What if we want to obtain all the grades for some combinations of student and courses. We might be tempted to use a <em>filter(**kwargs)</em>     method with the <em>in</em> lookup:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> grades.models <span class="keyword">import</span> Grade</div><div class="line"> </div><div class="line">student_codes = [<span class="string">'456870'</span>,<span class="string">'433495'</span>,<span class="string">'104248'</span>,<span class="string">'720400'</span>]</div><div class="line">course_codes = [<span class="string">'474009'</span>,<span class="string">'431934'</span>,<span class="string">'447595'</span>,<span class="string">'789614'</span>]</div><div class="line">grades = Grade.objects.filter(student_code__in=student_codes, </div><div class="line">                    course_codes__in=course_codes)</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Grade</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    student_code = models.CharField(<span class="string">u'Student Code'</span>, max_length=<span class="number">30</span>)</span><br><span class="line">    course_code = models.CharField(<span class="string">u'Course code'</span>, max_length=<span class="number">30</span>)</span><br></pre></td></tr></table></figure>
+<p>What if we want to obtain all the grades for some combinations of student and courses. We might be tempted to use a *filter(**kwargs)* method with the <em>in</em> lookup:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> grades.models <span class="keyword">import</span> Grade</span><br><span class="line"> </span><br><span class="line">student_codes = [<span class="string">'456870'</span>,<span class="string">'433495'</span>,<span class="string">'104248'</span>,<span class="string">'720400'</span>]</span><br><span class="line">course_codes = [<span class="string">'474009'</span>,<span class="string">'431934'</span>,<span class="string">'447595'</span>,<span class="string">'789614'</span>]</span><br><span class="line">grades = Grade.objects.filter(student_code__in=student_codes, </span><br><span class="line">                    course_codes__in=course_codes)</span><br></pre></td></tr></table></figure>
 <p>However, this is not ideal since we will end up with grades from different combinations of student/course. This where Q objects come for the rescue. Q objects encapsulate conditions and can be merged together with different logical operators, such as OR and AND. Therefore, we could rewrite our previous approach as follows:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> grades.models <span class="keyword">import</span> Grade</div><div class="line"><span class="keyword">from</span> django.db.models <span class="keyword">import</span> Q</div><div class="line"><span class="keyword">import</span> operator</div><div class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> izip</div><div class="line"> </div><div class="line">student_codes = [<span class="string">'456870'</span>,<span class="string">'433495'</span>,<span class="string">'104248'</span>,<span class="string">'720400'</span>]</div><div class="line">course_codes = [<span class="string">'474009'</span>,<span class="string">'431934'</span>,<span class="string">'447595'</span>,<span class="string">'789614'</span>]</div><div class="line"> </div><div class="line">q_objects = (Q(student_code=sc, course_code=cc) <span class="keyword">for</span> sc, cc <span class="keyword">in</span> izip(student_codes, course_codes))</div><div class="line"> </div><div class="line">query = reduce(operator.or_, q_objects)</div><div class="line">grades = Grade.objects.filter(query)</div></pre></td></tr></table></figure>
-<p>The important part here is that we joining together a set of OR statements (our desired combinations) instead of allowing forbidden combinations that we are not interested.<br>This example shows how we can overcome the limitations of <em>filter</em> methods by using Q objects, another great feature of our framework. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> grades.models <span class="keyword">import</span> Grade</span><br><span class="line"><span class="keyword">from</span> django.db.models <span class="keyword">import</span> Q</span><br><span class="line"><span class="keyword">import</span> operator</span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> izip</span><br><span class="line"> </span><br><span class="line">student_codes = [<span class="string">'456870'</span>,<span class="string">'433495'</span>,<span class="string">'104248'</span>,<span class="string">'720400'</span>]</span><br><span class="line">course_codes = [<span class="string">'474009'</span>,<span class="string">'431934'</span>,<span class="string">'447595'</span>,<span class="string">'789614'</span>]</span><br><span class="line"> </span><br><span class="line">q_objects = (Q(student_code=sc, course_code=cc) <span class="keyword">for</span> sc, cc <span class="keyword">in</span> izip(student_codes, course_codes))</span><br><span class="line"> </span><br><span class="line">query = reduce(operator.or_, q_objects)</span><br><span class="line">grades = Grade.objects.filter(query)</span><br></pre></td></tr></table></figure>
+<p>The important part here is that we joining together a set of OR statements (our desired combinations) instead of allowing forbidden combinations that we are not interested. This example shows how we can overcome the limitations of <em>filter</em> methods by using Q objects, another great feature of our framework.</p>
 
   </div>
 </article>
@@ -222,7 +226,7 @@
     
     <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2017 Alexandre Pinto
+    Copyright &copy; 2018 Alexandre Pinto
   </div>
   <div class="footer-right">
     <nav>
