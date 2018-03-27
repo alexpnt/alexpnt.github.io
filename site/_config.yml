@@ -86,15 +86,15 @@ instagramWall:
 
 asset_pipeline:
   revisioning:
-    enable: true
+    enable: false
   clean_css:
-    enable: true
+    enable: false
   uglify_js:
-    enable: true
+    enable: false
   imagemin:
-    enable: true
+    enable: false
   html_minifier:
-    enable: true
+    enable: false
     
 feed:
   type: rss
