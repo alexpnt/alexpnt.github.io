@@ -76,11 +76,11 @@ deploy:
 instagramWall:  
   enable: true  
   access_token: INSTAGRAM_WALL_TOKEN
-  requestedCount: 27  
-  itemsPerRow: 3  
+  requestedCount: 20  
+  itemsPerRow: 3
   showCaption: false  
   displayStyle: 'column'
-  gutterSize: '5px'  
+  gutterSize: '1px'  
   overlayColor: 'black'  
   textColor: 'white'   
 
