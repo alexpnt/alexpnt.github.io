@@ -1,5 +1,5 @@
 ---
-title: Speeding up python programs with Numba
+title: Speeding up python programs with Numba and Numpy
 date: 2018-09-23 16:21:56
 tags:
 - python
@@ -10,7 +10,7 @@ tags:
 ## When Python is not enough
 The Python programming language is a great tool for almost any kind of rapid prototyping and quick development. It has great features such as its high level nature, a syntax with almost human-level readability . Besides, it is cross platform, with a a diverse standard library and it is multi-paradigm, giving a lot of freedom to the programmer which can use different programming paradigms such as [object-oriented](https://en.wikipedia.org/wiki/Object-oriented_programming), [functional](https://en.wikipedia.org/wiki/Functional_programming) or [procedural](https://en.wikipedia.org/wiki/Procedural_programming) as he sees fit. However, sometimes some portion of our system has high performance requirements and thus the speed that Python offers might not be sufficient. So, how can we boost performance without leaving the realm of Python (using for example compiled languages such as C/C++ or JIT/compiled such as JAVA) and when all of our optimizations are not enough anymore ? 
 
-A possible solution is to make use of Numba, a runtime compiler that translates Python code to native instructions, while letting us use the concise and expressiveness power of Python and also achieve native code speed.
+A possible solution, among others, is to make use of Numba, a runtime compiler that translates Python code to native instructions, while letting us use the concise and expressiveness power of Python and also achieve native code speed.
 
 ## Whats is Numba ?
 
@@ -30,49 +30,108 @@ The best use case where we can make use of the Numba library is when we have to 
 
 $$ \sigma(z_j) = { e^{z_j}  \over \sum_{k=1}^{K}  e^{z_k} } $$
 
-A possible implementation of this function is as follows:
+The following code show two different implementations of this function, a pure python approach (_softmax_python_) and an optimized version making using of numpy and numba (_softmax_optimized_):
 
 ```bash
 import time
+import math
 import numpy as np
 from numba import jit
 
 
-@jit("f8[:](f8[:])", nopython=True, nogil=True, parallel=True)
-def softmax(z):
-    s = np.empty(z.shape)
-    for j in range(z.shape[0]):
-        s[j] = np.exp(z[j]) / np.sum(np.exp(z))
+@jit("f8(f8[:])", cache=False, nopython=True, nogil=True, parallel=True)
+def esum(z):
+    return np.sum(np.exp(z))
+
+
+@jit("f8[:](f8[:])", cache=False, nopython=True, nogil=True, parallel=True)
+def softmax_optimized(z):
+    num = np.exp(z)
+    s = num / esum(z)
+    return s
+
+
+def softmax_python(z):
+    s = []
+
+    exp_sum = 0
+    for i in range(len(z)):
+        exp_sum += math.exp(z[i])
+
+    for i in range(len(z)):
+        s += [math.exp(z[i]) / exp_sum]
+
     return s
 
 
 def main():
     np.random.seed(0)
-    z = np.random.rand(2 ** 16)
+    z = np.random.uniform(0, 10, 10 ** 8)   # generate random floats in the range [0,10)
 
     start = time.time()
-    s = softmax(z)
+    softmax_python(z.tolist())          # run pure python version of softmax
     elapsed = time.time() - start
+    print('Ran pure python softmax calculations in {} seconds'.format(elapsed))
 
-    print(s, '\nRan softmax calculations in {} seconds'.format(elapsed))
+    softmax_optimized(z)                     # cache jit compilation
+    start = time.time()
+    softmax_optimized(z)                     # run optimzed version of softmax
+    elapsed = time.time() - start
+    print('\nRan optimized softmax calculations in {} seconds'.format(elapsed))
 
 
 if __name__ == '__main__':
     main()
 ```
 
-In the code above, there is already the Numba annotation that 
-
-
-```bash
-[1.53983982e-05 1.81857688e-05 1.62519575e-05 ... 1.66401328e-05
- 9.79635582e-06 2.06871411e-05] 
-Ran softmax calculations in 16.70321774482727 seconds
-```
+The result of the above script will be something similar to:
 
 ```bash
-[1.53983982e-05 1.81857688e-05 1.62519575e-05 ... 1.66401328e-05
- 9.79635582e-06 2.06871411e-05] 
-Ran softmax calculations in 55.84803915023804 seconds
+> python softmax.py
+
+Ran pure python softmax calculations in 41.62234306335449 seconds
+
+Ran optimized softmax calculations in 1.7453773021697998 seconds
+```
+These results clearly shows the performance gains obtained when converting our code to something that Numba understands well. 
+
+In the _softmax_optimized_ function, there is already the Numba annotation that leverages the full power of JIT optimizations. In fact, under the hood the following bytecode will be analysed, optimized and compiled to native instructions:
+
+```python
+> python
+import dis
+from softmax import esum, softmax_optimized
+>>> dis.dis(softmax_optimized)
+ 14           0 LOAD_GLOBAL              0 (np)
+              2 LOAD_ATTR                1 (exp)
+              4 LOAD_FAST                0 (z)
+              6 CALL_FUNCTION            1
+              8 STORE_FAST               1 (num)
+
+ 15          10 LOAD_FAST                1 (num)
+             12 LOAD_GLOBAL              2 (esum)
+             14 LOAD_FAST                0 (z)
+             16 CALL_FUNCTION            1
+             18 BINARY_TRUE_DIVIDE
+             20 STORE_FAST               2 (s)
+
+ 16          22 LOAD_FAST                2 (s)
+             24 RETURN_VALUE
+>>> dis.dis(esum)
+  9           0 LOAD_GLOBAL              0 (np)
+              2 LOAD_ATTR                1 (sum)
+              4 LOAD_GLOBAL              0 (np)
+              6 LOAD_ATTR                2 (exp)
+              8 LOAD_FAST                0 (z)
+             10 CALL_FUNCTION            1
+             12 CALL_FUNCTION            1
+             14 RETURN_VALUE
 
 ```
+
+## Final words
+
+Python is a great tool. However, it has some limitations which can be surpassed with the right strategy, making it 
+competitive, in terms of performance, to other compiled languages. Although this post focused on the Numba library, 
+there are other good options (which deserve their own dedicated blog post). Finally, the example source code can be 
+found [here](https://github.com/alexpnt/numba-examples).
