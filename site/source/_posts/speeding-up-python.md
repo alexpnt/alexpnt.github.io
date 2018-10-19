@@ -1,6 +1,6 @@
 ---
 title: Speeding up python programs with Numba and Numpy
-date: 2018-09-23 16:21:56
+date: 2018-10-19 19:01:56
 tags:
 - python
 - development
