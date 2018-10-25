@@ -22,6 +22,8 @@ The most important instruction is the *@jit* decorator. It is this decorator tha
 
 There are two important modes: *nopython* and *object*. The *nopython* completely avoids the python interpreter and translates the full code to native instructions that can be run without the help of Python . However, if for some reason, that mode is not available (for example, when using unsupported Python features or external libraries) the compilation will fall back to the *object* mode, where it uses the Python interpreter when it is unable to compile some code . Naturally, the *nopython* mode is the one who offers the best performance gains.
 
+## High-level architecture of Numba 
+
 
 ## Speeding numerical computations: An example
 
@@ -95,7 +97,8 @@ Ran optimized softmax calculations in 1.7453773021697998 seconds
 ```
 These results clearly shows the performance gains obtained when converting our code to something that Numba understands well. 
 
-In the _softmax_optimized_ function, there is already the Numba annotation that leverages the full power of JIT optimizations. In fact, under the hood the following bytecode will be analysed, optimized and compiled to native instructions:
+In the _softmax_optimized_ function, there is already the Numba annotation that leverages the full power of JIT optimizations. 
+In fact, under the hood the following bytecode will be analysed, optimized and compiled to native instructions:
 
 ```python
 > python
@@ -129,9 +132,41 @@ from softmax import esum, softmax_optimized
 
 ```
 
+We can provide more information about the expected input and output types through the signature. 
+In the example above, the signature "_f8\[:](f8[:])_" is used to specify that the function accepts an array of double 
+precision floats and returns another array of 64-bit floats. 
+
+The signature could also use the explicit type names: "_float64\[:](float64[:])_". 
+The general form is _type(type, type, ...)_ which resembles a typical function where argument names are replaced by their 
+types and the function name is replaced by its return type. 
+Numba accepts many different types, which are described bellow:
+
+| Type name(s)        | Type short name| Description  |
+|:-------------:|:-------------:|:-----:|
+|boolean| 	b1 	|represented as a byte|
+|uint8, byte| 	u1| 	8-bit unsigned byte|
+|uint16| 	u2 	|16-bit unsigned integer|
+|uint32| 	u4 	|32-bit unsigned integer|
+|uint64| 	u8 	|64-bit unsigned integer|
+|int8, char| 	i1 	|8-bit signed byte|
+|int16| 	i2 	|16-bit signed integer|
+|int32| 	i4 	|32-bit signed integer|
+|int64| 	i8 	|64-bit signed integer|
+|intc| 	– 	|C |int-sized integer|
+|uintc| 	– 	|C |int-sized unsigned integer|
+|intp| 	– 	|pointer-sized integer|
+|uintp| 	– 	|pointer-sized unsigned integer|
+|float32| 	f4 	|single-precision floating-point number|
+|float64, double| 	f8 	|double-precision floating-point number|
+|complex64| 	c8 	|single-precision complex number|
+|complex128| 	c16 	|double-precision complex number|
+
+These annotations are easily extended to array forms using [:] , [:, :] or [:, :, :] for 1, 2 and 3 dimensions, respectively.
+
 ## Final words
 
 Python is a great tool. However, it has some limitations which can be surpassed with the right strategy, making it 
 competitive, in terms of performance, to other compiled languages. Although this post focused on the Numba library, 
-there are other good options (which deserve their own dedicated blog post). Finally, the example source code can be 
-found [here](https://github.com/alexpnt/numba-examples).
+there are other good options (which deserve their own dedicated blog post). 
+Numba also offers other great features not explored here such as integration with NVIDIA CUDA/AMD ROC GPUs, interfacing with C functions and Ahead-of-Time compilation (AOT).
+Finally, the example source code can be found [here](https://github.com/alexpnt/numba-examples).
