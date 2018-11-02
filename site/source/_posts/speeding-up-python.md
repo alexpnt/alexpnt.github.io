@@ -24,6 +24,36 @@ There are two important modes: *nopython* and *object*. The *nopython* completel
 
 ## High-level architecture of Numba 
 
+The Numba translation process can be translated in a set of important steps ranging from the Bytecode analysis to the final machine code generation. 
+The picture bellow illustrates this process, where the green boxes correspond to the frontend of the Numba compiler and the blue boxes belong to the backend.
+
+![](/images/numba/numba-arch.png)
+
+The Numba compiler starts by doing an extensive analysis on the byecode of the desired function(s). 
+This step produces a graph describing the possible flow of executions, called control flow graph (CFG). Based on this graph an analysis on the variable lifetimes are calculated. 
+With these steps finished, the compiler starts translating the bytecode into an intermediate representation (IR) where Numba will perform further optimizations and transformations.
+Afterwards, type inference, one of the most important steps, is performed. In this step, the compiler will try to infer the type of all variables. 
+Furthermore, if the parallel setting is enabled, the IR code will be transformed to an equivalent parallel version. 
+
+
+If all types are successfully inferred, the Numba IR code is then translated into an efficient LLVM IR code, completely avoiding the Python runtime.
+However, if the type inference process fails, the LLVM generated code will be slower since it still needs to deal with calls to Python C API.
+Finally, the LLVM IR code is compiled into native instructions by the LLVM JIT compiler. 
+This optimized machined code is then loaded into memory and reused across multiple calls to the same function(s), making it hundreds of times faster than pure Python.
+
+For debugging purposes, Numba also offers a set of flags that can be enabled in order to see the generated output of the different stages.
+
+```python
+import os
+
+os.environ["NUMBA_DUMP_CFG"] = "1"
+os.environ["NUMBA_DUMP_IR"] = "1"
+os.environ["NUMBA_DUMP_ANNOTATION"] = "1"
+os.environ["NUMBA_DEBUG_ARRAY_OPT_STATS"] = "1"
+os.environ["NUMBA_DUMP_LLVM"] = "1"
+os.environ["NUMBA_DUMP_OPTIMIZED"] = "1"
+os.environ["NUMBA_DUMP_ASSEMBLY"] = "1"
+```
 
 ## Speeding numerical computations: An example
 
