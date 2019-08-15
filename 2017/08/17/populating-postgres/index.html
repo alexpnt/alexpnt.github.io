@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="It is often the case that we need to populate a table with initial data. A typical approach is to run an sql script to perform a bulk insert. However this is not ideal for cases where there are millio">
 <meta name="keywords" content="performance,database,sql,postgres">
 <meta property="og:type" content="article">
@@ -59,13 +59,9 @@
          
           <li><a href="/cv/">CV</a></li>
          
-          <li><a href="/archives/">Blog</a></li>
+          <li><a href="/blog/">Blog</a></li>
          
           <li><a href="/papers/">Papers</a></li>
-         
-          <li><a href="/gallery/">Gallery</a></li>
-         
-          <li><a href="/contact/">Contact</a></li>
         
       </ul>
     </span>
@@ -146,7 +142,7 @@
 <p>This command may be used like this:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY table_name(column1, column2, column3, ...) FROM <span class="string">'data.csv'</span> DELIMITER <span class="string">';'</span> CSV HEADER;</span><br></pre></td></tr></table></figure>
 <p>where we specify the table name, its columns and the data file.</p>
-<p>To illustrate, let’s create a table that mimics an household electric power consumption. We can use a pre-built docker image containing a PostgreSQL installation for this and a <a href="https://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption" target="_blank" rel="noopener">public dataset</a> for testing.</p>
+<p>To illustrate, let's create a table that mimics an household electric power consumption. We can use a pre-built docker image containing a PostgreSQL installation for this and a <a href="https://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption" target="_blank" rel="noopener">public dataset</a> for testing.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ cat docker-compose</span><br><span class="line"></span><br><span class="line">version: <span class="string">'2'</span></span><br><span class="line"> </span><br><span class="line">services:</span><br><span class="line">  db:</span><br><span class="line">    image: postgres</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">"5432:5432"</span></span><br><span class="line">    volumes:</span><br><span class="line">      - data:/var/lib/postgresql/data</span><br><span class="line">    environment:</span><br><span class="line">      POSTGRES_USER: postgres</span><br><span class="line">      POSTGRES_PASSWORD: postgres</span><br><span class="line"> </span><br><span class="line">volumes:</span><br><span class="line">  data:</span><br></pre></td></tr></table></figure>
 <p>We are now ready to configure our database:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose up -d db</span><br><span class="line">$ docker cp household_power_consumption.csv db_1:/var/lib/postgresql/data/household_power_consumption.csv</span><br><span class="line">$ docker-compose run --rm db psql -h db -p 5432 -U postgres --password</span><br><span class="line">  </span><br><span class="line">CREATE TABLE power_consumption (</span><br><span class="line">    Date character varying(50),</span><br><span class="line">    Time character varying(50),</span><br><span class="line">    Global_active_power character varying(50),</span><br><span class="line">    Global_reactive_power character varying(50),</span><br><span class="line">    Voltage character varying(50),</span><br><span class="line">    Global_intensity character varying(50),</span><br><span class="line">    Sub_metering_1 character varying(50),</span><br><span class="line">    Sub_metering_2 character varying(50),</span><br><span class="line">    Sub_metering_3 character varying(50)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
@@ -176,13 +172,9 @@
          
           <li><a href="/cv/">CV</a></li>
          
-          <li><a href="/archives/">Blog</a></li>
+          <li><a href="/blog/">Blog</a></li>
          
           <li><a href="/papers/">Papers</a></li>
-         
-          <li><a href="/gallery/">Gallery</a></li>
-         
-          <li><a href="/contact/">Contact</a></li>
         
       </ul>
     </div>
@@ -222,7 +214,7 @@
     
     <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2018 Alexandre Pinto
+    Copyright &copy; 2019 Alexandre Pinto
   </div>
   <div class="footer-right">
     <nav>
@@ -232,13 +224,9 @@
          
           <li><a href="/cv/">CV</a></li>
          
-          <li><a href="/archives/">Blog</a></li>
+          <li><a href="/blog/">Blog</a></li>
          
           <li><a href="/papers/">Papers</a></li>
-         
-          <li><a href="/gallery/">Gallery</a></li>
-         
-          <li><a href="/contact/">Contact</a></li>
         
       </ul>
     </nav>

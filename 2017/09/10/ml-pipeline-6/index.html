@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="In the learning phase a set of examples are shown to the classifier, with class labels (supervised learning) or without them (unsupervised learning). As a result, the classifier is then able to catego">
 <meta name="keywords" content="python,machine-learning,scikit-learn,qt5">
 <meta property="og:type" content="article">
@@ -63,13 +63,9 @@
          
           <li><a href="/cv/">CV</a></li>
          
-          <li><a href="/archives/">Blog</a></li>
+          <li><a href="/blog/">Blog</a></li>
          
           <li><a href="/papers/">Papers</a></li>
-         
-          <li><a href="/gallery/">Gallery</a></li>
-         
-          <li><a href="/contact/">Contact</a></li>
         
       </ul>
     </span>
@@ -167,25 +163,16 @@
 <li><p><strong>F-measure</strong> - This measure combines precision and recall and provides a balance between them. It is computed as the harmonic mean between the two metrics providing the same weight for both. <span class="math display">\[ F_1 = {2 \times P \times R \over P +  R }\]</span></p></li>
 <li><p><strong>Stratified K-fold Cross Validation</strong> - A popular technique to evaluate the performance of the system is to split the data into training and testing sets, using the later to estimate the true generalization performance of the classifier. However, this may bring some issues such as the trade-offs between the percentage splits or the representativity of the test set. A popular accepted approach is to split the entire dataset into k representative partitions, using k − 1 of these partitions for training and the remaining one for testing. This process is then repeated <em>k</em> times, (each time using a different test partition) and the results averaged.</p></li>
 </ul>
-<div class="figure">
-<img src="/images/ml-pipeline/metrics.png">
-
-</div>
+<p><img src="/images/ml-pipeline/metrics.png"></p>
 <h2 id="visualizing-the-performance">Visualizing the performance</h2>
 <ul>
 <li><strong>Receiver Operating Characteristics (ROC)</strong> - ROC curves are useful graphs to visualize the performance of binary classifiers. They are useful to compare the rates at which the classifier is making correct predictions (True Positive Rate plotted on the Y axis) against the rate of false alarms (False Positive Rate plotted on the X axis). Important points in this graph are the lower left point (0,0), representing a classifier that never classify positive instances, neither having False Positives or True Positives. On the other hand, the upper right point (1,1) represents a classifier that classifies every instance as positive, disregarding if it is a false positive or not. Finally, the point (0,1) represents the perfect classifier, where every instance was correctly classified. The area bellow the ROC curve is called Area Under the Curve (AUC) and is also a good evaluation measure. A perfect classifier would have an AUC of 1.0 while a random classifier would only have 0.5.</li>
 </ul>
-<div class="figure">
-<img src="/images/ml-pipeline/roc.png">
-
-</div>
+<p><img src="/images/ml-pipeline/roc.png"></p>
 <ul>
 <li><strong>Precision-Recall Curves (PR)</strong> - The Precision-Recall Curve plots the trade-off between the precision and recall achieved by a classifier, by showing the recall on the X axis and precision on the Y axis. An important point in this graph is the upper right point (1,1) which represents the ideal classifier having maximum precision and recall. Figure 2.4 shows three hypothetical classifiers and the areas of good and bad performance, which are above or below the line defined by a random classifier. The area bellow the PR curve is called Average Precision (AP) and is also a good measure. A perfect classifier would have an Average Precision of 1.0 while a random classifier would only have 0.5.</li>
 </ul>
-<div class="figure">
-<img src="/images/ml-pipeline/precision-recall.png">
-
-</div>
+<p><img src="/images/ml-pipeline/precision-recall.png"></p>
 <p>In this series of posts, a machine learning application was presented, showing a typical pipeline with the following steps: * Dataset Loading * Feature Assessment where the distribution of features are inspected and visualized * Preprocessing where data transformations are applied and issues such as dataset balancing are addressed. * Feature Selection methods where features with he most discriminative power are selected * Classifications performed by predictive models where their performance is evaluated using ROC curves, Precision-Recall Curves and generic metrics such as Accuracy, Precision, Recall and F1 measures.</p>
 <p>The machine learning method is an iterative process, where one needs to go back and forth, setting different parameters, and different methods in order to see which combination works best and provides the best results. You can checkout this application and try it for yourself. The source code is available in <a href="https://github.com/AlexPnt/Default-Credit-Card-Prediction" target="_blank" rel="noopener">this repository</a>.</p>
 
@@ -212,13 +199,9 @@
          
           <li><a href="/cv/">CV</a></li>
          
-          <li><a href="/archives/">Blog</a></li>
+          <li><a href="/blog/">Blog</a></li>
          
           <li><a href="/papers/">Papers</a></li>
-         
-          <li><a href="/gallery/">Gallery</a></li>
-         
-          <li><a href="/contact/">Contact</a></li>
         
       </ul>
     </div>
@@ -258,7 +241,7 @@
     
     <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2018 Alexandre Pinto
+    Copyright &copy; 2019 Alexandre Pinto
   </div>
   <div class="footer-right">
     <nav>
@@ -268,13 +251,9 @@
          
           <li><a href="/cv/">CV</a></li>
          
-          <li><a href="/archives/">Blog</a></li>
+          <li><a href="/blog/">Blog</a></li>
          
           <li><a href="/papers/">Papers</a></li>
-         
-          <li><a href="/gallery/">Gallery</a></li>
-         
-          <li><a href="/contact/">Contact</a></li>
         
       </ul>
     </nav>

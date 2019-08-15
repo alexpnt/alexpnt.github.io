@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="When Python is not enough The Python programming language is a great tool for almost any kind of rapid prototyping and quick development. It has great features such as its high level nature, a syntax">
-<meta name="keywords" content="python,performance,development">
+<meta name="keywords" content="development,python,performance">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Speeding up python programs with Numba and Numpy">
 <meta property="og:url" content="https://alexpnt.github.io/2018/10/19/speeding-up-python/index.html">
@@ -15,7 +15,7 @@
 <meta property="og:description" content="When Python is not enough The Python programming language is a great tool for almost any kind of rapid prototyping and quick development. It has great features such as its high level nature, a syntax">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://alexpnt.github.io/images/numba/numba-arch.png">
-<meta property="og:updated_time" content="2018-11-02T16:27:01.252Z">
+<meta property="og:updated_time" content="2018-11-02T16:38:19.731Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Speeding up python programs with Numba and Numpy">
 <meta name="twitter:description" content="When Python is not enough The Python programming language is a great tool for almost any kind of rapid prototyping and quick development. It has great features such as its high level nature, a syntax">
@@ -61,13 +61,9 @@
          
           <li><a href="/cv/">CV</a></li>
          
-          <li><a href="/archives/">Blog</a></li>
+          <li><a href="/blog/">Blog</a></li>
          
           <li><a href="/papers/">Papers</a></li>
-         
-          <li><a href="/gallery/">Gallery</a></li>
-         
-          <li><a href="/contact/">Contact</a></li>
         
       </ul>
     </span>
@@ -155,8 +151,8 @@
 <p><img src="/images/numba/numba-arch.png"></p>
 <p>The Numba compiler starts by doing an extensive analysis on the byecode of the desired function(s). This step produces a graph describing the possible flow of executions, called control flow graph (CFG). Based on this graph an analysis on the variable lifetimes are calculated. With these steps finished, the compiler starts translating the bytecode into an intermediate representation (IR) where Numba will perform further optimizations and transformations. Afterwards, type inference, one of the most important steps, is performed. In this step, the compiler will try to infer the type of all variables. Furthermore, if the parallel setting is enabled, the IR code will be transformed to an equivalent parallel version.</p>
 <p>If all types are successfully inferred, the Numba IR code is then translated into an efficient LLVM IR code, completely avoiding the Python runtime. However, if the type inference process fails, the LLVM generated code will be slower since it still needs to deal with calls to Python C API. Finally, the LLVM IR code is compiled into native instructions by the LLVM JIT compiler. This optimized machined code is then loaded into memory and reused across multiple calls to the same function(s), making it hundreds of times faster than pure Python.</p>
-<p>For debugging purposes, Numba also offers a set of flags that can be enabled in order to see the output of the different stages.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">os.environ[<span class="string">"NUMBA_DUMP_CFG"</span>] = <span class="string">"1"</span></span><br><span class="line">os.environ[<span class="string">"NUMBA_DUMP_IR"</span>] = <span class="string">"1"</span></span><br><span class="line">os.environ[<span class="string">"NUMBA_DUMP_ANNOTATION"</span>] = <span class="string">"1"</span></span><br><span class="line">os.environ[<span class="string">"NUMBA_DEBUG_ARRAY_OPT_STATS"</span>] = <span class="string">"1"</span></span><br><span class="line">os.environ[<span class="string">"NUMBA_DUMP_LLVM"</span>] = <span class="string">"1"</span></span><br><span class="line">os.environ[<span class="string">"NUMBA_DUMP_OPTIMIZED"</span>] = <span class="string">"1"</span></span><br><span class="line">os.environ[<span class="string">"NUMBA_DUMP_ASSEMBLY"</span>] = <span class="string">"1"</span></span><br></pre></td></tr></table></figure>
+<p>For debugging purposes, Numba also offers a set of flags that can be enabled in order to see the generated output of the different stages.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">os.environ[<span class="string">"NUMBA_DUMP_CFG"</span>] = <span class="string">"1"</span></span><br><span class="line">os.environ[<span class="string">"NUMBA_DUMP_IR"</span>] = <span class="string">"1"</span></span><br><span class="line">os.environ[<span class="string">"NUMBA_DUMP_ANNOTATION"</span>] = <span class="string">"1"</span></span><br><span class="line">os.environ[<span class="string">"NUMBA_DEBUG_ARRAY_OPT_STATS"</span>] = <span class="string">"1"</span></span><br><span class="line">os.environ[<span class="string">"NUMBA_DUMP_LLVM"</span>] = <span class="string">"1"</span></span><br><span class="line">os.environ[<span class="string">"NUMBA_DUMP_OPTIMIZED"</span>] = <span class="string">"1"</span></span><br><span class="line">os.environ[<span class="string">"NUMBA_DUMP_ASSEMBLY"</span>] = <span class="string">"1"</span></span><br></pre></td></tr></table></figure>
 <h2 id="speeding-numerical-computations-an-example">Speeding numerical computations: An example</h2>
 <p>The best use case where we can make use of the Numba library is when we have to do intensive numerical computations. As an example, let's compute the softmax function on a set of 2^16 (65536) random numbers. The softmax function, useful to convert a set of real values into probabilities and commonly used as the last layer in neural networks architectures, is defined as:</p>
 <p><span class="math display">\[ \sigma(z_j) = { e^{z_j}  \over \sum_{k=1}^{K}  e^{z_k} } \]</span></p>
@@ -292,13 +288,9 @@
          
           <li><a href="/cv/">CV</a></li>
          
-          <li><a href="/archives/">Blog</a></li>
+          <li><a href="/blog/">Blog</a></li>
          
           <li><a href="/papers/">Papers</a></li>
-         
-          <li><a href="/gallery/">Gallery</a></li>
-         
-          <li><a href="/contact/">Contact</a></li>
         
       </ul>
     </div>
@@ -338,7 +330,7 @@
     
     <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2018 Alexandre Pinto
+    Copyright &copy; 2019 Alexandre Pinto
   </div>
   <div class="footer-right">
     <nav>
@@ -348,13 +340,9 @@
          
           <li><a href="/cv/">CV</a></li>
          
-          <li><a href="/archives/">Blog</a></li>
+          <li><a href="/blog/">Blog</a></li>
          
           <li><a href="/papers/">Papers</a></li>
-         
-          <li><a href="/gallery/">Gallery</a></li>
-         
-          <li><a href="/contact/">Contact</a></li>
         
       </ul>
     </nav>

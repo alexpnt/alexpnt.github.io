@@ -6,7 +6,7 @@
   <link href="/rss.xml" rel="self"/>
   
   <link href="https://alexpnt.github.io/"/>
-  <updated>2018-11-02T16:27:01.252Z</updated>
+  <updated>2018-11-02T16:38:19.731Z</updated>
   <id>https://alexpnt.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://alexpnt.github.io/2018/10/19/speeding-up-python/"/>
     <id>https://alexpnt.github.io/2018/10/19/speeding-up-python/</id>
     <published>2018-10-19T18:01:56.000Z</published>
-    <updated>2018-11-02T16:27:01.252Z</updated>
+    <updated>2018-11-02T16:38:19.731Z</updated>
     
     <summary type="html">
     
@@ -34,11 +34,11 @@
     </summary>
     
     
+      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
+    
       <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
       <category term="performance" scheme="https://alexpnt.github.io/tags/performance/"/>
-    
-      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
     
   </entry>
   
@@ -426,11 +426,8 @@
     
       
       
-        &lt;div class=&quot;figure&quot;&gt;
-&lt;img src=&quot;/images/dev.png&quot;&gt;
-
-&lt;/div&gt;
-&lt;p&gt;A typical web application has a set of components that work together such as the
+        &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;A typical web application has a set of components that work together such as the application backend, 
       
     
     </summary>
@@ -438,11 +435,11 @@
     
       <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
     
+      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
+    
       <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
       <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
-    
-      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
     
       <category term="microservices" scheme="https://alexpnt.github.io/tags/microservices/"/>
     
@@ -459,8 +456,9 @@
     
       
       
-        &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;Monolithic-vs-Microservices&quot;&gt;&lt;a href=&quot;#Monolithic-vs-Microservices&quot; class=&quot;headerlink&quot; tit
+        &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;monolithic-vs-microservices&quot;&gt;Monolithic vs Microservices&lt;/h2&gt;
+&lt;p&gt;Over the past years, there has b
       
     
     </summary>
@@ -468,11 +466,11 @@
     
       <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
     
+      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
+    
       <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
       <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
-    
-      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
     
       <category term="microservices" scheme="https://alexpnt.github.io/tags/microservices/"/>
     
@@ -514,11 +512,8 @@
     
       
       
-        &lt;div class=&quot;figure&quot;&gt;
-&lt;img src=&quot;/images/dev.png&quot;&gt;
-
-&lt;/div&gt;
-&lt;p&gt;As a developer, one of the first steps before attempting to do any work is to cr
+        &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;As a developer, one of the first steps before attempting to do any work is to create a good developmen
       
     
     </summary>
@@ -539,11 +534,8 @@
     
       
       
-        &lt;div class=&quot;figure&quot;&gt;
-&lt;img src=&quot;/images/dev.png&quot;&gt;
-
-&lt;/div&gt;
-&lt;p&gt;One of the great offers of Django is the high-level database API, which lets us 
+        &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;One of the great offers of Django is the high-level database API, which lets us manipulate our data us
       
     
     </summary>
@@ -551,9 +543,9 @@
     
       <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
     
-      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
-    
       <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
+    
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
   </entry>
   

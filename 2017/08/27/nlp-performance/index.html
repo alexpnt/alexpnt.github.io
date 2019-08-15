@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Motivation for this work The Web is a large source of data, mostly expressed in natural language text. Natural language processing (NLP) systems need to understand the human languages in order to extr">
 <meta name="keywords" content="nlp,natural-language-processing,research,benchmark">
 <meta property="og:type" content="article">
@@ -59,13 +59,9 @@
          
           <li><a href="/cv/">CV</a></li>
          
-          <li><a href="/archives/">Blog</a></li>
+          <li><a href="/blog/">Blog</a></li>
          
           <li><a href="/papers/">Papers</a></li>
-         
-          <li><a href="/gallery/">Gallery</a></li>
-         
-          <li><a href="/contact/">Contact</a></li>
         
       </ul>
     </span>
@@ -145,7 +141,7 @@
     <h2 id="motivation-for-this-work">Motivation for this work</h2>
 <p>The Web is a large source of data, mostly expressed in natural language text. Natural language processing (NLP) systems need to understand the human languages in order to extract new knowledge and perform diverse tasks, such as information retrieval, machine translation, or text classification, among others. For widely-spoken languages, such as English, there is currently a wide range of NLP toolkits available for performing lower-level NLP tasks, including tokenization, part-of-speech (POS) tagging, chunking or named entity recognition (NER).</p>
 <p>This enables that more complex applications do not have to be developed completely from scratch. Yet, with the availability of many such toolkits, the one to use is rarely obvious. Users have also to select the most suitable set of tools that meets their specific purpose. Among other aspects, the selection may consider the community of users, frequency of new versions and updates, support, portability, cost of integration, programming language, the number of covered tasks, and, of course, their performance. Most NLP tools available for English are made with good ease-of-use in mind, are open-source and are freely available, but it is not always clear which tool best fits the requirements of the user.</p>
-<p>This post compares a range of natural language processing toolkits with their default configuration, while performing a set of standard tasks (e.g. tokenization, POS tagging, chunking and NER), in popular datasets that cover newspaper and social network text. This kind of comparison is helpful for other developers and researchers in need of making a similar selection.</p>
+<p>This post compares a range of natural language processing toolkits with their default configuration, while performing a set of standard tasks (e.g. tokenization, POS tagging, chunking and NER), in popular datasets that cover newspaper and social network text. This kind of comparison is helpful for other developers and researchers in need of making a similar selection.</p>
 <h2 id="addressed-tasks">Addressed Tasks</h2>
 <p>In order to evaluate how good standard NLP tools perform against different kinds of text, such as noisy text from social networks and formal text from newspapers, the performance of common NLP tasks was analysed. The addressed tasks were tokenization, POS-tagging, chunking and NER. The following list describes the four evaluated tasks:</p>
 <ul>
@@ -155,7 +151,7 @@
 <li><p><strong>Name Entity Recognition/Classification:</strong> deals with the identification of certain types of entities in a text and may go further classifying them into one of given categories, typically PERson, LOCations, ORGanizations, all proper nouns, and sometimes others, such as dates. Usually this task is also useful to link mentions in the text to a specific entity. This usually involves other sub-problems such as Name Entity Disambiguation (NED).</p></li>
 </ul>
 <h2 id="compared-tools">Compared Tools</h2>
-<p>Tools can be implemented in different programming languages; have available models that cover different tasks, kinds of text or languages; require different setups; or have different learning curves for simple usage or for integration. The tools compared in this work were trained for English and are open, well-known and widely used by the NLP community. Moreover, they were developed either in Java or Python, which, nowadays, are probably the two languages more frequently used to develop NLP applications and for which there is a broader range of available toolkits. The compared tools are enumerated in the following list, where they are described and grouped in ``standard’’ toolkits, which means they were developed with no specific kind of text in mind, and social network-oriented tools, which aim to be used in short messages from social networks.</p>
+<p>Tools can be implemented in different programming languages; have available models that cover different tasks, kinds of text or languages; require different setups; or have different learning curves for simple usage or for integration. The tools compared in this work were trained for English and are open, well-known and widely used by the NLP community. Moreover, they were developed either in Java or Python, which, nowadays, are probably the two languages more frequently used to develop NLP applications and for which there is a broader range of available toolkits. The compared tools are enumerated in the following list, where they are described and grouped in ``standard'' toolkits, which means they were developed with no specific kind of text in mind, and social network-oriented tools, which aim to be used in short messages from social networks.</p>
 <h3 id="standard-nlp-toolkits">Standard NLP toolkits</h3>
 <ul>
 <li><p>The <a href="http://www.nltk.org" target="_blank" rel="noopener"><strong>NLTK toolkit</strong></a> is a Python library aimed at individuals who are entering the NLP field. It is divided in independent modules, responsible for specific NLP tasks such as tokenization, stemming, tree representations, tagging, parsing and visualization. It also comes bundled with popular corpus samples ready to be read. By default, NLTK uses the Penn Treebank Tokenizer, which uses regular expressions to tokenize the text. Its PoS tagger uses the Penn Treebank tagset and is trained on the PENN Treebank corpus with a Maximum Entropy model. The Chunker and the NER modules are trained on the ACE corpus with a Maximum Entropy model.</p></li>
@@ -165,14 +161,14 @@
 </ul>
 <h3 id="social-network-oriented-toolkits">Social Network-Oriented Toolkits</h3>
 <ul>
-<li><p><a href="https://github.com/aritter/twitter_nlp" target="_blank" rel="noopener"><strong>Alan Ritter’s TwitterNLP</strong></a> is a Python library that offers a NLP pipeline for performing Tokenization, POS, Chunking and NER. The authors reduced the problem of dealing with noisy texts by developing a system based on a set of features extracted from Twitter-specific POS taggers, a dedicated shallow parsing logic, and the use of gazetteers generated from entities in the Freebase knowledge base, that best match the fleeting nature of informal texts.</p></li>
-<li><p><a href="http://www.cs.cmu.edu/~ark/TweetNLP" target="_blank" rel="noopener"><strong>CMU’s TweetNLP</strong></a> is Java tool that provides a Tokenizer and a POS Tagger with available models, trained with a CRF model in Twitter data, manually annotated by its authors. In addition to the typical syntactic elements of a sentence, TweetNLP identifies content such as mentions, URLs, and emoticons.</p></li>
+<li><p><a href="https://github.com/aritter/twitter_nlp" target="_blank" rel="noopener"><strong>Alan Ritter's TwitterNLP</strong></a> is a Python library that offers a NLP pipeline for performing Tokenization, POS, Chunking and NER. The authors reduced the problem of dealing with noisy texts by developing a system based on a set of features extracted from Twitter-specific POS taggers, a dedicated shallow parsing logic, and the use of gazetteers generated from entities in the Freebase knowledge base, that best match the fleeting nature of informal texts.</p></li>
+<li><p><a href="http://www.cs.cmu.edu/~ark/TweetNLP" target="_blank" rel="noopener"><strong>CMU's TweetNLP</strong></a> is Java tool that provides a Tokenizer and a POS Tagger with available models, trained with a CRF model in Twitter data, manually annotated by its authors. In addition to the typical syntactic elements of a sentence, TweetNLP identifies content such as mentions, URLs, and emoticons.</p></li>
 <li><p><a href="https://gate.ac.uk/wiki/twitie.html" target="_blank" rel="noopener"><strong>TwitIE</strong></a> is an open-source plugin for GATE. The GATE framework comes already packaged with ANNIE, an information extraction system, and includes resources such as: a Tokenizer, a sentence splitter, gazetteer lists, a PoS tagger and a semantic tagger. TwitIE re-uses some of these components (sentence splitter and gazeteer lists) but adapts the other to the Twitter kind of text, supporting language identification, Tokenization, normalization, PoS tagging and Name Entity Recognition. The TwitIE tokenizer follows the same tokenization scheme as TwitterNLP. The PoS tagger uses an adptation of the Stanford tagger, trained on tweets with the Penn Tree Bank tagset, with additional tags for retweets, URLs, hashtags and user mentions.</p></li>
 </ul>
 <h2 id="datasets">Datasets</h2>
-<p>In order to evaluate the performance of the different NLP toolkits and determine the best performing ones, the same criteria must be followed, including the same metrics and manually-annotated gold standard data. Testing tools in the same tasks and scenarios makes comparison fair and more reliable. This work used well-known datasets widely used in NLP and text classification research, not only in the evaluation of NLP tools, but also for training new models. More precisely, different gold standard datasets that cover different kinds of text – newspaper and social media. Regarding newspaper text, a collection of news wire articles from the <a href="http://trec.nist.gov/data/reuters/reuters.html" target="_blank" rel="noopener">Reuters Corpus</a> was used. The POS and chunking annotations of this dataset were obtained using a memory-based MBT tagger. The named entities were manually annotated at the University of Antwerp.</p>
-<p>In order to represent social and more informal text, the annotated data from <a href="https://github.com/aritter/twitter_nlp/tree/master/data/annotated" target="_blank" rel="noopener">Alan Ritter’s Twitter corpus</a> was used, with manually tokenized, POS-tagged and chunked Twitter posts, also with annotated named entities. The collection of Twitter posts used in the <a href="http://oak.dcs.shef.ac.uk/msm2013/challenge.html" target="_blank" rel="noopener">MSM 2013 workshop</a>, where named entities are annotated, was also used as a gold standard for social media text.</p>
-<p>The POS tags of the CoNLL-2003 dataset follow the <a href="https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html" target="_blank" rel="noopener">Penn Treebank style</a>. Alan Ritter’s corpus follows the same format, with the same POS-tags and additional specific tags for retweets, <span class="citation">@usernames</span>, #hashtags, and urls. For the chunk tags, the format I-TYPE is used in both datasets. This is interpreted as: the token is inside (I), in the beginning (B) of a following chunk of the same type or outside (O) of a chunk phrase. The named entities in the CoNLL-2003 dataset are annotated using four entity types, namely Location (LOC), Miscellaneous (MISC), Organization (ORG) and Person (PER). In Alan Ritter’s corpus, entity types were not exactly the same, so they had to be converted, as we mention further on this section. The #MSM2013 corpus only contains annotated named entities and their types. To ease experimentation, this corpus was converted to the same format as the other two.</p>
+<p>In order to evaluate the performance of the different NLP toolkits and determine the best performing ones, the same criteria must be followed, including the same metrics and manually-annotated gold standard data. Testing tools in the same tasks and scenarios makes comparison fair and more reliable. This work used well-known datasets widely used in NLP and text classification research, not only in the evaluation of NLP tools, but also for training new models. More precisely, different gold standard datasets that cover different kinds of text -- newspaper and social media. Regarding newspaper text, a collection of news wire articles from the <a href="http://trec.nist.gov/data/reuters/reuters.html" target="_blank" rel="noopener">Reuters Corpus</a> was used. The POS and chunking annotations of this dataset were obtained using a memory-based MBT tagger. The named entities were manually annotated at the University of Antwerp.</p>
+<p>In order to represent social and more informal text, the annotated data from <a href="https://github.com/aritter/twitter_nlp/tree/master/data/annotated" target="_blank" rel="noopener">Alan Ritter's Twitter corpus</a> was used, with manually tokenized, POS-tagged and chunked Twitter posts, also with annotated named entities. The collection of Twitter posts used in the <a href="http://oak.dcs.shef.ac.uk/msm2013/challenge.html" target="_blank" rel="noopener">MSM 2013 workshop</a>, where named entities are annotated, was also used as a gold standard for social media text.</p>
+<p>The POS tags of the CoNLL-2003 dataset follow the <a href="https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html" target="_blank" rel="noopener">Penn Treebank style</a>. Alan Ritter's corpus follows the same format, with the same POS-tags and additional specific tags for retweets, <span class="citation" data-cites="usernames">@usernames</span>, #hashtags, and urls. For the chunk tags, the format I-TYPE is used in both datasets. This is interpreted as: the token is inside (I), in the beginning (B) of a following chunk of the same type or outside (O) of a chunk phrase. The named entities in the CoNLL-2003 dataset are annotated using four entity types, namely Location (LOC), Miscellaneous (MISC), Organization (ORG) and Person (PER). In Alan Ritter's corpus, entity types were not exactly the same, so they had to be converted, as we mention further on this section. The #MSM2013 corpus only contains annotated named entities and their types. To ease experimentation, this corpus was converted to the same format as the other two.</p>
 <h2 id="evaluation">Evaluation</h2>
 <p>The performance of a NLP tool in a certain task can be estimated by the quality of its predictions on the classification of unseen data. Predictions made are either considered Positive or Negative (under some category) and expected judgments are called True or False (again, under a certain category). The following are common metrics used to assess classification:</p>
 <ul>
@@ -216,13 +212,9 @@
          
           <li><a href="/cv/">CV</a></li>
          
-          <li><a href="/archives/">Blog</a></li>
+          <li><a href="/blog/">Blog</a></li>
          
           <li><a href="/papers/">Papers</a></li>
-         
-          <li><a href="/gallery/">Gallery</a></li>
-         
-          <li><a href="/contact/">Contact</a></li>
         
       </ul>
     </div>
@@ -262,7 +254,7 @@
     
     <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2018 Alexandre Pinto
+    Copyright &copy; 2019 Alexandre Pinto
   </div>
   <div class="footer-right">
     <nav>
@@ -272,13 +264,9 @@
          
           <li><a href="/cv/">CV</a></li>
          
-          <li><a href="/archives/">Blog</a></li>
+          <li><a href="/blog/">Blog</a></li>
          
           <li><a href="/papers/">Papers</a></li>
-         
-          <li><a href="/gallery/">Gallery</a></li>
-         
-          <li><a href="/contact/">Contact</a></li>
         
       </ul>
     </nav>
