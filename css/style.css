@@ -648,9 +648,9 @@ body {
 #header-post {
   position: fixed;
   top: 2rem;
-  right: 2rem;
+  left: 2rem;
   display: inline-block;
-  float: right;
+  float: left;
 }
 #header-post a {
   color: inherit;
@@ -707,7 +707,7 @@ body {
   color: #2bbc8a;
 }
 #header-post #menu {
-  visibility: hidden;
+  visibility: visible;
 }
 #header-post #nav {
   letter-spacing: 0.01em;
