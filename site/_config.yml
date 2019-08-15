@@ -1,0 +1,104 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: Alexandre Pinto
+subtitle: Software Enginner, Reader, Knowledge-seeker
+description: Welcome, my name is Alexandre Pinto and I am a software engineer, currently living in Coimbra, Portugal. I strive to build quality software and contribute to a positive impact in the world. My interests range from backend development to intelligent systems that make use of machine learning techniques to provide useful and smart predictions. On my spare time I like to <a target="_blank" href="http://www.goodreads.com/alexpnt"><strong class="underlined">read</strong></a>, <a target="_blank" href="https://github.com/alexpnt"><strong class="underlined">program</strong></a> or absorb new knowledge.  
+author: Alexandre Pinto
+language:
+timezone:
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: https://alexpnt.github.io
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: blog
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md # File name of new posts
+default_layout: post
+titlecase: false # Transform title into titlecase
+external_link: true # Open external links in new tab
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+highlight:
+  enable: true
+  line_number: true
+  auto_detect: false
+  tab_replace:
+
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# Pagination
+## Set per_page to 0 to disable pagination
+per_page: 0
+pagination_dir: page
+
+# Extensions
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
+# theme: landscape
+theme: cactus-dark
+
+# Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type:
+
+
+# Instagram Wall
+# instagramWall:  
+#   enable: true  
+#   access_token: INSTAGRAM_WALL_TOKEN
+#   requestedCount: 20  
+#   itemsPerRow: 3
+#   showCaption: false  
+#   displayStyle: 'column'
+#   gutterSize: '1px'  
+#   overlayColor: 'black'  
+#   textColor: 'white'   
+
+asset_pipeline:
+  revisioning:
+    enable: false
+  clean_css:
+    enable: false
+  uglify_js:
+    enable: false
+  imagemin:
+    enable: false
+  html_minifier:
+    enable: false
+    
+feed:
+  type: rss
+  path: rss.xml
+  limit: 20
+  hub:
+  content:
