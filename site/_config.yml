@@ -73,16 +73,16 @@ deploy:
 
 
 # Instagram Wall
-instagramWall:  
-  enable: true  
-  access_token: INSTAGRAM_WALL_TOKEN
-  requestedCount: 20  
-  itemsPerRow: 3
-  showCaption: false  
-  displayStyle: 'column'
-  gutterSize: '1px'  
-  overlayColor: 'black'  
-  textColor: 'white'   
+# instagramWall:  
+#   enable: true  
+#   access_token: INSTAGRAM_WALL_TOKEN
+#   requestedCount: 20  
+#   itemsPerRow: 3
+#   showCaption: false  
+#   displayStyle: 'column'
+#   gutterSize: '1px'  
+#   overlayColor: 'black'  
+#   textColor: 'white'   
 
 asset_pipeline:
   revisioning:

@@ -10,6 +10,7 @@
         <% for(var i in theme.customize.social_links) { %>
           <li><a target="_blank" href="<%- url_for(theme.customize.social_links[i]) %>" title="<%= i %>"><%= i %></a>&nbsp;<a class="icon fa fa-<%= i %>" target="_blank" href="<%- url_for(theme.customize.social_links[i]) %>" title="<%= i %>">&nbsp;</a></li>
         <% } %>
+         <li><a target="_blank" href="mailto:&#97;&#108;&#101;&#120;&#x61;&#110;&#x64;&#x70;&#x69;&#x6e;&#116;&#x6f;&#64;&#103;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#x6f;&#x6d;" title="email" rel="noopener">email</a>&nbsp;<a class="icon fa fa-send" target="_blank" href="mailto:&#97;&#108;&#101;&#120;&#x61;&#110;&#x64;&#x70;&#x69;&#x6e;&#116;&#x6f;&#64;&#103;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#x6f;&#x6d;" title="email" rel="noopener">&nbsp;</a></li>
       </ul>
 
     <% } %>
