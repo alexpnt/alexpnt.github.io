@@ -11,7 +11,7 @@
 	https://probberechts.github.io/cactus-dark/: a theme for the Hexo blogging framework
 
 /* SITE */
-	Last update: 03/2017
+	Last update: 08/2020
 	Language: English
 	Technologies: HTML5,CSS,javascript
-	Tools: Sublime Text 3, git, javascrit
+	Tools: Sublime Text 3, Markdown, git, javascript
