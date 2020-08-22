@@ -6,7 +6,7 @@
   <link href="/rss.xml" rel="self"/>
   
   <link href="https://alexpnt.github.io/"/>
-  <updated>2018-11-02T16:38:19.731Z</updated>
+  <updated>2020-08-22T15:04:57.163Z</updated>
   <id>https://alexpnt.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://alexpnt.github.io/2018/10/19/speeding-up-python/"/>
     <id>https://alexpnt.github.io/2018/10/19/speeding-up-python/</id>
     <published>2018-10-19T18:01:56.000Z</published>
-    <updated>2018-11-02T16:38:19.731Z</updated>
+    <updated>2020-08-22T15:04:57.163Z</updated>
     
     <summary type="html">
     
@@ -47,7 +47,7 @@
     <link href="https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/"/>
     <id>https://alexpnt.github.io/2018/01/27/nvidia-cuda-for-deep-learning/</id>
     <published>2018-01-27T17:26:57.000Z</published>
-    <updated>2018-03-23T13:34:45.124Z</updated>
+    <updated>2020-08-22T15:04:57.159Z</updated>
     
     <summary type="html">
     
@@ -80,7 +80,7 @@
     <link href="https://alexpnt.github.io/2018/01/06/fast-inference-falcon-bjoern/"/>
     <id>https://alexpnt.github.io/2018/01/06/fast-inference-falcon-bjoern/</id>
     <published>2018-01-06T16:25:16.000Z</published>
-    <updated>2018-03-07T11:50:21.894Z</updated>
+    <updated>2020-08-22T15:04:57.159Z</updated>
     
     <summary type="html">
     
@@ -105,7 +105,7 @@
     <link href="https://alexpnt.github.io/2017/09/10/ml-pipeline-6/"/>
     <id>https://alexpnt.github.io/2017/09/10/ml-pipeline-6/</id>
     <published>2017-09-10T09:30:41.000Z</published>
-    <updated>2018-03-05T13:50:22.056Z</updated>
+    <updated>2020-08-22T15:04:57.159Z</updated>
     
     <summary type="html">
     
@@ -132,7 +132,7 @@
     <link href="https://alexpnt.github.io/2017/09/09/ml-pipeline-5/"/>
     <id>https://alexpnt.github.io/2017/09/09/ml-pipeline-5/</id>
     <published>2017-09-09T17:15:41.000Z</published>
-    <updated>2018-03-05T13:50:22.056Z</updated>
+    <updated>2020-08-22T15:04:57.159Z</updated>
     
     <summary type="html">
     
@@ -159,7 +159,7 @@
     <link href="https://alexpnt.github.io/2017/09/09/ml-pipeline-4/"/>
     <id>https://alexpnt.github.io/2017/09/09/ml-pipeline-4/</id>
     <published>2017-09-09T09:15:41.000Z</published>
-    <updated>2018-03-05T13:50:22.056Z</updated>
+    <updated>2020-08-22T15:04:57.159Z</updated>
     
     <summary type="html">
     
@@ -186,7 +186,7 @@
     <link href="https://alexpnt.github.io/2017/09/03/ml-pipeline-3/"/>
     <id>https://alexpnt.github.io/2017/09/03/ml-pipeline-3/</id>
     <published>2017-09-03T09:15:41.000Z</published>
-    <updated>2018-03-05T13:50:22.056Z</updated>
+    <updated>2020-08-22T15:04:57.159Z</updated>
     
     <summary type="html">
     
@@ -213,7 +213,7 @@
     <link href="https://alexpnt.github.io/2017/09/02/ml-pipeline-2/"/>
     <id>https://alexpnt.github.io/2017/09/02/ml-pipeline-2/</id>
     <published>2017-09-02T14:40:32.000Z</published>
-    <updated>2018-03-05T13:50:22.056Z</updated>
+    <updated>2020-08-22T15:04:57.159Z</updated>
     
     <summary type="html">
     
@@ -240,7 +240,7 @@
     <link href="https://alexpnt.github.io/2017/09/02/ml-pipeline-1/"/>
     <id>https://alexpnt.github.io/2017/09/02/ml-pipeline-1/</id>
     <published>2017-09-02T09:33:32.000Z</published>
-    <updated>2018-03-05T13:50:22.056Z</updated>
+    <updated>2020-08-22T15:04:57.159Z</updated>
     
     <summary type="html">
     
@@ -267,7 +267,7 @@
     <link href="https://alexpnt.github.io/2017/08/27/nlp-performance/"/>
     <id>https://alexpnt.github.io/2017/08/27/nlp-performance/</id>
     <published>2017-08-27T14:11:36.000Z</published>
-    <updated>2018-03-05T13:50:22.056Z</updated>
+    <updated>2020-08-22T15:04:57.159Z</updated>
     
     <summary type="html">
     
@@ -295,7 +295,7 @@
     <link href="https://alexpnt.github.io/2017/08/18/django-performance-tips/"/>
     <id>https://alexpnt.github.io/2017/08/18/django-performance-tips/</id>
     <published>2017-08-18T21:06:19.000Z</published>
-    <updated>2018-03-07T11:12:58.492Z</updated>
+    <updated>2020-08-22T15:04:57.159Z</updated>
     
     <summary type="html">
     
@@ -320,7 +320,7 @@
     <link href="https://alexpnt.github.io/2017/08/17/populating-postgres/"/>
     <id>https://alexpnt.github.io/2017/08/17/populating-postgres/</id>
     <published>2017-08-17T21:30:56.000Z</published>
-    <updated>2018-03-05T13:50:22.056Z</updated>
+    <updated>2020-08-22T15:04:57.159Z</updated>
     
     <summary type="html">
     
@@ -347,7 +347,7 @@
     <link href="https://alexpnt.github.io/2017/08/15/docker-cleanup/"/>
     <id>https://alexpnt.github.io/2017/08/15/docker-cleanup/</id>
     <published>2017-08-15T13:37:54.000Z</published>
-    <updated>2018-03-05T13:50:22.056Z</updated>
+    <updated>2020-08-22T15:04:57.159Z</updated>
     
     <summary type="html">
     
@@ -372,7 +372,7 @@
     <link href="https://alexpnt.github.io/2017/08/15/reattaching-sessions/"/>
     <id>https://alexpnt.github.io/2017/08/15/reattaching-sessions/</id>
     <published>2017-08-15T11:44:36.000Z</published>
-    <updated>2018-03-05T13:50:22.056Z</updated>
+    <updated>2020-08-22T15:04:57.159Z</updated>
     
     <summary type="html">
     
@@ -395,7 +395,7 @@
     <link href="https://alexpnt.github.io/2017/08/12/clear-cache/"/>
     <id>https://alexpnt.github.io/2017/08/12/clear-cache/</id>
     <published>2017-08-11T23:39:00.000Z</published>
-    <updated>2018-03-05T13:50:22.056Z</updated>
+    <updated>2020-08-22T15:04:57.155Z</updated>
     
     <summary type="html">
     
@@ -420,7 +420,7 @@
     <link href="https://alexpnt.github.io/2017/08/06/dockerizing-your-django-app-2/"/>
     <id>https://alexpnt.github.io/2017/08/06/dockerizing-your-django-app-2/</id>
     <published>2017-08-06T14:02:07.000Z</published>
-    <updated>2018-03-05T13:50:22.056Z</updated>
+    <updated>2020-08-22T15:04:57.159Z</updated>
     
     <summary type="html">
     
@@ -450,7 +450,7 @@
     <link href="https://alexpnt.github.io/2017/07/31/dockerizing-your-django-app/"/>
     <id>https://alexpnt.github.io/2017/07/31/dockerizing-your-django-app/</id>
     <published>2017-07-31T22:16:17.000Z</published>
-    <updated>2018-10-17T21:36:56.545Z</updated>
+    <updated>2020-08-22T15:04:57.159Z</updated>
     
     <summary type="html">
     
@@ -481,7 +481,7 @@
     <link href="https://alexpnt.github.io/2017/07/23/mount-cifs-shares/"/>
     <id>https://alexpnt.github.io/2017/07/23/mount-cifs-shares/</id>
     <published>2017-07-23T15:11:15.000Z</published>
-    <updated>2018-03-05T13:50:22.056Z</updated>
+    <updated>2020-08-22T15:04:57.159Z</updated>
     
     <summary type="html">
     
@@ -506,7 +506,7 @@
     <link href="https://alexpnt.github.io/2017/07/22/the-setup/"/>
     <id>https://alexpnt.github.io/2017/07/22/the-setup/</id>
     <published>2017-07-22T15:20:06.000Z</published>
-    <updated>2018-03-05T13:50:22.056Z</updated>
+    <updated>2020-08-22T15:04:57.163Z</updated>
     
     <summary type="html">
     
@@ -528,7 +528,7 @@
     <link href="https://alexpnt.github.io/2017/07/19/q-objects/"/>
     <id>https://alexpnt.github.io/2017/07/19/q-objects/</id>
     <published>2017-07-19T21:26:02.000Z</published>
-    <updated>2018-03-05T13:50:22.056Z</updated>
+    <updated>2020-08-22T15:04:57.159Z</updated>
     
     <summary type="html">
     
