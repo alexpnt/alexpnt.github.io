@@ -3,7 +3,7 @@
   <title>Alexandre Pinto</title>
   
   <subtitle>Software Enginner, Reader, Knowledge-seeker</subtitle>
-  <link href="https://alexpnt.github.io/rss.xml" rel="self"/>
+  <link href="/rss.xml" rel="self"/>
   
   <link href="https://alexpnt.github.io/"/>
   <updated>2020-08-22T15:04:57.163Z</updated>
@@ -14,7 +14,7 @@
     
   </author>
   
-  <generator uri="https://hexo.io/">Hexo</generator>
+  <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
     <title>Speeding up python programs with Numba and Numpy</title>
@@ -23,21 +23,22 @@
     <published>2018-10-19T18:01:56.000Z</published>
     <updated>2020-08-22T15:04:57.163Z</updated>
     
+    <summary type="html">
     
       
       
-    <summary type="html">&lt;h2 id=&quot;when-python-is-not-enough&quot;&gt;When Python is not enough&lt;/h2&gt;
-&lt;p&gt;The Python programming language is a great tool for almost any kind of </summary>
+        &lt;h2 id=&quot;when-python-is-not-enough&quot;&gt;When Python is not enough&lt;/h2&gt;
+&lt;p&gt;The Python programming language is a great tool for almost any kind of 
       
     
+    </summary>
     
     
+      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
     
-    <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
-    <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
-    
-    <category term="performance" scheme="https://alexpnt.github.io/tags/performance/"/>
+      <category term="performance" scheme="https://alexpnt.github.io/tags/performance/"/>
     
   </entry>
   
@@ -48,28 +49,29 @@
     <published>2018-01-27T17:26:57.000Z</published>
     <updated>2020-08-22T15:04:57.159Z</updated>
     
+    <summary type="html">
     
       
       
-    <summary type="html">&lt;p&gt;Nowadays, there are have massive amounts of structured and unstructured data and good hardware resources, which makes it ideal for resour</summary>
+        &lt;p&gt;Nowadays, there are have massive amounts of structured and unstructured data and good hardware resources, which makes it ideal for resour
       
     
+    </summary>
     
     
+      <category term="performance" scheme="https://alexpnt.github.io/tags/performance/"/>
     
-    <category term="performance" scheme="https://alexpnt.github.io/tags/performance/"/>
+      <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
     
-    <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
+      <category term="gpu" scheme="https://alexpnt.github.io/tags/gpu/"/>
     
-    <category term="gpu" scheme="https://alexpnt.github.io/tags/gpu/"/>
+      <category term="cuda" scheme="https://alexpnt.github.io/tags/cuda/"/>
     
-    <category term="cuda" scheme="https://alexpnt.github.io/tags/cuda/"/>
+      <category term="nvidia" scheme="https://alexpnt.github.io/tags/nvidia/"/>
     
-    <category term="nvidia" scheme="https://alexpnt.github.io/tags/nvidia/"/>
+      <category term="tensorflow" scheme="https://alexpnt.github.io/tags/tensorflow/"/>
     
-    <category term="tensorflow" scheme="https://alexpnt.github.io/tags/tensorflow/"/>
-    
-    <category term="deep-learning" scheme="https://alexpnt.github.io/tags/deep-learning/"/>
+      <category term="deep-learning" scheme="https://alexpnt.github.io/tags/deep-learning/"/>
     
   </entry>
   
@@ -80,20 +82,21 @@
     <published>2018-01-06T16:25:16.000Z</published>
     <updated>2020-08-22T15:04:57.159Z</updated>
     
+    <summary type="html">
     
       
       
-    <summary type="html">&lt;p&gt;A good portion of time in building supervised machine learning models is spent into training, that is, finding the best set of parameters</summary>
+        &lt;p&gt;A good portion of time in building supervised machine learning models is spent into training, that is, finding the best set of parameters
       
     
+    </summary>
     
     
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
-    <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+      <category term="performance" scheme="https://alexpnt.github.io/tags/performance/"/>
     
-    <category term="performance" scheme="https://alexpnt.github.io/tags/performance/"/>
-    
-    <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
+      <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
     
   </entry>
   
@@ -104,22 +107,23 @@
     <published>2017-09-10T09:30:41.000Z</published>
     <updated>2020-08-22T15:04:57.159Z</updated>
     
+    <summary type="html">
     
       
       
-    <summary type="html">&lt;p&gt;In the learning phase a set of examples are shown to the classifier, with class labels (supervised learning) or without them (unsupervise</summary>
+        &lt;p&gt;In the learning phase a set of examples are shown to the classifier, with class labels (supervised learning) or without them (unsupervise
       
     
+    </summary>
     
     
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
-    <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+      <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
     
-    <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
+      <category term="scikit-learn" scheme="https://alexpnt.github.io/tags/scikit-learn/"/>
     
-    <category term="scikit-learn" scheme="https://alexpnt.github.io/tags/scikit-learn/"/>
-    
-    <category term="qt5" scheme="https://alexpnt.github.io/tags/qt5/"/>
+      <category term="qt5" scheme="https://alexpnt.github.io/tags/qt5/"/>
     
   </entry>
   
@@ -130,22 +134,23 @@
     <published>2017-09-09T17:15:41.000Z</published>
     <updated>2020-08-22T15:04:57.159Z</updated>
     
+    <summary type="html">
     
       
       
-    <summary type="html">&lt;p&gt;In &lt;a href=&quot;/2017/09/09/ml-pipeline-4/&quot;&gt;part IV&lt;/a&gt; some data preprocessing techniques were shown. After we have clean data, it is import</summary>
+        &lt;p&gt;In &lt;a href=&quot;/2017/09/09/ml-pipeline-4/&quot;&gt;part IV&lt;/a&gt; some data preprocessing techniques were shown. After we have clean data, it is import
       
     
+    </summary>
     
     
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
-    <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+      <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
     
-    <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
+      <category term="scikit-learn" scheme="https://alexpnt.github.io/tags/scikit-learn/"/>
     
-    <category term="scikit-learn" scheme="https://alexpnt.github.io/tags/scikit-learn/"/>
-    
-    <category term="qt5" scheme="https://alexpnt.github.io/tags/qt5/"/>
+      <category term="qt5" scheme="https://alexpnt.github.io/tags/qt5/"/>
     
   </entry>
   
@@ -156,22 +161,23 @@
     <published>2017-09-09T09:15:41.000Z</published>
     <updated>2020-08-22T15:04:57.159Z</updated>
     
+    <summary type="html">
     
       
       
-    <summary type="html">&lt;p&gt;&lt;a href=&quot;/2017/09/03/ml-pipeline-3/&quot;&gt;Part III&lt;/a&gt; explored data visualization and distribution methods. This article shows a list of comm</summary>
+        &lt;p&gt;&lt;a href=&quot;/2017/09/03/ml-pipeline-3/&quot;&gt;Part III&lt;/a&gt; explored data visualization and distribution methods. This article shows a list of comm
       
     
+    </summary>
     
     
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
-    <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+      <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
     
-    <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
+      <category term="scikit-learn" scheme="https://alexpnt.github.io/tags/scikit-learn/"/>
     
-    <category term="scikit-learn" scheme="https://alexpnt.github.io/tags/scikit-learn/"/>
-    
-    <category term="qt5" scheme="https://alexpnt.github.io/tags/qt5/"/>
+      <category term="qt5" scheme="https://alexpnt.github.io/tags/qt5/"/>
     
   </entry>
   
@@ -182,22 +188,23 @@
     <published>2017-09-03T09:15:41.000Z</published>
     <updated>2020-08-22T15:04:57.159Z</updated>
     
+    <summary type="html">
     
       
       
-    <summary type="html">&lt;p&gt;The assessment and visualization of the distribution of the features is an useful task to better get a sense of the discriminative capabi</summary>
+        &lt;p&gt;The assessment and visualization of the distribution of the features is an useful task to better get a sense of the discriminative capabi
       
     
+    </summary>
     
     
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
-    <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+      <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
     
-    <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
+      <category term="scikit-learn" scheme="https://alexpnt.github.io/tags/scikit-learn/"/>
     
-    <category term="scikit-learn" scheme="https://alexpnt.github.io/tags/scikit-learn/"/>
-    
-    <category term="qt5" scheme="https://alexpnt.github.io/tags/qt5/"/>
+      <category term="qt5" scheme="https://alexpnt.github.io/tags/qt5/"/>
     
   </entry>
   
@@ -208,22 +215,23 @@
     <published>2017-09-02T14:40:32.000Z</published>
     <updated>2020-08-22T15:04:57.159Z</updated>
     
+    <summary type="html">
     
       
       
-    <summary type="html">&lt;p&gt;In order to run experiments, we need a &lt;a href=&quot;https://archive.ics.uci.edu/ml/datasets/default+of+credit+card+clients&quot; target=&quot;_blank&quot; r</summary>
+        &lt;p&gt;In order to run experiments, we need a &lt;a href=&quot;https://archive.ics.uci.edu/ml/datasets/default+of+credit+card+clients&quot; target=&quot;_blank&quot; r
       
     
+    </summary>
     
     
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
-    <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+      <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
     
-    <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
+      <category term="scikit-learn" scheme="https://alexpnt.github.io/tags/scikit-learn/"/>
     
-    <category term="scikit-learn" scheme="https://alexpnt.github.io/tags/scikit-learn/"/>
-    
-    <category term="qt5" scheme="https://alexpnt.github.io/tags/qt5/"/>
+      <category term="qt5" scheme="https://alexpnt.github.io/tags/qt5/"/>
     
   </entry>
   
@@ -234,22 +242,23 @@
     <published>2017-09-02T09:33:32.000Z</published>
     <updated>2020-08-22T15:04:57.159Z</updated>
     
+    <summary type="html">
     
       
       
-    <summary type="html">&lt;p&gt;In machine learning problems, we usually describe the objects that we wish to recognize by a set of variables called features, consisting</summary>
+        &lt;p&gt;In machine learning problems, we usually describe the objects that we wish to recognize by a set of variables called features, consisting
       
     
+    </summary>
     
     
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
-    <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+      <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
     
-    <category term="machine-learning" scheme="https://alexpnt.github.io/tags/machine-learning/"/>
+      <category term="scikit-learn" scheme="https://alexpnt.github.io/tags/scikit-learn/"/>
     
-    <category term="scikit-learn" scheme="https://alexpnt.github.io/tags/scikit-learn/"/>
-    
-    <category term="qt5" scheme="https://alexpnt.github.io/tags/qt5/"/>
+      <category term="qt5" scheme="https://alexpnt.github.io/tags/qt5/"/>
     
   </entry>
   
@@ -260,23 +269,24 @@
     <published>2017-08-27T14:11:36.000Z</published>
     <updated>2020-08-22T15:04:57.159Z</updated>
     
+    <summary type="html">
     
       
       
-    <summary type="html">&lt;h2 id=&quot;motivation-for-this-work&quot;&gt;Motivation for this work&lt;/h2&gt;
-&lt;p&gt;The Web is a large source of data, mostly expressed in natural language t</summary>
+        &lt;h2 id=&quot;motivation-for-this-work&quot;&gt;Motivation for this work&lt;/h2&gt;
+&lt;p&gt;The Web is a large source of data, mostly expressed in natural language t
       
     
+    </summary>
     
     
+      <category term="nlp" scheme="https://alexpnt.github.io/tags/nlp/"/>
     
-    <category term="nlp" scheme="https://alexpnt.github.io/tags/nlp/"/>
+      <category term="natural-language-processing" scheme="https://alexpnt.github.io/tags/natural-language-processing/"/>
     
-    <category term="natural-language-processing" scheme="https://alexpnt.github.io/tags/natural-language-processing/"/>
+      <category term="research" scheme="https://alexpnt.github.io/tags/research/"/>
     
-    <category term="research" scheme="https://alexpnt.github.io/tags/research/"/>
-    
-    <category term="benchmark" scheme="https://alexpnt.github.io/tags/benchmark/"/>
+      <category term="benchmark" scheme="https://alexpnt.github.io/tags/benchmark/"/>
     
   </entry>
   
@@ -287,20 +297,21 @@
     <published>2017-08-18T21:06:19.000Z</published>
     <updated>2020-08-22T15:04:57.159Z</updated>
     
+    <summary type="html">
     
       
       
-    <summary type="html">&lt;p&gt;Performance is an typical concern when developing applications. In order to have a good back-end performance it is important to be aware </summary>
+        &lt;p&gt;Performance is an typical concern when developing applications. In order to have a good back-end performance it is important to be aware 
       
     
+    </summary>
     
     
+      <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
     
-    <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
-    <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
-    
-    <category term="performance" scheme="https://alexpnt.github.io/tags/performance/"/>
+      <category term="performance" scheme="https://alexpnt.github.io/tags/performance/"/>
     
   </entry>
   
@@ -311,22 +322,23 @@
     <published>2017-08-17T21:30:56.000Z</published>
     <updated>2020-08-22T15:04:57.159Z</updated>
     
+    <summary type="html">
     
       
       
-    <summary type="html">&lt;p&gt;It is often the case that we need to populate a table with initial data. A typical approach is to run an sql script to perform a bulk ins</summary>
+        &lt;p&gt;It is often the case that we need to populate a table with initial data. A typical approach is to run an sql script to perform a bulk ins
       
     
+    </summary>
     
     
+      <category term="performance" scheme="https://alexpnt.github.io/tags/performance/"/>
     
-    <category term="performance" scheme="https://alexpnt.github.io/tags/performance/"/>
+      <category term="database" scheme="https://alexpnt.github.io/tags/database/"/>
     
-    <category term="database" scheme="https://alexpnt.github.io/tags/database/"/>
+      <category term="sql" scheme="https://alexpnt.github.io/tags/sql/"/>
     
-    <category term="sql" scheme="https://alexpnt.github.io/tags/sql/"/>
-    
-    <category term="postgres" scheme="https://alexpnt.github.io/tags/postgres/"/>
+      <category term="postgres" scheme="https://alexpnt.github.io/tags/postgres/"/>
     
   </entry>
   
@@ -337,20 +349,21 @@
     <published>2017-08-15T13:37:54.000Z</published>
     <updated>2020-08-22T15:04:57.159Z</updated>
     
+    <summary type="html">
     
       
       
-    <summary type="html">&lt;p&gt;Docker is a great tool to create isolated micro services and environments. However, over time the number of intermediate image layers, si</summary>
+        &lt;p&gt;Docker is a great tool to create isolated micro services and environments. However, over time the number of intermediate image layers, si
       
     
+    </summary>
     
     
+      <category term="memory" scheme="https://alexpnt.github.io/tags/memory/"/>
     
-    <category term="memory" scheme="https://alexpnt.github.io/tags/memory/"/>
+      <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
     
-    <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
-    
-    <category term="disk" scheme="https://alexpnt.github.io/tags/disk/"/>
+      <category term="disk" scheme="https://alexpnt.github.io/tags/disk/"/>
     
   </entry>
   
@@ -361,18 +374,19 @@
     <published>2017-08-15T11:44:36.000Z</published>
     <updated>2020-08-22T15:04:57.159Z</updated>
     
+    <summary type="html">
     
       
       
-    <summary type="html">&lt;p&gt;Ever started a shell session running a process, quickly realizing that will take longer than you expected to finish? For instance, a remo</summary>
+        &lt;p&gt;Ever started a shell session running a process, quickly realizing that will take longer than you expected to finish? For instance, a remo
       
     
+    </summary>
     
     
+      <category term="linux" scheme="https://alexpnt.github.io/tags/linux/"/>
     
-    <category term="linux" scheme="https://alexpnt.github.io/tags/linux/"/>
-    
-    <category term="shell" scheme="https://alexpnt.github.io/tags/shell/"/>
+      <category term="shell" scheme="https://alexpnt.github.io/tags/shell/"/>
     
   </entry>
   
@@ -383,20 +397,21 @@
     <published>2017-08-11T23:39:00.000Z</published>
     <updated>2020-08-22T15:04:57.155Z</updated>
     
+    <summary type="html">
     
       
       
-    <summary type="html">&lt;p&gt;Running out of memory can be an issue when you are running a lot services on your development box, such as web services, databases, edito</summary>
+        &lt;p&gt;Running out of memory can be an issue when you are running a lot services on your development box, such as web services, databases, edito
       
     
+    </summary>
     
     
+      <category term="linux" scheme="https://alexpnt.github.io/tags/linux/"/>
     
-    <category term="linux" scheme="https://alexpnt.github.io/tags/linux/"/>
+      <category term="unix" scheme="https://alexpnt.github.io/tags/unix/"/>
     
-    <category term="unix" scheme="https://alexpnt.github.io/tags/unix/"/>
-    
-    <category term="memory" scheme="https://alexpnt.github.io/tags/memory/"/>
+      <category term="memory" scheme="https://alexpnt.github.io/tags/memory/"/>
     
   </entry>
   
@@ -407,25 +422,26 @@
     <published>2017-08-06T14:02:07.000Z</published>
     <updated>2020-08-22T15:04:57.159Z</updated>
     
+    <summary type="html">
     
       
       
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;/images/dev.png&quot;&gt;&lt;/p&gt;
-&lt;p&gt;A typical web application has a set of components that work together such as the application backend, </summary>
+        &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;A typical web application has a set of components that work together such as the application backend, 
       
     
+    </summary>
     
     
+      <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
     
-    <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
+      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
     
-    <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
-    <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+      <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
     
-    <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
-    
-    <category term="microservices" scheme="https://alexpnt.github.io/tags/microservices/"/>
+      <category term="microservices" scheme="https://alexpnt.github.io/tags/microservices/"/>
     
   </entry>
   
@@ -436,26 +452,27 @@
     <published>2017-07-31T22:16:17.000Z</published>
     <updated>2020-08-22T15:04:57.159Z</updated>
     
+    <summary type="html">
     
       
       
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;/images/dev.png&quot;&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot;&gt;&lt;/p&gt;
 &lt;h2 id=&quot;monolithic-vs-microservices&quot;&gt;Monolithic vs Microservices&lt;/h2&gt;
-&lt;p&gt;Over the past years, there has b</summary>
+&lt;p&gt;Over the past years, there has b
       
     
+    </summary>
     
     
+      <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
     
-    <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
+      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
     
-    <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
-    <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+      <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
     
-    <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
-    
-    <category term="microservices" scheme="https://alexpnt.github.io/tags/microservices/"/>
+      <category term="microservices" scheme="https://alexpnt.github.io/tags/microservices/"/>
     
   </entry>
   
@@ -466,20 +483,21 @@
     <published>2017-07-23T15:11:15.000Z</published>
     <updated>2020-08-22T15:04:57.159Z</updated>
     
+    <summary type="html">
     
       
       
-    <summary type="html">&lt;p&gt;Occasionally, there is the need to access files from a remote host which uses a diferent operating system or is located in a different ne</summary>
+        &lt;p&gt;Occasionally, there is the need to access files from a remote host which uses a diferent operating system or is located in a different ne
       
     
+    </summary>
     
     
+      <category term="linux" scheme="https://alexpnt.github.io/tags/linux/"/>
     
-    <category term="linux" scheme="https://alexpnt.github.io/tags/linux/"/>
+      <category term="cifs" scheme="https://alexpnt.github.io/tags/cifs/"/>
     
-    <category term="cifs" scheme="https://alexpnt.github.io/tags/cifs/"/>
-    
-    <category term="windows" scheme="https://alexpnt.github.io/tags/windows/"/>
+      <category term="windows" scheme="https://alexpnt.github.io/tags/windows/"/>
     
   </entry>
   
@@ -490,17 +508,18 @@
     <published>2017-07-22T15:20:06.000Z</published>
     <updated>2020-08-22T15:04:57.163Z</updated>
     
+    <summary type="html">
     
       
       
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;/images/dev.png&quot;&gt;&lt;/p&gt;
-&lt;p&gt;As a developer, one of the first steps before attempting to do any work is to create a good developmen</summary>
+        &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;As a developer, one of the first steps before attempting to do any work is to create a good developmen
       
     
+    </summary>
     
     
-    
-    <category term="setup" scheme="https://alexpnt.github.io/tags/setup/"/>
+      <category term="setup" scheme="https://alexpnt.github.io/tags/setup/"/>
     
   </entry>
   
@@ -511,21 +530,22 @@
     <published>2017-07-19T21:26:02.000Z</published>
     <updated>2020-08-22T15:04:57.159Z</updated>
     
+    <summary type="html">
     
       
       
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;/images/dev.png&quot;&gt;&lt;/p&gt;
-&lt;p&gt;One of the great offers of Django is the high-level database API, which lets us manipulate our data us</summary>
+        &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;One of the great offers of Django is the high-level database API, which lets us manipulate our data us
       
     
+    </summary>
     
     
+      <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
     
-    <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
+      <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
     
-    <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
-    
-    <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
+      <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
   </entry>
   
