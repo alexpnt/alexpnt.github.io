@@ -143,28 +143,15 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>Docker is a great tool to create isolated micro services and environments. However, over time the number of intermediate image layers, size of log files used by the containers and volumes increases which can take up considerable disk space. Besides, dangling images and stopped containers which we do not use anymore are not automatically removed. Fortunately, docker has some options which can help us reclaim disk space.    </p>
-<p>Dangling images are not referenced by any other image, so they can be garbage collected.   </p>
-<p><strong>List dangling images</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker images -f dangling=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p><strong>Removing dangling images</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker rmi $(docker images -q -f dangling=<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
-
+    <p>Docker is a great tool to create isolated micro services and environments. However, over time the number of intermediate image layers, size of log files used by the containers and volumes increases which can take up considerable disk space. Besides, dangling images and stopped containers which we do not use anymore are not automatically removed. Fortunately, docker has some options which can help us reclaim disk space.</p>
+<p>Dangling images are not referenced by any other image, so they can be garbage collected.</p>
+<p><strong>List dangling images</strong> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker images -f dangling=<span class="literal">true</span></span><br></pre></td></tr></table></figure> <strong>Removing dangling images</strong> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker rmi $(docker images -q -f dangling=<span class="literal">true</span>)</span><br></pre></td></tr></table></figure></p>
 <p>Similarly, we can list all stopped containers and remove them.</p>
-<p><strong>List stopped containers</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps -a -f status=exited</span><br></pre></td></tr></table></figure>
-<p><strong>Removing stopped containers</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker rm $(docker ps -a -q -f status=exited)</span><br></pre></td></tr></table></figure>
-
+<p><strong>List stopped containers</strong> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps -a -f status=exited</span><br></pre></td></tr></table></figure> <strong>Removing stopped containers</strong> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker rm $(docker ps -a -q -f status=exited)</span><br></pre></td></tr></table></figure></p>
 <p>We can also remove data volumes from containers that do not exist anymore, i.e., dangling volumes that are not automatically removed.</p>
-<p><strong>List dangling volumes</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker volume ls -f dangling=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p><strong>Removing dangling volumes</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker volume rm $(docker volume ls -q -f dangling=<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
-
+<p><strong>List dangling volumes</strong> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker volume ls -f dangling=<span class="literal">true</span></span><br></pre></td></tr></table></figure> <strong>Removing dangling volumes</strong> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker volume rm $(docker volume ls -q -f dangling=<span class="literal">true</span>)</span><br></pre></td></tr></table></figure></p>
 <p>Another good practice to minimize disk space usage is to periodically rotate the docker output logs. We can use the built-in utility logrotate by simply creating a configuration file in /etc/logrotate.d/ .</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/logrotate.d/docker-log</span><br><span class="line"> </span><br><span class="line">/var/lib/docker/containers/*/*.<span class="built_in">log</span> &#123;</span><br><span class="line">  rotate 10</span><br><span class="line">  daily</span><br><span class="line">  compress</span><br><span class="line">  size=50M</span><br><span class="line">  missingok</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>The above configuration archives and compress the logs when they reach a size of 50M. This rotation is performed daily and after 10 archived logs, the oldest one is removed.</p>
 <p>It is important to be aware of the disk space consumed by docker and perform some cleaning tasks once in a while or we might end up with some space issues. Docker also offers a great <a target="_blank" rel="noopener" href="https://docs.docker.com/">documentation</a> where we can further inspect its options.</p>
 

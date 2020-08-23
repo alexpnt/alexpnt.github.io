@@ -143,15 +143,14 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>Occasionally, there is the need to access files from a remote host which uses a diferent operating system or is located in a different network. The CIFS (Common Internet File System) is a sharing protocol that lets users share files across different systems. </p>
+    <p>Occasionally, there is the need to access files from a remote host which uses a diferent operating system or is located in a different network. The CIFS (Common Internet File System) is a sharing protocol that lets users share files across different systems.</p>
 <p>On a Linux/UNIX box we can mount our shared folder as follows:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mount -t cifs //remoteserver/shared /mnt/shared/ -o username=myusername,password=mypassword --verbose</span><br></pre></td></tr></table></figure>
-
 <p>where:</p>
 <p><em>-t cifs</em> is the filesystem type (cifs in our case)</p>
-<p><em>//remoteserver/shared</em> is our remote host (‘shared’ is the shared folder)</p>
+<p><em>//remoteserver/shared</em> is our remote host ('shared' is the shared folder)</p>
 <p><em>/mnt/shared/</em> is the local folder that will be mounted</p>
-<p>*-o username=myusername,password=mypassword * are the authentication credentials</p>
+<p><em>-o username=myusername,password=mypassword </em> are the authentication credentials</p>
 <p><strong>Disclaimer:</strong> You might need to install CIFS utilities before attempting to run the above command.</p>
 
   </div>

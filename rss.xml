@@ -26,7 +26,8 @@
     
       
       
-    <summary type="html">&lt;h2 id=&quot;When-Python-is-not-enough&quot;&gt;&lt;a href=&quot;#When-Python-is-not-enough&quot; class=&quot;headerlink&quot; title=&quot;When Python is not enough&quot;&gt;&lt;/a&gt;When Python</summary>
+    <summary type="html">&lt;h2 id=&quot;when-python-is-not-enough&quot;&gt;When Python is not enough&lt;/h2&gt;
+&lt;p&gt;The Python programming language is a great tool for almost any kind of </summary>
       
     
     
@@ -262,7 +263,8 @@
     
       
       
-    <summary type="html">&lt;h2 id=&quot;Motivation-for-this-work&quot;&gt;&lt;a href=&quot;#Motivation-for-this-work&quot; class=&quot;headerlink&quot; title=&quot;Motivation for this work&quot;&gt;&lt;/a&gt;Motivation for</summary>
+    <summary type="html">&lt;h2 id=&quot;motivation-for-this-work&quot;&gt;Motivation for this work&lt;/h2&gt;
+&lt;p&gt;The Web is a large source of data, mostly expressed in natural language t</summary>
       
     
     
@@ -408,8 +410,8 @@
     
       
       
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;/images/dev.png&quot;&gt;&lt;/p&gt;
-&lt;p&gt;A typical web application has a set of components that work together such as the application backend, </summary>
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;/images/dev.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;A typical web application has a set of components that work together such as the application backend</summary>
       
     
     
@@ -421,9 +423,9 @@
     
     <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
-    <category term="microservices" scheme="https://alexpnt.github.io/tags/microservices/"/>
-    
     <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
+    
+    <category term="microservices" scheme="https://alexpnt.github.io/tags/microservices/"/>
     
   </entry>
   
@@ -437,8 +439,9 @@
     
       
       
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;/images/dev.png&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;Monolithic-vs-Microservices&quot;&gt;&lt;a href=&quot;#Monolithic-vs-Microservices&quot; class=&quot;headerlink&quot; title=&quot;Mon</summary>
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;/images/dev.png&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;monolithic-vs-microservices&quot;&gt;Monolithic vs Microservices&lt;/h2&gt;
+&lt;p&gt;Over the past years, there has</summary>
       
     
     
@@ -450,9 +453,9 @@
     
     <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
-    <category term="microservices" scheme="https://alexpnt.github.io/tags/microservices/"/>
-    
     <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
+    
+    <category term="microservices" scheme="https://alexpnt.github.io/tags/microservices/"/>
     
   </entry>
   
@@ -490,8 +493,8 @@
     
       
       
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;/images/dev.png&quot;&gt;&lt;/p&gt;
-&lt;p&gt;As a developer, one of the first steps before attempting to do any work is to create a good developmen</summary>
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;/images/dev.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;As a developer, one of the first steps before attempting to do any work is to create a good developm</summary>
       
     
     
@@ -511,8 +514,8 @@
     
       
       
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;/images/dev.png&quot;&gt;&lt;/p&gt;
-&lt;p&gt;One of the great offers of Django is the high-level database API, which lets us manipulate our data us</summary>
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;/images/dev.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;One of the great offers of Django is the high-level database API, which lets us manipulate our data </summary>
       
     
     

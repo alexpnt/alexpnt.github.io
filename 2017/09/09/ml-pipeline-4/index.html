@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Part III explored data visualization and distribution methods. This article shows a list of common preprocessing methods that may be applied.  Dataset TransformationSome learning algorithms do not dea">
+    <meta name="description" content="Part III explored data visualization and distribution methods. This article shows a list of common preprocessing methods that may be applied.  Dataset Transformation Some learning algorithms do not de">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Building a machine-learning pipeline with scikit-learn and Qt - Part IV">
 <meta property="og:url" content="https://alexpnt.github.io/2017/09/09/ml-pipeline-4/index.html">
 <meta property="og:site_name" content="Alexandre Pinto">
-<meta property="og:description" content="Part III explored data visualization and distribution methods. This article shows a list of common preprocessing methods that may be applied.  Dataset TransformationSome learning algorithms do not dea">
+<meta property="og:description" content="Part III explored data visualization and distribution methods. This article shows a list of common preprocessing methods that may be applied.  Dataset Transformation Some learning algorithms do not de">
 <meta property="og:locale">
 <meta property="og:image" content="https://alexpnt.github.io/images/ml-pipeline/preprocessing.png">
 <meta property="article:published_time" content="2017-09-09T09:15:41.000Z">
@@ -107,7 +107,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Dataset-Transformation"><span class="toc-number">1.</span> <span class="toc-text">Dataset Transformation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dataset-Balancing"><span class="toc-number">2.</span> <span class="toc-text">Dataset Balancing</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#dataset-transformation"><span class="toc-number">1.</span> <span class="toc-text">Dataset Transformation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dataset-balancing"><span class="toc-number">2.</span> <span class="toc-text">Dataset Balancing</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -147,35 +147,27 @@
 
   <div class="content" itemprop="articleBody">
     <p><a href="/2017/09/03/ml-pipeline-3/">Part III</a> explored data visualization and distribution methods. This article shows a list of common preprocessing methods that may be applied.</p>
-<p><img src="/images/ml-pipeline/preprocessing.png"></p>
-<h2 id="Dataset-Transformation"><a href="#Dataset-Transformation" class="headerlink" title="Dataset Transformation"></a>Dataset Transformation</h2><p>Some learning algorithms do not deal with certain types of data. In order to be able to use them, the type of the attributes might be transformed to another suitable type. For example converting symbolic features to equivalent numeric features, or the other way around. Another important issue to consider is the normalization of the data, such as converting different attributes to the same scale, avoiding the dominance of some attributes and decreasing the dispersion of the data. </p>
+<p><img src="/images/ml-pipeline/preprocessing.png" /></p>
+<h2 id="dataset-transformation">Dataset Transformation</h2>
+<p>Some learning algorithms do not deal with certain types of data. In order to be able to use them, the type of the attributes might be transformed to another suitable type. For example converting symbolic features to equivalent numeric features, or the other way around. Another important issue to consider is the normalization of the data, such as converting different attributes to the same scale, avoiding the dominance of some attributes and decreasing the dispersion of the data.</p>
 <ul>
-<li><strong>Standardization</strong> - Standardization transforms each feature by removing their mean and diving non-constant features by their standard deviation, obtaining data normally distributed with zero mean and unit variance (<em>ρ<sub>Xstd</sub> = 0</em>, <em>σ<sub>Xstd</sub> = 1</em>). $$ x’ = { x - ρX \over σX } $$</li>
+<li><p><strong>Standardization</strong> - Standardization transforms each feature by removing their mean and diving non-constant features by their standard deviation, obtaining data normally distributed with zero mean and unit variance (<em>ρ<sub>Xstd</sub> = 0</em>, <em>σ<sub>Xstd</sub> = 1</em>). <span class="math display">\[ x&#39; = { x - ρX \over σX } \]</span></p></li>
+<li><p><strong>Normalization</strong> - Normalization involves scaling samples/features vectors to have unit norm, usually achieved by diving by the euclidean norm of the vector. <span class="math display">\[ x&#39; = { x  \over \sqrt \sum x_i^2 } \]</span></p></li>
+<li><p><strong>Scaling</strong> - Scaling transform the features to lie between a minimum and a maximum value. Typical ranges are [0,1] or [-1,1]. <span class="math display">\[ x&#39;_{[0,1]} = { x - min_x \over max_x - min_x } \]</span></p></li>
 </ul>
-<ul>
-<li><p><strong>Normalization</strong> - Normalization involves scaling samples/features vectors to have unit norm, usually achieved by diving by the euclidean norm of the vector. $$ x’ = { x  \over \sqrt \sum x_i^2 } $$</p>
-</li>
-<li><p><strong>Scaling</strong> - Scaling transform the features to lie between a minimum and a maximum value. Typical ranges are [0,1] or [-1,1]. $$ x’_{[0,1]} = { x - min_x \over max_x - min_x } $$</p>
-</li>
-</ul>
-<h2 id="Dataset-Balancing"><a href="#Dataset-Balancing" class="headerlink" title="Dataset Balancing"></a>Dataset Balancing</h2><p>The original dataset contain an imbalance between the two classes, that is, there is 23364(∼78%) samples from class ’0’ and 6636(∼22%) from class ’1’, which can affect the classifier prediction ability. In order to address this issue, 2 groups of methods may be employed, i.e, methods based on the undersampling of the majority class and methods based on the oversampling of the minority class:</p>
+<h2 id="dataset-balancing">Dataset Balancing</h2>
+<p>The original dataset contain an imbalance between the two classes, that is, there is 23364(∼78%) samples from class ’0’ and 6636(∼22%) from class ’1’, which can affect the classifier prediction ability. In order to address this issue, 2 groups of methods may be employed, i.e, methods based on the undersampling of the majority class and methods based on the oversampling of the minority class:</p>
 <p><strong>Undersampling</strong></p>
 <ul>
-<li><p><strong>Random Majority Undersampling</strong> - Starts with a set consisting only of samples from the minority class and adds random samples from the majority classes (allowing duplicates).</p>
-</li>
-<li><p><strong>NearMiss-1</strong> - Selects samples from the majority class that are close to the minority class samples, by choosing the ones whose average to three closest minority samples are the smallest.</p>
-</li>
-<li><p><strong>NearMiss-3</strong> - Surround each minority sample with a number of majority samples and choose the ones which have the highest average distance to three closest minority samples.</p>
-</li>
-<li><p><strong>Neighbor Cleaning Rule</strong> - Remove noisy data (samples whose class differs from the majority class of at least two of its three nearest neighbor) and the three nearest neighbors that misclassify samples of the minority class.</p>
-</li>
+<li><p><strong>Random Majority Undersampling</strong> - Starts with a set consisting only of samples from the minority class and adds random samples from the majority classes (allowing duplicates).</p></li>
+<li><p><strong>NearMiss-1</strong> - Selects samples from the majority class that are close to the minority class samples, by choosing the ones whose average to three closest minority samples are the smallest.</p></li>
+<li><p><strong>NearMiss-3</strong> - Surround each minority sample with a number of majority samples and choose the ones which have the highest average distance to three closest minority samples.</p></li>
+<li><p><strong>Neighbor Cleaning Rule</strong> - Remove noisy data (samples whose class differs from the majority class of at least two of its three nearest neighbor) and the three nearest neighbors that misclassify samples of the minority class.</p></li>
 </ul>
 <p><strong>Oversampling</strong></p>
 <ul>
-<li><p><strong>Random Majority Undersampling</strong> - Starts with a set consisting only of samples from the majority class and adds random samples from the minority classes (allowing duplicates).</p>
-</li>
-<li><p><strong>SMOTE</strong> - Oversamples the minority data by creating ”synthetic” samples from the minority class.</p>
-</li>
+<li><p><strong>Random Majority Undersampling</strong> - Starts with a set consisting only of samples from the majority class and adds random samples from the minority classes (allowing duplicates).</p></li>
+<li><p><strong>SMOTE</strong> - Oversamples the minority data by creating ”synthetic” samples from the minority class.</p></li>
 </ul>
 <p>Applying these transformations to the input data usually bring benefits to the final accuracy of the classifier. The <a href="/2017/09/09/ml-pipeline-5/">next post</a> will be dedicated to feature selection/reduction methods.</p>
 
@@ -210,7 +202,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Dataset-Transformation"><span class="toc-number">1.</span> <span class="toc-text">Dataset Transformation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dataset-Balancing"><span class="toc-number">2.</span> <span class="toc-text">Dataset Balancing</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#dataset-transformation"><span class="toc-number">1.</span> <span class="toc-text">Dataset Transformation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dataset-balancing"><span class="toc-number">2.</span> <span class="toc-text">Dataset Balancing</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
