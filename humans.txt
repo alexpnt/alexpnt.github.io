@@ -13,5 +13,5 @@
 /* SITE */
 	Last update: 08/2020
 	Language: English
-	Technologies: HTML5,CSS,javascript
+	Technologies: HTML5, CSS, javascript
 	Tools: Sublime Text 3, Markdown, git, javascript

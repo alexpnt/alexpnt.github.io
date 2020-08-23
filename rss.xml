@@ -219,7 +219,7 @@
     
       
       
-        &lt;p&gt;In order to run experiments, we need a &lt;a href=&quot;https://archive.ics.uci.edu/ml/datasets/default+of+credit+card+clients&quot; target=&quot;_blank&quot; r
+        &lt;p&gt;In order to run experiments, we need a &lt;a href=&quot;https://archive.ics.uci.edu/ml/datasets/default+of+credit+card+clients&quot;&gt;data&lt;/a&gt;. This da
       
     
     </summary>
@@ -426,8 +426,8 @@
     
       
       
-        &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot;&gt;&lt;/p&gt;
-&lt;p&gt;A typical web application has a set of components that work together such as the application backend, 
+        &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;A typical web application has a set of components that work together such as the application backend
       
     
     </summary>
@@ -456,9 +456,9 @@
     
       
       
-        &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot;&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot; /&gt;&lt;/p&gt;
 &lt;h2 id=&quot;monolithic-vs-microservices&quot;&gt;Monolithic vs Microservices&lt;/h2&gt;
-&lt;p&gt;Over the past years, there has b
+&lt;p&gt;Over the past years, there has
       
     
     </summary>
@@ -512,8 +512,8 @@
     
       
       
-        &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot;&gt;&lt;/p&gt;
-&lt;p&gt;As a developer, one of the first steps before attempting to do any work is to create a good developmen
+        &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;As a developer, one of the first steps before attempting to do any work is to create a good developm
       
     
     </summary>
@@ -534,8 +534,8 @@
     
       
       
-        &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot;&gt;&lt;/p&gt;
-&lt;p&gt;One of the great offers of Django is the high-level database API, which lets us manipulate our data us
+        &lt;p&gt;&lt;img src=&quot;/images/dev.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;One of the great offers of Django is the high-level database API, which lets us manipulate our data 
       
     
     </summary>

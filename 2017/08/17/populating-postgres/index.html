@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="It is often the case that we need to populate a table with initial data. A typical approach is to run an sql script to perform a bulk insert. However this is not ideal for cases where there are millio">
-<meta name="keywords" content="performance,database,sql,postgres">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Populating a PostgreSQL database">
 <meta property="og:url" content="https://alexpnt.github.io/2017/08/17/populating-postgres/index.html">
 <meta property="og:site_name" content="Alexandre Pinto">
 <meta property="og:description" content="It is often the case that we need to populate a table with initial data. A typical approach is to run an sql script to perform a bulk insert. However this is not ideal for cases where there are millio">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-08-22T15:04:57.159Z">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-08-17T21:30:56.000Z">
+<meta property="article:modified_time" content="2020-08-22T15:04:57.159Z">
+<meta property="article:author" content="Alexandre Pinto">
+<meta property="article:tag" content="performance">
+<meta property="article:tag" content="database">
+<meta property="article:tag" content="sql">
+<meta property="article:tag" content="postgres">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Populating a PostgreSQL database">
-<meta name="twitter:description" content="It is often the case that we need to populate a table with initial data. A typical approach is to run an sql script to perform a bulk insert. However this is not ideal for cases where there are millio">
     
     
         
@@ -39,11 +42,13 @@
     <!-- title -->
     <title>Populating a PostgreSQL database</title>
     <!-- styles -->
-    <link rel="stylesheet" href="/css/style.css">
-    <!-- rss --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
     
     
-</head>
+<meta name="generator" content="Hexo 5.1.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
     
@@ -85,16 +90,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://alexpnt.github.io/2017/08/17/populating-postgres/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&text=Populating a PostgreSQL database"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&title=Populating a PostgreSQL database"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&is_video=false&description=Populating a PostgreSQL database"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://alexpnt.github.io/2017/08/17/populating-postgres/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&text=Populating a PostgreSQL database"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&title=Populating a PostgreSQL database"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&is_video=false&description=Populating a PostgreSQL database"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=Populating a PostgreSQL database&body=Check out this article: https://alexpnt.github.io/2017/08/17/populating-postgres/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&title=Populating a PostgreSQL database"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&title=Populating a PostgreSQL database"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&title=Populating a PostgreSQL database"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&title=Populating a PostgreSQL database"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&name=Populating a PostgreSQL database&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&title=Populating a PostgreSQL database"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&title=Populating a PostgreSQL database"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&title=Populating a PostgreSQL database"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&title=Populating a PostgreSQL database"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&name=Populating a PostgreSQL database&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -129,7 +134,7 @@
       
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/database/">database</a>, <a class="tag-link" href="/tags/performance/">performance</a>, <a class="tag-link" href="/tags/postgres/">postgres</a>, <a class="tag-link" href="/tags/sql/">sql</a>
+        <a class="tag-link-link" href="/tags/database/" rel="tag">database</a>, <a class="tag-link-link" href="/tags/performance/" rel="tag">performance</a>, <a class="tag-link-link" href="/tags/postgres/" rel="tag">postgres</a>, <a class="tag-link-link" href="/tags/sql/" rel="tag">sql</a>
     </div>
 
 
@@ -140,13 +145,13 @@
   <div class="content" itemprop="articleBody">
     <p>It is often the case that we need to populate a table with initial data. A typical approach is to run an sql script to perform a bulk insert. However this is not ideal for cases where there are millions of rows. To tackle this, PostgreSQL provides the COPY command, a very efficient way of inserting a large amount of data.</p>
 <p>This command may be used like this:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY table_name(column1, column2, column3, ...) FROM <span class="string">'data.csv'</span> DELIMITER <span class="string">';'</span> CSV HEADER;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY table_name(column1, column2, column3, ...) FROM <span class="string">&#x27;data.csv&#x27;</span> DELIMITER <span class="string">&#x27;;&#x27;</span> CSV HEADER;</span><br></pre></td></tr></table></figure>
 <p>where we specify the table name, its columns and the data file.</p>
-<p>To illustrate, let's create a table that mimics an household electric power consumption. We can use a pre-built docker image containing a PostgreSQL installation for this and a <a href="https://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption" target="_blank" rel="noopener">public dataset</a> for testing.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ cat docker-compose</span><br><span class="line"></span><br><span class="line">version: <span class="string">'2'</span></span><br><span class="line"> </span><br><span class="line">services:</span><br><span class="line">  db:</span><br><span class="line">    image: postgres</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">"5432:5432"</span></span><br><span class="line">    volumes:</span><br><span class="line">      - data:/var/lib/postgresql/data</span><br><span class="line">    environment:</span><br><span class="line">      POSTGRES_USER: postgres</span><br><span class="line">      POSTGRES_PASSWORD: postgres</span><br><span class="line"> </span><br><span class="line">volumes:</span><br><span class="line">  data:</span><br></pre></td></tr></table></figure>
+<p>To illustrate, let's create a table that mimics an household electric power consumption. We can use a pre-built docker image containing a PostgreSQL installation for this and a <a target="_blank" rel="noopener" href="https://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption">public dataset</a> for testing.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ cat docker-compose</span><br><span class="line"></span><br><span class="line">version: <span class="string">&#x27;2&#x27;</span></span><br><span class="line"> </span><br><span class="line">services:</span><br><span class="line">  db:</span><br><span class="line">    image: postgres</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">&quot;5432:5432&quot;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - data:/var/lib/postgresql/data</span><br><span class="line">    environment:</span><br><span class="line">      POSTGRES_USER: postgres</span><br><span class="line">      POSTGRES_PASSWORD: postgres</span><br><span class="line"> </span><br><span class="line">volumes:</span><br><span class="line">  data:</span><br></pre></td></tr></table></figure>
 <p>We are now ready to configure our database:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose up -d db</span><br><span class="line">$ docker cp household_power_consumption.csv db_1:/var/lib/postgresql/data/household_power_consumption.csv</span><br><span class="line">$ docker-compose run --rm db psql -h db -p 5432 -U postgres --password</span><br><span class="line">  </span><br><span class="line">CREATE TABLE power_consumption (</span><br><span class="line">    Date character varying(50),</span><br><span class="line">    Time character varying(50),</span><br><span class="line">    Global_active_power character varying(50),</span><br><span class="line">    Global_reactive_power character varying(50),</span><br><span class="line">    Voltage character varying(50),</span><br><span class="line">    Global_intensity character varying(50),</span><br><span class="line">    Sub_metering_1 character varying(50),</span><br><span class="line">    Sub_metering_2 character varying(50),</span><br><span class="line">    Sub_metering_3 character varying(50)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>Finally, we can load the data into our newly created table: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\timing on</span><br><span class="line"> </span><br><span class="line">COPY power_consumption(Date,Time,Global_active_power,Global_reactive_power,Voltage,Global_intensity,Sub_metering_1,Sub_metering_2,Sub_metering_3) FROM <span class="string">'/var/lib/postgresql/data/household_power_consumption.csv'</span> DELIMITER <span class="string">';'</span> CSV HEADER;</span><br><span class="line"></span><br><span class="line">Time: 7906.845 ms</span><br></pre></td></tr></table></figure></p>
+<p>Finally, we can load the data into our newly created table: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\timing on</span><br><span class="line"> </span><br><span class="line">COPY power_consumption(Date,Time,Global_active_power,Global_reactive_power,Voltage,Global_intensity,Sub_metering_1,Sub_metering_2,Sub_metering_3) FROM <span class="string">&#x27;/var/lib/postgresql/data/household_power_consumption.csv&#x27;</span> DELIMITER <span class="string">&#x27;;&#x27;</span> CSV HEADER;</span><br><span class="line"></span><br><span class="line">Time: 7906.845 ms</span><br></pre></td></tr></table></figure></p>
 <p>It took roughly 8 seconds to insert 2 075 259 records. This operation works best if there are not any indexes or foreign keys present that may introduce overhead in each insert. It is usually preferred to create them after.</p>
 
   </div>
@@ -154,7 +159,7 @@
 
     <div class="blog-post-comments">
         <div id="disqus_thread">
-            <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
         </div>
     </div>
 
@@ -185,16 +190,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://alexpnt.github.io/2017/08/17/populating-postgres/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&text=Populating a PostgreSQL database"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&title=Populating a PostgreSQL database"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&is_video=false&description=Populating a PostgreSQL database"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://alexpnt.github.io/2017/08/17/populating-postgres/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&text=Populating a PostgreSQL database"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&title=Populating a PostgreSQL database"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&is_video=false&description=Populating a PostgreSQL database"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=Populating a PostgreSQL database&body=Check out this article: https://alexpnt.github.io/2017/08/17/populating-postgres/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&title=Populating a PostgreSQL database"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&title=Populating a PostgreSQL database"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&title=Populating a PostgreSQL database"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&title=Populating a PostgreSQL database"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&name=Populating a PostgreSQL database&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&title=Populating a PostgreSQL database"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&title=Populating a PostgreSQL database"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&title=Populating a PostgreSQL database"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&title=Populating a PostgreSQL database"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://alexpnt.github.io/2017/08/17/populating-postgres/&name=Populating a PostgreSQL database&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -236,15 +241,27 @@
 </body>
 </html>
 <!-- styles -->
+
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
 <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+
+
 <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
 
 
+
 <!-- jquery -->
+
 <script src="/lib/jquery/jquery.min.js"></script>
+
+
 <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+
 <script src="/js/main.js"></script>
+
 <!-- Google Analytics -->
 
     <script type="text/javascript">
