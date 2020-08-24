@@ -33,11 +33,11 @@
     
     
     
+    <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
+    
     <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
     <category term="performance" scheme="https://alexpnt.github.io/tags/performance/"/>
-    
-    <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
     
   </entry>
   
@@ -419,9 +419,9 @@
     
     <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
     
-    <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
-    
     <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
+    
+    <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
     <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
     
@@ -449,9 +449,9 @@
     
     <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
     
-    <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
-    
     <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
+    
+    <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
     <category term="docker" scheme="https://alexpnt.github.io/tags/docker/"/>
     
@@ -523,9 +523,9 @@
     
     <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
     
-    <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
-    
     <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
+    
+    <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
   </entry>
   

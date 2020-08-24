@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Welcome, my name is Alexandre Pinto and I am a software engineer, currently living in Coimbra, Portugal. I strive to build quality software and contribute to a positive impact in the world. My interes">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Alexandre Pinto">
-<meta property="og:url" content="https://alexpnt.github.io/tags/linux/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Search">
+<meta property="og:url" content="https://alexpnt.github.io/search/index.html">
 <meta property="og:site_name" content="Alexandre Pinto">
-<meta property="og:description" content="Welcome, my name is Alexandre Pinto and I am a software engineer, currently living in Coimbra, Portugal. I strive to build quality software and contribute to a positive impact in the world. My interes">
 <meta property="og:locale">
+<meta property="article:published_time" content="2020-08-24T22:25:29.090Z">
+<meta property="article:modified_time" content="2020-08-24T22:25:29.090Z">
 <meta property="article:author" content="Alexandre Pinto">
 <meta name="twitter:card" content="summary">
     
@@ -34,7 +34,7 @@
         
     
     <!-- title -->
-    <title>Tag: linux</title>
+    <title>Search</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -200,90 +200,22 @@ mjx-container[display="true"] + br {
 </header>
 
         
-        <div id="archive">
-  <ul class="post-list">
-    
-    
-    
-    
-      
-      
-      
-      
-        <h2>2017</h2>
-      
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2017-08-15T11:44:36.000Z" itemprop="datePublished">2017-08-15</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2017/08/15/reattaching-sessions/">Reattaching shell sessions</a>
-    
-
-
-</span>
-      </li>
-    
-      
-      
-      
-      
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2017-08-11T23:39:00.000Z" itemprop="datePublished">2017-08-12</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2017/08/12/clear-cache/">Free up memory by cleaning caches</a>
-    
-
-
-</span>
-      </li>
-    
-      
-      
-      
-      
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2017-07-23T15:11:15.000Z" itemprop="datePublished">2017-07-23</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2017/07/23/mount-cifs-shares/">Mouting CIFS shares on a Linux/UNIX box</a>
-    
-
-
-</span>
-      </li>
-    
-  </ul>
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   
 
-</div>
+  <div class="content" itemprop="articleBody">
+      
+        <section id="search">
+  <form>
+    <input type="text" class="search-input" id="search-input" placeholder="Search...">
+  </form>
+  <div id="search-result"></div>
+  <p class="search-no-result">No results found.</p>
+</section>
+
+      
+  </div>
+</article>
 
         
         <footer id="footer">
@@ -336,6 +268,45 @@ mjx-container[display="true"] + br {
 
 <!-- search -->
 
+  
+<script src="/js/search.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+
+    var $inputArea = $("input#search-input");
+    var $resultArea = document.querySelector("div#search-result");
+
+    $inputArea.focus(function() {
+      var search_path = "search.xml";
+      if (search_path.length == 0) {
+        search_path = "search.xml";
+      }
+      var path = "/" + search_path;
+      searchFunc(path, 'search-input', 'search-result');
+    });
+
+    $inputArea.keydown(function(e) {
+      if (e.which == 13) {
+        e.preventDefault();
+      }
+    });
+
+    var observer = new MutationObserver(function(mutationsList, observer) {
+      if (mutationsList.length == 1) {
+        if (mutationsList[0].addedNodes.length) {
+          $(".search-no-result").hide();
+        } else if (mutationsList[0].removedNodes.length) {
+          $(".search-no-result").show(200);
+        }
+      }
+    });
+
+    observer.observe($resultArea, { childList: true });
+
+  });
+  </script>
+
 <!-- Google Analytics -->
 
     <script type="text/javascript">
@@ -358,7 +329,7 @@ mjx-container[display="true"] + br {
             var dsq = document.createElement('script');
             dsq.type = 'text/javascript';
             dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         }());
     </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
