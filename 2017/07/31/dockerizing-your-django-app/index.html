@@ -6,21 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Monolithic vs Microservices Over the past years, there has been a paradigm shift in the architecture of software, i.e., the microservices approach to software development is taking over the tradition">
+    <meta name="description" content="Monolithic vs MicroservicesOver the past years, there has been a paradigm shift in the architecture of software, i.e., the microservices approach to software development is taking over the traditiona">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Microservices, Docker and Django - Part I">
 <meta property="og:url" content="https://alexpnt.github.io/2017/07/31/dockerizing-your-django-app/index.html">
 <meta property="og:site_name" content="Alexandre Pinto">
-<meta property="og:description" content="Monolithic vs Microservices Over the past years, there has been a paradigm shift in the architecture of software, i.e., the microservices approach to software development is taking over the tradition">
+<meta property="og:description" content="Monolithic vs MicroservicesOver the past years, there has been a paradigm shift in the architecture of software, i.e., the microservices approach to software development is taking over the traditiona">
 <meta property="og:locale">
 <meta property="og:image" content="https://alexpnt.github.io/images/dev.png">
 <meta property="article:published_time" content="2017-07-31T22:16:17.000Z">
 <meta property="article:modified_time" content="2020-08-22T15:04:57.159Z">
 <meta property="article:author" content="Alexandre Pinto">
+<meta property="article:tag" content="docker">
 <meta property="article:tag" content="django">
 <meta property="article:tag" content="development">
 <meta property="article:tag" content="python">
-<meta property="article:tag" content="docker">
 <meta property="article:tag" content="microservices">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://alexpnt.github.io/images/dev.png">
@@ -234,7 +234,7 @@ mjx-container[display="true"] + br {
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#monolithic-vs-microservices"><span class="toc-number">1.</span> <span class="toc-text">Monolithic vs Microservices</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docker-containerization"><span class="toc-number">2.</span> <span class="toc-text">Docker Containerization</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#installing-docker"><span class="toc-number">3.</span> <span class="toc-text">Installing Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#installing-docker-compose"><span class="toc-number">4.</span> <span class="toc-text">Installing Docker Compose</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#downloading-our-example-application-that-we-will-dockerize"><span class="toc-number">5.</span> <span class="toc-text">Downloading our example application that we will dockerize</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Monolithic-vs-Microservices"><span class="toc-number">1.</span> <span class="toc-text">Monolithic vs Microservices</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker-Containerization"><span class="toc-number">2.</span> <span class="toc-text">Docker Containerization</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Installing-Docker"><span class="toc-number">3.</span> <span class="toc-text">Installing Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Installing-Docker-Compose"><span class="toc-number">4.</span> <span class="toc-text">Installing Docker Compose</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Downloading-our-example-application-that-we-will-dockerize"><span class="toc-number">5.</span> <span class="toc-text">Downloading our example application that we will dockerize</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -278,22 +278,20 @@ mjx-container[display="true"] + br {
   
 
   <div class="content" itemprop="articleBody">
-    <p><img src="/images/dev.png" /></p>
-<h2 id="monolithic-vs-microservices">Monolithic vs Microservices</h2>
-<p>Over the past years, there has been a paradigm shift in the architecture of software, i.e., the microservices approach to software development is taking over the traditional monolithic architecture.</p>
+    <p><img src="/images/dev.png"></p>
+<h2 id="Monolithic-vs-Microservices"><a href="#Monolithic-vs-Microservices" class="headerlink" title="Monolithic vs Microservices"></a>Monolithic vs Microservices</h2><p>Over the past years, there has been a paradigm shift in the architecture of software, i.e., the microservices approach to software development is taking over the traditional monolithic architecture. </p>
 <p>Monolithic applications are systems built as a single tightly coupled unit, which gets more complex as the application evolves. Monolithic applications share the same resources, libraries and memory, which brings faster accesses and inter service communications, however, it is harder to maintain, challenging to scale and more difficult to isolate services.</p>
-<p>On the other hand, microservices are independent and isolated services with specific responsibilities, who communicate with each other. This brings an overall better organization, separation of concerns and performance in the long run. With microservices is easier to scale since we only need to 'upgrade' certain services and not the entire system. It is easier to deploy (we only update parts of the system) and more fault tolerant (a failure of one part does not bring down the entire system).</p>
-<h2 id="docker-containerization">Docker Containerization</h2>
-<p>Containers are a way of isolating services, just like virtual machines but with some important differences. While virtual machines create an isolated full stack, from the host operating system to the user application, containers share the host operating system, adding only the necessary libraries and applications, creating a lightweight sandbox on our system, with its own layered filesystem and network management. <a target="_blank" rel="noopener" href="https://www.docker.com/">Docker</a> is a popular container system which uses Linux containers(LXC) under the hood, a native feature of Linux systems, in order to provide isolation of microservices.</p>
-<p>With docker we can quickly change to different environment setups,</p>
-<h2 id="installing-docker">Installing Docker</h2>
-<p>To install docker on a Debian based box, we simply run these commands.</p>
+<p>On the other hand, microservices are independent and isolated services with specific responsibilities, who communicate with each other. This brings an overall better organization, separation of concerns and performance in the long run. With microservices is easier to scale since we only need to ‘upgrade’ certain services and not the entire system. It is easier to deploy (we only update parts of the system) and more fault tolerant (a failure of one part does not bring down the entire system).</p>
+<h2 id="Docker-Containerization"><a href="#Docker-Containerization" class="headerlink" title="Docker Containerization"></a>Docker Containerization</h2><p>Containers are a way of isolating services, just like virtual machines but with some important differences. While virtual machines create an isolated full stack, from the host operating system to the user application, containers share the host operating system, adding only the necessary libraries and applications, creating a lightweight sandbox on our system, with its own layered filesystem and network management. <a target="_blank" rel="noopener" href="https://www.docker.com/">Docker</a> is a popular container system which uses Linux containers(LXC) under the hood, a native feature of Linux systems, in order to provide isolation of microservices. </p>
+<p>With docker we can quickly change to different environment setups,   </p>
+<h2 id="Installing-Docker"><a href="#Installing-Docker" class="headerlink" title="Installing Docker"></a>Installing Docker</h2><p>To install docker on a Debian based box, we simply run these commands.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install \</span><br><span class="line">    apt-transport-https \</span><br><span class="line">    ca-certificates \</span><br><span class="line">    curl \</span><br><span class="line">    software-properties-common</span><br><span class="line"> </span><br><span class="line">$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</span><br><span class="line"> </span><br><span class="line">$ sudo add-apt-repository \</span><br><span class="line">   <span class="string">&quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \</span></span><br><span class="line"><span class="string">   <span class="subst">$(lsb_release -cs)</span> \</span></span><br><span class="line"><span class="string">   stable&quot;</span></span><br><span class="line"> </span><br><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install docker-ce</span><br><span class="line">$ sudo groupadd docker</span><br></pre></td></tr></table></figure>
-<h2 id="installing-docker-compose">Installing Docker Compose</h2>
-<p>Docker Compose is a useful tool that let us configure and run multiple containers.</p>
+
+<h2 id="Installing-Docker-Compose"><a href="#Installing-Docker-Compose" class="headerlink" title="Installing Docker Compose"></a>Installing Docker Compose</h2><p>Docker Compose is a useful tool that let us configure and run multiple containers.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install docker-compose</span><br></pre></td></tr></table></figure>
-<h2 id="downloading-our-example-application-that-we-will-dockerize">Downloading our example application that we will dockerize</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir dockerize-musicwallet</span><br><span class="line">$ <span class="built_in">cd</span> dockerize-musicwallet</span><br><span class="line">$ git <span class="built_in">clone</span> -b postgres https://github.com/AlexPnt/MusicWallet.git</span><br></pre></td></tr></table></figure>
+
+<h2 id="Downloading-our-example-application-that-we-will-dockerize"><a href="#Downloading-our-example-application-that-we-will-dockerize" class="headerlink" title="Downloading our example application that we will dockerize"></a>Downloading our example application that we will dockerize</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir dockerize-musicwallet</span><br><span class="line">$ <span class="built_in">cd</span> dockerize-musicwallet</span><br><span class="line">$ git <span class="built_in">clone</span> -b postgres https://github.com/AlexPnt/MusicWallet.git</span><br></pre></td></tr></table></figure>
+
 <p>We now have a code base from a <a target="_blank" rel="noopener" href="https://github.com/AlexPnt/MusicWallet">web application</a> that let us manage users and their favourite musics, with a REST API, built with Django and the Django Rest Framework.</p>
 <p>In the <a href="/2017/08/06/dockerizing-your-django-app-2/" title="Microservices, Docker and Django - Part II">Microservices, Docker and Django - Part II</a>, we will turn this application into a docker container.</p>
 
@@ -337,7 +335,7 @@ mjx-container[display="true"] + br {
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#monolithic-vs-microservices"><span class="toc-number">1.</span> <span class="toc-text">Monolithic vs Microservices</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docker-containerization"><span class="toc-number">2.</span> <span class="toc-text">Docker Containerization</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#installing-docker"><span class="toc-number">3.</span> <span class="toc-text">Installing Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#installing-docker-compose"><span class="toc-number">4.</span> <span class="toc-text">Installing Docker Compose</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#downloading-our-example-application-that-we-will-dockerize"><span class="toc-number">5.</span> <span class="toc-text">Downloading our example application that we will dockerize</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Monolithic-vs-Microservices"><span class="toc-number">1.</span> <span class="toc-text">Monolithic vs Microservices</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker-Containerization"><span class="toc-number">2.</span> <span class="toc-text">Docker Containerization</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Installing-Docker"><span class="toc-number">3.</span> <span class="toc-text">Installing Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Installing-Docker-Compose"><span class="toc-number">4.</span> <span class="toc-text">Installing Docker Compose</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Downloading-our-example-application-that-we-will-dockerize"><span class="toc-number">5.</span> <span class="toc-text">Downloading our example application that we will dockerize</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -442,15 +440,6 @@ mjx-container[display="true"] + br {
 <!-- search -->
 
 <!-- Google Analytics -->
-
-    <script type="text/javascript">
-        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-43571022-2', 'auto');
-        ga('send', 'pageview');
-    </script>
 
 <!-- Baidu Analytics -->
 

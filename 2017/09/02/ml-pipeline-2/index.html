@@ -233,7 +233,7 @@ mjx-container[display="true"] + br {
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#data-gathering"><span class="toc-number">1.</span> <span class="toc-text">Data Gathering</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-dataset"><span class="toc-number">2.</span> <span class="toc-text">The dataset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-gui"><span class="toc-number">3.</span> <span class="toc-text">The GUI</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-Gathering"><span class="toc-number">1.</span> <span class="toc-text">Data Gathering</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-dataset"><span class="toc-number">2.</span> <span class="toc-text">The dataset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-GUI"><span class="toc-number">3.</span> <span class="toc-text">The GUI</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -277,17 +277,18 @@ mjx-container[display="true"] + br {
   
 
   <div class="content" itemprop="articleBody">
-    <p>In order to run experiments, we need a <a target="_blank" rel="noopener" href="https://archive.ics.uci.edu/ml/datasets/default+of+credit+card+clients">data</a>. This dataset was the same used in a <a target="_blank" rel="noopener" href="http://www.sciencedirect.com/science/article/pii/S0957417407006719">research study</a>, consisting of data payments gathered during October, 2005, from a bank in Taiwan, using the credit card holders from that bank as the study targets.</p>
+    <p>In order to run experiments, we need a <a target="_blank" rel="noopener" href="https://archive.ics.uci.edu/ml/datasets/default+of+credit+card+clients">data</a>. This dataset was the same used in a <a target="_blank" rel="noopener" href="http://www.sciencedirect.com/science/article/pii/S0957417407006719">research study</a>, consisting of data payments gathered during October, 2005, from a bank in Taiwan, using the credit card holders from that bank as the study targets. </p>
 <p>In the <a href="/2017/09/02/ml-pipeline-1/">first part</a> we talked about the process of machine learning. This post will discuss data gathering and the dataset.</p>
-<h2 id="data-gathering">Data Gathering</h2>
-<p>The first step is to collect the training and testing data such as sufficient and representative data. This usually implies tasks such as:</p>
+<h2 id="Data-Gathering"><a href="#Data-Gathering" class="headerlink" title="Data Gathering"></a>Data Gathering</h2><p>The first step is to collect the training and testing data such as sufficient and representative data. This usually implies tasks such as:</p>
 <ul>
-<li><p><strong>Data Integration</strong> - The initial data might come from different sources, with different formats or duplicated data. This step is important to create a single repository of data.</p></li>
-<li><p><strong>Data Balancing</strong> - As is often the case with real data, the data is usually not uniformly distributed across the different classes. Consequently, the trained models tend to predict new data with the majority class. Techniques to artificially balance the data might be employed here, such as reducing (Undersampling) / increasing (Oversampling) the number of instances from the majority /minority classes. An other alternative might be performing a stratified sampling in order to keep a significant number of instances in each class.</p></li>
-<li><p><strong>Cleaning</strong> - The quality of the data is important. Sometimes the data will have missing attributes or useless values. However, redundant or noisy data are important issues to be addressed, such as instances with very similar feature values, attributes easily deducted from others or outliers.</p></li>
+<li><p><strong>Data Integration</strong> - The initial data might come from different sources, with different formats or duplicated data. This step is important to create a single repository of data.</p>
+</li>
+<li><p><strong>Data Balancing</strong> - As is often the case with real data, the data is usually not uniformly distributed across the different classes. Consequently, the trained models tend to predict new data with the majority class. Techniques to artificially balance the data might be employed here, such as reducing (Undersampling) / increasing (Oversampling) the number of instances from the majority /minority classes. An other alternative might be performing a stratified sampling in order to keep a significant number of instances in each class.</p>
+</li>
+<li><p><strong>Cleaning</strong> - The quality of the data is important. Sometimes the data will have missing attributes or useless values. However, redundant or noisy data are important issues to be addressed, such as instances with very similar feature values, attributes easily deducted from others or outliers.</p>
+</li>
 </ul>
-<h2 id="the-dataset">The dataset</h2>
-<p>Each sample of the dataset contains 23 variables and a predictive binary label (Defaul payment: Yes = 1, No = 0). These 23 features are described as follows:</p>
+<h2 id="The-dataset"><a href="#The-dataset" class="headerlink" title="The dataset"></a>The dataset</h2><p>Each sample of the dataset contains 23 variables and a predictive binary label (Defaul payment: Yes = 1, No = 0). These 23 features are described as follows:</p>
 <ul>
 <li>X1: Amount of the given credit</li>
 <li>X2: Gender (1 = male; 2 = female)</li>
@@ -298,12 +299,11 @@ mjx-container[display="true"] + br {
 <li>X12-X17: Amount of bill statement</li>
 <li>X18–X23: Amount of previous payment</li>
 </ul>
-<h2 id="the-gui">The GUI</h2>
-<p>The resulting application has a tab designed to show a quick description of the loaded dataset, that is, the description of the features, the cardinality of each class and some statistical measures of each feature:</p>
-<p><img src="/images/ml-pipeline/loading.png" /></p>
-<p>For the design of the interface, the <a target="_blank" rel="noopener" href="http://doc.qt.io/qt-5/qtdesigner-manual.html">Qt Designer</a> is a great tool to quickly generate our GUI. This tool generates a <em>.xml</em> file describing the UI, which is then used to generate a python module which we can import and use to load the main interface.</p>
+<h2 id="The-GUI"><a href="#The-GUI" class="headerlink" title="The GUI"></a>The GUI</h2><p>The resulting application has a tab designed to show a quick description of the loaded dataset, that is, the description of the features, the cardinality of each class and some statistical measures of each feature: </p>
+<p><img src="/images/ml-pipeline/loading.png"></p>
+<p>For the design of the interface, the <a target="_blank" rel="noopener" href="http://doc.qt.io/qt-5/qtdesigner-manual.html">Qt Designer</a> is a great tool to quickly generate our GUI. This tool generates a <em>.xml</em> file describing the UI, which is then used to generate a python module which we can import and use to load the main interface. </p>
 <p>The extraction of statistical metrics is useful to get a quick overview of how our data is distributed. We will talk about these metrics later in detail.</p>
-<p><a href="/2017/09/03/ml-pipeline-3/">Part III will provide an overview of feature assessment and visualization</a>.</p>
+<p><a href="/2017/09/03/ml-pipeline-3/">Part III will provide an overview of feature assessment and  visualization</a>.</p>
 
   </div>
 </article>
@@ -345,7 +345,7 @@ mjx-container[display="true"] + br {
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#data-gathering"><span class="toc-number">1.</span> <span class="toc-text">Data Gathering</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-dataset"><span class="toc-number">2.</span> <span class="toc-text">The dataset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-gui"><span class="toc-number">3.</span> <span class="toc-text">The GUI</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-Gathering"><span class="toc-number">1.</span> <span class="toc-text">Data Gathering</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-dataset"><span class="toc-number">2.</span> <span class="toc-text">The dataset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-GUI"><span class="toc-number">3.</span> <span class="toc-text">The GUI</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -450,15 +450,6 @@ mjx-container[display="true"] + br {
 <!-- search -->
 
 <!-- Google Analytics -->
-
-    <script type="text/javascript">
-        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-43571022-2', 'auto');
-        ga('send', 'pageview');
-    </script>
 
 <!-- Baidu Analytics -->
 
