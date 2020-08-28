@@ -227,7 +227,7 @@ mjx-container[display="true"] + br {
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Hexo-Framework"><span class="toc-number">1.</span> <span class="toc-text">The Hexo Framework</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Walkthrough"><span class="toc-number">2.</span> <span class="toc-text">Walkthrough</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#the-hexo-framework"><span class="toc-number">1.</span> <span class="toc-text">The Hexo Framework</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#walkthrough"><span class="toc-number">2.</span> <span class="toc-text">Walkthrough</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -272,24 +272,18 @@ mjx-container[display="true"] + br {
 
   <div class="content" itemprop="articleBody">
     <p>I always enjoyed the idea of keeping a journal where ideas, tips and tricks from my daily life could be shared. With this first post I intend to move forward this goal. By sharing knowledge, you grow a bit and help others improve. It also helps you to keep motivated, giving you a sense of purpose since you feel that you are contributing to the community.</p>
-<h2 id="The-Hexo-Framework"><a href="#The-Hexo-Framework" class="headerlink" title="The Hexo Framework"></a>The Hexo Framework</h2><p>This site is built using the awesome <a target="_blank" rel="noopener" href="https://hexo.io/">hexo framework</a> with a slightly customized version of the <a target="_blank" rel="noopener" href="https://github.com/probberechts/cactus-dark">Cactus Dark</a>  theme. In the light of the open source  movement, you can find the <a target="_blank" rel="noopener" href="https://github.com/AlexPnt/hexo-site">source code</a> of this site in my github account.</p>
-<p>The <a target="_blank" rel="noopener" href="https://hexo.io/">hexo framework</a> is a fast and simple static site generator. Rather than generating dynamic content depending on the user request, a set of raw content is matched against a set of templates and styles to produce the final static content, that never changes over time. This has some advantages such as simplicity and speed, since there is no need to perform complex queries to complex backends to retrieve and build the content that the user is requesting. </p>
-<h2 id="Walkthrough"><a href="#Walkthrough" class="headerlink" title="Walkthrough"></a>Walkthrough</h2><p>In order to get started you need to have the Node.js package manager (<a target="_blank" rel="noopener" href="https://www.npmjs.com/">npm</a>) and the version control system <a target="_blank" rel="noopener" href="https://git-scm.com/">git</a> installed.</p>
+<h2 id="the-hexo-framework">The Hexo Framework</h2>
+<p>This site is built using the awesome <a target="_blank" rel="noopener" href="https://hexo.io/">hexo framework</a> with a slightly customized version of the <a target="_blank" rel="noopener" href="https://github.com/probberechts/cactus-dark">Cactus Dark</a> theme. In the light of the open source movement, you can find the <a target="_blank" rel="noopener" href="https://github.com/AlexPnt/hexo-site">source code</a> of this site in my github account.</p>
+<p>The <a target="_blank" rel="noopener" href="https://hexo.io">hexo framework</a> is a fast and simple static site generator. Rather than generating dynamic content depending on the user request, a set of raw content is matched against a set of templates and styles to produce the final static content, that never changes over time. This has some advantages such as simplicity and speed, since there is no need to perform complex queries to complex backends to retrieve and build the content that the user is requesting.</p>
+<h2 id="walkthrough">Walkthrough</h2>
+<p>In order to get started you need to have the Node.js package manager (<a target="_blank" rel="noopener" href="https://www.npmjs.com/">npm</a>) and the version control system <a target="_blank" rel="noopener" href="https://git-scm.com/">git</a> installed.</p>
 <p><strong>Setting up hexo:</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br><span class="line">$ hexo init mysite</span><br><span class="line">$ <span class="built_in">cd</span> mysite</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
-
-<p><strong>Installing the cactus-dark theme:</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/probberechts/cactus-dark.git themes/cactus-dark</span><br><span class="line">$ npm install hexo-pagination --save</span><br></pre></td></tr></table></figure>
-
-<p>In your config.yml file, change the theme setting:</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">cactus-dark</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>Start serving your new site:</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo serve</span><br></pre></td></tr></table></figure>
-
-<p>Head over to <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a> to see it in action!<br>After this, go ahead and customize it to your needs. There is a basic folder structure that you have to keep in mind.  </p>
+<p><strong>Installing the cactus-dark theme:</strong> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/probberechts/cactus-dark.git themes/cactus-dark</span><br><span class="line">$ npm install hexo-pagination --save</span><br></pre></td></tr></table></figure></p>
+<p>In your config.yml file, change the theme setting: <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">cactus-dark</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>Start serving your new site:</strong> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo serve</span><br></pre></td></tr></table></figure></p>
+<p>Head over to http://localhost:4000 to see it in action! After this, go ahead and customize it to your needs. There is a basic folder structure that you have to keep in mind.</p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">├── _config.yml - (configuration settings) </span><br><span class="line">├── public      - (static files, which may be deployed to a live server)</span><br><span class="line">├── scaffolds   - (pages and posts will be based on these scaffolds)</span><br><span class="line">├── source      - (raw source content of your site)</span><br><span class="line">└── themes      - (custom themes of your site)</span><br></pre></td></tr></table></figure>
-
 <p><strong>Deploy:</strong></p>
 <p>The last step is to deploy your generated static site to a remote server and start serving it. In my case, I simply push the public folder to my github repository.</p>
 <p>For more details, head over to the great <a target="_blank" rel="noopener" href="https://hexo.io/docs/">hexo documentation</a>.</p>
@@ -334,7 +328,7 @@ mjx-container[display="true"] + br {
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Hexo-Framework"><span class="toc-number">1.</span> <span class="toc-text">The Hexo Framework</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Walkthrough"><span class="toc-number">2.</span> <span class="toc-text">Walkthrough</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#the-hexo-framework"><span class="toc-number">1.</span> <span class="toc-text">The Hexo Framework</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#walkthrough"><span class="toc-number">2.</span> <span class="toc-text">Walkthrough</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -405,9 +399,9 @@ mjx-container[display="true"] + br {
 
 <script src="/lib/jquery/jquery.min.js"></script>
 
-
+<!-- 
 <script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
-
+ -->
 <!-- clipboard -->
 
   

@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="When Python is not enoughThe Python programming language is a great tool for almost any kind of rapid prototyping and quick development. It has great features such as its high level nature, a syntax w">
+    <meta name="description" content="When Python is not enough The Python programming language is a great tool for almost any kind of rapid prototyping and quick development. It has great features such as its high level nature, a syntax">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Speeding up python programs with Numba and Numpy">
 <meta property="og:url" content="https://alexpnt.github.io/2018/10/19/speeding-up-python/index.html">
 <meta property="og:site_name" content="Alexandre Pinto">
-<meta property="og:description" content="When Python is not enoughThe Python programming language is a great tool for almost any kind of rapid prototyping and quick development. It has great features such as its high level nature, a syntax w">
+<meta property="og:description" content="When Python is not enough The Python programming language is a great tool for almost any kind of rapid prototyping and quick development. It has great features such as its high level nature, a syntax">
 <meta property="og:locale">
 <meta property="og:image" content="https://alexpnt.github.io/images/numba/numba-arch.png">
 <meta property="article:published_time" content="2018-10-19T18:01:56.000Z">
@@ -230,7 +230,7 @@ mjx-container[display="true"] + br {
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#When-Python-is-not-enough"><span class="toc-number">1.</span> <span class="toc-text">When Python is not enough</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Whats-is-Numba"><span class="toc-number">2.</span> <span class="toc-text">Whats is Numba ?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Numba-modes-and-the-jit-decorator"><span class="toc-number">3.</span> <span class="toc-text">Numba modes and the @jit decorator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#High-level-architecture-of-Numba"><span class="toc-number">4.</span> <span class="toc-text">High-level architecture of Numba</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Speeding-numerical-computations-An-example"><span class="toc-number">5.</span> <span class="toc-text">Speeding numerical computations: An example</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Final-words"><span class="toc-number">6.</span> <span class="toc-text">Final words</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#when-python-is-not-enough"><span class="toc-number">1.</span> <span class="toc-text">When Python is not enough</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#whats-is-numba"><span class="toc-number">2.</span> <span class="toc-text">Whats is Numba ?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#numba-modes-and-the-jit-decorator"><span class="toc-number">3.</span> <span class="toc-text">Numba modes and the @jit decorator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#high-level-architecture-of-numba"><span class="toc-number">4.</span> <span class="toc-text">High-level architecture of Numba</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#speeding-numerical-computations-an-example"><span class="toc-number">5.</span> <span class="toc-text">Speeding numerical computations: An example</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#final-words"><span class="toc-number">6.</span> <span class="toc-text">Final words</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -274,127 +274,132 @@ mjx-container[display="true"] + br {
   
 
   <div class="content" itemprop="articleBody">
-    <h2 id="When-Python-is-not-enough"><a href="#When-Python-is-not-enough" class="headerlink" title="When Python is not enough"></a>When Python is not enough</h2><p>The Python programming language is a great tool for almost any kind of rapid prototyping and quick development. It has great features such as its high level nature, a syntax with almost human-level readability . Besides, it is cross platform, with a a diverse standard library and it is multi-paradigm, giving a lot of freedom to the programmer which can use different programming paradigms such as <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Object-oriented_programming">object-oriented</a>, <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Functional_programming">functional</a> or <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Procedural_programming">procedural</a> as he sees fit. However, sometimes some portion of our system has high performance requirements and thus the speed that Python offers might not be sufficient. So, how can we boost performance without leaving the realm of Python (using for example compiled languages such as C/C++ or JIT/compiled such as JAVA) and when all of our optimizations are not enough anymore ? </p>
+    <h2 id="when-python-is-not-enough">When Python is not enough</h2>
+<p>The Python programming language is a great tool for almost any kind of rapid prototyping and quick development. It has great features such as its high level nature, a syntax with almost human-level readability . Besides, it is cross platform, with a a diverse standard library and it is multi-paradigm, giving a lot of freedom to the programmer which can use different programming paradigms such as <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Object-oriented_programming">object-oriented</a>, <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Functional_programming">functional</a> or <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Procedural_programming">procedural</a> as he sees fit. However, sometimes some portion of our system has high performance requirements and thus the speed that Python offers might not be sufficient. So, how can we boost performance without leaving the realm of Python (using for example compiled languages such as C/C++ or JIT/compiled such as JAVA) and when all of our optimizations are not enough anymore ?</p>
 <p>A possible solution, among others, is to make use of Numba, a runtime compiler that translates Python code to native instructions, while letting us use the concise and expressiveness power of Python and also achieve native code speed.</p>
-<h2 id="Whats-is-Numba"><a href="#Whats-is-Numba" class="headerlink" title="Whats is Numba ?"></a>Whats is Numba ?</h2><p><a target="_blank" rel="noopener" href="https://numba.pydata.org/">Numba</a> is a library that performs <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Just-in-time_compilation">JIT</a> compilation, that is, translates pure python code to optimized machine code at runtime, using the <a target="_blank" rel="noopener" href="https://llvm.org/">LLVM</a> industry-standard compiler. It is also able to automatically parallelize loops and run them on multiple cores. Numba is cross-platform since it works on different operative systems (Linux, Windows, OSX) and different architectures (x86, x86_64, ppc64le, etc). It is also able to run the same code on a GPU (NVIDIA CUDA or AMD ROC) and is compatible with Python 2.7 and 3.4-3.7. Overall, the most impressive feature is its simplicity of use since we only need a few decorators to leverage the full power of JIT optimizations.</p>
-<h2 id="Numba-modes-and-the-jit-decorator"><a href="#Numba-modes-and-the-jit-decorator" class="headerlink" title="Numba modes and the @jit decorator"></a>Numba modes and the @jit decorator</h2><p>The most important instruction is the <em>@jit</em> decorator. It is this decorator that instructs the compiler which mode to run and with what configurations . Under the hood, the generated bytecode of our decorated functions combined with the arguments that we specify in the decorator, such as the type of the input arguments, are analysed, optimized and finally compiled with the LLVM, generating specially tailored native machine instructions for the CPU currently in use. This compiled version is then reused for each function call.</p>
+<h2 id="whats-is-numba">Whats is Numba ?</h2>
+<p><a target="_blank" rel="noopener" href="https://numba.pydata.org/">Numba</a> is a library that performs <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Just-in-time_compilation">JIT</a> compilation, that is, translates pure python code to optimized machine code at runtime, using the <a target="_blank" rel="noopener" href="https://llvm.org/">LLVM</a> industry-standard compiler. It is also able to automatically parallelize loops and run them on multiple cores. Numba is cross-platform since it works on different operative systems (Linux, Windows, OSX) and different architectures (x86, x86_64, ppc64le, etc). It is also able to run the same code on a GPU (NVIDIA CUDA or AMD ROC) and is compatible with Python 2.7 and 3.4-3.7. Overall, the most impressive feature is its simplicity of use since we only need a few decorators to leverage the full power of JIT optimizations.</p>
+<h2 id="numba-modes-and-the-jit-decorator">Numba modes and the <span class="citation" data-cites="jit">@jit</span> decorator</h2>
+<p>The most important instruction is the <em><span class="citation" data-cites="jit">@jit</span></em> decorator. It is this decorator that instructs the compiler which mode to run and with what configurations . Under the hood, the generated bytecode of our decorated functions combined with the arguments that we specify in the decorator, such as the type of the input arguments, are analysed, optimized and finally compiled with the LLVM, generating specially tailored native machine instructions for the CPU currently in use. This compiled version is then reused for each function call.</p>
 <p>There are two important modes: <em>nopython</em> and <em>object</em>. The <em>nopython</em> completely avoids the python interpreter and translates the full code to native instructions that can be run without the help of Python . However, if for some reason, that mode is not available (for example, when using unsupported Python features or external libraries) the compilation will fall back to the <em>object</em> mode, where it uses the Python interpreter when it is unable to compile some code . Naturally, the <em>nopython</em> mode is the one who offers the best performance gains.</p>
-<h2 id="High-level-architecture-of-Numba"><a href="#High-level-architecture-of-Numba" class="headerlink" title="High-level architecture of Numba"></a>High-level architecture of Numba</h2><p>The Numba translation process can be translated in a set of important steps ranging from the Bytecode analysis to the final machine code generation.<br>The picture bellow illustrates this process, where the green boxes correspond to the frontend of the Numba compiler and the blue boxes belong to the backend.</p>
-<p><img src="/images/numba/numba-arch.png"></p>
-<p>The Numba compiler starts by doing an extensive analysis on the byecode of the desired function(s).<br>This step produces a graph describing the possible flow of executions, called control flow graph (CFG). Based on this graph an analysis on the variable lifetimes are calculated.<br>With these steps finished, the compiler starts translating the bytecode into an intermediate representation (IR) where Numba will perform further optimizations and transformations.<br>Afterwards, type inference, one of the most important steps, is performed. In this step, the compiler will try to infer the type of all variables.<br>Furthermore, if the parallel setting is enabled, the IR code will be transformed to an equivalent parallel version. </p>
-<p>If all types are successfully inferred, the Numba IR code is then translated into an efficient LLVM IR code, completely avoiding the Python runtime.<br>However, if the type inference process fails, the LLVM generated code will be slower since it still needs to deal with calls to Python C API.<br>Finally, the LLVM IR code is compiled into native instructions by the LLVM JIT compiler.<br>This optimized machined code is then loaded into memory and reused across multiple calls to the same function(s), making it hundreds of times faster than pure Python.</p>
+<h2 id="high-level-architecture-of-numba">High-level architecture of Numba</h2>
+<p>The Numba translation process can be translated in a set of important steps ranging from the Bytecode analysis to the final machine code generation. The picture bellow illustrates this process, where the green boxes correspond to the frontend of the Numba compiler and the blue boxes belong to the backend.</p>
+<p><img src="/images/numba/numba-arch.png" /></p>
+<p>The Numba compiler starts by doing an extensive analysis on the byecode of the desired function(s). This step produces a graph describing the possible flow of executions, called control flow graph (CFG). Based on this graph an analysis on the variable lifetimes are calculated. With these steps finished, the compiler starts translating the bytecode into an intermediate representation (IR) where Numba will perform further optimizations and transformations. Afterwards, type inference, one of the most important steps, is performed. In this step, the compiler will try to infer the type of all variables. Furthermore, if the parallel setting is enabled, the IR code will be transformed to an equivalent parallel version.</p>
+<p>If all types are successfully inferred, the Numba IR code is then translated into an efficient LLVM IR code, completely avoiding the Python runtime. However, if the type inference process fails, the LLVM generated code will be slower since it still needs to deal with calls to Python C API. Finally, the LLVM IR code is compiled into native instructions by the LLVM JIT compiler. This optimized machined code is then loaded into memory and reused across multiple calls to the same function(s), making it hundreds of times faster than pure Python.</p>
 <p>For debugging purposes, Numba also offers a set of flags that can be enabled in order to see the generated output of the different stages.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">os.environ[<span class="string">&quot;NUMBA_DUMP_CFG&quot;</span>] = <span class="string">&quot;1&quot;</span></span><br><span class="line">os.environ[<span class="string">&quot;NUMBA_DUMP_IR&quot;</span>] = <span class="string">&quot;1&quot;</span></span><br><span class="line">os.environ[<span class="string">&quot;NUMBA_DUMP_ANNOTATION&quot;</span>] = <span class="string">&quot;1&quot;</span></span><br><span class="line">os.environ[<span class="string">&quot;NUMBA_DEBUG_ARRAY_OPT_STATS&quot;</span>] = <span class="string">&quot;1&quot;</span></span><br><span class="line">os.environ[<span class="string">&quot;NUMBA_DUMP_LLVM&quot;</span>] = <span class="string">&quot;1&quot;</span></span><br><span class="line">os.environ[<span class="string">&quot;NUMBA_DUMP_OPTIMIZED&quot;</span>] = <span class="string">&quot;1&quot;</span></span><br><span class="line">os.environ[<span class="string">&quot;NUMBA_DUMP_ASSEMBLY&quot;</span>] = <span class="string">&quot;1&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Speeding-numerical-computations-An-example"><a href="#Speeding-numerical-computations-An-example" class="headerlink" title="Speeding numerical computations: An example"></a>Speeding numerical computations: An example</h2><p>The best use case where we can make use of the Numba library is when we have to do intensive numerical computations. As an example, let’s compute the softmax function on a set of 2^16 (65536) random numbers. The softmax function, useful to convert a set of real values into probabilities and commonly used as the last layer in neural networks architectures, is defined as:</p>
-<p>$$ \sigma(z_j) = { e^{z_j}  \over \sum_{k=1}^{K}  e^{z_k} } $$</p>
-<p>The following code show two different implementations of this function, a pure python approach (<em>softmax_python_) and an optimized version making using of numpy and numba (_softmax_optimized</em>):</p>
+<h2 id="speeding-numerical-computations-an-example">Speeding numerical computations: An example</h2>
+<p>The best use case where we can make use of the Numba library is when we have to do intensive numerical computations. As an example, let's compute the softmax function on a set of 2^16 (65536) random numbers. The softmax function, useful to convert a set of real values into probabilities and commonly used as the last layer in neural networks architectures, is defined as:</p>
+<p><span class="math display">\[ \sigma(z_j) = { e^{z_j}  \over \sum_{k=1}^{K}  e^{z_k} } \]</span></p>
+<p>The following code show two different implementations of this function, a pure python approach (<em>softmax_python</em>) and an optimized version making using of numpy and numba (<em>softmax_optimized</em>):</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line">import math</span><br><span class="line">import numpy as np</span><br><span class="line">from numba import jit</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@jit(<span class="string">&quot;f8(f8[:])&quot;</span>, cache=False, nopython=True, nogil=True, parallel=True)</span><br><span class="line">def esum(z):</span><br><span class="line">    <span class="built_in">return</span> np.sum(np.exp(z))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@jit(<span class="string">&quot;f8[:](f8[:])&quot;</span>, cache=False, nopython=True, nogil=True, parallel=True)</span><br><span class="line">def softmax_optimized(z):</span><br><span class="line">    num = np.exp(z)</span><br><span class="line">    s = num / esum(z)</span><br><span class="line">    <span class="built_in">return</span> s</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def softmax_python(z):</span><br><span class="line">    s = []</span><br><span class="line"></span><br><span class="line">    exp_sum = 0</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(z)):</span><br><span class="line">        exp_sum += math.exp(z[i])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(z)):</span><br><span class="line">        s += [math.exp(z[i]) / exp_sum]</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> s</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    np.random.seed(0)</span><br><span class="line">    z = np.random.uniform(0, 10, 10 ** 8)   <span class="comment"># generate random floats in the range [0,10)</span></span><br><span class="line"></span><br><span class="line">    start = time.time()</span><br><span class="line">    softmax_python(z.tolist())          <span class="comment"># run pure python version of softmax</span></span><br><span class="line">    elapsed = time.time() - start</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Ran pure python softmax calculations in &#123;&#125; seconds&#x27;</span>.format(elapsed))</span><br><span class="line"></span><br><span class="line">    softmax_optimized(z)                     <span class="comment"># cache jit compilation</span></span><br><span class="line">    start = time.time()</span><br><span class="line">    softmax_optimized(z)                     <span class="comment"># run optimzed version of softmax</span></span><br><span class="line">    elapsed = time.time() - start</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;\nRan optimized softmax calculations in &#123;&#125; seconds&#x27;</span>.format(elapsed))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
-
 <p>The result of the above script will be something similar to:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; python softmax.py</span><br><span class="line"></span><br><span class="line">Ran pure python softmax calculations <span class="keyword">in</span> 41.62234306335449 seconds</span><br><span class="line"></span><br><span class="line">Ran optimized softmax calculations <span class="keyword">in</span> 1.7453773021697998 seconds</span><br></pre></td></tr></table></figure>
-<p>These results clearly shows the performance gains obtained when converting our code to something that Numba understands well. </p>
-<p>In the _softmax_optimized_ function, there is already the Numba annotation that leverages the full power of JIT optimizations.<br>In fact, under the hood the following bytecode will be analysed, optimized and compiled to native instructions:</p>
+<p>These results clearly shows the performance gains obtained when converting our code to something that Numba understands well.</p>
+<p>In the <em>softmax_optimized</em> function, there is already the Numba annotation that leverages the full power of JIT optimizations. In fact, under the hood the following bytecode will be analysed, optimized and compiled to native instructions:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&gt; python</span><br><span class="line"><span class="keyword">import</span> dis</span><br><span class="line"><span class="keyword">from</span> softmax <span class="keyword">import</span> esum, softmax_optimized</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dis.dis(softmax_optimized)</span><br><span class="line"> <span class="number">14</span>           <span class="number">0</span> LOAD_GLOBAL              <span class="number">0</span> (np)</span><br><span class="line">              <span class="number">2</span> LOAD_ATTR                <span class="number">1</span> (exp)</span><br><span class="line">              <span class="number">4</span> LOAD_FAST                <span class="number">0</span> (z)</span><br><span class="line">              <span class="number">6</span> CALL_FUNCTION            <span class="number">1</span></span><br><span class="line">              <span class="number">8</span> STORE_FAST               <span class="number">1</span> (num)</span><br><span class="line"></span><br><span class="line"> <span class="number">15</span>          <span class="number">10</span> LOAD_FAST                <span class="number">1</span> (num)</span><br><span class="line">             <span class="number">12</span> LOAD_GLOBAL              <span class="number">2</span> (esum)</span><br><span class="line">             <span class="number">14</span> LOAD_FAST                <span class="number">0</span> (z)</span><br><span class="line">             <span class="number">16</span> CALL_FUNCTION            <span class="number">1</span></span><br><span class="line">             <span class="number">18</span> BINARY_TRUE_DIVIDE</span><br><span class="line">             <span class="number">20</span> STORE_FAST               <span class="number">2</span> (s)</span><br><span class="line"></span><br><span class="line"> <span class="number">16</span>          <span class="number">22</span> LOAD_FAST                <span class="number">2</span> (s)</span><br><span class="line">             <span class="number">24</span> RETURN_VALUE</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dis.dis(esum)</span><br><span class="line">  <span class="number">9</span>           <span class="number">0</span> LOAD_GLOBAL              <span class="number">0</span> (np)</span><br><span class="line">              <span class="number">2</span> LOAD_ATTR                <span class="number">1</span> (sum)</span><br><span class="line">              <span class="number">4</span> LOAD_GLOBAL              <span class="number">0</span> (np)</span><br><span class="line">              <span class="number">6</span> LOAD_ATTR                <span class="number">2</span> (exp)</span><br><span class="line">              <span class="number">8</span> LOAD_FAST                <span class="number">0</span> (z)</span><br><span class="line">             <span class="number">10</span> CALL_FUNCTION            <span class="number">1</span></span><br><span class="line">             <span class="number">12</span> CALL_FUNCTION            <span class="number">1</span></span><br><span class="line">             <span class="number">14</span> RETURN_VALUE</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>We can provide more information about the expected input and output types through the signature.<br>In the example above, the signature “<em>f8[:](f8[:])</em>“ is used to specify that the function accepts an array of double<br>precision floats and returns another array of 64-bit floats. </p>
-<p>The signature could also use the explicit type names: “<em>float64[:](float64[:])</em>“.<br>The general form is <em>type(type, type, …)</em> which resembles a typical function where argument names are replaced by their<br>types and the function name is replaced by its return type.<br>Numba accepts many different types, which are described bellow:</p>
+<p>We can provide more information about the expected input and output types through the signature. In the example above, the signature "<em>f8[:](f8[:])</em>" is used to specify that the function accepts an array of double precision floats and returns another array of 64-bit floats.</p>
+<p>The signature could also use the explicit type names: "<em>float64[:](float64[:])</em>". The general form is <em>type(type, type, ...)</em> which resembles a typical function where argument names are replaced by their types and the function name is replaced by its return type. Numba accepts many different types, which are described bellow:</p>
 <table>
 <thead>
-<tr>
-<th align="center">Type name(s)</th>
-<th align="center">Type short name</th>
-<th align="center">Description</th>
+<tr class="header">
+<th style="text-align: center;">Type name(s)</th>
+<th style="text-align: center;">Type short name</th>
+<th style="text-align: center;">Description</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">boolean</td>
-<td align="center">b1</td>
-<td align="center">represented as a byte</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">boolean</td>
+<td style="text-align: center;">b1</td>
+<td style="text-align: center;">represented as a byte</td>
 </tr>
-<tr>
-<td align="center">uint8, byte</td>
-<td align="center">u1</td>
-<td align="center">8-bit unsigned byte</td>
+<tr class="even">
+<td style="text-align: center;">uint8, byte</td>
+<td style="text-align: center;">u1</td>
+<td style="text-align: center;">8-bit unsigned byte</td>
 </tr>
-<tr>
-<td align="center">uint16</td>
-<td align="center">u2</td>
-<td align="center">16-bit unsigned integer</td>
+<tr class="odd">
+<td style="text-align: center;">uint16</td>
+<td style="text-align: center;">u2</td>
+<td style="text-align: center;">16-bit unsigned integer</td>
 </tr>
-<tr>
-<td align="center">uint32</td>
-<td align="center">u4</td>
-<td align="center">32-bit unsigned integer</td>
+<tr class="even">
+<td style="text-align: center;">uint32</td>
+<td style="text-align: center;">u4</td>
+<td style="text-align: center;">32-bit unsigned integer</td>
 </tr>
-<tr>
-<td align="center">uint64</td>
-<td align="center">u8</td>
-<td align="center">64-bit unsigned integer</td>
+<tr class="odd">
+<td style="text-align: center;">uint64</td>
+<td style="text-align: center;">u8</td>
+<td style="text-align: center;">64-bit unsigned integer</td>
 </tr>
-<tr>
-<td align="center">int8, char</td>
-<td align="center">i1</td>
-<td align="center">8-bit signed byte</td>
+<tr class="even">
+<td style="text-align: center;">int8, char</td>
+<td style="text-align: center;">i1</td>
+<td style="text-align: center;">8-bit signed byte</td>
 </tr>
-<tr>
-<td align="center">int16</td>
-<td align="center">i2</td>
-<td align="center">16-bit signed integer</td>
+<tr class="odd">
+<td style="text-align: center;">int16</td>
+<td style="text-align: center;">i2</td>
+<td style="text-align: center;">16-bit signed integer</td>
 </tr>
-<tr>
-<td align="center">int32</td>
-<td align="center">i4</td>
-<td align="center">32-bit signed integer</td>
+<tr class="even">
+<td style="text-align: center;">int32</td>
+<td style="text-align: center;">i4</td>
+<td style="text-align: center;">32-bit signed integer</td>
 </tr>
-<tr>
-<td align="center">int64</td>
-<td align="center">i8</td>
-<td align="center">64-bit signed integer</td>
+<tr class="odd">
+<td style="text-align: center;">int64</td>
+<td style="text-align: center;">i8</td>
+<td style="text-align: center;">64-bit signed integer</td>
 </tr>
-<tr>
-<td align="center">intc</td>
-<td align="center">–</td>
-<td align="center">C</td>
+<tr class="even">
+<td style="text-align: center;">intc</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">C</td>
 </tr>
-<tr>
-<td align="center">uintc</td>
-<td align="center">–</td>
-<td align="center">C</td>
+<tr class="odd">
+<td style="text-align: center;">uintc</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">C</td>
 </tr>
-<tr>
-<td align="center">intp</td>
-<td align="center">–</td>
-<td align="center">pointer-sized integer</td>
+<tr class="even">
+<td style="text-align: center;">intp</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">pointer-sized integer</td>
 </tr>
-<tr>
-<td align="center">uintp</td>
-<td align="center">–</td>
-<td align="center">pointer-sized unsigned integer</td>
+<tr class="odd">
+<td style="text-align: center;">uintp</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">pointer-sized unsigned integer</td>
 </tr>
-<tr>
-<td align="center">float32</td>
-<td align="center">f4</td>
-<td align="center">single-precision floating-point number</td>
+<tr class="even">
+<td style="text-align: center;">float32</td>
+<td style="text-align: center;">f4</td>
+<td style="text-align: center;">single-precision floating-point number</td>
 </tr>
-<tr>
-<td align="center">float64, double</td>
-<td align="center">f8</td>
-<td align="center">double-precision floating-point number</td>
+<tr class="odd">
+<td style="text-align: center;">float64, double</td>
+<td style="text-align: center;">f8</td>
+<td style="text-align: center;">double-precision floating-point number</td>
 </tr>
-<tr>
-<td align="center">complex64</td>
-<td align="center">c8</td>
-<td align="center">single-precision complex number</td>
+<tr class="even">
+<td style="text-align: center;">complex64</td>
+<td style="text-align: center;">c8</td>
+<td style="text-align: center;">single-precision complex number</td>
 </tr>
-<tr>
-<td align="center">complex128</td>
-<td align="center">c16</td>
-<td align="center">double-precision complex number</td>
+<tr class="odd">
+<td style="text-align: center;">complex128</td>
+<td style="text-align: center;">c16</td>
+<td style="text-align: center;">double-precision complex number</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>These annotations are easily extended to array forms using [:] , [:, :] or [:, :, :] for 1, 2 and 3 dimensions, respectively.</p>
-<h2 id="Final-words"><a href="#Final-words" class="headerlink" title="Final words"></a>Final words</h2><p>Python is a great tool. However, it has some limitations which can be surpassed with the right strategy, making it<br>competitive, in terms of performance, to other compiled languages. Although this post focused on the Numba library,<br>there are other good options (which deserve their own dedicated blog post).<br>Numba also offers other great features not explored here such as integration with NVIDIA CUDA/AMD ROC GPUs, interfacing with C functions and Ahead-of-Time compilation (AOT).<br>Finally, the example source code can be found <a target="_blank" rel="noopener" href="https://github.com/alexpnt/numba-examples">here</a>.</p>
+<h2 id="final-words">Final words</h2>
+<p>Python is a great tool. However, it has some limitations which can be surpassed with the right strategy, making it competitive, in terms of performance, to other compiled languages. Although this post focused on the Numba library, there are other good options (which deserve their own dedicated blog post). Numba also offers other great features not explored here such as integration with NVIDIA CUDA/AMD ROC GPUs, interfacing with C functions and Ahead-of-Time compilation (AOT). Finally, the example source code can be found <a target="_blank" rel="noopener" href="https://github.com/alexpnt/numba-examples">here</a>.</p>
 
   </div>
 </article>
@@ -436,7 +441,7 @@ mjx-container[display="true"] + br {
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#When-Python-is-not-enough"><span class="toc-number">1.</span> <span class="toc-text">When Python is not enough</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Whats-is-Numba"><span class="toc-number">2.</span> <span class="toc-text">Whats is Numba ?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Numba-modes-and-the-jit-decorator"><span class="toc-number">3.</span> <span class="toc-text">Numba modes and the @jit decorator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#High-level-architecture-of-Numba"><span class="toc-number">4.</span> <span class="toc-text">High-level architecture of Numba</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Speeding-numerical-computations-An-example"><span class="toc-number">5.</span> <span class="toc-text">Speeding numerical computations: An example</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Final-words"><span class="toc-number">6.</span> <span class="toc-text">Final words</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#when-python-is-not-enough"><span class="toc-number">1.</span> <span class="toc-text">When Python is not enough</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#whats-is-numba"><span class="toc-number">2.</span> <span class="toc-text">Whats is Numba ?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#numba-modes-and-the-jit-decorator"><span class="toc-number">3.</span> <span class="toc-text">Numba modes and the @jit decorator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#high-level-architecture-of-numba"><span class="toc-number">4.</span> <span class="toc-text">High-level architecture of Numba</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#speeding-numerical-computations-an-example"><span class="toc-number">5.</span> <span class="toc-text">Speeding numerical computations: An example</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#final-words"><span class="toc-number">6.</span> <span class="toc-text">Final words</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -507,9 +512,9 @@ mjx-container[display="true"] + br {
 
 <script src="/lib/jquery/jquery.min.js"></script>
 
-
+<!-- 
 <script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
-
+ -->
 <!-- clipboard -->
 
   

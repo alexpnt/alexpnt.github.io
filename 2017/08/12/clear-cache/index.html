@@ -274,16 +274,11 @@ mjx-container[display="true"] + br {
   
 
   <div class="content" itemprop="articleBody">
-    <p>Running out of memory can be an issue when you are running a lot services on your development box, such as web services, databases, editors, etc. Over time, the caching system eats up a good portion of your memory resources. Event though Linux has a good memory management system, the kernel also has a useful mechanism to free up caches. </p>
+    <p>Running out of memory can be an issue when you are running a lot services on your development box, such as web services, databases, editors, etc. Over time, the caching system eats up a good portion of your memory resources. Event though Linux has a good memory management system, the kernel also has a useful mechanism to free up caches.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sync; <span class="built_in">echo</span> 3 &gt; /proc/sys/vm/drop_caches</span><br></pre></td></tr></table></figure>
-
-<p>Basically,  the initial <em>sync</em> command writes pending data in memory back to disk. After this synchronization, we can release memory by dropping cached objects.  The value ‘3’ is just an internal argument used to specify the type of caches that will be freed. The writing event triggers the cleaning task.<br>You can see its effects by checking your memory in real time:</p>
-<p>Before:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">watch free -h -t</span><br><span class="line">              total        used        free      shared  buff/cache   available</span><br><span class="line">Mem:           3.8G        2.0G        1.1G        134M        622M        1.4G</span><br><span class="line">Swap:          2.0G        531M        1.5G</span><br><span class="line">Total:         5.8G        2.5G        2.6G</span><br></pre></td></tr></table></figure>
-
-<p>After:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">watch free -h -t</span><br><span class="line">              total        used        free      shared  buff/cache   available</span><br><span class="line">Mem:           3.8G        2.0G        1.4G        133M        375M        1.4G</span><br><span class="line">Swap:          2.0G        532M        1.5G</span><br><span class="line">Total:         5.8G        2.5G        2.9G</span><br></pre></td></tr></table></figure>
-
+<p>Basically, the initial <em>sync</em> command writes pending data in memory back to disk. After this synchronization, we can release memory by dropping cached objects. The value '3' is just an internal argument used to specify the type of caches that will be freed. The writing event triggers the cleaning task. You can see its effects by checking your memory in real time:</p>
+<p>Before: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">watch free -h -t</span><br><span class="line">              total        used        free      shared  buff/cache   available</span><br><span class="line">Mem:           3.8G        2.0G        1.1G        134M        622M        1.4G</span><br><span class="line">Swap:          2.0G        531M        1.5G</span><br><span class="line">Total:         5.8G        2.5G        2.6G</span><br></pre></td></tr></table></figure></p>
+<p>After: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">watch free -h -t</span><br><span class="line">              total        used        free      shared  buff/cache   available</span><br><span class="line">Mem:           3.8G        2.0G        1.4G        133M        375M        1.4G</span><br><span class="line">Swap:          2.0G        532M        1.5G</span><br><span class="line">Total:         5.8G        2.5G        2.9G</span><br></pre></td></tr></table></figure></p>
 <p>It is important to note that this will cause objects to be recreated later, which may lead to some intense CPU/IO usage. However, it is still an approach you can use if you feel you are running out of memory and want to reclaim back some portions of it.</p>
 
   </div>
@@ -397,9 +392,9 @@ mjx-container[display="true"] + br {
 
 <script src="/lib/jquery/jquery.min.js"></script>
 
-
+<!-- 
 <script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
-
+ -->
 <!-- clipboard -->
 
   
