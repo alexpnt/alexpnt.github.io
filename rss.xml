@@ -6,7 +6,7 @@
   <link href="https://alexpnt.github.io/rss.xml" rel="self"/>
   
   <link href="https://alexpnt.github.io/"/>
-  <updated>2020-08-22T15:04:57.163Z</updated>
+  <updated>2021-01-14T22:10:33.066Z</updated>
   <id>https://alexpnt.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Best books read in 2020</title>
+    <link href="https://alexpnt.github.io/2021/01/14/best-books-of-2020/"/>
+    <id>https://alexpnt.github.io/2021/01/14/best-books-of-2020/</id>
+    <published>2021-01-14T00:00:00.000Z</published>
+    <updated>2021-01-14T22:10:33.066Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;on-reading-and-books&quot;&gt;On reading and books&lt;/h2&gt;
+&lt;p&gt;Books have immense value for what they actually cost. As Carl Sagan once said, &quot;B</summary>
+      
+    
+    
+    
+    
+    <category term="books" scheme="https://alexpnt.github.io/tags/books/"/>
+    
+    <category term="reading" scheme="https://alexpnt.github.io/tags/reading/"/>
+    
+  </entry>
   
   <entry>
     <title>Speeding up python programs with Numba and Numpy</title>
@@ -501,31 +524,6 @@
     
     
     <category term="setup" scheme="https://alexpnt.github.io/tags/setup/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Complex lookups with Q objects in Django</title>
-    <link href="https://alexpnt.github.io/2017/07/19/q-objects/"/>
-    <id>https://alexpnt.github.io/2017/07/19/q-objects/</id>
-    <published>2017-07-19T21:26:02.000Z</published>
-    <updated>2020-08-22T15:04:57.159Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;/images/dev.png&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;One of the great offers of Django is the high-level database API, which lets us manipulate our data </summary>
-      
-    
-    
-    
-    
-    <category term="django" scheme="https://alexpnt.github.io/tags/django/"/>
-    
-    <category term="development" scheme="https://alexpnt.github.io/tags/development/"/>
-    
-    <category term="python" scheme="https://alexpnt.github.io/tags/python/"/>
     
   </entry>
   
