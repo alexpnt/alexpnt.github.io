@@ -33,9 +33,9 @@
     
     
     
-    <category term="books" scheme="https://alexpnt.github.io/tags/books/"/>
-    
     <category term="reading" scheme="https://alexpnt.github.io/tags/reading/"/>
+    
+    <category term="books" scheme="https://alexpnt.github.io/tags/books/"/>
     
   </entry>
   
@@ -125,7 +125,7 @@
     <link href="https://alexpnt.github.io/2017/09/10/ml-pipeline-6/"/>
     <id>https://alexpnt.github.io/2017/09/10/ml-pipeline-6/</id>
     <published>2017-09-10T09:30:41.000Z</published>
-    <updated>2021-01-10T19:15:38.474Z</updated>
+    <updated>2021-08-19T15:33:19.368Z</updated>
     
     
       
@@ -151,7 +151,7 @@
     <link href="https://alexpnt.github.io/2017/09/09/ml-pipeline-5/"/>
     <id>https://alexpnt.github.io/2017/09/09/ml-pipeline-5/</id>
     <published>2017-09-09T17:15:41.000Z</published>
-    <updated>2020-08-24T22:02:19.909Z</updated>
+    <updated>2021-08-19T15:33:19.352Z</updated>
     
     
       
@@ -177,7 +177,7 @@
     <link href="https://alexpnt.github.io/2017/09/09/ml-pipeline-4/"/>
     <id>https://alexpnt.github.io/2017/09/09/ml-pipeline-4/</id>
     <published>2017-09-09T09:15:41.000Z</published>
-    <updated>2020-08-24T22:09:59.819Z</updated>
+    <updated>2021-08-19T15:24:45.696Z</updated>
     
     
       
@@ -382,7 +382,7 @@
     <link href="https://alexpnt.github.io/2017/08/15/reattaching-sessions/"/>
     <id>https://alexpnt.github.io/2017/08/15/reattaching-sessions/</id>
     <published>2017-08-15T11:44:36.000Z</published>
-    <updated>2020-08-22T15:04:57.159Z</updated>
+    <updated>2021-08-19T15:13:08.357Z</updated>
     
     
       
@@ -428,13 +428,12 @@
     <link href="https://alexpnt.github.io/2017/08/06/dockerizing-your-django-app-2/"/>
     <id>https://alexpnt.github.io/2017/08/06/dockerizing-your-django-app-2/</id>
     <published>2017-08-06T14:02:07.000Z</published>
-    <updated>2020-08-22T15:04:57.159Z</updated>
+    <updated>2021-08-19T15:10:19.501Z</updated>
     
     
       
       
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;/images/dev.png&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;A typical web application has a set of components that work together such as the application backend</summary>
+    <summary type="html">&lt;p&gt;A typical web application has a set of components that work together such as the application backend, the frontend, the database or other</summary>
       
     
     
@@ -457,14 +456,13 @@
     <link href="https://alexpnt.github.io/2017/07/31/dockerizing-your-django-app/"/>
     <id>https://alexpnt.github.io/2017/07/31/dockerizing-your-django-app/</id>
     <published>2017-07-31T22:16:17.000Z</published>
-    <updated>2020-08-22T15:04:57.159Z</updated>
+    <updated>2021-08-19T15:09:45.652Z</updated>
     
     
       
       
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;/images/dev.png&quot; /&gt;&lt;/p&gt;
-&lt;h2 id=&quot;monolithic-vs-microservices&quot;&gt;Monolithic vs Microservices&lt;/h2&gt;
-&lt;p&gt;Over the past years, there has</summary>
+    <summary type="html">&lt;h2 id=&quot;monolithic-vs-microservices&quot;&gt;Monolithic vs Microservices&lt;/h2&gt;
+&lt;p&gt;Over the past years, there has been a paradigm shift in the archite</summary>
       
     
     
@@ -487,7 +485,7 @@
     <link href="https://alexpnt.github.io/2017/07/23/mount-cifs-shares/"/>
     <id>https://alexpnt.github.io/2017/07/23/mount-cifs-shares/</id>
     <published>2017-07-23T15:11:15.000Z</published>
-    <updated>2020-08-22T15:04:57.159Z</updated>
+    <updated>2021-08-19T15:02:50.440Z</updated>
     
     
       
@@ -511,13 +509,12 @@
     <link href="https://alexpnt.github.io/2017/07/22/the-setup/"/>
     <id>https://alexpnt.github.io/2017/07/22/the-setup/</id>
     <published>2017-07-22T15:20:06.000Z</published>
-    <updated>2020-08-22T15:04:57.163Z</updated>
+    <updated>2021-08-19T14:58:55.982Z</updated>
     
     
       
       
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;/images/dev.png&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;As a developer, one of the first steps before attempting to do any work is to create a good developm</summary>
+    <summary type="html">&lt;p&gt;As a developer, one of the first steps before attempting to do any work is to create a good development environment. This involves choosi</summary>
       
     
     

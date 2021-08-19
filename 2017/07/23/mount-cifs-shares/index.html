@@ -14,7 +14,7 @@
 <meta property="og:description" content="Occasionally, there is the need to access files from a remote host which uses a diferent operating system or is located in a different network. The CIFS (Common Internet File System) is a sharing prot">
 <meta property="og:locale">
 <meta property="article:published_time" content="2017-07-23T15:11:15.000Z">
-<meta property="article:modified_time" content="2020-08-22T15:04:57.159Z">
+<meta property="article:modified_time" content="2021-08-19T15:02:50.440Z">
 <meta property="article:author" content="Alexandre Pinto">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="cifs">
@@ -49,124 +49,19 @@
     <!-- rss -->
     
     
-<meta name="generator" content="Hexo 5.4.0"><style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"] > svg a {
-  fill: blue;
-  stroke: blue;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style><link rel="alternate" href="/rss.xml" title="Alexandre Pinto" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/rss.xml" title="Alexandre Pinto" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body class="max-width mx-auto px3 ltr">
@@ -274,10 +169,12 @@ mjx-container[display="true"] + br {
 <p>On a Linux/UNIX box we can mount our shared folder as follows:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mount -t cifs //remoteserver/shared /mnt/shared/ -o username=myusername,password=mypassword --verbose</span><br></pre></td></tr></table></figure>
 <p>where:</p>
-<p><em>-t cifs</em> is the filesystem type (cifs in our case)</p>
-<p><em>//remoteserver/shared</em> is our remote host ('shared' is the shared folder)</p>
-<p><em>/mnt/shared/</em> is the local folder that will be mounted</p>
-<p><em>-o username=myusername,password=mypassword </em> are the authentication credentials</p>
+<ul>
+<li><p><em>-t cifs</em> is the filesystem type (cifs in our case)</p></li>
+<li><p><em>//remoteserver/shared</em> is our remote host ('shared' is the shared folder)</p></li>
+<li><p><em>/mnt/shared/</em> is the local folder that will be mounted</p></li>
+<li><p><em>-o username=myusername,password=mypassword</em> are the authentication credentials</p></li>
+</ul>
 <p><strong>Disclaimer:</strong> You might need to install CIFS utilities before attempting to run the above command.</p>
 
   </div>

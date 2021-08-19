@@ -51,124 +51,19 @@
     <!-- rss -->
     
     
-<meta name="generator" content="Hexo 5.4.0"><style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"] > svg a {
-  fill: blue;
-  stroke: blue;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style><link rel="alternate" href="/rss.xml" title="Alexandre Pinto" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/rss.xml" title="Alexandre Pinto" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body class="max-width mx-auto px3 ltr">
@@ -296,7 +191,7 @@ mjx-container[display="true"] + br {
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; python softmax.py</span><br><span class="line"></span><br><span class="line">Ran pure python softmax calculations <span class="keyword">in</span> 41.62234306335449 seconds</span><br><span class="line"></span><br><span class="line">Ran optimized softmax calculations <span class="keyword">in</span> 1.7453773021697998 seconds</span><br></pre></td></tr></table></figure>
 <p>These results clearly shows the performance gains obtained when converting our code to something that Numba understands well.</p>
 <p>In the <em>softmax_optimized</em> function, there is already the Numba annotation that leverages the full power of JIT optimizations. In fact, under the hood the following bytecode will be analysed, optimized and compiled to native instructions:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&gt; python</span><br><span class="line"><span class="keyword">import</span> dis</span><br><span class="line"><span class="keyword">from</span> softmax <span class="keyword">import</span> esum, softmax_optimized</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dis.dis(softmax_optimized)</span><br><span class="line"> <span class="number">14</span>           <span class="number">0</span> LOAD_GLOBAL              <span class="number">0</span> (np)</span><br><span class="line">              <span class="number">2</span> LOAD_ATTR                <span class="number">1</span> (exp)</span><br><span class="line">              <span class="number">4</span> LOAD_FAST                <span class="number">0</span> (z)</span><br><span class="line">              <span class="number">6</span> CALL_FUNCTION            <span class="number">1</span></span><br><span class="line">              <span class="number">8</span> STORE_FAST               <span class="number">1</span> (num)</span><br><span class="line"></span><br><span class="line"> <span class="number">15</span>          <span class="number">10</span> LOAD_FAST                <span class="number">1</span> (num)</span><br><span class="line">             <span class="number">12</span> LOAD_GLOBAL              <span class="number">2</span> (esum)</span><br><span class="line">             <span class="number">14</span> LOAD_FAST                <span class="number">0</span> (z)</span><br><span class="line">             <span class="number">16</span> CALL_FUNCTION            <span class="number">1</span></span><br><span class="line">             <span class="number">18</span> BINARY_TRUE_DIVIDE</span><br><span class="line">             <span class="number">20</span> STORE_FAST               <span class="number">2</span> (s)</span><br><span class="line"></span><br><span class="line"> <span class="number">16</span>          <span class="number">22</span> LOAD_FAST                <span class="number">2</span> (s)</span><br><span class="line">             <span class="number">24</span> RETURN_VALUE</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dis.dis(esum)</span><br><span class="line">  <span class="number">9</span>           <span class="number">0</span> LOAD_GLOBAL              <span class="number">0</span> (np)</span><br><span class="line">              <span class="number">2</span> LOAD_ATTR                <span class="number">1</span> (sum)</span><br><span class="line">              <span class="number">4</span> LOAD_GLOBAL              <span class="number">0</span> (np)</span><br><span class="line">              <span class="number">6</span> LOAD_ATTR                <span class="number">2</span> (exp)</span><br><span class="line">              <span class="number">8</span> LOAD_FAST                <span class="number">0</span> (z)</span><br><span class="line">             <span class="number">10</span> CALL_FUNCTION            <span class="number">1</span></span><br><span class="line">             <span class="number">12</span> CALL_FUNCTION            <span class="number">1</span></span><br><span class="line">             <span class="number">14</span> RETURN_VALUE</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&gt; python</span><br><span class="line"><span class="keyword">import</span> dis</span><br><span class="line"><span class="keyword">from</span> softmax <span class="keyword">import</span> esum, softmax_optimized</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dis.dis(softmax_optimized)</span><br><span class="line"> <span class="number">14</span>           <span class="number">0</span> LOAD_GLOBAL              <span class="number">0</span> (np)</span><br><span class="line">              <span class="number">2</span> LOAD_ATTR                <span class="number">1</span> (exp)</span><br><span class="line">              <span class="number">4</span> LOAD_FAST                <span class="number">0</span> (z)</span><br><span class="line">              <span class="number">6</span> CALL_FUNCTION            <span class="number">1</span></span><br><span class="line">              <span class="number">8</span> STORE_FAST               <span class="number">1</span> (num)</span><br><span class="line"></span><br><span class="line"> <span class="number">15</span>          <span class="number">10</span> LOAD_FAST                <span class="number">1</span> (num)</span><br><span class="line">             <span class="number">12</span> LOAD_GLOBAL              <span class="number">2</span> (esum)</span><br><span class="line">             <span class="number">14</span> LOAD_FAST                <span class="number">0</span> (z)</span><br><span class="line">             <span class="number">16</span> CALL_FUNCTION            <span class="number">1</span></span><br><span class="line">             <span class="number">18</span> BINARY_TRUE_DIVIDE</span><br><span class="line">             <span class="number">20</span> STORE_FAST               <span class="number">2</span> (s)</span><br><span class="line"></span><br><span class="line"> <span class="number">16</span>          <span class="number">22</span> LOAD_FAST                <span class="number">2</span> (s)</span><br><span class="line">             <span class="number">24</span> RETURN_VALUE</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dis.dis(esum)</span><br><span class="line">  <span class="number">9</span>           <span class="number">0</span> LOAD_GLOBAL              <span class="number">0</span> (np)</span><br><span class="line">              <span class="number">2</span> LOAD_ATTR                <span class="number">1</span> (<span class="built_in">sum</span>)</span><br><span class="line">              <span class="number">4</span> LOAD_GLOBAL              <span class="number">0</span> (np)</span><br><span class="line">              <span class="number">6</span> LOAD_ATTR                <span class="number">2</span> (exp)</span><br><span class="line">              <span class="number">8</span> LOAD_FAST                <span class="number">0</span> (z)</span><br><span class="line">             <span class="number">10</span> CALL_FUNCTION            <span class="number">1</span></span><br><span class="line">             <span class="number">12</span> CALL_FUNCTION            <span class="number">1</span></span><br><span class="line">             <span class="number">14</span> RETURN_VALUE</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>We can provide more information about the expected input and output types through the signature. In the example above, the signature "<em>f8[:](f8[:])</em>" is used to specify that the function accepts an array of double precision floats and returns another array of 64-bit floats.</p>
 <p>The signature could also use the explicit type names: "<em>float64[:](float64[:])</em>". The general form is <em>type(type, type, ...)</em> which resembles a typical function where argument names are replaced by their types and the function name is replaced by its return type. Numba accepts many different types, which are described bellow:</p>
 <table>

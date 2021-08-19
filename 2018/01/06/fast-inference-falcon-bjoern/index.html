@@ -52,124 +52,19 @@
     <!-- rss -->
     
     
-<meta name="generator" content="Hexo 5.4.0"><style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"] > svg a {
-  fill: blue;
-  stroke: blue;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style><link rel="alternate" href="/rss.xml" title="Alexandre Pinto" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/rss.xml" title="Alexandre Pinto" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body class="max-width mx-auto px3 ltr">
@@ -293,7 +188,7 @@ mjx-container[display="true"] + br {
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir models</span><br><span class="line">wget --directory-prefix&#x3D;models https:&#x2F;&#x2F;s3-us-west-1.amazonaws.com&#x2F;fasttext-vectors&#x2F;supervised_models&#x2F;amazon_review_full.ftz</span><br></pre></td></tr></table></figure>
 <h2 id="creating-a-rest-resource">Creating a REST resource</h2>
 <p>In order to serve requests by answering with polarity predictions (number of stars), let's define a resource by specifying a REST endpoint.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> fastText</span><br><span class="line"><span class="keyword">import</span> falcon</span><br><span class="line"><span class="keyword">import</span> bjoern</span><br><span class="line"><span class="keyword">import</span> ujson</span><br><span class="line"></span><br><span class="line">REVIEW_MODEL = <span class="string">&#x27;models/amazon_review_full.ftz&#x27;</span></span><br><span class="line">WEB_HOST = <span class="string">&#x27;127.0.0.1&#x27;</span></span><br><span class="line">PORT = <span class="number">9000</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">&#x27;Loading amazon review polarity model ...&#x27;</span>)</span><br><span class="line">review_classifier = fastText.load_model(REVIEW_MODEL)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ReviewResource</span>(<span class="params">object</span>):</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">on_post</span>(<span class="params">self, req, resp</span>):</span></span><br><span class="line">		form = req.params</span><br><span class="line">		<span class="keyword">if</span> <span class="string">&#x27;text&#x27;</span> <span class="keyword">in</span> form <span class="keyword">and</span> form[<span class="string">&#x27;text&#x27;</span>]:</span><br><span class="line">			<span class="keyword">try</span>:</span><br><span class="line">				classification, confidence = review_classifier.predict(form[<span class="string">&#x27;text&#x27;</span>])</span><br><span class="line">				resp.body = ujson.dumps(&#123;<span class="string">&#x27;&#123;&#125; star&#x27;</span>.format(classification[<span class="number">0</span>][<span class="number">-1</span>]) : confidence[<span class="number">0</span>]&#125;)</span><br><span class="line">				resp.status = falcon.HTTP_200</span><br><span class="line">			<span class="keyword">except</span>:</span><br><span class="line">				resp.body = ujson.dumps(&#123;<span class="string">&#x27;Error&#x27;</span>: <span class="string">&#x27;An internal server error has occurred&#x27;</span>&#125;)</span><br><span class="line">				resp.status = falcon.HTTP_500</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">		    resp.body = ujson.dumps(&#123;<span class="string">&#x27;Error&#x27;</span>: <span class="string">&#x27;param \&#x27;text\&#x27; is mandatory&#x27;</span>&#125;)</span><br><span class="line">		    resp.status = falcon.HTTP_400</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># instantiate a callable WSGI app</span></span><br><span class="line">app = falcon.API()</span><br><span class="line"></span><br><span class="line"><span class="comment"># long-lived resource class instance</span></span><br><span class="line">infer_review = ReviewResource()</span><br><span class="line"></span><br><span class="line"><span class="comment"># handle all requests to the &#x27;/inferreview&#x27; URL path</span></span><br><span class="line">app.req_options.auto_parse_form_urlencoded = <span class="literal">True</span></span><br><span class="line">app.add_route(<span class="string">&#x27;/inferreview&#x27;</span>, infer_review)</span><br><span class="line"></span><br><span class="line">print(<span class="string">&#x27;Listening on&#x27;</span>, WEB_HOST + <span class="string">&#x27;:&#x27;</span> + str(PORT) + <span class="string">&#x27;/inferreview&#x27;</span>)</span><br><span class="line">bjoern.run(app, WEB_HOST, PORT, reuse_port=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> fastText</span><br><span class="line"><span class="keyword">import</span> falcon</span><br><span class="line"><span class="keyword">import</span> bjoern</span><br><span class="line"><span class="keyword">import</span> ujson</span><br><span class="line"></span><br><span class="line">REVIEW_MODEL = <span class="string">&#x27;models/amazon_review_full.ftz&#x27;</span></span><br><span class="line">WEB_HOST = <span class="string">&#x27;127.0.0.1&#x27;</span></span><br><span class="line">PORT = <span class="number">9000</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">&#x27;Loading amazon review polarity model ...&#x27;</span>)</span><br><span class="line">review_classifier = fastText.load_model(REVIEW_MODEL)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ReviewResource</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">on_post</span>(<span class="params">self, req, resp</span>):</span></span><br><span class="line">		form = req.params</span><br><span class="line">		<span class="keyword">if</span> <span class="string">&#x27;text&#x27;</span> <span class="keyword">in</span> form <span class="keyword">and</span> form[<span class="string">&#x27;text&#x27;</span>]:</span><br><span class="line">			<span class="keyword">try</span>:</span><br><span class="line">				classification, confidence = review_classifier.predict(form[<span class="string">&#x27;text&#x27;</span>])</span><br><span class="line">				resp.body = ujson.dumps(&#123;<span class="string">&#x27;&#123;&#125; star&#x27;</span>.<span class="built_in">format</span>(classification[<span class="number">0</span>][-<span class="number">1</span>]) : confidence[<span class="number">0</span>]&#125;)</span><br><span class="line">				resp.status = falcon.HTTP_200</span><br><span class="line">			<span class="keyword">except</span>:</span><br><span class="line">				resp.body = ujson.dumps(&#123;<span class="string">&#x27;Error&#x27;</span>: <span class="string">&#x27;An internal server error has occurred&#x27;</span>&#125;)</span><br><span class="line">				resp.status = falcon.HTTP_500</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">		    resp.body = ujson.dumps(&#123;<span class="string">&#x27;Error&#x27;</span>: <span class="string">&#x27;param \&#x27;text\&#x27; is mandatory&#x27;</span>&#125;)</span><br><span class="line">		    resp.status = falcon.HTTP_400</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># instantiate a callable WSGI app</span></span><br><span class="line">app = falcon.API()</span><br><span class="line"></span><br><span class="line"><span class="comment"># long-lived resource class instance</span></span><br><span class="line">infer_review = ReviewResource()</span><br><span class="line"></span><br><span class="line"><span class="comment"># handle all requests to the &#x27;/inferreview&#x27; URL path</span></span><br><span class="line">app.req_options.auto_parse_form_urlencoded = <span class="literal">True</span></span><br><span class="line">app.add_route(<span class="string">&#x27;/inferreview&#x27;</span>, infer_review)</span><br><span class="line"></span><br><span class="line">print(<span class="string">&#x27;Listening on&#x27;</span>, WEB_HOST + <span class="string">&#x27;:&#x27;</span> + <span class="built_in">str</span>(PORT) + <span class="string">&#x27;/inferreview&#x27;</span>)</span><br><span class="line">bjoern.run(app, WEB_HOST, PORT, reuse_port=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 <p>In the above code, we define an handler for POST requests, instantiate the application, configure routing and finally run the bjoern WSGI server.</p>
 <h2 id="making-queries">Making queries</h2>
 <p>The command bellow allow us to make queries to our web server. As an example, the request asks for a rating of the following review: 'I love this product.'</p>
