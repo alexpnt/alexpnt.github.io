@@ -1,6 +1,6 @@
 # Personal Website
 
-Source content used to generate my personal site - https://alexpnt.github.io/
+Generated source content behind https://alexpnt.github.io/
 
 
 ### Tools:
