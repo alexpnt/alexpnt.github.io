@@ -74,34 +74,36 @@
 <body class="max-width mx-auto px3 ltr">
     
       <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
-  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <a id="menu-icon" href="#" aria-label="القائمة"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="القائمة"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="الأعلى" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
   <span id="menu">
     <span id="nav">
       <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/cv/">CV</a></li>
-         
-          <li><a href="/blog/">Blog</a></li>
-         
-          <li><a href="/publications/">Publications</a></li>
-         
-          <li><a href="/search/">Search</a></li>
-        
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/cv/">CV</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Blog</a></li><!--
+     --><!--
+       --><li><a href="/publications/">Publications</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
       </ul>
     </span>
     <br/>
     <span id="actions">
       <ul>
         
+        <li><a class="icon" aria-label="Previous post" href="/2022/04/17/best-books-of-2021/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
-        <li><a class="icon" aria-label="Next post " href="/2018/10/19/speeding-up-python/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
-        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+        <li><a class="icon" aria-label="Next post" href="/2018/10/19/speeding-up-python/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
       <span id="i-prev" class="info" style="display:none;">Previous post</span>
       <span id="i-next" class="info" style="display:none;">Next post</span>
@@ -226,15 +228,9 @@
 
 
     <div class="blog-post-comments">
-        <noscript>Please enable JavaScript to view the comments.</noscript>
-        <script src="https://utteranc.es/client.js"
-                repo="alexpnt/alexpnt.github.io"
-                issue-term="pathname"
-                label="comments"
-                theme="photon-dark"
-                crossorigin="anonymous"
-                async>
-        </script>
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
     </div>
 
 
@@ -302,17 +298,17 @@
   <div class="footer-right">
     <nav>
       <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/cv/">CV</a></li>
-         
-          <li><a href="/blog/">Blog</a></li>
-         
-          <li><a href="/publications/">Publications</a></li>
-         
-          <li><a href="/search/">Search</a></li>
-        
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/cv/">CV</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Blog</a></li><!--
+     --><!--
+       --><li><a href="/publications/">Publications</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
       </ul>
     </nav>
   </div>
@@ -373,6 +369,27 @@
 
 <!-- Disqus Comments -->
 
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'alexpnt/alexpnt.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'comments';
+      var utterances_theme = 'photon-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
 
 <script data-goatcounter="https://7qbwtffvufxizdiw.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
