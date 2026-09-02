@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title>Alexandre Pinto - unix</title>
+      <link>https://alexandrept.com</link>
+      <description>Software engineer, from Portugal. Mostly interested in backend development and machine learning.</description>
+      <generator>Zola</generator>
+      <language>en</language>
+      <atom:link href="https://alexandrept.com/tags/unix/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Sat, 12 Aug 2017 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>Free up memory by cleaning caches</title>
+          <pubDate>Sat, 12 Aug 2017 00:00:00 +0000</pubDate>
+          <author>Alexandre Pinto</author>
+          <link>https://alexandrept.com/blog/clear-cache/</link>
+          <guid>https://alexandrept.com/blog/clear-cache/</guid>
+          <description xml:base="https://alexandrept.com/blog/clear-cache/">&lt;p&gt;Running out of memory can be an issue when you are running a lot services on your development box, such as web services, databases, editors, etc. Over time, the caching system eats up a good portion of your memory resources. Event though Linux has a good memory management system, the kernel also has a useful mechanism to free up caches.&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;sync&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; echo&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; 3&lt;/span&gt;&lt;span class=&quot;z-l-8 z-d-10&quot;&gt; &amp;gt;&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; /proc/sys/vm/drop_caches&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Basically,  the initial &lt;em&gt;sync&lt;/em&gt; command writes pending data in memory back to disk. After this synchronization, we can release memory by dropping cached objects.  The value &#39;3&#39; is just an internal argument used to specify the type of caches that will be freed. The writing event triggers the cleaning task.
+You can see its effects by checking your memory in real time:&lt;/p&gt;
+&lt;p&gt;Before:&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; free&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;t&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;              total&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        used&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        free&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;      shared&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;  buff/cache&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;   available&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;Mem:&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;           3.8G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        2.0G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        1.1G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        134M&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        622M&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        1.4G&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;Swap:&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;          2.0G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        531M&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        1.5G&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;Total:&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;         5.8G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        2.5G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        2.6G&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After:&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; free&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;t&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;              total&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        used&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        free&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;      shared&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;  buff/cache&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;   available&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;Mem:&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;           3.8G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        2.0G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        1.4G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        133M&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        375M&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        1.4G&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;Swap:&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;          2.0G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        532M&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        1.5G&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;Total:&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;         5.8G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        2.5G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        2.9G&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It is important to note that this will cause objects to be recreated later, which may lead to some intense CPU/IO usage. However, it is still an approach you can use if you feel you are running out of memory and want to reclaim back some portions of it.&lt;/p&gt;
+</description>
+      </item>
+    </channel>
+</rss>

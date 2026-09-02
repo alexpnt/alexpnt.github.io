@@ -1,0 +1,607 @@
+
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+    
+<head>
+    
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="base" content="https://alexandrept.com" />
+
+    
+
+    
+
+    
+    
+    
+        <title>
+            
+                Speeding up python programs with Numba and Numpy
+            
+        </title>
+
+        
+            <meta property="og:title"
+                  content="Speeding up python programs with Numba and Numpy" />
+        
+    
+
+    
+        
+            <meta property="og:description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+        
+            <meta name="description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+    
+        <link rel="icon"
+              type="image/png"
+              href="https://alexandrept.com/favicon.ico" />
+    
+
+    
+    
+        <link href=https://alexandrept.com/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/codeblock.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/toc.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/note.js></script>
+    
+
+    
+        <script>
+            MathJax = {
+                tex: {
+                    inlineMath: [
+                        ['$', '$'],
+                        ['\\(', '\\)']
+                    ]
+                }
+            };
+        </script>
+        <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js">
+        </script>
+    
+
+    
+    
+        
+            
+                <link rel="alternate"
+                      type="application/rss+xml"
+                      title="
+Alexandre Pinto
+"
+                      href="https://alexandrept.com/rss.xml" />
+            
+        
+    
+
+
+    
+
+    
+    
+        
+            <link id="syntaxLightStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-light.css" />
+            <link id="syntaxDarkStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-dark.css"
+                  disabled />
+        
+    
+
+    
+    
+        <link rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/light.css" />
+        <link id="darkModeStyle"
+              rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/dark.css" />
+    
+
+    
+        
+            <script>
+                var themeToggleMode = "toggle";
+            </script>
+        
+        <script src=https://alexandrept.com/js/themetoggle.js></script>
+
+        
+            <script>
+                setTheme(getSavedTheme());
+            </script>
+        
+    
+
+
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="https://alexandrept.com/main.css" />
+
+    
+        
+            <link rel="stylesheet" href="https://alexandrept.com/custom.css" />
+        
+    
+
+    
+        <script defer
+                src="https://alexandrept.com/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="e09f570a-4ee8-4bd0-81a1-c219559d337c"></script>
+
+</head>
+
+
+    <body>
+        
+
+        <div class="left-content">
+            
+            
+        </div>
+
+        <div class="content">
+            <nav>
+    <div class="left-nav">
+        
+            <a href=https://alexandrept.com>Alexandre Pinto</a>
+        
+
+
+        <div class="socials">
+            
+                
+            
+            
+                <a rel='me noopener' target='_blank' href="https://github.com/alexpnt" class="social">
+                    <img alt="github"
+                         src="https://alexandrept.com/icons/social/github.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://www.linkedin.com/in/alexandre-pinto" class="social">
+                    <img alt="linkedin"
+                         src="https://alexandrept.com/icons/social/linkedin.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://stackoverflow.com/users/3242636/alexpnt" class="social">
+                    <img alt="stackoverflow"
+                         src="https://alexandrept.com/icons/social/stack-overflow.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://twitter.com/alxpnto" class="social">
+                    <img alt="twitter"
+                         src="https://alexandrept.com/icons/social/twitter.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="mailto:contact@alexandrept.com" class="social">
+                    <img alt="email"
+                         src="https://alexandrept.com/icons/social/email.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="/rss.xml" class="social">
+                    <img alt="rss"
+                         src="https://alexandrept.com/icons/social/rss.svg" />
+                </a>
+            
+        </div>
+    </div>
+
+    <div class="right-nav">
+        
+            <a href=https://alexandrept.com style="margin-right: 0.5em">Home</a>
+        
+            <a href=https://alexandrept.com/cv style="margin-right: 0.5em">CV</a>
+        
+            <a href=https://alexandrept.com/blog style="margin-right: 0.5em">Blog</a>
+        
+            <a href=https://alexandrept.com/publications style="margin-right: 0.5em">Publications</a>
+        
+            <a href=https://alexandrept.com/tags style="margin-right: 0.5em">Tags</a>
+        
+
+        
+            <button id="search-button"
+                    class="search-button"
+                    title="$SHORTCUT to open search">
+                <img src="https://alexandrept.com/icons/search.svg"
+                     alt="Search"
+                     class="search-icon" />
+            </button>
+
+            <div id="searchModal"
+                 class="search-modal js"
+                 role="dialog"
+                 aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">
+                        Search
+                    </h1>
+                    <div id="searchBar">
+                        <input id="searchInput"
+                               role="combobox"
+                               autocomplete="off"
+                               spellcheck="false"
+                               aria-expanded="false"
+                               aria-controls="results-container"
+                               placeholder="Search..." />
+                        <button id="clear-search" class="clear-button" title="Clear search">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+        
+            <a id="dark-mode-toggle"
+               onclick="toggleTheme(); event.preventDefault();"
+               href="#">
+                <img src="https://alexandrept.com/icons/sun.svg" id="sun-icon" alt="Light" />
+                <img src="https://alexandrept.com/icons/moon.svg"
+                     id="moon-icon"
+                     style="filter: invert(1)"
+                     alt="Dark" />
+                
+            </a>
+
+            <!-- Initialize the theme toggle icons -->
+            <script>
+                updateItemToggleTheme()
+            </script>
+        
+    </div>
+</nav>
+
+
+            
+            
+    
+<div class="visible-element-observer-root" data-selector="main article p">
+    <main>
+        <article>
+            <div class="title">
+                
+                
+
+    <div class="page-header">
+        Speeding up python programs with Numba and Numpy
+    </div>
+
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2018-10-19</time>
+                    
+
+
+                    
+
+                    
+
+                    
+
+                    
+                    
+
+                    
+                    
+
+                    
+                    
+                        <span class="tags-label">::</span>
+                        <span class="tags">
+                                <a href="https://alexandrept.com/tags/development/"
+                                   class="post-tag">development</a>
+                            
+                                <a href="https://alexandrept.com/tags/performance/"
+                                   class="post-tag">performance</a>
+                            
+                                <a href="https://alexandrept.com/tags/python/"
+                                   class="post-tag">python</a>
+                            
+                        </span>
+                    
+
+                    
+
+                </div>
+            </div>
+
+            
+
+            <section class="body">
+                <h2 id="when-python-is-not-enough">When Python is not enough</h2>
+<p>The Python programming language is a great tool for almost any kind of rapid prototyping and quick development. It has great features such as its high level nature, a syntax with almost human-level readability . Besides, it is cross platform, with a a diverse standard library and it is multi-paradigm, giving a lot of freedom to the programmer which can use different programming paradigms such as <a rel="noopener external" target="_blank" href="https://en.wikipedia.org/wiki/Object-oriented_programming">object-oriented</a>, <a rel="noopener external" target="_blank" href="https://en.wikipedia.org/wiki/Functional_programming">functional</a> or <a rel="noopener external" target="_blank" href="https://en.wikipedia.org/wiki/Procedural_programming">procedural</a> as he sees fit. However, sometimes some portion of our system has high performance requirements and thus the speed that Python offers might not be sufficient. So, how can we boost performance without leaving the realm of Python (using for example compiled languages such as C/C++ or JIT/compiled such as JAVA) and when all of our optimizations are not enough anymore ?</p>
+<p>A possible solution, among others, is to make use of Numba, a runtime compiler that translates Python code to native instructions, while letting us use the concise and expressiveness power of Python and also achieve native code speed.</p>
+<h2 id="whats-is-numba">Whats is Numba ?</h2>
+<p><a rel="noopener external" target="_blank" href="https://numba.pydata.org/">Numba</a> is a library that performs <a rel="noopener external" target="_blank" href="https://en.wikipedia.org/wiki/Just-in-time_compilation">JIT</a> compilation, that is, translates pure python code to optimized machine code at runtime, using the <a rel="noopener external" target="_blank" href="https://llvm.org/">LLVM</a> industry-standard compiler. It is also able to automatically parallelize loops and run them on multiple cores. Numba is cross-platform since it works on different operative systems (Linux, Windows, OSX) and different architectures (x86, x86_64, ppc64le, etc). It is also able to run the same code on a GPU (NVIDIA CUDA or AMD ROC) and is compatible with Python 2.7 and 3.4-3.7. Overall, the most impressive feature is its simplicity of use since we only need a few decorators to leverage the full power of JIT optimizations.</p>
+<h2 id="numba-modes-and-the-jit-decorator">Numba modes and the @jit decorator</h2>
+<p>The most important instruction is the <em>@jit</em> decorator. It is this decorator that instructs the compiler which mode to run and with what configurations . Under the hood, the generated bytecode of our decorated functions combined with the arguments that we specify in the decorator, such as the type of the input arguments, are analysed, optimized and finally compiled with the LLVM, generating specially tailored native machine instructions for the CPU currently in use. This compiled version is then reused for each function call.</p>
+<p>There are two important modes: <em>nopython</em> and <em>object</em>. The <em>nopython</em> completely avoids the python interpreter and translates the full code to native instructions that can be run without the help of Python . However, if for some reason, that mode is not available (for example, when using unsupported Python features or external libraries) the compilation will fall back to the <em>object</em> mode, where it uses the Python interpreter when it is unable to compile some code . Naturally, the <em>nopython</em> mode is the one who offers the best performance gains.</p>
+<h2 id="high-level-architecture-of-numba">High-level architecture of Numba</h2>
+<p>The Numba translation process can be translated in a set of important steps ranging from the Bytecode analysis to the final machine code generation.
+The picture bellow illustrates this process, where the green boxes correspond to the frontend of the Numba compiler and the blue boxes belong to the backend.</p>
+<p><img src="/images/numba/numba-arch.png" alt="" /></p>
+<p>The Numba compiler starts by doing an extensive analysis on the byecode of the desired function(s).
+This step produces a graph describing the possible flow of executions, called control flow graph (CFG). Based on this graph an analysis on the variable lifetimes are calculated.
+With these steps finished, the compiler starts translating the bytecode into an intermediate representation (IR) where Numba will perform further optimizations and transformations.
+Afterwards, type inference, one of the most important steps, is performed. In this step, the compiler will try to infer the type of all variables.
+Furthermore, if the parallel setting is enabled, the IR code will be transformed to an equivalent parallel version.</p>
+<p>If all types are successfully inferred, the Numba IR code is then translated into an efficient LLVM IR code, completely avoiding the Python runtime.
+However, if the type inference process fails, the LLVM generated code will be slower since it still needs to deal with calls to Python C API.
+Finally, the LLVM IR code is compiled into native instructions by the LLVM JIT compiler.
+This optimized machined code is then loaded into memory and reused across multiple calls to the same function(s), making it hundreds of times faster than pure Python.</p>
+<p>For debugging purposes, Numba also offers a set of flags that can be enabled in order to see the generated output of the different stages.</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span class="z-l-8 z-d-10">import</span><span> os</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>os</span><span>.</span><span>environ</span><span>[</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">NUMBA_DUMP_CFG</span><span class="z-l-2 z-d-6">&quot;</span><span>]</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-2 z-d-6"> &quot;</span><span class="z-l-2 z-d-6">1</span><span class="z-l-2 z-d-6">&quot;</span></span>
+<span class="giallo-l"><span>os</span><span>.</span><span>environ</span><span>[</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">NUMBA_DUMP_IR</span><span class="z-l-2 z-d-6">&quot;</span><span>]</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-2 z-d-6"> &quot;</span><span class="z-l-2 z-d-6">1</span><span class="z-l-2 z-d-6">&quot;</span></span>
+<span class="giallo-l"><span>os</span><span>.</span><span>environ</span><span>[</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">NUMBA_DUMP_ANNOTATION</span><span class="z-l-2 z-d-6">&quot;</span><span>]</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-2 z-d-6"> &quot;</span><span class="z-l-2 z-d-6">1</span><span class="z-l-2 z-d-6">&quot;</span></span>
+<span class="giallo-l"><span>os</span><span>.</span><span>environ</span><span>[</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">NUMBA_DEBUG_ARRAY_OPT_STATS</span><span class="z-l-2 z-d-6">&quot;</span><span>]</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-2 z-d-6"> &quot;</span><span class="z-l-2 z-d-6">1</span><span class="z-l-2 z-d-6">&quot;</span></span>
+<span class="giallo-l"><span>os</span><span>.</span><span>environ</span><span>[</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">NUMBA_DUMP_LLVM</span><span class="z-l-2 z-d-6">&quot;</span><span>]</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-2 z-d-6"> &quot;</span><span class="z-l-2 z-d-6">1</span><span class="z-l-2 z-d-6">&quot;</span></span>
+<span class="giallo-l"><span>os</span><span>.</span><span>environ</span><span>[</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">NUMBA_DUMP_OPTIMIZED</span><span class="z-l-2 z-d-6">&quot;</span><span>]</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-2 z-d-6"> &quot;</span><span class="z-l-2 z-d-6">1</span><span class="z-l-2 z-d-6">&quot;</span></span>
+<span class="giallo-l"><span>os</span><span>.</span><span>environ</span><span>[</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">NUMBA_DUMP_ASSEMBLY</span><span class="z-l-2 z-d-6">&quot;</span><span>]</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-2 z-d-6"> &quot;</span><span class="z-l-2 z-d-6">1</span><span class="z-l-2 z-d-6">&quot;</span></span></code></pre><h2 id="speeding-numerical-computations-an-example">Speeding numerical computations: An example</h2>
+<p>The best use case where we can make use of the Numba library is when we have to do intensive numerical computations. As an example, let's compute the softmax function on a set of 2^16 (65536) random numbers. The softmax function, useful to convert a set of real values into probabilities and commonly used as the last layer in neural networks architectures, is defined as:</p>
+<p>$$ \sigma(z_j) = { e^{z_j}  \over \sum_{k=1}^{K}  e^{z_k} } $$</p>
+<p>The following code show two different implementations of this function, a pure python approach (<em>softmax_python</em>) and an optimized version making using of numpy and numba (<em>softmax_optimized</em>):</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">import</span><span class="z-l-2 z-d-6"> time</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">import</span><span class="z-l-2 z-d-6"> math</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">import</span><span class="z-l-2 z-d-6"> numpy</span><span class="z-l-2 z-d-6"> as</span><span class="z-l-2 z-d-6"> np</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">from</span><span class="z-l-2 z-d-6"> numba</span><span class="z-l-2 z-d-6"> import</span><span class="z-l-2 z-d-6"> jit</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">@jit(</span><span class="z-l-6 z-d-7">&quot;</span><span class="z-l-6 z-d-7">f8(f8[:])</span><span class="z-l-6 z-d-7">&quot;</span><span class="z-l-6 z-d-7">,</span><span class="z-l-2 z-d-6"> cache=False,</span><span class="z-l-2 z-d-6"> nopython=True,</span><span class="z-l-2 z-d-6"> nogil=True,</span><span class="z-l-2 z-d-6"> parallel=True</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">def</span><span class="z-l-2 z-d-6"> esum</span><span>(</span><span class="z-l-6 z-d-7">z</span><span>)</span><span class="z-l-2 z-d-6">:</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">    return</span><span class="z-l-2 z-d-6"> np.sum</span><span>(</span><span class="z-l-6 z-d-7">np.exp(z</span><span>)</span><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">@jit(</span><span class="z-l-6 z-d-7">&quot;</span><span class="z-l-6 z-d-7">f8[:](f8[:])</span><span class="z-l-6 z-d-7">&quot;</span><span class="z-l-6 z-d-7">,</span><span class="z-l-2 z-d-6"> cache=False,</span><span class="z-l-2 z-d-6"> nopython=True,</span><span class="z-l-2 z-d-6"> nogil=True,</span><span class="z-l-2 z-d-6"> parallel=True</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">def</span><span class="z-l-2 z-d-6"> softmax_optimized</span><span>(</span><span class="z-l-6 z-d-7">z</span><span>)</span><span class="z-l-2 z-d-6">:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    num</span><span class="z-l-2 z-d-6"> =</span><span class="z-l-2 z-d-6"> np.exp</span><span>(</span><span class="z-l-6 z-d-7">z</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    s</span><span class="z-l-2 z-d-6"> =</span><span class="z-l-2 z-d-6"> num</span><span class="z-l-2 z-d-6"> /</span><span class="z-l-2 z-d-6"> esum</span><span>(</span><span class="z-l-6 z-d-7">z</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">    return</span><span class="z-l-2 z-d-6"> s</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">def</span><span class="z-l-2 z-d-6"> softmax_python</span><span>(</span><span class="z-l-6 z-d-7">z</span><span>)</span><span class="z-l-2 z-d-6">:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    s</span><span class="z-l-2 z-d-6"> =</span><span> [</span><span>]</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    exp_sum</span><span class="z-l-2 z-d-6"> =</span><span class="z-l-1 z-d-4"> 0</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">    for</span><span> i</span><span class="z-l-8 z-d-10"> in</span><span class="z-l-2 z-d-6"> r</span><span class="z-l-2 z-d-6">a</span><span class="z-l-2 z-d-6">n</span><span class="z-l-2 z-d-6">g</span><span class="z-l-2 z-d-6">e</span><span>(</span><span class="z-l-6 z-d-7">len(z</span><span>)</span><span>):</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">        exp_sum</span><span class="z-l-2 z-d-6"> +=</span><span class="z-l-2 z-d-6"> math.exp</span><span>(</span><span class="z-l-6 z-d-7">z[i]</span><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">    for</span><span> i</span><span class="z-l-8 z-d-10"> in</span><span class="z-l-2 z-d-6"> r</span><span class="z-l-2 z-d-6">a</span><span class="z-l-2 z-d-6">n</span><span class="z-l-2 z-d-6">g</span><span class="z-l-2 z-d-6">e</span><span>(</span><span class="z-l-6 z-d-7">len(z</span><span>)</span><span>):</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">        s</span><span class="z-l-2 z-d-6"> +=</span><span> [math.exp(z[i</span><span>]) / exp_sum]</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">    return</span><span class="z-l-2 z-d-6"> s</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">def</span><span class="z-l-2 z-d-6"> main</span><span>(</span><span>)</span><span class="z-l-2 z-d-6">:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    np.random.seed(0</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    z</span><span class="z-l-2 z-d-6"> =</span><span class="z-l-2 z-d-6"> np.random.uniform</span><span>(</span><span class="z-l-6 z-d-7">0,</span><span class="z-l-2 z-d-6"> 10,</span><span class="z-l-1 z-d-4"> 10</span><span class="z-l-1 z-d-4"> *</span><span class="z-l-1 z-d-4">*</span><span class="z-l-1 z-d-4"> 8</span><span>)</span><span class="z-l-5 z-d-3">   #</span><span class="z-l-5 z-d-3"> generate random floats in the range [0,10)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    start</span><span class="z-l-2 z-d-6"> =</span><span class="z-l-2 z-d-6"> time.time</span><span>(</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    softmax_python(z.tolist(</span><span>))          # run pure python version of softmax</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    elapsed</span><span class="z-l-2 z-d-6"> =</span><span class="z-l-2 z-d-6"> time.time</span><span>(</span><span>)</span><span class="z-l-2 z-d-6"> -</span><span class="z-l-2 z-d-6"> start</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">    print</span><span>(</span><span class="z-l-6 z-d-7">&#39;</span><span class="z-l-6 z-d-7">Ran pure python softmax calculations in {} seconds</span><span class="z-l-6 z-d-7">&#39;</span><span class="z-l-6 z-d-7">.format(elapsed</span><span>))</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    softmax_optimized(z</span><span>)</span><span class="z-l-5 z-d-3">                     #</span><span class="z-l-5 z-d-3"> cache jit compilation</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    start</span><span class="z-l-2 z-d-6"> =</span><span class="z-l-2 z-d-6"> time.time</span><span>(</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    softmax_optimized(z</span><span>)</span><span class="z-l-5 z-d-3">                     #</span><span class="z-l-5 z-d-3"> run optimzed version of softmax</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    elapsed</span><span class="z-l-2 z-d-6"> =</span><span class="z-l-2 z-d-6"> time.time</span><span>(</span><span>)</span><span class="z-l-2 z-d-6"> -</span><span class="z-l-2 z-d-6"> start</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">    print</span><span>(</span><span class="z-l-6 z-d-7">&#39;</span><span class="z-l-6 z-d-7">\nRan optimized softmax calculations in {} seconds</span><span class="z-l-6 z-d-7">&#39;</span><span class="z-l-6 z-d-7">.format(elapsed</span><span>))</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">if</span><span class="z-l-6 z-d-7"> __name__</span><span class="z-l-2 z-d-6"> ==</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">__main__</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    main</span><span>(</span><span>)</span></span></code></pre>
+<p>The result of the above script will be something similar to:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-8 z-d-10">&gt;</span><span> python softmax.py</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">Ran</span><span class="z-l-2 z-d-6"> pure</span><span class="z-l-2 z-d-6"> python</span><span class="z-l-2 z-d-6"> softmax</span><span class="z-l-2 z-d-6"> calculations</span><span class="z-l-2 z-d-6"> in</span><span class="z-l-1 z-d-4"> 41.62234306335449</span><span class="z-l-2 z-d-6"> seconds</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">Ran</span><span class="z-l-2 z-d-6"> optimized</span><span class="z-l-2 z-d-6"> softmax</span><span class="z-l-2 z-d-6"> calculations</span><span class="z-l-2 z-d-6"> in</span><span class="z-l-1 z-d-4"> 1.7453773021697998</span><span class="z-l-2 z-d-6"> seconds</span></span></code></pre>
+<p>These results clearly shows the performance gains obtained when converting our code to something that Numba understands well.</p>
+<p>In the <em>softmax_optimized</em> function, there is already the Numba annotation that leverages the full power of JIT optimizations.
+In fact, under the hood the following bytecode will be analysed, optimized and compiled to native instructions:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span class="z-l-8 z-d-10">&gt;</span><span> python</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">import</span><span> dis</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> softmax</span><span class="z-l-8 z-d-10"> import</span><span> esum</span><span>,</span><span> softmax_optimized</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">&gt;&gt;</span><span class="z-l-8 z-d-10">&gt;</span><span> dis</span><span>.</span><span>dis</span><span>(</span><span>softmax_optimized</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4"> 14</span><span class="z-l-1 z-d-4">           0</span><span class="z-l-1 z-d-4"> LOAD_GLOBAL</span><span class="z-l-1 z-d-4">              0</span><span> (</span><span>np</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">              2</span><span class="z-l-1 z-d-4"> LOAD_ATTR</span><span class="z-l-1 z-d-4">                1</span><span> (</span><span>exp</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">              4</span><span class="z-l-1 z-d-4"> LOAD_FAST</span><span class="z-l-1 z-d-4">                0</span><span> (</span><span>z</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">              6</span><span class="z-l-1 z-d-4"> CALL_FUNCTION</span><span class="z-l-1 z-d-4">            1</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">              8</span><span class="z-l-1 z-d-4"> STORE_FAST</span><span class="z-l-1 z-d-4">               1</span><span> (</span><span>num</span><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4"> 15</span><span class="z-l-1 z-d-4">          10</span><span class="z-l-1 z-d-4"> LOAD_FAST</span><span class="z-l-1 z-d-4">                1</span><span> (</span><span>num</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">             12</span><span class="z-l-1 z-d-4"> LOAD_GLOBAL</span><span class="z-l-1 z-d-4">              2</span><span> (</span><span>esum</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">             14</span><span class="z-l-1 z-d-4"> LOAD_FAST</span><span class="z-l-1 z-d-4">                0</span><span> (</span><span>z</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">             16</span><span class="z-l-1 z-d-4"> CALL_FUNCTION</span><span class="z-l-1 z-d-4">            1</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">             18</span><span class="z-l-1 z-d-4"> BINARY_TRUE_DIVIDE</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">             20</span><span class="z-l-1 z-d-4"> STORE_FAST</span><span class="z-l-1 z-d-4">               2</span><span> (</span><span>s</span><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4"> 16</span><span class="z-l-1 z-d-4">          22</span><span class="z-l-1 z-d-4"> LOAD_FAST</span><span class="z-l-1 z-d-4">                2</span><span> (</span><span>s</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">             24</span><span class="z-l-1 z-d-4"> RETURN_VALUE</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">&gt;&gt;</span><span class="z-l-8 z-d-10">&gt;</span><span> dis</span><span>.</span><span>dis</span><span>(</span><span>esum</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">  9</span><span class="z-l-1 z-d-4">           0</span><span class="z-l-1 z-d-4"> LOAD_GLOBAL</span><span class="z-l-1 z-d-4">              0</span><span> (</span><span>np</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">              2</span><span class="z-l-1 z-d-4"> LOAD_ATTR</span><span class="z-l-1 z-d-4">                1</span><span> (</span><span class="z-l-1 z-d-4">sum</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">              4</span><span class="z-l-1 z-d-4"> LOAD_GLOBAL</span><span class="z-l-1 z-d-4">              0</span><span> (</span><span>np</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">              6</span><span class="z-l-1 z-d-4"> LOAD_ATTR</span><span class="z-l-1 z-d-4">                2</span><span> (</span><span>exp</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">              8</span><span class="z-l-1 z-d-4"> LOAD_FAST</span><span class="z-l-1 z-d-4">                0</span><span> (</span><span>z</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">             10</span><span class="z-l-1 z-d-4"> CALL_FUNCTION</span><span class="z-l-1 z-d-4">            1</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">             12</span><span class="z-l-1 z-d-4"> CALL_FUNCTION</span><span class="z-l-1 z-d-4">            1</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">             14</span><span class="z-l-1 z-d-4"> RETURN_VALUE</span></span>
+<span class="giallo-l"></span></code></pre>
+<p>We can provide more information about the expected input and output types through the signature.
+In the example above, the signature "<em>f8[:](f8[:])</em>" is used to specify that the function accepts an array of double
+precision floats and returns another array of 64-bit floats.</p>
+<p>The signature could also use the explicit type names: "<em>float64[:](float64[:])</em>".
+The general form is <em>type(type, type, ...)</em> which resembles a typical function where argument names are replaced by their
+types and the function name is replaced by its return type.
+Numba accepts many different types, which are described bellow:</p>
+<table><thead><tr><th style="text-align: center">Type name(s)</th><th style="text-align: center">Type short name</th><th style="text-align: center">Description</th></tr></thead><tbody>
+<tr><td style="text-align: center">boolean</td><td style="text-align: center">b1</td><td style="text-align: center">represented as a byte</td></tr>
+<tr><td style="text-align: center">uint8, byte</td><td style="text-align: center">u1</td><td style="text-align: center">8-bit unsigned byte</td></tr>
+<tr><td style="text-align: center">uint16</td><td style="text-align: center">u2</td><td style="text-align: center">16-bit unsigned integer</td></tr>
+<tr><td style="text-align: center">uint32</td><td style="text-align: center">u4</td><td style="text-align: center">32-bit unsigned integer</td></tr>
+<tr><td style="text-align: center">uint64</td><td style="text-align: center">u8</td><td style="text-align: center">64-bit unsigned integer</td></tr>
+<tr><td style="text-align: center">int8, char</td><td style="text-align: center">i1</td><td style="text-align: center">8-bit signed byte</td></tr>
+<tr><td style="text-align: center">int16</td><td style="text-align: center">i2</td><td style="text-align: center">16-bit signed integer</td></tr>
+<tr><td style="text-align: center">int32</td><td style="text-align: center">i4</td><td style="text-align: center">32-bit signed integer</td></tr>
+<tr><td style="text-align: center">int64</td><td style="text-align: center">i8</td><td style="text-align: center">64-bit signed integer</td></tr>
+<tr><td style="text-align: center">intc</td><td style="text-align: center">–</td><td style="text-align: center">C</td></tr>
+<tr><td style="text-align: center">uintc</td><td style="text-align: center">–</td><td style="text-align: center">C</td></tr>
+<tr><td style="text-align: center">intp</td><td style="text-align: center">–</td><td style="text-align: center">pointer-sized integer</td></tr>
+<tr><td style="text-align: center">uintp</td><td style="text-align: center">–</td><td style="text-align: center">pointer-sized unsigned integer</td></tr>
+<tr><td style="text-align: center">float32</td><td style="text-align: center">f4</td><td style="text-align: center">single-precision floating-point number</td></tr>
+<tr><td style="text-align: center">float64, double</td><td style="text-align: center">f8</td><td style="text-align: center">double-precision floating-point number</td></tr>
+<tr><td style="text-align: center">complex64</td><td style="text-align: center">c8</td><td style="text-align: center">single-precision complex number</td></tr>
+<tr><td style="text-align: center">complex128</td><td style="text-align: center">c16</td><td style="text-align: center">double-precision complex number</td></tr>
+</tbody></table>
+<p>These annotations are easily extended to array forms using [:] , [:, :] or [:, :, :] for 1, 2 and 3 dimensions, respectively.</p>
+<h2 id="final-words">Final words</h2>
+<p>Python is a great tool. However, it has some limitations which can be surpassed with the right strategy, making it
+competitive, in terms of performance, to other compiled languages. Although this post focused on the Numba library,
+there are other good options (which deserve their own dedicated blog post).
+Numba also offers other great features not explored here such as integration with NVIDIA CUDA/AMD ROC GPUs, interfacing with C functions and Ahead-of-Time compilation (AOT).
+Finally, the example source code can be found <a rel="noopener external" target="_blank" href="https://github.com/alexpnt/numba-examples">here</a>.</p>
+
+            </section>
+        </article>
+    </main>
+</div>
+
+
+
+            
+                
+            
+
+            
+        </div>
+
+        <div class="right-content">
+            
+    
+    
+        <div class="toc">
+    <div class="heading">
+        Table of Contents
+    </div>
+    <ul class="toc-list">
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/speeding-up-python/#when-python-is-not-enough">When Python is not enough</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/speeding-up-python/#whats-is-numba">Whats is Numba ?</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/speeding-up-python/#numba-modes-and-the-jit-decorator">Numba modes and the @jit decorator</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/speeding-up-python/#high-level-architecture-of-numba">High-level architecture of Numba</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/speeding-up-python/#speeding-numerical-computations-an-example">Speeding numerical computations: An example</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/speeding-up-python/#final-words">Final words</a>
+
+                
+            </li>
+        
+    </ul>
+</div>
+
+    
+
+        </div>
+        
+
+<style>
+    body { flex-wrap: wrap; }
+    .site-footer {
+        flex-basis: 100%;
+        width: 100%;
+        max-width: 920px;
+        margin: 0.5rem auto 0;
+        padding: 0 0.9rem;
+        text-align: center;
+        opacity: 0.7;
+        font-size: 0.9em;
+    }
+</style>
+<footer class="site-footer">
+    <p>Copyright &copy; 2026 Alexandre Pinto</p>
+</footer>
+
+    </body>
+
+</html>

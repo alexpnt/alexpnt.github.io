@@ -1,0 +1,527 @@
+
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+    
+<head>
+    
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="base" content="https://alexandrept.com" />
+
+    
+
+    
+
+    
+    
+    
+        <title>
+            
+                Microservices, Docker and Django - Part II
+            
+        </title>
+
+        
+            <meta property="og:title"
+                  content="Microservices, Docker and Django - Part II" />
+        
+    
+
+    
+        
+            <meta property="og:description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+        
+            <meta name="description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+    
+        <link rel="icon"
+              type="image/png"
+              href="https://alexandrept.com/favicon.ico" />
+    
+
+    
+    
+        <link href=https://alexandrept.com/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/codeblock.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/toc.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/note.js></script>
+    
+
+    
+
+    
+    
+        
+            
+                <link rel="alternate"
+                      type="application/rss+xml"
+                      title="
+Alexandre Pinto
+"
+                      href="https://alexandrept.com/rss.xml" />
+            
+        
+    
+
+
+    
+
+    
+    
+        
+            <link id="syntaxLightStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-light.css" />
+            <link id="syntaxDarkStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-dark.css"
+                  disabled />
+        
+    
+
+    
+    
+        <link rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/light.css" />
+        <link id="darkModeStyle"
+              rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/dark.css" />
+    
+
+    
+        
+            <script>
+                var themeToggleMode = "toggle";
+            </script>
+        
+        <script src=https://alexandrept.com/js/themetoggle.js></script>
+
+        
+            <script>
+                setTheme(getSavedTheme());
+            </script>
+        
+    
+
+
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="https://alexandrept.com/main.css" />
+
+    
+        
+            <link rel="stylesheet" href="https://alexandrept.com/custom.css" />
+        
+    
+
+    
+        <script defer
+                src="https://alexandrept.com/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="e09f570a-4ee8-4bd0-81a1-c219559d337c"></script>
+
+</head>
+
+
+    <body>
+        
+
+        <div class="left-content">
+            
+            
+        </div>
+
+        <div class="content">
+            <nav>
+    <div class="left-nav">
+        
+            <a href=https://alexandrept.com>Alexandre Pinto</a>
+        
+
+
+        <div class="socials">
+            
+                
+            
+            
+                <a rel='me noopener' target='_blank' href="https://github.com/alexpnt" class="social">
+                    <img alt="github"
+                         src="https://alexandrept.com/icons/social/github.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://www.linkedin.com/in/alexandre-pinto" class="social">
+                    <img alt="linkedin"
+                         src="https://alexandrept.com/icons/social/linkedin.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://stackoverflow.com/users/3242636/alexpnt" class="social">
+                    <img alt="stackoverflow"
+                         src="https://alexandrept.com/icons/social/stack-overflow.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://twitter.com/alxpnto" class="social">
+                    <img alt="twitter"
+                         src="https://alexandrept.com/icons/social/twitter.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="mailto:contact@alexandrept.com" class="social">
+                    <img alt="email"
+                         src="https://alexandrept.com/icons/social/email.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="/rss.xml" class="social">
+                    <img alt="rss"
+                         src="https://alexandrept.com/icons/social/rss.svg" />
+                </a>
+            
+        </div>
+    </div>
+
+    <div class="right-nav">
+        
+            <a href=https://alexandrept.com style="margin-right: 0.5em">Home</a>
+        
+            <a href=https://alexandrept.com/cv style="margin-right: 0.5em">CV</a>
+        
+            <a href=https://alexandrept.com/blog style="margin-right: 0.5em">Blog</a>
+        
+            <a href=https://alexandrept.com/publications style="margin-right: 0.5em">Publications</a>
+        
+            <a href=https://alexandrept.com/tags style="margin-right: 0.5em">Tags</a>
+        
+
+        
+            <button id="search-button"
+                    class="search-button"
+                    title="$SHORTCUT to open search">
+                <img src="https://alexandrept.com/icons/search.svg"
+                     alt="Search"
+                     class="search-icon" />
+            </button>
+
+            <div id="searchModal"
+                 class="search-modal js"
+                 role="dialog"
+                 aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">
+                        Search
+                    </h1>
+                    <div id="searchBar">
+                        <input id="searchInput"
+                               role="combobox"
+                               autocomplete="off"
+                               spellcheck="false"
+                               aria-expanded="false"
+                               aria-controls="results-container"
+                               placeholder="Search..." />
+                        <button id="clear-search" class="clear-button" title="Clear search">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+        
+            <a id="dark-mode-toggle"
+               onclick="toggleTheme(); event.preventDefault();"
+               href="#">
+                <img src="https://alexandrept.com/icons/sun.svg" id="sun-icon" alt="Light" />
+                <img src="https://alexandrept.com/icons/moon.svg"
+                     id="moon-icon"
+                     style="filter: invert(1)"
+                     alt="Dark" />
+                
+            </a>
+
+            <!-- Initialize the theme toggle icons -->
+            <script>
+                updateItemToggleTheme()
+            </script>
+        
+    </div>
+</nav>
+
+
+            
+            
+    
+<div class="visible-element-observer-root" data-selector="main article p">
+    <main>
+        <article>
+            <div class="title">
+                
+                
+
+    <div class="page-header">
+        Microservices, Docker and Django - Part II
+    </div>
+
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2017-08-06</time>
+                    
+
+
+                    
+
+                    
+
+                    
+
+                    
+                    
+
+                    
+                    
+
+                    
+                    
+                        <span class="tags-label">::</span>
+                        <span class="tags">
+                                <a href="https://alexandrept.com/tags/development/"
+                                   class="post-tag">development</a>
+                            
+                                <a href="https://alexandrept.com/tags/django/"
+                                   class="post-tag">django</a>
+                            
+                                <a href="https://alexandrept.com/tags/docker/"
+                                   class="post-tag">docker</a>
+                            
+                                <a href="https://alexandrept.com/tags/microservices/"
+                                   class="post-tag">microservices</a>
+                            
+                                <a href="https://alexandrept.com/tags/python/"
+                                   class="post-tag">python</a>
+                            
+                        </span>
+                    
+
+                    
+
+                </div>
+            </div>
+
+            
+
+            <section class="body">
+                <p>A typical web application has a set of components that work together such as the application backend, the frontend, the database or other components such as cache services, proxy servers, etc. Docker is a great tool to decouple our different services and isolate them. In this post we will decouple our web application  into  two services, the application and the database.</p>
+<p>We start by getting a copy of our code base:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> git</span><span class="z-l-2 z-d-6"> clone</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">b</span><span class="z-l-2 z-d-6"> postgres</span><span class="z-l-2 z-d-6"> https://github.com/AlexPnt/MusicWallet.git</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> cd</span><span class="z-l-2 z-d-6"> MusicWallet</span></span></code></pre>
+<p>Our project structure is as follows:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">└──</span><span class="z-l-2 z-d-6"> MusicWallet</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    ├──</span><span class="z-l-2 z-d-6"> docker-compose.yml</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    ├──</span><span class="z-l-2 z-d-6"> musicwalletproject</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    │  </span><span class="z-l-2 z-d-6"> ├──</span><span class="z-l-2 z-d-6"> docker-entrypoint.sh</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    │  </span><span class="z-l-2 z-d-6"> ├──</span><span class="z-l-2 z-d-6"> Dockerfile</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    │  </span><span class="z-l-2 z-d-6"> ├──</span><span class="z-l-2 z-d-6"> manage.py</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    │  </span><span class="z-l-2 z-d-6"> ├──</span><span class="z-l-2 z-d-6"> musicwalletapp</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    │  </span><span class="z-l-2 z-d-6"> ├──</span><span class="z-l-2 z-d-6"> musicwalletproject</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    │  </span><span class="z-l-2 z-d-6"> └──</span><span class="z-l-2 z-d-6"> requirements.txt</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    └──</span><span class="z-l-2 z-d-6"> README.md</span></span></code></pre>
+<p>We declare our two services in a configuration file called <em>docker-compose.yml</em> .</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">version:</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">2</span><span class="z-l-2 z-d-6">&#39;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">services:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">  db:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    image:</span><span class="z-l-2 z-d-6"> postgres</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    restart:</span><span class="z-l-2 z-d-6"> always</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    ports:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">      -</span><span class="z-l-2 z-d-6"> &quot;</span><span class="z-l-2 z-d-6">5432:5432</span><span class="z-l-2 z-d-6">&quot;</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    volumes:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">      -</span><span class="z-l-2 z-d-6"> data:/var/lib/postgresql/data</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    environment:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">      POSTGRES_USER:</span><span class="z-l-2 z-d-6"> postgres</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">      POSTGRES_PASSWORD:</span><span class="z-l-2 z-d-6"> postgres</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">  web:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    restart:</span><span class="z-l-2 z-d-6"> always</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    build:</span><span class="z-l-2 z-d-6"> ./musicwalletproject</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">    command</span><span class="z-l-2 z-d-6">:</span><span class="z-l-2 z-d-6"> python</span><span class="z-l-2 z-d-6"> manage.py</span><span class="z-l-2 z-d-6"> runserver</span><span class="z-l-2 z-d-6"> 0.0.0.0:8000</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">-settings=musicwalletproject.settings.development</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    volumes:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">      -</span><span class="z-l-2 z-d-6"> ./musicwalletproject:/code</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    ports:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">      -</span><span class="z-l-2 z-d-6"> &quot;</span><span class="z-l-2 z-d-6">8000:8000</span><span class="z-l-2 z-d-6">&quot;</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    depends_on:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">      -</span><span class="z-l-2 z-d-6"> db</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">volumes:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">  data:</span></span></code></pre>
+<p>We declare our database service 'db' and our web application 'web'. The database service pulls a docker image from the <a rel="noopener external" target="_blank" href="https://hub.docker.com/_/postgres/">official repository</a>, setups up some credentials and expose the standard ports. The service 'web' uses our code base to build an image that will serve requests on port 8000.</p>
+<p>Our 'web' service used a file called <em>Dockerfile</em> to setup the docker image:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">FROM</span><span class="z-l-2 z-d-6"> python:2</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">ENV</span><span class="z-l-2 z-d-6"> PYTHONUNBUFFERED</span><span class="z-l-1 z-d-4"> 1</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">RUN</span><span class="z-l-2 z-d-6"> mkdir</span><span class="z-l-2 z-d-6"> /code</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">WORKDIR</span><span class="z-l-2 z-d-6"> /code</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">ADD</span><span class="z-l-2 z-d-6"> .</span><span class="z-l-2 z-d-6"> /code</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">ADD</span><span class="z-l-2 z-d-6"> requirements.txt</span><span class="z-l-2 z-d-6"> /code/</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">RUN</span><span class="z-l-2 z-d-6"> pip</span><span class="z-l-2 z-d-6"> install</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">r</span><span class="z-l-2 z-d-6"> /code/requirements.txt</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">COPY</span><span class="z-l-2 z-d-6"> ./docker-entrypoint.sh</span><span class="z-l-2 z-d-6"> /</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">ENTRYPOINT</span><span> [</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">/docker-entrypoint.sh</span><span class="z-l-2 z-d-6">&quot;</span><span>]</span></span></code></pre>
+<p>This file simply instructs docker to copy our code base into the container and install all the required dependencies. Besides, it also runs some setup commands specified in <em>docker-entrypoint.sh</em>, which applies migrations to the database, copy the static files to a single location and starts the web server:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-5 z-d-3">#!</span><span class="z-l-5 z-d-3">/bin/sh</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">python</span><span class="z-l-2 z-d-6"> manage.py</span><span class="z-l-2 z-d-6"> makemigrations</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">-settings=musicwalletproject.settings.development</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">python</span><span class="z-l-2 z-d-6"> manage.py</span><span class="z-l-2 z-d-6"> migrate</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">-settings=musicwalletproject.settings.development</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">python</span><span class="z-l-2 z-d-6"> manage.py</span><span class="z-l-2 z-d-6"> collectstatic</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">-settings=musicwalletproject.settings.development</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">-noinput</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">python</span><span class="z-l-2 z-d-6"> manage.py</span><span class="z-l-2 z-d-6"> runserver</span><span class="z-l-2 z-d-6"> 0.0.0.0:8000</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">-settings=musicwalletproject.settings.development</span></span></code></pre>
+<p>We are now ready to launch our services. Starting with the database service, with these docker commands we can quickly launch our new database container and create our new database:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> docker-compose</span><span class="z-l-2 z-d-6"> up</span><span class="z-l-2 z-d-6"> db</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> docker-compose</span><span class="z-l-2 z-d-6"> run</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">-rm</span><span class="z-l-2 z-d-6"> db</span><span class="z-l-2 z-d-6"> psql</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">h</span><span class="z-l-2 z-d-6"> db</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">U</span><span class="z-l-2 z-d-6"> postgres</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">c</span><span class="z-l-2 z-d-6"> &quot;</span><span class="z-l-2 z-d-6">CREATE DATABASE musicwallet_db</span><span class="z-l-2 z-d-6">&quot;</span><span> </span></span></code></pre>
+<p>Similarly, we build our web application and launch it:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> docker-compose</span><span class="z-l-2 z-d-6"> build</span><span class="z-l-2 z-d-6"> web</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> docker-compose</span><span class="z-l-2 z-d-6"> up</span><span class="z-l-2 z-d-6"> web</span></span></code></pre>
+<p>If we want to inspect if our services are running, we can use the docker-compose command <em>ps</em>:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> docker-compose</span><span class="z-l-2 z-d-6"> ps</span></span>
+<span class="giallo-l"><span>  </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">      Name</span><span class="z-l-2 z-d-6">                     Command</span><span class="z-l-2 z-d-6">               State</span><span class="z-l-2 z-d-6">           Ports</span><span>          </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">-----------------------------------------------------------------------------------</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">musicwallet_db_1</span><span class="z-l-2 z-d-6">    docker-entrypoint.sh</span><span class="z-l-2 z-d-6"> postgres</span><span class="z-l-2 z-d-6">    Up</span><span class="z-l-2 z-d-6">      0.0.0.0:5432</span><span>-</span><span class="z-l-8 z-d-10">&gt;</span><span class="z-l-2 z-d-6">5432/tcp</span><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">musicwallet_web_1</span><span class="z-l-2 z-d-6">   /docker-entrypoint.sh</span><span class="z-l-2 z-d-6"> pyth</span><span class="z-l-2 z-d-6"> ...</span><span class="z-l-2 z-d-6">   Up</span><span class="z-l-2 z-d-6">      0.0.0.0:8000</span><span>-</span><span class="z-l-8 z-d-10">&gt;</span><span class="z-l-2 z-d-6">8000/tcp</span><span> </span></span></code></pre>
+<p>It seems to be working. We can further inspect the logs to see if any error occurred during launch:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> docker-compose</span><span class="z-l-2 z-d-6"> up</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">Starting</span><span class="z-l-2 z-d-6"> musicwallet_db_1</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">Starting</span><span class="z-l-2 z-d-6"> musicwallet_web_1</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">Attaching</span><span class="z-l-2 z-d-6"> to</span><span class="z-l-2 z-d-6"> musicwallet_db_1,</span><span class="z-l-2 z-d-6"> musicwallet_web_1</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">db_1</span><span class="z-l-8 z-d-10">   |</span><span class="z-l-6 z-d-7"> LOG:</span><span class="z-l-2 z-d-6">  database</span><span class="z-l-2 z-d-6"> system</span><span class="z-l-2 z-d-6"> was</span><span class="z-l-2 z-d-6"> interrupted</span><span>;</span><span class="z-l-6 z-d-7"> last</span><span class="z-l-2 z-d-6"> known</span><span class="z-l-2 z-d-6"> up</span><span class="z-l-2 z-d-6"> at</span><span class="z-l-2 z-d-6"> 2017-08-09</span><span class="z-l-2 z-d-6"> 23:44:42</span><span class="z-l-2 z-d-6"> UTC</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">db_1</span><span class="z-l-8 z-d-10">   |</span><span class="z-l-6 z-d-7"> LOG:</span><span class="z-l-2 z-d-6">  database</span><span class="z-l-2 z-d-6"> system</span><span class="z-l-2 z-d-6"> was</span><span class="z-l-2 z-d-6"> not</span><span class="z-l-2 z-d-6"> properly</span><span class="z-l-2 z-d-6"> shut</span><span class="z-l-2 z-d-6"> down</span><span>;</span><span class="z-l-6 z-d-7"> automatic</span><span class="z-l-2 z-d-6"> recovery</span><span class="z-l-2 z-d-6"> in</span><span class="z-l-2 z-d-6"> progress</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">db_1</span><span class="z-l-8 z-d-10">   |</span><span class="z-l-6 z-d-7"> LOG:</span><span class="z-l-2 z-d-6">  invalid</span><span class="z-l-2 z-d-6"> record</span><span class="z-l-2 z-d-6"> length</span><span class="z-l-2 z-d-6"> at</span><span class="z-l-2 z-d-6"> 0/15975C0:</span><span class="z-l-2 z-d-6"> wanted</span><span class="z-l-2 z-d-6"> 24,</span><span class="z-l-2 z-d-6"> got</span><span class="z-l-1 z-d-4"> 0</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">db_1</span><span class="z-l-8 z-d-10">   |</span><span class="z-l-6 z-d-7"> LOG:</span><span class="z-l-2 z-d-6">  redo</span><span class="z-l-2 z-d-6"> is</span><span class="z-l-2 z-d-6"> not</span><span class="z-l-2 z-d-6"> required</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">db_1</span><span class="z-l-8 z-d-10">   |</span><span class="z-l-6 z-d-7"> LOG:</span><span class="z-l-2 z-d-6">  MultiXact</span><span class="z-l-2 z-d-6"> member</span><span class="z-l-2 z-d-6"> wraparound</span><span class="z-l-2 z-d-6"> protections</span><span class="z-l-2 z-d-6"> are</span><span class="z-l-2 z-d-6"> now</span><span class="z-l-2 z-d-6"> enabled</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">db_1</span><span class="z-l-8 z-d-10">   |</span><span class="z-l-6 z-d-7"> LOG:</span><span class="z-l-2 z-d-6">  autovacuum</span><span class="z-l-2 z-d-6"> launcher</span><span class="z-l-2 z-d-6"> started</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">db_1</span><span class="z-l-8 z-d-10">   |</span><span class="z-l-6 z-d-7"> LOG:</span><span class="z-l-2 z-d-6">  database</span><span class="z-l-2 z-d-6"> system</span><span class="z-l-2 z-d-6"> is</span><span class="z-l-2 z-d-6"> ready</span><span class="z-l-2 z-d-6"> to</span><span class="z-l-2 z-d-6"> accept</span><span class="z-l-2 z-d-6"> connections</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">web_1</span><span class="z-l-8 z-d-10">  |</span><span class="z-l-6 z-d-7"> No</span><span class="z-l-2 z-d-6"> changes</span><span class="z-l-2 z-d-6"> detected</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">web_1</span><span class="z-l-8 z-d-10">  |</span><span class="z-l-6 z-d-7"> Operations</span><span class="z-l-2 z-d-6"> to</span><span class="z-l-2 z-d-6"> perform:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">web_1</span><span class="z-l-8 z-d-10">  |</span><span class="z-l-6 z-d-7">   Apply</span><span class="z-l-2 z-d-6"> all</span><span class="z-l-2 z-d-6"> migrations:</span><span class="z-l-2 z-d-6"> admin,</span><span class="z-l-2 z-d-6"> auth,</span><span class="z-l-2 z-d-6"> authtoken,</span><span class="z-l-2 z-d-6"> contenttypes,</span><span class="z-l-2 z-d-6"> musicwalletapp,</span><span class="z-l-2 z-d-6"> sessions</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">web_1</span><span class="z-l-8 z-d-10">  |</span><span class="z-l-6 z-d-7"> Running</span><span class="z-l-2 z-d-6"> migrations:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">web_1</span><span class="z-l-8 z-d-10">  |</span><span class="z-l-6 z-d-7">   No</span><span class="z-l-2 z-d-6"> migrations</span><span class="z-l-2 z-d-6"> to</span><span class="z-l-2 z-d-6"> apply.</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">web_1</span><span class="z-l-8 z-d-10">  |</span><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">web_1</span><span class="z-l-8 z-d-10">  |</span><span class="z-l-6 z-d-7"> 0</span><span class="z-l-2 z-d-6"> static</span><span class="z-l-2 z-d-6"> files</span><span class="z-l-2 z-d-6"> copied</span><span class="z-l-2 z-d-6"> to</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">/code/musicwalletproject/settings/static</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">,</span><span class="z-l-1 z-d-4"> 93</span><span class="z-l-2 z-d-6"> unmodified.</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">web_1</span><span class="z-l-8 z-d-10">  |</span><span class="z-l-6 z-d-7"> Performing</span><span class="z-l-2 z-d-6"> system</span><span class="z-l-2 z-d-6"> checks...</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">web_1</span><span class="z-l-8 z-d-10">  |</span><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">web_1</span><span class="z-l-8 z-d-10">  |</span><span class="z-l-6 z-d-7"> System</span><span class="z-l-2 z-d-6"> check</span><span class="z-l-2 z-d-6"> identified</span><span class="z-l-2 z-d-6"> no</span><span class="z-l-2 z-d-6"> issues</span><span> (0</span><span class="z-l-2 z-d-6"> silenced</span><span>).</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">web_1</span><span class="z-l-8 z-d-10">  |</span><span class="z-l-6 z-d-7"> August</span><span class="z-l-2 z-d-6"> 09,</span><span class="z-l-1 z-d-4"> 2017</span><span class="z-l-2 z-d-6"> -</span><span class="z-l-2 z-d-6"> 23:55:50</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">web_1</span><span class="z-l-8 z-d-10">  |</span><span class="z-l-6 z-d-7"> Django</span><span class="z-l-2 z-d-6"> version</span><span class="z-l-2 z-d-6"> 1.10.2,</span><span class="z-l-2 z-d-6"> using</span><span class="z-l-2 z-d-6"> settings</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">musicwalletproject.settings.development</span><span class="z-l-2 z-d-6">&#39;</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">web_1</span><span class="z-l-8 z-d-10">  |</span><span class="z-l-6 z-d-7"> Starting</span><span class="z-l-2 z-d-6"> development</span><span class="z-l-2 z-d-6"> server</span><span class="z-l-2 z-d-6"> at</span><span class="z-l-2 z-d-6"> http://0.0.0.0:8000/</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">web_1</span><span class="z-l-8 z-d-10">  |</span><span class="z-l-6 z-d-7"> Quit</span><span class="z-l-2 z-d-6"> the</span><span class="z-l-2 z-d-6"> server</span><span class="z-l-2 z-d-6"> with</span><span class="z-l-2 z-d-6"> CONTROL-C.</span></span></code></pre>
+<p>Finally, we can head over to <a href="localhost:8000">localhost:8000</a>:</p>
+<p><img src="/images/musicwallet.png" alt="" /></p>
+<p>The web application is ready to be used !</p>
+<p>Alternatively, you can use perform REST calls using the <a rel="noopener external" target="_blank" href="https://httpie.org/">httpie</a> client.</p>
+<p>Obtaining the authentication token:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> http</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">-json</span><span class="z-l-2 z-d-6"> POST</span><span class="z-l-2 z-d-6"> localhost:8000/api-token-auth/</span><span class="z-l-2 z-d-6"> username=myuser</span><span class="z-l-2 z-d-6"> password=mypassword</span></span></code></pre>
+<p>List users:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> http</span><span class="z-l-2 z-d-6"> GET</span><span class="z-l-2 z-d-6"> localhost:8000/api/users/</span><span class="z-l-2 z-d-6"> Authorization:</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">Token &lt;token_id&gt;</span><span class="z-l-2 z-d-6">&quot;</span></span></code></pre>
+<p>Get details from a user</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> http</span><span class="z-l-2 z-d-6"> GET</span><span class="z-l-2 z-d-6"> localhost:8000/api/users/</span><span class="z-l-8 z-d-10">&lt;</span><span class="z-l-2 z-d-6">i</span><span>d</span><span class="z-l-8 z-d-10">&gt;</span><span class="z-l-2 z-d-6">/</span><span class="z-l-2 z-d-6"> Authorization:</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">Token &lt;token_id&gt;</span><span class="z-l-2 z-d-6">&quot;</span></span></code></pre>
+<p>Edit an existing user by sending a request with json data in the body of the request.</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> http</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">-json</span><span class="z-l-2 z-d-6"> PUT</span><span class="z-l-2 z-d-6"> localhost:8000/api/users/</span><span class="z-l-8 z-d-10">&lt;</span><span class="z-l-2 z-d-6">i</span><span>d</span><span class="z-l-8 z-d-10">&gt;</span><span class="z-l-2 z-d-6">/</span><span class="z-l-2 z-d-6"> username=newname</span><span class="z-l-2 z-d-6"> email=newemail</span><span class="z-l-2 z-d-6"> password=newpassword</span><span class="z-l-2 z-d-6"> Authorization:</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">Token &lt;token_id&gt;</span><span class="z-l-2 z-d-6">&quot;</span></span></code></pre>
+<p>Delete an existing user.</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> http</span><span class="z-l-2 z-d-6"> DELETE</span><span class="z-l-2 z-d-6"> localhost:8000/api/users/</span><span class="z-l-8 z-d-10">&lt;</span><span class="z-l-2 z-d-6">i</span><span>d</span><span class="z-l-8 z-d-10">&gt;</span><span class="z-l-2 z-d-6">/</span><span class="z-l-2 z-d-6"> Authorization:</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">Token &lt;token_id&gt;</span><span class="z-l-2 z-d-6">&quot;</span></span></code></pre>
+<p>List musics:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> http</span><span class="z-l-2 z-d-6"> GET</span><span class="z-l-2 z-d-6"> localhost:8000/api/musics/</span><span class="z-l-2 z-d-6"> Authorization:</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">Token &lt;token_id&gt;</span><span class="z-l-2 z-d-6">&quot;</span></span></code></pre>
+<p>Get details from a music.</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> http</span><span class="z-l-2 z-d-6"> GET</span><span class="z-l-2 z-d-6"> localhost:8000/api/musics/</span><span class="z-l-8 z-d-10">&lt;</span><span class="z-l-2 z-d-6">i</span><span>d</span><span class="z-l-8 z-d-10">&gt;</span><span class="z-l-2 z-d-6">/</span><span class="z-l-2 z-d-6"> Authorization:</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">Token &lt;token_id&gt;</span><span class="z-l-2 z-d-6">&quot;</span></span></code></pre>
+<p>Create a new music by sending a request with json data in the body of the request.</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> http</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">-json</span><span class="z-l-2 z-d-6"> POST</span><span class="z-l-2 z-d-6"> localhost:8000/api/musics/</span><span class="z-l-2 z-d-6"> title=mytitle</span><span class="z-l-2 z-d-6"> artist=myartist</span><span class="z-l-2 z-d-6"> album=myalbum</span><span class="z-l-2 z-d-6"> Authorization:</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">Token &lt;token_id&gt;</span><span class="z-l-2 z-d-6">&quot;</span></span></code></pre>
+<p>Edit an existing music by sending a request with json data in the body of the request.</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> http</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">-json</span><span class="z-l-2 z-d-6"> PUT</span><span class="z-l-2 z-d-6"> localhost:8000/api/musics/</span><span class="z-l-8 z-d-10">&lt;</span><span class="z-l-2 z-d-6">i</span><span>d</span><span class="z-l-8 z-d-10">&gt;</span><span class="z-l-2 z-d-6">/</span><span class="z-l-2 z-d-6"> title=newtitle</span><span class="z-l-2 z-d-6"> artist=newartist</span><span class="z-l-2 z-d-6"> album=newalbum</span><span class="z-l-2 z-d-6"> Authorization:</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">Token &lt;token_id&gt;</span><span class="z-l-2 z-d-6">&quot;</span></span></code></pre>
+<p>Delete an existing music.</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> http</span><span class="z-l-2 z-d-6"> DELETE</span><span class="z-l-2 z-d-6"> localhost:8000/api/musics/</span><span class="z-l-8 z-d-10">&lt;</span><span class="z-l-2 z-d-6">i</span><span>d</span><span class="z-l-8 z-d-10">&gt;</span><span class="z-l-2 z-d-6">/</span><span class="z-l-2 z-d-6"> Authorization:</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">Token &lt;token_id&gt;</span><span class="z-l-2 z-d-6">&quot;</span></span></code></pre>
+<p>Add an existing music to the list of favourites from an existing user.</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> http</span><span class="z-l-2 z-d-6"> POST</span><span class="z-l-2 z-d-6"> localhost:8000/api/users/</span><span class="z-l-8 z-d-10">&lt;</span><span class="z-l-2 z-d-6">music_i</span><span>d</span><span class="z-l-8 z-d-10">&gt;</span><span class="z-l-2 z-d-6">/add_fav_music/</span><span class="z-l-2 z-d-6"> Authorization:</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">Token &lt;token_id&gt;</span><span class="z-l-2 z-d-6">&quot;</span></span></code></pre>
+<p>Delete a favourite music from the list of favourites from an existing user.</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> http</span><span class="z-l-2 z-d-6"> DELETE</span><span class="z-l-2 z-d-6"> localhost:8000/api/users/</span><span class="z-l-8 z-d-10">&lt;</span><span class="z-l-2 z-d-6">music_i</span><span>d</span><span class="z-l-8 z-d-10">&gt;</span><span class="z-l-2 z-d-6">/remove_fav_music/</span><span class="z-l-2 z-d-6"> Authorization:</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">Token &lt;token_id&gt;</span><span class="z-l-2 z-d-6">&quot;</span></span></code></pre>
+            </section>
+        </article>
+    </main>
+</div>
+
+
+
+            
+                
+            
+
+            
+        </div>
+
+        <div class="right-content">
+            
+    
+    
+
+        </div>
+        
+
+<style>
+    body { flex-wrap: wrap; }
+    .site-footer {
+        flex-basis: 100%;
+        width: 100%;
+        max-width: 920px;
+        margin: 0.5rem auto 0;
+        padding: 0 0.9rem;
+        text-align: center;
+        opacity: 0.7;
+        font-size: 0.9em;
+    }
+</style>
+<footer class="site-footer">
+    <p>Copyright &copy; 2026 Alexandre Pinto</p>
+</footer>
+
+    </body>
+
+</html>

@@ -1,0 +1,438 @@
+
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+    
+<head>
+    
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="base" content="https://alexandrept.com" />
+
+    
+
+    
+
+    
+    
+    
+        <title>
+            
+                A brave new blog
+            
+        </title>
+
+        
+            <meta property="og:title"
+                  content="A brave new blog" />
+        
+    
+
+    
+        
+            <meta property="og:description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+        
+            <meta name="description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+    
+        <link rel="icon"
+              type="image/png"
+              href="https://alexandrept.com/favicon.ico" />
+    
+
+    
+    
+        <link href=https://alexandrept.com/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/codeblock.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/toc.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/note.js></script>
+    
+
+    
+
+    
+    
+        
+            
+                <link rel="alternate"
+                      type="application/rss+xml"
+                      title="
+Alexandre Pinto
+"
+                      href="https://alexandrept.com/rss.xml" />
+            
+        
+    
+
+
+    
+
+    
+    
+        
+            <link id="syntaxLightStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-light.css" />
+            <link id="syntaxDarkStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-dark.css"
+                  disabled />
+        
+    
+
+    
+    
+        <link rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/light.css" />
+        <link id="darkModeStyle"
+              rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/dark.css" />
+    
+
+    
+        
+            <script>
+                var themeToggleMode = "toggle";
+            </script>
+        
+        <script src=https://alexandrept.com/js/themetoggle.js></script>
+
+        
+            <script>
+                setTheme(getSavedTheme());
+            </script>
+        
+    
+
+
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="https://alexandrept.com/main.css" />
+
+    
+        
+            <link rel="stylesheet" href="https://alexandrept.com/custom.css" />
+        
+    
+
+    
+        <script defer
+                src="https://alexandrept.com/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="e09f570a-4ee8-4bd0-81a1-c219559d337c"></script>
+
+</head>
+
+
+    <body>
+        
+
+        <div class="left-content">
+            
+            
+        </div>
+
+        <div class="content">
+            <nav>
+    <div class="left-nav">
+        
+            <a href=https://alexandrept.com>Alexandre Pinto</a>
+        
+
+
+        <div class="socials">
+            
+                
+            
+            
+                <a rel='me noopener' target='_blank' href="https://github.com/alexpnt" class="social">
+                    <img alt="github"
+                         src="https://alexandrept.com/icons/social/github.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://www.linkedin.com/in/alexandre-pinto" class="social">
+                    <img alt="linkedin"
+                         src="https://alexandrept.com/icons/social/linkedin.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://stackoverflow.com/users/3242636/alexpnt" class="social">
+                    <img alt="stackoverflow"
+                         src="https://alexandrept.com/icons/social/stack-overflow.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://twitter.com/alxpnto" class="social">
+                    <img alt="twitter"
+                         src="https://alexandrept.com/icons/social/twitter.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="mailto:contact@alexandrept.com" class="social">
+                    <img alt="email"
+                         src="https://alexandrept.com/icons/social/email.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="/rss.xml" class="social">
+                    <img alt="rss"
+                         src="https://alexandrept.com/icons/social/rss.svg" />
+                </a>
+            
+        </div>
+    </div>
+
+    <div class="right-nav">
+        
+            <a href=https://alexandrept.com style="margin-right: 0.5em">Home</a>
+        
+            <a href=https://alexandrept.com/cv style="margin-right: 0.5em">CV</a>
+        
+            <a href=https://alexandrept.com/blog style="margin-right: 0.5em">Blog</a>
+        
+            <a href=https://alexandrept.com/publications style="margin-right: 0.5em">Publications</a>
+        
+            <a href=https://alexandrept.com/tags style="margin-right: 0.5em">Tags</a>
+        
+
+        
+            <button id="search-button"
+                    class="search-button"
+                    title="$SHORTCUT to open search">
+                <img src="https://alexandrept.com/icons/search.svg"
+                     alt="Search"
+                     class="search-icon" />
+            </button>
+
+            <div id="searchModal"
+                 class="search-modal js"
+                 role="dialog"
+                 aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">
+                        Search
+                    </h1>
+                    <div id="searchBar">
+                        <input id="searchInput"
+                               role="combobox"
+                               autocomplete="off"
+                               spellcheck="false"
+                               aria-expanded="false"
+                               aria-controls="results-container"
+                               placeholder="Search..." />
+                        <button id="clear-search" class="clear-button" title="Clear search">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+        
+            <a id="dark-mode-toggle"
+               onclick="toggleTheme(); event.preventDefault();"
+               href="#">
+                <img src="https://alexandrept.com/icons/sun.svg" id="sun-icon" alt="Light" />
+                <img src="https://alexandrept.com/icons/moon.svg"
+                     id="moon-icon"
+                     style="filter: invert(1)"
+                     alt="Dark" />
+                
+            </a>
+
+            <!-- Initialize the theme toggle icons -->
+            <script>
+                updateItemToggleTheme()
+            </script>
+        
+    </div>
+</nav>
+
+
+            
+            
+    
+<div class="visible-element-observer-root" data-selector="main article p">
+    <main>
+        <article>
+            <div class="title">
+                
+                
+
+    <div class="page-header">
+        A brave new blog
+    </div>
+
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2017-07-01</time>
+                    
+
+
+                    
+
+                    
+
+                    
+
+                    
+                    
+
+                    
+                    
+
+                    
+                    
+                        <span class="tags-label">::</span>
+                        <span class="tags">
+                                <a href="https://alexandrept.com/tags/hexo/"
+                                   class="post-tag">hexo</a>
+                            
+                                <a href="https://alexandrept.com/tags/walkthrough/"
+                                   class="post-tag">walkthrough</a>
+                            
+                        </span>
+                    
+
+                    
+
+                </div>
+            </div>
+
+            
+
+            <section class="body">
+                <p>I always enjoyed the idea of keeping a journal where ideas, tips and tricks from my daily life could be shared. With this first post I intend to move forward this goal. By sharing knowledge, you grow a bit and help others improve. It also helps you to keep motivated, giving you a sense of purpose since you feel that you are contributing to the community.</p>
+<h2 id="the-hexo-framework">The Hexo Framework</h2>
+<p>This site is built using the awesome <a rel="noopener external" target="_blank" href="https://hexo.io/">hexo framework</a> with a slightly customized version of the <a rel="noopener external" target="_blank" href="https://github.com/probberechts/cactus-dark">Cactus Dark</a>  theme. In the light of the open source  movement, you can find the <a rel="noopener external" target="_blank" href="https://github.com/AlexPnt/hexo-site">source code</a> of this site in my github account.</p>
+<p>The <a rel="noopener external" target="_blank" href="https://hexo.io">hexo framework</a> is a fast and simple static site generator. Rather than generating dynamic content depending on the user request, a set of raw content is matched against a set of templates and styles to produce the final static content, that never changes over time. This has some advantages such as simplicity and speed, since there is no need to perform complex queries to complex backends to retrieve and build the content that the user is requesting.</p>
+<h2 id="walkthrough">Walkthrough</h2>
+<p>In order to get started you need to have the Node.js package manager (<a rel="noopener external" target="_blank" href="https://www.npmjs.com/">npm</a>) and the version control system <a rel="noopener external" target="_blank" href="https://git-scm.com/">git</a> installed.</p>
+<p><strong>Setting up hexo:</strong></p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> npm</span><span class="z-l-2 z-d-6"> install</span><span class="z-l-2 z-d-6"> hexo-cli</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">g</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> hexo</span><span class="z-l-2 z-d-6"> init</span><span class="z-l-2 z-d-6"> mysite</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> cd</span><span class="z-l-2 z-d-6"> mysite</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> npm</span><span class="z-l-2 z-d-6"> install</span></span></code></pre>
+<p><strong>Installing the cactus-dark theme:</strong></p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> git</span><span class="z-l-2 z-d-6"> clone</span><span class="z-l-2 z-d-6"> https://github.com/probberechts/cactus-dark.git</span><span class="z-l-2 z-d-6"> themes/cactus-dark</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> npm</span><span class="z-l-2 z-d-6"> install</span><span class="z-l-2 z-d-6"> hexo-pagination</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">-save</span></span></code></pre>
+<p>In your config.yml file, change the theme setting:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="yaml"><span class="giallo-l"><span class="z-l-3 z-d-5">t</span><span class="z-l-3 z-d-5">heme</span><span>:</span><span class="z-l-2 z-d-6"> c</span><span class="z-l-2 z-d-6">actus-dark</span></span></code></pre>
+<p><strong>Start serving your new site:</strong></p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> hexo</span><span class="z-l-2 z-d-6"> generate</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> hexo</span><span class="z-l-2 z-d-6"> serve</span></span></code></pre>
+<p>Head over to http://localhost:4000 to see it in action!
+After this, go ahead and customize it to your needs. There is a basic folder structure that you have to keep in mind.</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="plain"><span class="giallo-l"><span>├── _config.yml - (configuration settings) </span></span>
+<span class="giallo-l"><span>├── public      - (static files, which may be deployed to a live server)</span></span>
+<span class="giallo-l"><span>├── scaffolds   - (pages and posts will be based on these scaffolds)</span></span>
+<span class="giallo-l"><span>├── source      - (raw source content of your site)</span></span>
+<span class="giallo-l"><span>└── themes      - (custom themes of your site)</span></span></code></pre>
+<p><strong>Deploy:</strong></p>
+<p>The last step is to deploy your generated static site to a remote server and start serving it. In my case, I simply push the public folder to my github repository.</p>
+<p>For more details, head over to the great <a rel="noopener external" target="_blank" href="https://hexo.io/docs/">hexo documentation</a>.</p>
+
+            </section>
+        </article>
+    </main>
+</div>
+
+
+
+            
+                
+            
+
+            
+        </div>
+
+        <div class="right-content">
+            
+    
+    
+        <div class="toc">
+    <div class="heading">
+        Table of Contents
+    </div>
+    <ul class="toc-list">
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/this-blog/#the-hexo-framework">The Hexo Framework</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/this-blog/#walkthrough">Walkthrough</a>
+
+                
+            </li>
+        
+    </ul>
+</div>
+
+    
+
+        </div>
+        
+
+<style>
+    body { flex-wrap: wrap; }
+    .site-footer {
+        flex-basis: 100%;
+        width: 100%;
+        max-width: 920px;
+        margin: 0.5rem auto 0;
+        padding: 0 0.9rem;
+        text-align: center;
+        opacity: 0.7;
+        font-size: 0.9em;
+    }
+</style>
+<footer class="site-footer">
+    <p>Copyright &copy; 2026 Alexandre Pinto</p>
+</footer>
+
+    </body>
+
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title>Alexandre Pinto - problems</title>
+      <link>https://alexandrept.com</link>
+      <description>Software engineer, from Portugal. Mostly interested in backend development and machine learning.</description>
+      <generator>Zola</generator>
+      <language>en</language>
+      <atom:link href="https://alexandrept.com/tags/problems/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Sun, 16 Jul 2017 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>Problem solving techniques</title>
+          <pubDate>Sun, 16 Jul 2017 00:00:00 +0000</pubDate>
+          <author>Alexandre Pinto</author>
+          <link>https://alexandrept.com/blog/problem-solving/</link>
+          <guid>https://alexandrept.com/blog/problem-solving/</guid>
+          <description xml:base="https://alexandrept.com/blog/problem-solving/">&lt;p&gt;In our daily life, we are constantly faced with problems that we need to solve. Therefore, we should take this into account and be prepared.&lt;/p&gt;
+&lt;p&gt;Fortunatelly, there are many frameworks and systematic guidelines out there that we can follow. One of my favourites is based on the four principles outlined by &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https://en.wikipedia.org/wiki/George_P%C3%B3lya&quot;&gt;George Polya&lt;/a&gt; in 1945.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/problem_solving.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. Understanding the Problem&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In order to fully understand the problem, we may restate it in different words. We should describe all the availabe data and extract any possible information from it. The unknown variables and the conditions the data is subject to should also be noted.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. Devise a plan&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;This step is probably the most important. Sometimes, different problems are related and maybe we can follow a strategy that we have used before. This recognition comes with practise and requires us to have knowledge of them. We may also try to solve an easier version of our problem and gradually add the other variables and conditions. Or we can try to recursively divide the big task into smaller sub-tasks and solve these ones first (divide and conquer). Even if we come up with different solutions, we should discuss the pros and cons of each in terms of different important factors.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. Carry out the plan&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In this step we just follow each outlined step of the plan. We should check that we are not forgetting anything and should take measures to guarantee that we are obtaining the expected results, for instance, logging and monitoring each iteration of our plan.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4. Look back&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Finally, we confirm we did obtain the desired results, by interpreting them and asking if they make sense. In this step we may also document and share our strategy. This will help us in the future when similar problems appear and also help new people who are faced for the first time with this kind of challenges.&lt;/p&gt;
+</description>
+      </item>
+    </channel>
+</rss>

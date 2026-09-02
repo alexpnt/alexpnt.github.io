@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title>Alexandre Pinto - values</title>
+      <link>https://alexandrept.com</link>
+      <description>Software engineer, from Portugal. Mostly interested in backend development and machine learning.</description>
+      <generator>Zola</generator>
+      <language>en</language>
+      <atom:link href="https://alexandrept.com/tags/values/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Sun, 02 Jul 2017 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>A set of core values</title>
+          <pubDate>Sun, 02 Jul 2017 00:00:00 +0000</pubDate>
+          <author>Alexandre Pinto</author>
+          <link>https://alexandrept.com/blog/core-values/</link>
+          <guid>https://alexandrept.com/blog/core-values/</guid>
+          <description xml:base="https://alexandrept.com/blog/core-values/">&lt;p&gt;In our daily lifes, we follow a set of principles that guide our behaviour and actions. They help us define and distinguish the right from wrong, deal with many situations, and follow what we believe to be the right path. Therefore, I like to keep a list of personal core values that I enjoy following.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Listen.&lt;/li&gt;
+&lt;li&gt;Observe.&lt;/li&gt;
+&lt;li&gt;Exercise.&lt;/li&gt;
+&lt;li&gt;Experiment.&lt;/li&gt;
+&lt;li&gt;Communicate.&lt;/li&gt;
+&lt;li&gt;Keep learning.&lt;/li&gt;
+&lt;li&gt;Enjoy moments.&lt;/li&gt;
+&lt;li&gt;Think and Ask.&lt;/li&gt;
+&lt;li&gt;Have a passion.&lt;/li&gt;
+&lt;li&gt;Avoid multitasking.&lt;/li&gt;
+&lt;li&gt;Be positive and motivated.&lt;/li&gt;
+&lt;li&gt;Do not ignore your intuiton.&lt;/li&gt;
+&lt;li&gt;Handle stressful situations calmy and with patience.&lt;/li&gt;
+&lt;li&gt;You cannot change the past, but you can affect the future.&lt;/li&gt;
+&lt;li&gt;Intercalate work with moments of leisure, instead of the opposite.&lt;/li&gt;
+&lt;li&gt;Things are built by increments. Focus on the small units and in time, you will achieve the bigger picture.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+      </item>
+    </channel>
+</rss>

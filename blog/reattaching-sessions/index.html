@@ -1,0 +1,480 @@
+
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+    
+<head>
+    
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="base" content="https://alexandrept.com" />
+
+    
+
+    
+
+    
+    
+    
+        <title>
+            
+                Reattaching shell sessions
+            
+        </title>
+
+        
+            <meta property="og:title"
+                  content="Reattaching shell sessions" />
+        
+    
+
+    
+        
+            <meta property="og:description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+        
+            <meta name="description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+    
+        <link rel="icon"
+              type="image/png"
+              href="https://alexandrept.com/favicon.ico" />
+    
+
+    
+    
+        <link href=https://alexandrept.com/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/codeblock.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/toc.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/note.js></script>
+    
+
+    
+
+    
+    
+        
+            
+                <link rel="alternate"
+                      type="application/rss+xml"
+                      title="
+Alexandre Pinto
+"
+                      href="https://alexandrept.com/rss.xml" />
+            
+        
+    
+
+
+    
+
+    
+    
+        
+            <link id="syntaxLightStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-light.css" />
+            <link id="syntaxDarkStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-dark.css"
+                  disabled />
+        
+    
+
+    
+    
+        <link rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/light.css" />
+        <link id="darkModeStyle"
+              rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/dark.css" />
+    
+
+    
+        
+            <script>
+                var themeToggleMode = "toggle";
+            </script>
+        
+        <script src=https://alexandrept.com/js/themetoggle.js></script>
+
+        
+            <script>
+                setTheme(getSavedTheme());
+            </script>
+        
+    
+
+
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="https://alexandrept.com/main.css" />
+
+    
+        
+            <link rel="stylesheet" href="https://alexandrept.com/custom.css" />
+        
+    
+
+    
+        <script defer
+                src="https://alexandrept.com/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="e09f570a-4ee8-4bd0-81a1-c219559d337c"></script>
+
+</head>
+
+
+    <body>
+        
+
+        <div class="left-content">
+            
+            
+        </div>
+
+        <div class="content">
+            <nav>
+    <div class="left-nav">
+        
+            <a href=https://alexandrept.com>Alexandre Pinto</a>
+        
+
+
+        <div class="socials">
+            
+                
+            
+            
+                <a rel='me noopener' target='_blank' href="https://github.com/alexpnt" class="social">
+                    <img alt="github"
+                         src="https://alexandrept.com/icons/social/github.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://www.linkedin.com/in/alexandre-pinto" class="social">
+                    <img alt="linkedin"
+                         src="https://alexandrept.com/icons/social/linkedin.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://stackoverflow.com/users/3242636/alexpnt" class="social">
+                    <img alt="stackoverflow"
+                         src="https://alexandrept.com/icons/social/stack-overflow.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://twitter.com/alxpnto" class="social">
+                    <img alt="twitter"
+                         src="https://alexandrept.com/icons/social/twitter.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="mailto:contact@alexandrept.com" class="social">
+                    <img alt="email"
+                         src="https://alexandrept.com/icons/social/email.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="/rss.xml" class="social">
+                    <img alt="rss"
+                         src="https://alexandrept.com/icons/social/rss.svg" />
+                </a>
+            
+        </div>
+    </div>
+
+    <div class="right-nav">
+        
+            <a href=https://alexandrept.com style="margin-right: 0.5em">Home</a>
+        
+            <a href=https://alexandrept.com/cv style="margin-right: 0.5em">CV</a>
+        
+            <a href=https://alexandrept.com/blog style="margin-right: 0.5em">Blog</a>
+        
+            <a href=https://alexandrept.com/publications style="margin-right: 0.5em">Publications</a>
+        
+            <a href=https://alexandrept.com/tags style="margin-right: 0.5em">Tags</a>
+        
+
+        
+            <button id="search-button"
+                    class="search-button"
+                    title="$SHORTCUT to open search">
+                <img src="https://alexandrept.com/icons/search.svg"
+                     alt="Search"
+                     class="search-icon" />
+            </button>
+
+            <div id="searchModal"
+                 class="search-modal js"
+                 role="dialog"
+                 aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">
+                        Search
+                    </h1>
+                    <div id="searchBar">
+                        <input id="searchInput"
+                               role="combobox"
+                               autocomplete="off"
+                               spellcheck="false"
+                               aria-expanded="false"
+                               aria-controls="results-container"
+                               placeholder="Search..." />
+                        <button id="clear-search" class="clear-button" title="Clear search">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+        
+            <a id="dark-mode-toggle"
+               onclick="toggleTheme(); event.preventDefault();"
+               href="#">
+                <img src="https://alexandrept.com/icons/sun.svg" id="sun-icon" alt="Light" />
+                <img src="https://alexandrept.com/icons/moon.svg"
+                     id="moon-icon"
+                     style="filter: invert(1)"
+                     alt="Dark" />
+                
+            </a>
+
+            <!-- Initialize the theme toggle icons -->
+            <script>
+                updateItemToggleTheme()
+            </script>
+        
+    </div>
+</nav>
+
+
+            
+            
+    
+<div class="visible-element-observer-root" data-selector="main article p">
+    <main>
+        <article>
+            <div class="title">
+                
+                
+
+    <div class="page-header">
+        Reattaching shell sessions
+    </div>
+
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2017-08-15</time>
+                    
+
+
+                    
+
+                    
+
+                    
+
+                    
+                    
+
+                    
+                    
+
+                    
+                    
+                        <span class="tags-label">::</span>
+                        <span class="tags">
+                                <a href="https://alexandrept.com/tags/linux/"
+                                   class="post-tag">linux</a>
+                            
+                                <a href="https://alexandrept.com/tags/shell/"
+                                   class="post-tag">shell</a>
+                            
+                        </span>
+                    
+
+                    
+
+                </div>
+            </div>
+
+            
+
+            <section class="body">
+                <p>Ever started a shell session running a process, quickly realizing that will take longer than you expected to finish? For instance, a remote ssh session where you do not want to leave your computer turned on just to keep the session open. Fortunately, there is a workaround by using a combination of <a rel="noopener external" target="_blank" href="https://www.gnu.org/software/screen/">screen</a> and <a rel="noopener external" target="_blank" href="https://github.com/nelhage/reptyr">reptyr</a>.</p>
+<p>For example, imagine that we are running this hypothetic slow process that prints in each second the next number of the Fibonacci sequence:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span class="z-l-5 z-d-3">#</span><span class="z-l-5 z-d-3">!/usr/bin/env python</span></span>
+<span class="giallo-l"><span class="z-l-5 z-d-3">#</span><span class="z-l-5 z-d-3"> -*- coding: utf-8 -*-</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">import</span><span> time</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">def</span><span class="z-l-6 z-d-7"> fibo</span><span>(</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span>	prev</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-1 z-d-4"> sum</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-1 z-d-4"> 0</span></span>
+<span class="giallo-l"><span>	actual</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-1 z-d-4"> 1</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">        print</span><span> actual</span><span>	</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">	while</span><span class="z-l-1 z-d-4"> True</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">		next</span><span class="z-l-8 z-d-10"> =</span><span> prev</span><span class="z-l-8 z-d-10"> +</span><span> actual</span></span>
+<span class="giallo-l"><span>		prev</span><span class="z-l-8 z-d-10"> =</span><span> actual</span></span>
+<span class="giallo-l"><span>		actual</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-1 z-d-4"> next</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">		print</span><span> actual</span></span>
+<span class="giallo-l"><span>		time</span><span>.</span><span>sleep</span><span>(</span><span class="z-l-1 z-d-4">1</span><span>)</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">if</span><span class="z-l-1 z-d-4"> __name__</span><span class="z-l-8 z-d-10"> ==</span><span class="z-l-2 z-d-6"> &quot;</span><span class="z-l-2 z-d-6">__main__</span><span class="z-l-2 z-d-6">&quot;</span><span>:</span></span>
+<span class="giallo-l"><span>    fibo</span><span>(</span><span>)</span></span></code></pre><pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> python</span><span class="z-l-2 z-d-6"> fibo.py</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">1</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">1</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">2</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">3</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">5</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">8</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">13</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">21</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">34</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">55</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">89</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">144</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">233</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">377</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">610</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">987</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">1597</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">2584</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">4181</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">6765</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">10946</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">17711</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">28657</span></span></code></pre>
+<p>We are now interested in moving this job to another session where we can attach and detach any time, while leaving the job running. In order to achieve this, we start by creating a new screen session in a new window:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> screen</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">S</span><span class="z-l-2 z-d-6"> fibonacci</span></span></code></pre>
+<p>The screen tool lets us create multiple windows with shells inside. We can also leave those windows at anytime and reenter them later, always leaving their internal programs running. Once we have this new screen session, we can move our running job to this new shell:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> ps</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">u</span><span class="z-l-8 z-d-10"> |</span><span class="z-l-6 z-d-7"> grep</span><span class="z-l-2 z-d-6"> fibo.py</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">alexpnt</span><span class="z-l-1 z-d-4">  10776</span><span class="z-l-1 z-d-4">  0.0</span><span class="z-l-1 z-d-4">  0.1</span><span class="z-l-1 z-d-4">  25540</span><span class="z-l-1 z-d-4">  6204</span><span class="z-l-2 z-d-6"> pts/4</span><span class="z-l-2 z-d-6">    S+</span><span class="z-l-2 z-d-6">   14:00</span><span class="z-l-2 z-d-6">   0:00</span><span class="z-l-2 z-d-6"> python</span><span class="z-l-2 z-d-6"> fibo.py</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> sudo</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">i</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> echo</span><span class="z-l-1 z-d-4"> 0</span><span class="z-l-8 z-d-10"> &gt;</span><span class="z-l-2 z-d-6"> /proc/sys/kernel/yama/ptrace_scope</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> exit</span><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> reptyr</span><span class="z-l-1 z-d-4"> 10776</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">46368</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">75025</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">121393</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">196418</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">317811</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">514229</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">832040</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">1346269</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">2178309</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">3524578</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">5702887</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">9227465</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">14930352</span></span></code></pre>
+<p>We temporarily enable the ability to attach programs, as root. Then, we grab the process id and pass it to the reptyr tool, which does a great job in moving our old process back to this new shell. We can now detach from this screen session by typing <em>Ctrl + Shift + D</em> and confirming the session is saved:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> screen</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">ls</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">There</span><span class="z-l-2 z-d-6"> is</span><span class="z-l-2 z-d-6"> a</span><span class="z-l-2 z-d-6"> screen</span><span class="z-l-2 z-d-6"> on:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	10822.fibo</span><span>	(Detached</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">1</span><span class="z-l-2 z-d-6"> Socket</span><span class="z-l-2 z-d-6"> in</span><span class="z-l-2 z-d-6"> /run/screens/S-alexpnt.</span></span>
+<span class="giallo-l"></span></code></pre>
+<p>Later, when can reattach to the screen:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> screen</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">r</span><span class="z-l-2 z-d-6"> fibo</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">24157817</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">39088169</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">63245986</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">102334155</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">165580141</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">267914296</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">433494437</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">701408733</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">1134903170</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">1836311903</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">2971215073</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">4807526976</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">7778742049</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">12586269025</span></span></code></pre>
+<p>PS: You might need to run <code>bash echo 0 &gt; /proc/sys/kernel/yama/ptrace_scope</code></p>
+<p>This is a very simple example with a trivial job running just to illustrate the idea of moving random jobs to new screen sessions. We can avoid this by always starting long running process in new screen sessions. In case we forget, we can use this process to rescue us.</p>
+
+            </section>
+        </article>
+    </main>
+</div>
+
+
+
+            
+                
+            
+
+            
+        </div>
+
+        <div class="right-content">
+            
+    
+    
+
+        </div>
+        
+
+<style>
+    body { flex-wrap: wrap; }
+    .site-footer {
+        flex-basis: 100%;
+        width: 100%;
+        max-width: 920px;
+        margin: 0.5rem auto 0;
+        padding: 0 0.9rem;
+        text-align: center;
+        opacity: 0.7;
+        font-size: 0.9em;
+    }
+</style>
+<footer class="site-footer">
+    <p>Copyright &copy; 2026 Alexandre Pinto</p>
+</footer>
+
+    </body>
+
+</html>

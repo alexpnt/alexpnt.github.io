@@ -1,0 +1,421 @@
+
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+    
+<head>
+    
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="base" content="https://alexandrept.com" />
+
+    
+
+    
+
+    
+    
+    
+        <title>
+            
+                Building a machine-learning pipeline with scikit-learn and Qt - Part III
+            
+        </title>
+
+        
+            <meta property="og:title"
+                  content="Building a machine-learning pipeline with scikit-learn and Qt - Part III" />
+        
+    
+
+    
+        
+            <meta property="og:description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+        
+            <meta name="description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+    
+        <link rel="icon"
+              type="image/png"
+              href="https://alexandrept.com/favicon.ico" />
+    
+
+    
+    
+        <link href=https://alexandrept.com/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/codeblock.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/toc.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/note.js></script>
+    
+
+    
+
+    
+    
+        
+            
+                <link rel="alternate"
+                      type="application/rss+xml"
+                      title="
+Alexandre Pinto
+"
+                      href="https://alexandrept.com/rss.xml" />
+            
+        
+    
+
+
+    
+
+    
+    
+        
+            <link id="syntaxLightStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-light.css" />
+            <link id="syntaxDarkStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-dark.css"
+                  disabled />
+        
+    
+
+    
+    
+        <link rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/light.css" />
+        <link id="darkModeStyle"
+              rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/dark.css" />
+    
+
+    
+        
+            <script>
+                var themeToggleMode = "toggle";
+            </script>
+        
+        <script src=https://alexandrept.com/js/themetoggle.js></script>
+
+        
+            <script>
+                setTheme(getSavedTheme());
+            </script>
+        
+    
+
+
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="https://alexandrept.com/main.css" />
+
+    
+        
+            <link rel="stylesheet" href="https://alexandrept.com/custom.css" />
+        
+    
+
+    
+        <script defer
+                src="https://alexandrept.com/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="e09f570a-4ee8-4bd0-81a1-c219559d337c"></script>
+
+</head>
+
+
+    <body>
+        
+
+        <div class="left-content">
+            
+            
+        </div>
+
+        <div class="content">
+            <nav>
+    <div class="left-nav">
+        
+            <a href=https://alexandrept.com>Alexandre Pinto</a>
+        
+
+
+        <div class="socials">
+            
+                
+            
+            
+                <a rel='me noopener' target='_blank' href="https://github.com/alexpnt" class="social">
+                    <img alt="github"
+                         src="https://alexandrept.com/icons/social/github.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://www.linkedin.com/in/alexandre-pinto" class="social">
+                    <img alt="linkedin"
+                         src="https://alexandrept.com/icons/social/linkedin.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://stackoverflow.com/users/3242636/alexpnt" class="social">
+                    <img alt="stackoverflow"
+                         src="https://alexandrept.com/icons/social/stack-overflow.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://twitter.com/alxpnto" class="social">
+                    <img alt="twitter"
+                         src="https://alexandrept.com/icons/social/twitter.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="mailto:contact@alexandrept.com" class="social">
+                    <img alt="email"
+                         src="https://alexandrept.com/icons/social/email.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="/rss.xml" class="social">
+                    <img alt="rss"
+                         src="https://alexandrept.com/icons/social/rss.svg" />
+                </a>
+            
+        </div>
+    </div>
+
+    <div class="right-nav">
+        
+            <a href=https://alexandrept.com style="margin-right: 0.5em">Home</a>
+        
+            <a href=https://alexandrept.com/cv style="margin-right: 0.5em">CV</a>
+        
+            <a href=https://alexandrept.com/blog style="margin-right: 0.5em">Blog</a>
+        
+            <a href=https://alexandrept.com/publications style="margin-right: 0.5em">Publications</a>
+        
+            <a href=https://alexandrept.com/tags style="margin-right: 0.5em">Tags</a>
+        
+
+        
+            <button id="search-button"
+                    class="search-button"
+                    title="$SHORTCUT to open search">
+                <img src="https://alexandrept.com/icons/search.svg"
+                     alt="Search"
+                     class="search-icon" />
+            </button>
+
+            <div id="searchModal"
+                 class="search-modal js"
+                 role="dialog"
+                 aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">
+                        Search
+                    </h1>
+                    <div id="searchBar">
+                        <input id="searchInput"
+                               role="combobox"
+                               autocomplete="off"
+                               spellcheck="false"
+                               aria-expanded="false"
+                               aria-controls="results-container"
+                               placeholder="Search..." />
+                        <button id="clear-search" class="clear-button" title="Clear search">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+        
+            <a id="dark-mode-toggle"
+               onclick="toggleTheme(); event.preventDefault();"
+               href="#">
+                <img src="https://alexandrept.com/icons/sun.svg" id="sun-icon" alt="Light" />
+                <img src="https://alexandrept.com/icons/moon.svg"
+                     id="moon-icon"
+                     style="filter: invert(1)"
+                     alt="Dark" />
+                
+            </a>
+
+            <!-- Initialize the theme toggle icons -->
+            <script>
+                updateItemToggleTheme()
+            </script>
+        
+    </div>
+</nav>
+
+
+            
+            
+    
+<div class="visible-element-observer-root" data-selector="main article p">
+    <main>
+        <article>
+            <div class="title">
+                
+                
+
+    <div class="page-header">
+        Building a machine-learning pipeline with scikit-learn and Qt - Part III
+    </div>
+
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2017-09-03</time>
+                    
+
+
+                    
+
+                    
+
+                    
+
+                    
+                    
+
+                    
+                    
+
+                    
+                    
+                        <span class="tags-label">::</span>
+                        <span class="tags">
+                                <a href="https://alexandrept.com/tags/machine-learning/"
+                                   class="post-tag">machine-learning</a>
+                            
+                                <a href="https://alexandrept.com/tags/python/"
+                                   class="post-tag">python</a>
+                            
+                                <a href="https://alexandrept.com/tags/qt5/"
+                                   class="post-tag">qt5</a>
+                            
+                                <a href="https://alexandrept.com/tags/scikit-learn/"
+                                   class="post-tag">scikit-learn</a>
+                            
+                        </span>
+                    
+
+                    
+
+                </div>
+            </div>
+
+            
+
+            <section class="body">
+                <p>The assessment and visualization of the distribution of the features is an useful task to better get a sense of the discriminative capability of the features and how they relate with each other. In <a href="/blog/ml-pipeline-2/">part II</a> we talked about the dataset and the data collecting process. In this post we take a look at some common tasks such as:</p>
+<ul>
+<li><strong>Normalized Histogram Distribution</strong> - A normalized histogram (bin counts divided by total sum) showing the proportion of each feature value is shown for a certain feature where bars are grouped by class.</li>
+</ul>
+<p><img src="/images/ml-pipeline/feature-inspection-hist.png" alt="" /></p>
+<ul>
+<li><strong>Box Plot</strong> - A box plot for visualizing the distribution of the feature values of each feature grouped by class.</li>
+</ul>
+<p><img src="/images/ml-pipeline/feature-inspection-boxplot.png" alt="" /></p>
+<ul>
+<li><strong>Pairwise Relationships</strong> - A graph plotting the distribution relationships between two features, resulting in a 2 × 2 matrix where each diagonal element showed either the histogram distribution or the kernel density estimation of each feature distribution. Non-diagonal elements included a scatter plot of the two features grouped by class.</li>
+</ul>
+<p><img src="/images/ml-pipeline/feature-inspection-pairwise.png" alt="" /></p>
+<ul>
+<li><strong>Empirical Cumulative vs Standard Normal Density Functions</strong> - The Empirical Cumulative Density Functions are also shown against the standard Normal curve, along with the Kolmogorov–Smirnov statistic useful to test if the two functions are drawn from the same distribution (Standard Normal, in this case).</li>
+</ul>
+<p><img src="/images/ml-pipeline/feature-inspection-edf.png" alt="" /></p>
+<ul>
+<li><strong>Pearson Correlations</strong> - In order to see how strongly related two features are, the Pearson Correlation matrix is also shown, giving values between -1 and 1, where absolute values closer to 1 mean a high correlation. The sign indicates whether there is a positive relationship between the variables, that is, if a feature value increase or decreases, the other increases/decreases as well (positive correlation) or if one variable increases/decreases, the other decreases/increases with it (negative correlation).</li>
+</ul>
+<p><img src="/images/ml-pipeline/feature-inspection-pearson.png" alt="" /></p>
+<ul>
+<li><strong>Two-Dimensional Principal Components Analysis</strong> - A visualization of the two main principal components (directions with the highest variance).</li>
+</ul>
+<p><img src="/images/ml-pipeline/feature-inspection-pca.png" alt="" /></p>
+<ul>
+<li><strong>Two-Dimensional Linear Discriminant Analysis</strong> - A visualization of the two first linear discriminant directions (directions with highest class-separability and lowest inner-class variance).</li>
+</ul>
+<p><img src="/images/ml-pipeline/feature-inspection-lda.png" alt="" /></p>
+<p>The <a href="/blog/ml-pipeline-4/">next post</a> will be about preprocessing methods that we can apply to our data. Stay tuned.</p>
+
+            </section>
+        </article>
+    </main>
+</div>
+
+
+
+            
+                
+            
+
+            
+        </div>
+
+        <div class="right-content">
+            
+    
+    
+
+        </div>
+        
+
+<style>
+    body { flex-wrap: wrap; }
+    .site-footer {
+        flex-basis: 100%;
+        width: 100%;
+        max-width: 920px;
+        margin: 0.5rem auto 0;
+        padding: 0 0.9rem;
+        text-align: center;
+        opacity: 0.7;
+        font-size: 0.9em;
+    }
+</style>
+<footer class="site-footer">
+    <p>Copyright &copy; 2026 Alexandre Pinto</p>
+</footer>
+
+    </body>
+
+</html>

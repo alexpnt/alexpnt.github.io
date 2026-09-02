@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+    
+<head>
+    
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="base" content="https://alexandrept.com" />
+
+    
+
+    
+
+    
+    
+    
+        <title>
+            
+                Building a machine-learning pipeline with scikit-learn and Qt - Part II
+            
+        </title>
+
+        
+            <meta property="og:title"
+                  content="Building a machine-learning pipeline with scikit-learn and Qt - Part II" />
+        
+    
+
+    
+        
+            <meta property="og:description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+        
+            <meta name="description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+    
+        <link rel="icon"
+              type="image/png"
+              href="https://alexandrept.com/favicon.ico" />
+    
+
+    
+    
+        <link href=https://alexandrept.com/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/codeblock.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/toc.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/note.js></script>
+    
+
+    
+
+    
+    
+        
+            
+                <link rel="alternate"
+                      type="application/rss+xml"
+                      title="
+Alexandre Pinto
+"
+                      href="https://alexandrept.com/rss.xml" />
+            
+        
+    
+
+
+    
+
+    
+    
+        
+            <link id="syntaxLightStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-light.css" />
+            <link id="syntaxDarkStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-dark.css"
+                  disabled />
+        
+    
+
+    
+    
+        <link rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/light.css" />
+        <link id="darkModeStyle"
+              rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/dark.css" />
+    
+
+    
+        
+            <script>
+                var themeToggleMode = "toggle";
+            </script>
+        
+        <script src=https://alexandrept.com/js/themetoggle.js></script>
+
+        
+            <script>
+                setTheme(getSavedTheme());
+            </script>
+        
+    
+
+
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="https://alexandrept.com/main.css" />
+
+    
+        
+            <link rel="stylesheet" href="https://alexandrept.com/custom.css" />
+        
+    
+
+    
+        <script defer
+                src="https://alexandrept.com/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="e09f570a-4ee8-4bd0-81a1-c219559d337c"></script>
+
+</head>
+
+
+    <body>
+        
+
+        <div class="left-content">
+            
+            
+        </div>
+
+        <div class="content">
+            <nav>
+    <div class="left-nav">
+        
+            <a href=https://alexandrept.com>Alexandre Pinto</a>
+        
+
+
+        <div class="socials">
+            
+                
+            
+            
+                <a rel='me noopener' target='_blank' href="https://github.com/alexpnt" class="social">
+                    <img alt="github"
+                         src="https://alexandrept.com/icons/social/github.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://www.linkedin.com/in/alexandre-pinto" class="social">
+                    <img alt="linkedin"
+                         src="https://alexandrept.com/icons/social/linkedin.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://stackoverflow.com/users/3242636/alexpnt" class="social">
+                    <img alt="stackoverflow"
+                         src="https://alexandrept.com/icons/social/stack-overflow.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://twitter.com/alxpnto" class="social">
+                    <img alt="twitter"
+                         src="https://alexandrept.com/icons/social/twitter.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="mailto:contact@alexandrept.com" class="social">
+                    <img alt="email"
+                         src="https://alexandrept.com/icons/social/email.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="/rss.xml" class="social">
+                    <img alt="rss"
+                         src="https://alexandrept.com/icons/social/rss.svg" />
+                </a>
+            
+        </div>
+    </div>
+
+    <div class="right-nav">
+        
+            <a href=https://alexandrept.com style="margin-right: 0.5em">Home</a>
+        
+            <a href=https://alexandrept.com/cv style="margin-right: 0.5em">CV</a>
+        
+            <a href=https://alexandrept.com/blog style="margin-right: 0.5em">Blog</a>
+        
+            <a href=https://alexandrept.com/publications style="margin-right: 0.5em">Publications</a>
+        
+            <a href=https://alexandrept.com/tags style="margin-right: 0.5em">Tags</a>
+        
+
+        
+            <button id="search-button"
+                    class="search-button"
+                    title="$SHORTCUT to open search">
+                <img src="https://alexandrept.com/icons/search.svg"
+                     alt="Search"
+                     class="search-icon" />
+            </button>
+
+            <div id="searchModal"
+                 class="search-modal js"
+                 role="dialog"
+                 aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">
+                        Search
+                    </h1>
+                    <div id="searchBar">
+                        <input id="searchInput"
+                               role="combobox"
+                               autocomplete="off"
+                               spellcheck="false"
+                               aria-expanded="false"
+                               aria-controls="results-container"
+                               placeholder="Search..." />
+                        <button id="clear-search" class="clear-button" title="Clear search">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+        
+            <a id="dark-mode-toggle"
+               onclick="toggleTheme(); event.preventDefault();"
+               href="#">
+                <img src="https://alexandrept.com/icons/sun.svg" id="sun-icon" alt="Light" />
+                <img src="https://alexandrept.com/icons/moon.svg"
+                     id="moon-icon"
+                     style="filter: invert(1)"
+                     alt="Dark" />
+                
+            </a>
+
+            <!-- Initialize the theme toggle icons -->
+            <script>
+                updateItemToggleTheme()
+            </script>
+        
+    </div>
+</nav>
+
+
+            
+            
+    
+<div class="visible-element-observer-root" data-selector="main article p">
+    <main>
+        <article>
+            <div class="title">
+                
+                
+
+    <div class="page-header">
+        Building a machine-learning pipeline with scikit-learn and Qt - Part II
+    </div>
+
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2017-09-02</time>
+                    
+
+
+                    
+
+                    
+
+                    
+
+                    
+                    
+
+                    
+                    
+
+                    
+                    
+                        <span class="tags-label">::</span>
+                        <span class="tags">
+                                <a href="https://alexandrept.com/tags/machine-learning/"
+                                   class="post-tag">machine-learning</a>
+                            
+                                <a href="https://alexandrept.com/tags/python/"
+                                   class="post-tag">python</a>
+                            
+                                <a href="https://alexandrept.com/tags/qt5/"
+                                   class="post-tag">qt5</a>
+                            
+                                <a href="https://alexandrept.com/tags/scikit-learn/"
+                                   class="post-tag">scikit-learn</a>
+                            
+                        </span>
+                    
+
+                    
+
+                </div>
+            </div>
+
+            
+
+            <section class="body">
+                <p>In order to run experiments, we need a <a rel="noopener external" target="_blank" href="https://archive.ics.uci.edu/ml/datasets/default+of+credit+card+clients">data</a>. This dataset was the same used in a <a rel="noopener external" target="_blank" href="http://www.sciencedirect.com/science/article/pii/S0957417407006719">research study</a>, consisting of data payments gathered during October, 2005, from a bank in Taiwan, using the credit card holders from that bank as the study targets.</p>
+<p>In the <a href="/blog/ml-pipeline-1/">first part</a> we talked about the process of machine learning. This post will discuss data gathering and the dataset.</p>
+<h2 id="data-gathering">Data Gathering</h2>
+<p>The first step is to collect the training and testing data such as sufficient and representative data. This usually implies tasks such as:</p>
+<ul>
+<li>
+<p><strong>Data Integration</strong> - The initial data might come from different sources, with different formats or duplicated data. This step is important to create a single repository of data.</p>
+</li>
+<li>
+<p><strong>Data Balancing</strong> - As is often the case with real data, the data is usually not uniformly distributed across the different classes. Consequently, the trained models tend to predict new data with the majority class. Techniques to artificially balance the data might be employed here, such as reducing (Undersampling) / increasing (Oversampling) the number of instances from the majority /minority classes. An other alternative might be performing a stratified sampling in order to keep a significant number of instances in each class.</p>
+</li>
+<li>
+<p><strong>Cleaning</strong> - The quality of the data is important. Sometimes the data will have missing attributes or useless values. However, redundant or noisy data are important issues to be addressed, such as instances with very similar feature values, attributes easily deducted from others or outliers.</p>
+</li>
+</ul>
+<h2 id="the-dataset">The dataset</h2>
+<p>Each sample of the dataset contains 23 variables and a predictive binary label (Defaul payment: Yes = 1, No = 0). These 23 features are described as follows:</p>
+<ul>
+<li>X1: Amount of the given credit</li>
+<li>X2: Gender (1 = male; 2 = female)</li>
+<li>X3: Education (1 = graduate school; 2 = university; 3 = high school; 4 = others).</li>
+<li>X4: Marital status (1 = married; 2 = single; 3 = others)</li>
+<li>X5: Age (age in years)</li>
+<li>X6-X11: History of past payment (X6 = the repayment status in September, 2005 ; . . .; X11 = the repayment status in April, 2005), where x = -1 = pay duly and x = 1,2,3, ..9 = payment delay for x months</li>
+<li>X12-X17: Amount of bill statement</li>
+<li>X18–X23: Amount of previous payment</li>
+</ul>
+<h2 id="the-gui">The GUI</h2>
+<p>The resulting application has a tab designed to show a quick description of the loaded dataset, that is, the description of the features, the cardinality of each class and some statistical measures of each feature:</p>
+<p><img src="/images/ml-pipeline/loading.png" alt="" /></p>
+<p>For the design of the interface, the <a rel="noopener external" target="_blank" href="http://doc.qt.io/qt-5/qtdesigner-manual.html">Qt Designer</a> is a great tool to quickly generate our GUI. This tool generates a <em>.xml</em> file describing the UI, which is then used to generate a python module which we can import and use to load the main interface.</p>
+<p>The extraction of statistical metrics is useful to get a quick overview of how our data is distributed. We will talk about these metrics later in detail.</p>
+<p><a href="/blog/ml-pipeline-3/">Part III will provide an overview of feature assessment and  visualization</a>.</p>
+
+            </section>
+        </article>
+    </main>
+</div>
+
+
+
+            
+                
+            
+
+            
+        </div>
+
+        <div class="right-content">
+            
+    
+    
+        <div class="toc">
+    <div class="heading">
+        Table of Contents
+    </div>
+    <ul class="toc-list">
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/ml-pipeline-2/#data-gathering">Data Gathering</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/ml-pipeline-2/#the-dataset">The dataset</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/ml-pipeline-2/#the-gui">The GUI</a>
+
+                
+            </li>
+        
+    </ul>
+</div>
+
+    
+
+        </div>
+        
+
+<style>
+    body { flex-wrap: wrap; }
+    .site-footer {
+        flex-basis: 100%;
+        width: 100%;
+        max-width: 920px;
+        margin: 0.5rem auto 0;
+        padding: 0 0.9rem;
+        text-align: center;
+        opacity: 0.7;
+        font-size: 0.9em;
+    }
+</style>
+<footer class="site-footer">
+    <p>Copyright &copy; 2026 Alexandre Pinto</p>
+</footer>
+
+    </body>
+
+</html>

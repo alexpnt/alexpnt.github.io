@@ -1,0 +1,696 @@
+
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+    
+<head>
+    
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="base" content="https://alexandrept.com" />
+
+    
+
+    
+
+    
+    
+    
+        <title>
+            
+                Getting started with Django - Building a simple calendar
+            
+        </title>
+
+        
+            <meta property="og:title"
+                  content="Getting started with Django - Building a simple calendar" />
+        
+    
+
+    
+        
+            <meta property="og:description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+        
+            <meta name="description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+    
+        <link rel="icon"
+              type="image/png"
+              href="https://alexandrept.com/favicon.ico" />
+    
+
+    
+    
+        <link href=https://alexandrept.com/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/codeblock.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/toc.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/note.js></script>
+    
+
+    
+
+    
+    
+        
+            
+                <link rel="alternate"
+                      type="application/rss+xml"
+                      title="
+Alexandre Pinto
+"
+                      href="https://alexandrept.com/rss.xml" />
+            
+        
+    
+
+
+    
+
+    
+    
+        
+            <link id="syntaxLightStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-light.css" />
+            <link id="syntaxDarkStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-dark.css"
+                  disabled />
+        
+    
+
+    
+    
+        <link rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/light.css" />
+        <link id="darkModeStyle"
+              rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/dark.css" />
+    
+
+    
+        
+            <script>
+                var themeToggleMode = "toggle";
+            </script>
+        
+        <script src=https://alexandrept.com/js/themetoggle.js></script>
+
+        
+            <script>
+                setTheme(getSavedTheme());
+            </script>
+        
+    
+
+
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="https://alexandrept.com/main.css" />
+
+    
+        
+            <link rel="stylesheet" href="https://alexandrept.com/custom.css" />
+        
+    
+
+    
+        <script defer
+                src="https://alexandrept.com/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="e09f570a-4ee8-4bd0-81a1-c219559d337c"></script>
+
+</head>
+
+
+    <body>
+        
+
+        <div class="left-content">
+            
+            
+        </div>
+
+        <div class="content">
+            <nav>
+    <div class="left-nav">
+        
+            <a href=https://alexandrept.com>Alexandre Pinto</a>
+        
+
+
+        <div class="socials">
+            
+                
+            
+            
+                <a rel='me noopener' target='_blank' href="https://github.com/alexpnt" class="social">
+                    <img alt="github"
+                         src="https://alexandrept.com/icons/social/github.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://www.linkedin.com/in/alexandre-pinto" class="social">
+                    <img alt="linkedin"
+                         src="https://alexandrept.com/icons/social/linkedin.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://stackoverflow.com/users/3242636/alexpnt" class="social">
+                    <img alt="stackoverflow"
+                         src="https://alexandrept.com/icons/social/stack-overflow.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://twitter.com/alxpnto" class="social">
+                    <img alt="twitter"
+                         src="https://alexandrept.com/icons/social/twitter.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="mailto:contact@alexandrept.com" class="social">
+                    <img alt="email"
+                         src="https://alexandrept.com/icons/social/email.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="/rss.xml" class="social">
+                    <img alt="rss"
+                         src="https://alexandrept.com/icons/social/rss.svg" />
+                </a>
+            
+        </div>
+    </div>
+
+    <div class="right-nav">
+        
+            <a href=https://alexandrept.com style="margin-right: 0.5em">Home</a>
+        
+            <a href=https://alexandrept.com/cv style="margin-right: 0.5em">CV</a>
+        
+            <a href=https://alexandrept.com/blog style="margin-right: 0.5em">Blog</a>
+        
+            <a href=https://alexandrept.com/publications style="margin-right: 0.5em">Publications</a>
+        
+            <a href=https://alexandrept.com/tags style="margin-right: 0.5em">Tags</a>
+        
+
+        
+            <button id="search-button"
+                    class="search-button"
+                    title="$SHORTCUT to open search">
+                <img src="https://alexandrept.com/icons/search.svg"
+                     alt="Search"
+                     class="search-icon" />
+            </button>
+
+            <div id="searchModal"
+                 class="search-modal js"
+                 role="dialog"
+                 aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">
+                        Search
+                    </h1>
+                    <div id="searchBar">
+                        <input id="searchInput"
+                               role="combobox"
+                               autocomplete="off"
+                               spellcheck="false"
+                               aria-expanded="false"
+                               aria-controls="results-container"
+                               placeholder="Search..." />
+                        <button id="clear-search" class="clear-button" title="Clear search">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+        
+            <a id="dark-mode-toggle"
+               onclick="toggleTheme(); event.preventDefault();"
+               href="#">
+                <img src="https://alexandrept.com/icons/sun.svg" id="sun-icon" alt="Light" />
+                <img src="https://alexandrept.com/icons/moon.svg"
+                     id="moon-icon"
+                     style="filter: invert(1)"
+                     alt="Dark" />
+                
+            </a>
+
+            <!-- Initialize the theme toggle icons -->
+            <script>
+                updateItemToggleTheme()
+            </script>
+        
+    </div>
+</nav>
+
+
+            
+            
+    
+<div class="visible-element-observer-root" data-selector="main article p">
+    <main>
+        <article>
+            <div class="title">
+                
+                
+
+    <div class="page-header">
+        Getting started with Django - Building a simple calendar
+    </div>
+
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2017-07-15</time>
+                    
+
+
+                    
+
+                    
+
+                    
+
+                    
+                    
+
+                    
+                    
+
+                    
+                    
+                        <span class="tags-label">::</span>
+                        <span class="tags">
+                                <a href="https://alexandrept.com/tags/development/"
+                                   class="post-tag">development</a>
+                            
+                                <a href="https://alexandrept.com/tags/django/"
+                                   class="post-tag">django</a>
+                            
+                                <a href="https://alexandrept.com/tags/python/"
+                                   class="post-tag">python</a>
+                            
+                        </span>
+                    
+
+                    
+
+                </div>
+            </div>
+
+            
+
+            <section class="body">
+                <h2 id="what-is-django">What is Django ?</h2>
+<p>Django is a well-known web framework, written in Python, which comes packaged with lots of out of the box features, such as:</p>
+<ul>
+<li>An ORM (Object-relational mapping) where you define your data models and get access to a high-level API that lets you manage your data, instead of writing raw SQL.</li>
+<li>A template system for writing the front end, extending the basic HTML functionality.</li>
+<li>An admin panel where you can manage your data models.</li>
+<li>Security measures.</li>
+<li>Authentication, Form handling and URL routing.</li>
+</ul>
+<p>This speeds up your development, since the most basic and common tasks are already provided to you and ready to be used, letting you focus on the logic that makes your product unique.</p>
+<h2 id="getting-started">Getting started</h2>
+<p><strong>Installing and activating a virtual environment</strong></p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> wget</span><span class="z-l-2 z-d-6"> https://bootstrap.pypa.io/get-pip.py</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> sudo</span><span class="z-l-2 z-d-6"> python</span><span class="z-l-2 z-d-6"> get-pip.py</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> sudo</span><span class="z-l-2 z-d-6"> pip</span><span class="z-l-2 z-d-6"> install</span><span class="z-l-2 z-d-6"> virtualenv</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> virtualenv</span><span class="z-l-2 z-d-6"> venv</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> source</span><span class="z-l-2 z-d-6"> venv/bin/activate</span></span></code></pre>
+<p><strong>Installing Django</strong></p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> pip</span><span class="z-l-2 z-d-6"> install</span><span class="z-l-2 z-d-6"> django==</span><span class="z-l-1 z-d-4">1.11.3</span></span></code></pre>
+<p><strong>Creating the project directory structure</strong></p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> django-admin</span><span class="z-l-2 z-d-6"> startproject</span><span class="z-l-2 z-d-6"> mycalendar</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> cd</span><span class="z-l-2 z-d-6"> mycalendar</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> python</span><span class="z-l-2 z-d-6"> manage.py</span><span class="z-l-2 z-d-6"> startapp</span><span class="z-l-2 z-d-6"> events</span></span></code></pre>
+<p><strong>Aplplying the migrations, creating the admin account and running the web server</strong></p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> python</span><span class="z-l-2 z-d-6"> manage.py</span><span class="z-l-2 z-d-6"> migrate</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> python</span><span class="z-l-2 z-d-6"> manage.py</span><span class="z-l-2 z-d-6"> createsuperuser</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> python</span><span class="z-l-2 z-d-6"> manage.py</span><span class="z-l-2 z-d-6"> runserver</span></span></code></pre>
+<p>If you head over to http://localhost:8000/admin, you will see a simple administration interface.</p>
+<h2 id="events">Events</h2>
+<p>The basic unit of our calendar will be the event, so we start by writting our event model in <em>mycalendar/events/models.py</em>.</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span class="z-l-5 z-d-3">#</span><span class="z-l-5 z-d-3"> -*- coding: utf-8 -*-</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span class="z-l-1 z-d-4"> __future__</span><span class="z-l-8 z-d-10"> import</span><span> unicode_literals</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> django</span><span>.</span><span>db</span><span class="z-l-8 z-d-10"> import</span><span> models</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">class</span><span class="z-l-6 z-d-7"> Event</span><span>(</span><span class="z-l-6 z-d-7">models</span><span>.</span><span class="z-l-6 z-d-7">Model</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span>    day</span><span class="z-l-8 z-d-10"> =</span><span> models</span><span>.</span><span>DateField</span><span>(</span><span class="z-l-8 z-d-10">u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Day of the event</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-9 z-d-12"> help_text</span><span class="z-l-8 z-d-10">=</span><span class="z-l-8 z-d-10">u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Day of the event</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span>    start_time</span><span class="z-l-8 z-d-10"> =</span><span> models</span><span>.</span><span>TimeField</span><span>(</span><span class="z-l-8 z-d-10">u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Starting time</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-9 z-d-12"> help_text</span><span class="z-l-8 z-d-10">=</span><span class="z-l-8 z-d-10">u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Starting time</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span>    end_time</span><span class="z-l-8 z-d-10"> =</span><span> models</span><span>.</span><span>TimeField</span><span>(</span><span class="z-l-8 z-d-10">u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Final time</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-9 z-d-12"> help_text</span><span class="z-l-8 z-d-10">=</span><span class="z-l-8 z-d-10">u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Final time</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span>    notes</span><span class="z-l-8 z-d-10"> =</span><span> models</span><span>.</span><span>TextField</span><span>(</span><span class="z-l-8 z-d-10">u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Textual Notes</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-9 z-d-12"> help_text</span><span class="z-l-8 z-d-10">=</span><span class="z-l-8 z-d-10">u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Textual Notes</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-9 z-d-12"> blank</span><span class="z-l-8 z-d-10">=</span><span class="z-l-1 z-d-4">True</span><span>,</span><span class="z-l-9 z-d-12"> null</span><span class="z-l-8 z-d-10">=</span><span class="z-l-1 z-d-4">True</span><span>)</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">    class</span><span class="z-l-6 z-d-7"> Meta</span><span>:</span></span>
+<span class="giallo-l"><span>        verbose_name</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-8 z-d-10"> u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Scheduling</span><span class="z-l-2 z-d-6">&#39;</span></span>
+<span class="giallo-l"><span>        verbose_name_plural</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-8 z-d-10"> u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Scheduling</span><span class="z-l-2 z-d-6">&#39;</span></span>
+<span class="giallo-l"></span></code></pre>
+<p>After this step we need to tell django about our new app in <em>mycalendar/settings.py</em>.</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"></span>
+<span class="giallo-l"><span>(</span><span class="z-l-1 z-d-4">...</span><span>)</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-5 z-d-3">#</span><span class="z-l-5 z-d-3"> Application definition</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">INSTALLED_APPS</span><span class="z-l-8 z-d-10"> =</span><span> [</span></span>
+<span class="giallo-l"><span class="z-l-2 z-d-6">    &#39;</span><span class="z-l-2 z-d-6">django.contrib.admin</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span></span>
+<span class="giallo-l"><span class="z-l-2 z-d-6">    &#39;</span><span class="z-l-2 z-d-6">django.contrib.auth</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span></span>
+<span class="giallo-l"><span class="z-l-2 z-d-6">    &#39;</span><span class="z-l-2 z-d-6">django.contrib.contenttypes</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span></span>
+<span class="giallo-l"><span class="z-l-2 z-d-6">    &#39;</span><span class="z-l-2 z-d-6">django.contrib.sessions</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span></span>
+<span class="giallo-l"><span class="z-l-2 z-d-6">    &#39;</span><span class="z-l-2 z-d-6">django.contrib.messages</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span></span>
+<span class="giallo-l"><span class="z-l-2 z-d-6">    &#39;</span><span class="z-l-2 z-d-6">django.contrib.staticfiles</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span></span>
+<span class="giallo-l"><span class="z-l-2 z-d-6">    &#39;</span><span class="z-l-2 z-d-6">events</span><span class="z-l-2 z-d-6">&#39;</span></span>
+<span class="giallo-l"><span>]</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span>(</span><span class="z-l-1 z-d-4">...</span><span>)</span></span></code></pre>
+<p>And in <em>mycalendar/events/admin.py</em> we register the model.</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span class="z-l-5 z-d-3">#</span><span class="z-l-5 z-d-3"> -*- coding: utf-8 -*-</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span class="z-l-1 z-d-4"> __future__</span><span class="z-l-8 z-d-10"> import</span><span> unicode_literals</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> django</span><span>.</span><span>contrib</span><span class="z-l-8 z-d-10"> import</span><span> admin</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> models</span><span class="z-l-8 z-d-10"> import</span><span> Event</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">class</span><span class="z-l-6 z-d-7"> EventAdmin</span><span>(</span><span class="z-l-6 z-d-7">admin</span><span>.</span><span class="z-l-6 z-d-7">ModelAdmin</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span>    list_display</span><span class="z-l-8 z-d-10"> =</span><span> [</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">day</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">start_time</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">end_time</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">notes</span><span class="z-l-2 z-d-6">&#39;</span><span>]</span></span></code></pre>
+<p>Finally, we apply the changes to the database and run the app:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> python</span><span class="z-l-2 z-d-6"> manage.py</span><span class="z-l-2 z-d-6"> makemigrations</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> python</span><span class="z-l-2 z-d-6"> manage.py</span><span class="z-l-2 z-d-6"> migrate</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> python</span><span class="z-l-2 z-d-6"> manage.py</span><span class="z-l-2 z-d-6"> runserver</span></span></code></pre>
+<p>We are now able to add simple events:</p>
+<p><img src="/images/add_event.png" alt="" /></p>
+<p>However, our current model does not have any validations, such as overlapping events. We can add these kind of validations in the <em>clean()</em> method of our model,  which iterates over our events and checks if there are collisions.</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span class="z-l-5 z-d-3">#</span><span class="z-l-5 z-d-3"> -*- coding: utf-8 -*-</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span class="z-l-1 z-d-4"> __future__</span><span class="z-l-8 z-d-10"> import</span><span> unicode_literals</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> django</span><span>.</span><span>db</span><span class="z-l-8 z-d-10"> import</span><span> models</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> django</span><span>.</span><span>core</span><span>.</span><span>exceptions</span><span class="z-l-8 z-d-10"> import</span><span> ValidationError</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> django</span><span>.</span><span>core</span><span>.</span><span>urlresolvers</span><span class="z-l-8 z-d-10"> import</span><span> reverse</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">class</span><span class="z-l-6 z-d-7"> Event</span><span>(</span><span class="z-l-6 z-d-7">models</span><span>.</span><span class="z-l-6 z-d-7">Model</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span>    day</span><span class="z-l-8 z-d-10"> =</span><span> models</span><span>.</span><span>DateField</span><span>(</span><span class="z-l-8 z-d-10">u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Day of the event</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-9 z-d-12"> help_text</span><span class="z-l-8 z-d-10">=</span><span class="z-l-8 z-d-10">u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Day of the event</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span>    start_time</span><span class="z-l-8 z-d-10"> =</span><span> models</span><span>.</span><span>TimeField</span><span>(</span><span class="z-l-8 z-d-10">u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Starting time</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-9 z-d-12"> help_text</span><span class="z-l-8 z-d-10">=</span><span class="z-l-8 z-d-10">u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Starting time</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span>    end_time</span><span class="z-l-8 z-d-10"> =</span><span> models</span><span>.</span><span>TimeField</span><span>(</span><span class="z-l-8 z-d-10">u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Final time</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-9 z-d-12"> help_text</span><span class="z-l-8 z-d-10">=</span><span class="z-l-8 z-d-10">u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Final time</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span>    notes</span><span class="z-l-8 z-d-10"> =</span><span> models</span><span>.</span><span>TextField</span><span>(</span><span class="z-l-8 z-d-10">u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Textual Notes</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-9 z-d-12"> help_text</span><span class="z-l-8 z-d-10">=</span><span class="z-l-8 z-d-10">u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Textual Notes</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-9 z-d-12"> blank</span><span class="z-l-8 z-d-10">=</span><span class="z-l-1 z-d-4">True</span><span>,</span><span class="z-l-9 z-d-12"> null</span><span class="z-l-8 z-d-10">=</span><span class="z-l-1 z-d-4">True</span><span>)</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">    class</span><span class="z-l-6 z-d-7"> Meta</span><span>:</span></span>
+<span class="giallo-l"><span>        verbose_name</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-8 z-d-10"> u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Scheduling</span><span class="z-l-2 z-d-6">&#39;</span></span>
+<span class="giallo-l"><span>        verbose_name_plural</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-8 z-d-10"> u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Scheduling</span><span class="z-l-2 z-d-6">&#39;</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">    def</span><span class="z-l-6 z-d-7"> check_overlap</span><span>(</span><span>self</span><span>,</span><span> fixed_start</span><span>,</span><span> fixed_end</span><span>,</span><span> new_start</span><span>,</span><span> new_end</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span>        overlap</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-1 z-d-4"> False</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">        if</span><span> new_start</span><span class="z-l-8 z-d-10"> ==</span><span> fixed_end</span><span class="z-l-8 z-d-10"> or</span><span> new_end</span><span class="z-l-8 z-d-10"> ==</span><span> fixed_start</span><span>:</span><span class="z-l-5 z-d-3">    #</span><span class="z-l-5 z-d-3">edge case</span></span>
+<span class="giallo-l"><span>            overlap</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-1 z-d-4"> False</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">        elif</span><span> (</span><span>new_start</span><span class="z-l-8 z-d-10"> &gt;=</span><span> fixed_start</span><span class="z-l-8 z-d-10"> and</span><span> new_start</span><span class="z-l-8 z-d-10"> &lt;=</span><span> fixed_end</span><span>)</span><span class="z-l-8 z-d-10"> or</span><span> (</span><span>new_end</span><span class="z-l-8 z-d-10"> &gt;=</span><span> fixed_start</span><span class="z-l-8 z-d-10"> and</span><span> new_end</span><span class="z-l-8 z-d-10"> &lt;=</span><span> fixed_end</span><span>)</span><span>:</span><span class="z-l-5 z-d-3"> #</span><span class="z-l-5 z-d-3">innner limits</span></span>
+<span class="giallo-l"><span>            overlap</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-1 z-d-4"> True</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">        elif</span><span> new_start</span><span class="z-l-8 z-d-10"> &lt;=</span><span> fixed_start</span><span class="z-l-8 z-d-10"> and</span><span> new_end</span><span class="z-l-8 z-d-10"> &gt;=</span><span> fixed_end</span><span>:</span><span class="z-l-5 z-d-3"> #</span><span class="z-l-5 z-d-3">outter limits</span></span>
+<span class="giallo-l"><span>            overlap</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-1 z-d-4"> True</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">        return</span><span> overlap</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">    def</span><span class="z-l-6 z-d-7"> get_absolute_url</span><span>(</span><span>self</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span>        url</span><span class="z-l-8 z-d-10"> =</span><span> reverse</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">admin:</span><span class="z-l-1 z-d-4">%s</span><span class="z-l-2 z-d-6">_</span><span class="z-l-1 z-d-4">%s</span><span class="z-l-2 z-d-6">_change</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-8 z-d-10"> %</span><span> (</span><span class="z-l-1 z-d-4">self</span><span>.</span><span>_meta</span><span>.</span><span>app_label</span><span>,</span><span class="z-l-1 z-d-4"> self</span><span>.</span><span>_meta</span><span>.</span><span>model_name</span><span>)</span><span>,</span><span class="z-l-9 z-d-12"> args</span><span class="z-l-8 z-d-10">=</span><span>[</span><span class="z-l-1 z-d-4">self</span><span>.</span><span>id</span><span>]</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">        return</span><span class="z-l-8 z-d-10"> u</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">&lt;a href=&quot;</span><span class="z-l-1 z-d-4">%s</span><span class="z-l-2 z-d-6">&quot;&gt;</span><span class="z-l-1 z-d-4">%s</span><span class="z-l-2 z-d-6">&lt;/a&gt;</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-8 z-d-10"> %</span><span> (</span><span>url</span><span>,</span><span class="z-l-1 z-d-4"> str</span><span>(</span><span class="z-l-1 z-d-4">self</span><span>.</span><span>start_time</span><span>)</span><span>)</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">    def</span><span class="z-l-6 z-d-7"> clean</span><span>(</span><span>self</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">        if</span><span class="z-l-1 z-d-4"> self</span><span>.</span><span>end_time</span><span class="z-l-8 z-d-10"> &lt;=</span><span class="z-l-1 z-d-4"> self</span><span>.</span><span>start_time</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">            raise</span><span> ValidationError</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Ending times must after starting times</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span>        events</span><span class="z-l-8 z-d-10"> =</span><span> Event</span><span>.</span><span>objects</span><span>.</span><span>filter</span><span>(</span><span class="z-l-9 z-d-12">day</span><span class="z-l-8 z-d-10">=</span><span class="z-l-1 z-d-4">self</span><span>.</span><span>day</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">        if</span><span> events</span><span>.</span><span>exists</span><span>(</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">            for</span><span> event</span><span class="z-l-8 z-d-10"> in</span><span> events</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">                if</span><span class="z-l-1 z-d-4"> self</span><span>.</span><span>check_overlap</span><span>(</span><span>event</span><span>.</span><span>start_time</span><span>,</span><span> event</span><span>.</span><span>end_time</span><span>,</span><span class="z-l-1 z-d-4"> self</span><span>.</span><span>start_time</span><span>,</span><span class="z-l-1 z-d-4"> self</span><span>.</span><span>end_time</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">                    raise</span><span> ValidationError</span><span>(</span></span>
+<span class="giallo-l"><span class="z-l-2 z-d-6">                        &#39;</span><span class="z-l-2 z-d-6">There is an overlap with another event: </span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-8 z-d-10"> +</span><span class="z-l-1 z-d-4"> str</span><span>(</span><span>event</span><span>.</span><span>day</span><span>)</span><span class="z-l-8 z-d-10"> +</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">, </span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-8 z-d-10"> +</span><span class="z-l-1 z-d-4"> str</span><span>(</span></span>
+<span class="giallo-l"><span>                            event</span><span>.</span><span>start_time</span><span>)</span><span class="z-l-8 z-d-10"> +</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">-</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-8 z-d-10"> +</span><span class="z-l-1 z-d-4"> str</span><span>(</span><span>event</span><span>.</span><span>end_time</span><span>)</span><span>)</span></span>
+<span class="giallo-l"></span></code></pre>
+<p>Our app now detects collisions.</p>
+<p><img src="/images/overlap.png" alt="" /></p>
+<h2 id="calendar">Calendar</h2>
+<p>It would be nice to add a monthly view of our events. There are some third-party packages available, but for the sake of simplicity we will stick to the built-in <em>HTMLCalendar</em> class provided by python.</p>
+<p>We first need to override the <em>change_list.html</em> admin template by creating a file in <em>events/templates/admin/events/change_list.html</em> with the exactly the same content installed in <em>site-packages/django/contrib/admin/templates/admin/</em> .</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="html"><span class="giallo-l"><span>(...)</span></span>
+<span class="giallo-l"><span>{​% block content %}</span></span>
+<span class="giallo-l"><span>  &lt;</span><span class="z-l-3 z-d-5">div</span><span class="z-l-6 z-d-7"> id</span><span>=</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">content-main</span><span class="z-l-2 z-d-6">&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>          &lt;</span><span class="z-l-3 z-d-5">ul</span><span class="z-l-6 z-d-7"> class</span><span>=</span><span class="z-l-2 z-d-6">&quot;</span><span class="z-l-2 z-d-6">object-tools</span><span class="z-l-2 z-d-6">&quot;</span><span>&gt;</span></span>
+<span class="giallo-l"><span>            &lt;</span><span class="z-l-3 z-d-5">li</span><span>&gt;</span></span>
+<span class="giallo-l"><span>                &lt;</span><span class="z-l-3 z-d-5">a</span><span class="z-l-6 z-d-7"> href</span><span>=</span><span class="z-l-2 z-d-6">{​{</span><span class="z-l-6 z-d-7"> previous_month</span><span class="z-l-6 z-d-7"> }}</span><span>&gt;</span></span>
+<span class="giallo-l"><span>                    Previous month</span></span>
+<span class="giallo-l"><span>                &lt;/</span><span class="z-l-3 z-d-5">a</span><span>&gt;</span></span>
+<span class="giallo-l"><span>            &lt;/</span><span class="z-l-3 z-d-5">li</span><span>&gt;</span></span>
+<span class="giallo-l"><span>            &lt;</span><span class="z-l-3 z-d-5">li</span><span>&gt;</span></span>
+<span class="giallo-l"><span>                &lt;</span><span class="z-l-3 z-d-5">a</span><span class="z-l-6 z-d-7"> href</span><span>=</span><span class="z-l-2 z-d-6">{​{</span><span class="z-l-6 z-d-7"> next_month</span><span class="z-l-6 z-d-7"> }}</span><span>&gt;</span></span>
+<span class="giallo-l"><span>                    Next month</span></span>
+<span class="giallo-l"><span>                &lt;/</span><span class="z-l-3 z-d-5">a</span><span>&gt;</span></span>
+<span class="giallo-l"><span>            &lt;/</span><span class="z-l-3 z-d-5">li</span><span>&gt;</span></span>
+<span class="giallo-l"><span>        &lt;/</span><span class="z-l-3 z-d-5">ul</span><span>&gt;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>        {​{ calendar }}</span></span>
+<span class="giallo-l"><span>(...)</span></span></code></pre>
+<p>We will now dynamically define the context variables such as previous_month, next_month and calendar in <em>events/admin.py</em></p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span class="z-l-5 z-d-3">#</span><span class="z-l-5 z-d-3"> -*- coding: utf-8 -*-</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span class="z-l-1 z-d-4"> __future__</span><span class="z-l-8 z-d-10"> import</span><span> unicode_literals</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> django</span><span>.</span><span>contrib</span><span class="z-l-8 z-d-10"> import</span><span> admin</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> models</span><span class="z-l-8 z-d-10"> import</span><span> Event</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">import</span><span> datetime</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">import</span><span> calendar</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> django</span><span>.</span><span>core</span><span>.</span><span>urlresolvers</span><span class="z-l-8 z-d-10"> import</span><span> reverse</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> calendar</span><span class="z-l-8 z-d-10"> import</span><span> HTMLCalendar</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> django</span><span>.</span><span>utils</span><span>.</span><span>safestring</span><span class="z-l-8 z-d-10"> import</span><span> mark_safe</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-5 z-d-3">#</span><span class="z-l-5 z-d-3"> Register your models here.</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">class</span><span class="z-l-6 z-d-7"> EventAdmin</span><span>(</span><span class="z-l-6 z-d-7">admin</span><span>.</span><span class="z-l-6 z-d-7">ModelAdmin</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span>    list_display</span><span class="z-l-8 z-d-10"> =</span><span> [</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">day</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">start_time</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">end_time</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">notes</span><span class="z-l-2 z-d-6">&#39;</span><span>]</span></span>
+<span class="giallo-l"><span>    change_list_template</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">admin/events/change_list.html</span><span class="z-l-2 z-d-6">&#39;</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">    def</span><span class="z-l-6 z-d-7"> changelist_view</span><span>(</span><span>self</span><span>,</span><span> request</span><span>,</span><span> extra_context</span><span class="z-l-8 z-d-10">=</span><span class="z-l-1 z-d-4">None</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span>        after_day</span><span class="z-l-8 z-d-10"> =</span><span> request</span><span>.</span><span class="z-l-1 z-d-4">GET</span><span>.</span><span>get</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">day__gte</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-1 z-d-4"> None</span><span>)</span></span>
+<span class="giallo-l"><span>        extra_context</span><span class="z-l-8 z-d-10"> =</span><span> extra_context</span><span class="z-l-8 z-d-10"> or</span><span> {</span><span>}</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">        if</span><span class="z-l-8 z-d-10"> not</span><span> after_day</span><span>:</span></span>
+<span class="giallo-l"><span>            d</span><span class="z-l-8 z-d-10"> =</span><span> datetime</span><span>.</span><span>date</span><span>.</span><span>today</span><span>(</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">        else</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">            try</span><span>:</span></span>
+<span class="giallo-l"><span>                split_after_day</span><span class="z-l-8 z-d-10"> =</span><span> after_day</span><span>.</span><span>split</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">-</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span>                d</span><span class="z-l-8 z-d-10"> =</span><span> datetime</span><span>.</span><span>date</span><span>(</span><span class="z-l-9 z-d-12">year</span><span class="z-l-8 z-d-10">=</span><span class="z-l-1 z-d-4">int</span><span>(</span><span>split_after_day</span><span>[</span><span class="z-l-1 z-d-4">0</span><span>]</span><span>)</span><span>,</span><span class="z-l-9 z-d-12"> month</span><span class="z-l-8 z-d-10">=</span><span class="z-l-1 z-d-4">int</span><span>(</span><span>split_after_day</span><span>[</span><span class="z-l-1 z-d-4">1</span><span>]</span><span>)</span><span>,</span><span class="z-l-9 z-d-12"> day</span><span class="z-l-8 z-d-10">=</span><span class="z-l-1 z-d-4">1</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">            except</span><span>:</span></span>
+<span class="giallo-l"><span>                d</span><span class="z-l-8 z-d-10"> =</span><span> datetime</span><span>.</span><span>date</span><span>.</span><span>today</span><span>(</span><span>)</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span>        previous_month</span><span class="z-l-8 z-d-10"> =</span><span> datetime</span><span>.</span><span>date</span><span>(</span><span class="z-l-9 z-d-12">year</span><span class="z-l-8 z-d-10">=</span><span>d</span><span>.</span><span>year</span><span>,</span><span class="z-l-9 z-d-12"> month</span><span class="z-l-8 z-d-10">=</span><span>d</span><span>.</span><span>month</span><span>,</span><span class="z-l-9 z-d-12"> day</span><span class="z-l-8 z-d-10">=</span><span class="z-l-1 z-d-4">1</span><span>)</span><span class="z-l-5 z-d-3">  #</span><span class="z-l-5 z-d-3"> find first day of current month</span></span>
+<span class="giallo-l"><span>        previous_month</span><span class="z-l-8 z-d-10"> =</span><span> previous_month</span><span class="z-l-8 z-d-10"> -</span><span> datetime</span><span>.</span><span>timedelta</span><span>(</span><span class="z-l-9 z-d-12">days</span><span class="z-l-8 z-d-10">=</span><span class="z-l-1 z-d-4">1</span><span>)</span><span class="z-l-5 z-d-3">  #</span><span class="z-l-5 z-d-3"> backs up a single day</span></span>
+<span class="giallo-l"><span>        previous_month</span><span class="z-l-8 z-d-10"> =</span><span> datetime</span><span>.</span><span>date</span><span>(</span><span class="z-l-9 z-d-12">year</span><span class="z-l-8 z-d-10">=</span><span>previous_month</span><span>.</span><span>year</span><span>,</span><span class="z-l-9 z-d-12"> month</span><span class="z-l-8 z-d-10">=</span><span>previous_month</span><span>.</span><span>month</span><span>,</span></span>
+<span class="giallo-l"><span class="z-l-9 z-d-12">                                       day</span><span class="z-l-8 z-d-10">=</span><span class="z-l-1 z-d-4">1</span><span>)</span><span class="z-l-5 z-d-3">  #</span><span class="z-l-5 z-d-3"> find first day of previous month</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span>        last_day</span><span class="z-l-8 z-d-10"> =</span><span> calendar</span><span>.</span><span>monthrange</span><span>(</span><span>d</span><span>.</span><span>year</span><span>,</span><span> d</span><span>.</span><span>month</span><span>)</span></span>
+<span class="giallo-l"><span>        next_month</span><span class="z-l-8 z-d-10"> =</span><span> datetime</span><span>.</span><span>date</span><span>(</span><span class="z-l-9 z-d-12">year</span><span class="z-l-8 z-d-10">=</span><span>d</span><span>.</span><span>year</span><span>,</span><span class="z-l-9 z-d-12"> month</span><span class="z-l-8 z-d-10">=</span><span>d</span><span>.</span><span>month</span><span>,</span><span class="z-l-9 z-d-12"> day</span><span class="z-l-8 z-d-10">=</span><span>last_day</span><span>[</span><span class="z-l-1 z-d-4">1</span><span>]</span><span>)</span><span class="z-l-5 z-d-3">  #</span><span class="z-l-5 z-d-3"> find last day of current month</span></span>
+<span class="giallo-l"><span>        next_month</span><span class="z-l-8 z-d-10"> =</span><span> next_month</span><span class="z-l-8 z-d-10"> +</span><span> datetime</span><span>.</span><span>timedelta</span><span>(</span><span class="z-l-9 z-d-12">days</span><span class="z-l-8 z-d-10">=</span><span class="z-l-1 z-d-4">1</span><span>)</span><span class="z-l-5 z-d-3">  #</span><span class="z-l-5 z-d-3"> forward a single day</span></span>
+<span class="giallo-l"><span>        next_month</span><span class="z-l-8 z-d-10"> =</span><span> datetime</span><span>.</span><span>date</span><span>(</span><span class="z-l-9 z-d-12">year</span><span class="z-l-8 z-d-10">=</span><span>next_month</span><span>.</span><span>year</span><span>,</span><span class="z-l-9 z-d-12"> month</span><span class="z-l-8 z-d-10">=</span><span>next_month</span><span>.</span><span>month</span><span>,</span></span>
+<span class="giallo-l"><span class="z-l-9 z-d-12">                                   day</span><span class="z-l-8 z-d-10">=</span><span class="z-l-1 z-d-4">1</span><span>)</span><span class="z-l-5 z-d-3">  #</span><span class="z-l-5 z-d-3"> find first day of next month</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span>        extra_context</span><span>[</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">previous_month</span><span class="z-l-2 z-d-6">&#39;</span><span>]</span><span class="z-l-8 z-d-10"> =</span><span> reverse</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">admin:events_event_changelist</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span><span class="z-l-8 z-d-10"> +</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">?day__gte=</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-8 z-d-10"> +</span><span class="z-l-1 z-d-4"> str</span><span>(</span></span>
+<span class="giallo-l"><span>            previous_month</span><span>)</span></span>
+<span class="giallo-l"><span>        extra_context</span><span>[</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">next_month</span><span class="z-l-2 z-d-6">&#39;</span><span>]</span><span class="z-l-8 z-d-10"> =</span><span> reverse</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">admin:events_event_changelist</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span><span class="z-l-8 z-d-10"> +</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">?day__gte=</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-8 z-d-10"> +</span><span class="z-l-1 z-d-4"> str</span><span>(</span><span>next_month</span><span>)</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span>        cal</span><span class="z-l-8 z-d-10"> =</span><span> HTMLCalendar</span><span>(</span><span>)</span></span>
+<span class="giallo-l"><span>        html_calendar</span><span class="z-l-8 z-d-10"> =</span><span> cal</span><span>.</span><span>formatmonth</span><span>(</span><span>d</span><span>.</span><span>year</span><span>,</span><span> d</span><span>.</span><span>month</span><span>,</span><span class="z-l-9 z-d-12"> withyear</span><span class="z-l-8 z-d-10">=</span><span class="z-l-1 z-d-4">True</span><span>)</span></span>
+<span class="giallo-l"><span>        html_calendar</span><span class="z-l-8 z-d-10"> =</span><span> html_calendar</span><span>.</span><span>replace</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">&lt;td </span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">&lt;td  width=&quot;150&quot; height=&quot;150&quot;</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span>        extra_context</span><span>[</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">calendar</span><span class="z-l-2 z-d-6">&#39;</span><span>]</span><span class="z-l-8 z-d-10"> =</span><span> mark_safe</span><span>(</span><span>html_calendar</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">        return</span><span class="z-l-1 z-d-4"> super</span><span>(</span><span>EventAdmin</span><span>,</span><span class="z-l-1 z-d-4"> self</span><span>)</span><span>.</span><span>changelist_view</span><span>(</span><span>request</span><span>,</span><span> extra_context</span><span>)</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span>admin</span><span>.</span><span>site</span><span>.</span><span>register</span><span>(</span><span>Event</span><span>,</span><span> EventAdmin</span><span>)</span></span></code></pre>
+<p>With this addition, our app now displays a monthly calendar.</p>
+<p><img src="/images/calendar.png" alt="" /></p>
+<p>However, our app still does not display the events in each cell. We can tweak the <em>HTMLCalendar</em> class by extending it and override the methods responsible for drawing the table cells. Our little tweak will be the introduction of the list of events and displaying them in their corresponding cell. We will now create a new class in <em>utils.py</em> .</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> calendar</span><span class="z-l-8 z-d-10"> import</span><span> HTMLCalendar</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> datetime</span><span class="z-l-8 z-d-10"> import</span><span> datetime</span><span class="z-l-8 z-d-10"> as</span><span> dtime</span><span>,</span><span> date</span><span>,</span><span> time</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">import</span><span> datetime</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> models</span><span class="z-l-8 z-d-10"> import</span><span> Event</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">class</span><span class="z-l-6 z-d-7"> EventCalendar</span><span>(</span><span class="z-l-6 z-d-7">HTMLCalendar</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">    def</span><span class="z-l-1 z-d-4"> __init__</span><span>(</span><span>self</span><span>,</span><span> events</span><span class="z-l-8 z-d-10">=</span><span class="z-l-1 z-d-4">None</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">        super</span><span>(</span><span>EventCalendar</span><span>,</span><span class="z-l-1 z-d-4"> self</span><span>)</span><span>.</span><span class="z-l-1 z-d-4">__init__</span><span>(</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">        self</span><span>.</span><span>events</span><span class="z-l-8 z-d-10"> =</span><span> events</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">    def</span><span class="z-l-6 z-d-7"> formatday</span><span>(</span><span>self</span><span>,</span><span> day</span><span>,</span><span> weekday</span><span>,</span><span> events</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-2 z-d-6">        &quot;&quot;&quot;</span></span>
+<span class="giallo-l"><span class="z-l-2 z-d-6">        Return a day as a table cell.</span></span>
+<span class="giallo-l"><span class="z-l-2 z-d-6">        &quot;&quot;&quot;</span></span>
+<span class="giallo-l"><span>        events_from_day</span><span class="z-l-8 z-d-10"> =</span><span> events</span><span>.</span><span>filter</span><span>(</span><span class="z-l-9 z-d-12">day__day</span><span class="z-l-8 z-d-10">=</span><span>day</span><span>)</span></span>
+<span class="giallo-l"><span>        events_html</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-2 z-d-6"> &quot;</span><span class="z-l-2 z-d-6">&lt;ul&gt;</span><span class="z-l-2 z-d-6">&quot;</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">        for</span><span> event</span><span class="z-l-8 z-d-10"> in</span><span> events_from_day</span><span>:</span></span>
+<span class="giallo-l"><span>            events_html</span><span class="z-l-8 z-d-10"> +=</span><span> event</span><span>.</span><span>get_absolute_url</span><span>(</span><span>)</span><span class="z-l-8 z-d-10"> +</span><span class="z-l-2 z-d-6"> &quot;</span><span class="z-l-2 z-d-6">&lt;br&gt;</span><span class="z-l-2 z-d-6">&quot;</span></span>
+<span class="giallo-l"><span>        events_html</span><span class="z-l-8 z-d-10"> +=</span><span class="z-l-2 z-d-6"> &quot;</span><span class="z-l-2 z-d-6">&lt;/ul&gt;</span><span class="z-l-2 z-d-6">&quot;</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">        if</span><span> day</span><span class="z-l-8 z-d-10"> ==</span><span class="z-l-1 z-d-4"> 0</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">            return</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">&lt;td class=&quot;noday&quot;&gt;&amp;nbsp;&lt;/td&gt;</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-5 z-d-3">  #</span><span class="z-l-5 z-d-3"> day outside month</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">        else</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">            return</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">&lt;td class=&quot;</span><span class="z-l-1 z-d-4">%s</span><span class="z-l-2 z-d-6">&quot;&gt;</span><span class="z-l-1 z-d-4">%d</span><span class="z-l-1 z-d-4">%s</span><span class="z-l-2 z-d-6">&lt;/td&gt;</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-8 z-d-10"> %</span><span> (</span><span class="z-l-1 z-d-4">self</span><span>.</span><span>cssclasses</span><span>[</span><span>weekday</span><span>]</span><span>,</span><span> day</span><span>,</span><span> events_html</span><span>)</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">    def</span><span class="z-l-6 z-d-7"> formatweek</span><span>(</span><span>self</span><span>,</span><span> theweek</span><span>,</span><span> events</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-2 z-d-6">        &quot;&quot;&quot;</span></span>
+<span class="giallo-l"><span class="z-l-2 z-d-6">        Return a complete week as a table row.</span></span>
+<span class="giallo-l"><span class="z-l-2 z-d-6">        &quot;&quot;&quot;</span></span>
+<span class="giallo-l"><span>        s</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">&#39;</span><span>.</span><span>join</span><span>(</span><span class="z-l-1 z-d-4">self</span><span>.</span><span>formatday</span><span>(</span><span>d</span><span>,</span><span> wd</span><span>,</span><span> events</span><span>)</span><span class="z-l-8 z-d-10"> for</span><span> (</span><span>d</span><span>,</span><span> wd</span><span>)</span><span class="z-l-8 z-d-10"> in</span><span> theweek</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">        return</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">&lt;tr&gt;</span><span class="z-l-1 z-d-4">%s</span><span class="z-l-2 z-d-6">&lt;/tr&gt;</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-8 z-d-10"> %</span><span> s</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">    def</span><span class="z-l-6 z-d-7"> formatmonth</span><span>(</span><span>self</span><span>,</span><span> theyear</span><span>,</span><span> themonth</span><span>,</span><span> withyear</span><span class="z-l-8 z-d-10">=</span><span class="z-l-1 z-d-4">True</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-2 z-d-6">        &quot;&quot;&quot;</span></span>
+<span class="giallo-l"><span class="z-l-2 z-d-6">        Return a formatted month as a table.</span></span>
+<span class="giallo-l"><span class="z-l-2 z-d-6">        &quot;&quot;&quot;</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span>        events</span><span class="z-l-8 z-d-10"> =</span><span> Event</span><span>.</span><span>objects</span><span>.</span><span>filter</span><span>(</span><span class="z-l-9 z-d-12">day__month</span><span class="z-l-8 z-d-10">=</span><span>themonth</span><span>)</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span>        v</span><span class="z-l-8 z-d-10"> =</span><span> [</span><span>]</span></span>
+<span class="giallo-l"><span>        a</span><span class="z-l-8 z-d-10"> =</span><span> v</span><span>.</span><span>append</span></span>
+<span class="giallo-l"><span>        a</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; class=&quot;month&quot;&gt;</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span>        a</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-1 z-d-4">\n</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span>        a</span><span>(</span><span class="z-l-1 z-d-4">self</span><span>.</span><span>formatmonthname</span><span>(</span><span>theyear</span><span>,</span><span> themonth</span><span>,</span><span class="z-l-9 z-d-12"> withyear</span><span class="z-l-8 z-d-10">=</span><span>withyear</span><span>)</span><span>)</span></span>
+<span class="giallo-l"><span>        a</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-1 z-d-4">\n</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span>        a</span><span>(</span><span class="z-l-1 z-d-4">self</span><span>.</span><span>formatweekheader</span><span>(</span><span>)</span><span>)</span></span>
+<span class="giallo-l"><span>        a</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-1 z-d-4">\n</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">        for</span><span> week</span><span class="z-l-8 z-d-10"> in</span><span class="z-l-1 z-d-4"> self</span><span>.</span><span>monthdays2calendar</span><span>(</span><span>theyear</span><span>,</span><span> themonth</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span>            a</span><span>(</span><span class="z-l-1 z-d-4">self</span><span>.</span><span>formatweek</span><span>(</span><span>week</span><span>,</span><span> events</span><span>)</span><span>)</span></span>
+<span class="giallo-l"><span>            a</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-1 z-d-4">\n</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span>        a</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">&lt;/table&gt;</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span>        a</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-1 z-d-4">\n</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">        return</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">&#39;</span><span>.</span><span>join</span><span>(</span><span>v</span><span>)</span></span></code></pre>
+<p>We can now use this new calendar in our admin view:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span>(</span><span class="z-l-1 z-d-4">...</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> utils</span><span class="z-l-8 z-d-10"> import</span><span> EventCalendar</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span>(</span><span class="z-l-1 z-d-4">...</span><span>)</span></span>
+<span class="giallo-l"><span>cal</span><span class="z-l-8 z-d-10"> =</span><span> EventCalendar</span><span>(</span><span>)</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span>(</span><span class="z-l-1 z-d-4">...</span><span>)</span></span></code></pre>
+<p>Our monthly view now displays the events in their corresponding cells.</p>
+<p><img src="/images/events.png" alt="" /></p>
+<p>We can see a lot of events happening at 15th July. Fortunately, our new calendar also display links to their details.</p>
+<p><img src="/images/birthday.png" alt="" /></p>
+<p>Someone is having a very special day!</p>
+<p>You can find the source code of this example <a rel="noopener external" target="_blank" href="https://github.com/AlexPnt/django-calendar">here</a>.</p>
+
+            </section>
+        </article>
+    </main>
+</div>
+
+
+
+            
+                
+            
+
+            
+        </div>
+
+        <div class="right-content">
+            
+    
+    
+        <div class="toc">
+    <div class="heading">
+        Table of Contents
+    </div>
+    <ul class="toc-list">
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/django-calendar/#what-is-django">What is Django ?</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/django-calendar/#getting-started">Getting started</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/django-calendar/#events">Events</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/django-calendar/#calendar">Calendar</a>
+
+                
+            </li>
+        
+    </ul>
+</div>
+
+    
+
+        </div>
+        
+
+<style>
+    body { flex-wrap: wrap; }
+    .site-footer {
+        flex-basis: 100%;
+        width: 100%;
+        max-width: 920px;
+        margin: 0.5rem auto 0;
+        padding: 0 0.9rem;
+        text-align: center;
+        opacity: 0.7;
+        font-size: 0.9em;
+    }
+</style>
+<footer class="site-footer">
+    <p>Copyright &copy; 2026 Alexandre Pinto</p>
+</footer>
+
+    </body>
+
+</html>

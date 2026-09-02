@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title>Alexandre Pinto - disk</title>
+      <link>https://alexandrept.com</link>
+      <description>Software engineer, from Portugal. Mostly interested in backend development and machine learning.</description>
+      <generator>Zola</generator>
+      <language>en</language>
+      <atom:link href="https://alexandrept.com/tags/disk/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Tue, 15 Aug 2017 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>Reclaiming disk space from docker</title>
+          <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
+          <author>Alexandre Pinto</author>
+          <link>https://alexandrept.com/blog/docker-cleanup/</link>
+          <guid>https://alexandrept.com/blog/docker-cleanup/</guid>
+          <description xml:base="https://alexandrept.com/blog/docker-cleanup/">&lt;p&gt;Docker is a great tool to create isolated micro services and environments. However, over time the number of intermediate image layers, size of log files used by the containers and volumes increases which can take up considerable disk space. Besides, dangling images and stopped containers which we do not use anymore are not automatically removed. Fortunately, docker has some options which can help us reclaim disk space.&lt;/p&gt;
+&lt;p&gt;Dangling images are not referenced by any other image, so they can be garbage collected.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;List dangling images&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; docker&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; images&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; dangling=&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;true&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Removing dangling images&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; docker&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; rmi&lt;/span&gt;&lt;span&gt; $(&lt;/span&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;docker&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; images&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;q&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; dangling=&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;true&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Similarly, we can list all stopped containers and remove them.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;List stopped containers&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; docker&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; ps&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; status=exited&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Removing stopped containers&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; docker&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; rm&lt;/span&gt;&lt;span&gt; $(&lt;/span&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;docker&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; ps&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;q&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; status=exited&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can also remove data volumes from containers that do not exist anymore, i.e., dangling volumes that are not automatically removed.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;List dangling volumes&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; docker&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; volume&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; ls&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; dangling=&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;true&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Removing dangling volumes&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; docker&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; volume&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; rm&lt;/span&gt;&lt;span&gt; $(&lt;/span&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;docker&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; volume&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; ls&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;q&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; dangling=&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;true&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Another good practice to minimize disk space usage is to periodically rotate the docker output logs. We can use the built-in utility logrotate by simply creating a configuration file in /etc/logrotate.d/ .&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; vim&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; /etc/logrotate.d/docker-log&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;/var/lib/docker/containers/*/*.log&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; {&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;  rotate&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; 10&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;  daily&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;  compress&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;  size&lt;/span&gt;&lt;span class=&quot;z-l-8 z-d-10&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;M&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;  missingok&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The above configuration archives and compress the logs when they reach a size of 50M. This rotation is performed daily and after 10 archived logs, the oldest one is removed.&lt;/p&gt;
+&lt;p&gt;It is important to be aware of the disk space consumed by docker and perform some cleaning tasks once in a while or we might end up with some space issues. Docker also offers a great &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https://docs.docker.com/&quot;&gt;documentation&lt;/a&gt; where we can further inspect its options.&lt;/p&gt;
+</description>
+      </item>
+    </channel>
+</rss>

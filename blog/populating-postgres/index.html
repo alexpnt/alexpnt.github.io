@@ -1,0 +1,436 @@
+
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+    
+<head>
+    
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="base" content="https://alexandrept.com" />
+
+    
+
+    
+
+    
+    
+    
+        <title>
+            
+                Populating a PostgreSQL database
+            
+        </title>
+
+        
+            <meta property="og:title"
+                  content="Populating a PostgreSQL database" />
+        
+    
+
+    
+        
+            <meta property="og:description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+        
+            <meta name="description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+    
+        <link rel="icon"
+              type="image/png"
+              href="https://alexandrept.com/favicon.ico" />
+    
+
+    
+    
+        <link href=https://alexandrept.com/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/codeblock.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/toc.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/note.js></script>
+    
+
+    
+
+    
+    
+        
+            
+                <link rel="alternate"
+                      type="application/rss+xml"
+                      title="
+Alexandre Pinto
+"
+                      href="https://alexandrept.com/rss.xml" />
+            
+        
+    
+
+
+    
+
+    
+    
+        
+            <link id="syntaxLightStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-light.css" />
+            <link id="syntaxDarkStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-dark.css"
+                  disabled />
+        
+    
+
+    
+    
+        <link rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/light.css" />
+        <link id="darkModeStyle"
+              rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/dark.css" />
+    
+
+    
+        
+            <script>
+                var themeToggleMode = "toggle";
+            </script>
+        
+        <script src=https://alexandrept.com/js/themetoggle.js></script>
+
+        
+            <script>
+                setTheme(getSavedTheme());
+            </script>
+        
+    
+
+
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="https://alexandrept.com/main.css" />
+
+    
+        
+            <link rel="stylesheet" href="https://alexandrept.com/custom.css" />
+        
+    
+
+    
+        <script defer
+                src="https://alexandrept.com/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="e09f570a-4ee8-4bd0-81a1-c219559d337c"></script>
+
+</head>
+
+
+    <body>
+        
+
+        <div class="left-content">
+            
+            
+        </div>
+
+        <div class="content">
+            <nav>
+    <div class="left-nav">
+        
+            <a href=https://alexandrept.com>Alexandre Pinto</a>
+        
+
+
+        <div class="socials">
+            
+                
+            
+            
+                <a rel='me noopener' target='_blank' href="https://github.com/alexpnt" class="social">
+                    <img alt="github"
+                         src="https://alexandrept.com/icons/social/github.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://www.linkedin.com/in/alexandre-pinto" class="social">
+                    <img alt="linkedin"
+                         src="https://alexandrept.com/icons/social/linkedin.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://stackoverflow.com/users/3242636/alexpnt" class="social">
+                    <img alt="stackoverflow"
+                         src="https://alexandrept.com/icons/social/stack-overflow.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://twitter.com/alxpnto" class="social">
+                    <img alt="twitter"
+                         src="https://alexandrept.com/icons/social/twitter.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="mailto:contact@alexandrept.com" class="social">
+                    <img alt="email"
+                         src="https://alexandrept.com/icons/social/email.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="/rss.xml" class="social">
+                    <img alt="rss"
+                         src="https://alexandrept.com/icons/social/rss.svg" />
+                </a>
+            
+        </div>
+    </div>
+
+    <div class="right-nav">
+        
+            <a href=https://alexandrept.com style="margin-right: 0.5em">Home</a>
+        
+            <a href=https://alexandrept.com/cv style="margin-right: 0.5em">CV</a>
+        
+            <a href=https://alexandrept.com/blog style="margin-right: 0.5em">Blog</a>
+        
+            <a href=https://alexandrept.com/publications style="margin-right: 0.5em">Publications</a>
+        
+            <a href=https://alexandrept.com/tags style="margin-right: 0.5em">Tags</a>
+        
+
+        
+            <button id="search-button"
+                    class="search-button"
+                    title="$SHORTCUT to open search">
+                <img src="https://alexandrept.com/icons/search.svg"
+                     alt="Search"
+                     class="search-icon" />
+            </button>
+
+            <div id="searchModal"
+                 class="search-modal js"
+                 role="dialog"
+                 aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">
+                        Search
+                    </h1>
+                    <div id="searchBar">
+                        <input id="searchInput"
+                               role="combobox"
+                               autocomplete="off"
+                               spellcheck="false"
+                               aria-expanded="false"
+                               aria-controls="results-container"
+                               placeholder="Search..." />
+                        <button id="clear-search" class="clear-button" title="Clear search">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+        
+            <a id="dark-mode-toggle"
+               onclick="toggleTheme(); event.preventDefault();"
+               href="#">
+                <img src="https://alexandrept.com/icons/sun.svg" id="sun-icon" alt="Light" />
+                <img src="https://alexandrept.com/icons/moon.svg"
+                     id="moon-icon"
+                     style="filter: invert(1)"
+                     alt="Dark" />
+                
+            </a>
+
+            <!-- Initialize the theme toggle icons -->
+            <script>
+                updateItemToggleTheme()
+            </script>
+        
+    </div>
+</nav>
+
+
+            
+            
+    
+<div class="visible-element-observer-root" data-selector="main article p">
+    <main>
+        <article>
+            <div class="title">
+                
+                
+
+    <div class="page-header">
+        Populating a PostgreSQL database
+    </div>
+
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2017-08-17</time>
+                    
+
+
+                    
+
+                    
+
+                    
+
+                    
+                    
+
+                    
+                    
+
+                    
+                    
+                        <span class="tags-label">::</span>
+                        <span class="tags">
+                                <a href="https://alexandrept.com/tags/database/"
+                                   class="post-tag">database</a>
+                            
+                                <a href="https://alexandrept.com/tags/performance/"
+                                   class="post-tag">performance</a>
+                            
+                                <a href="https://alexandrept.com/tags/postgres/"
+                                   class="post-tag">postgres</a>
+                            
+                                <a href="https://alexandrept.com/tags/sql/"
+                                   class="post-tag">sql</a>
+                            
+                        </span>
+                    
+
+                    
+
+                </div>
+            </div>
+
+            
+
+            <section class="body">
+                <p>It is often the case that we need to populate a table with initial data. A typical approach is to run an sql script to perform a bulk insert. However this is not ideal for cases where there are millions of rows. To tackle this, PostgreSQL provides the COPY command, a very efficient way of inserting a large amount of data.</p>
+<p>This command may be used like this:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">COPY</span><span class="z-l-2 z-d-6"> table_name</span><span>(</span><span class="z-l-6 z-d-7">column1,</span><span class="z-l-2 z-d-6"> column2,</span><span class="z-l-2 z-d-6"> column3,</span><span class="z-l-2 z-d-6"> ...</span><span>)</span><span class="z-l-2 z-d-6"> FROM</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">data.csv</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6"> DELIMITER</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">;</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6"> CSV</span><span class="z-l-2 z-d-6"> HEADER</span><span>;</span></span></code></pre>
+<p>where we specify the table name, its columns and the data file.</p>
+<p>To illustrate, let's create a table that mimics an household electric power consumption. We can use a pre-built docker image containing a PostgreSQL installation for this and a <a rel="noopener external" target="_blank" href="https://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption">public dataset</a> for testing.</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> cat</span><span class="z-l-2 z-d-6"> docker-compose</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">version:</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">2</span><span class="z-l-2 z-d-6">&#39;</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">services:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">  db:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    image:</span><span class="z-l-2 z-d-6"> postgres</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    ports:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">      -</span><span class="z-l-2 z-d-6"> &quot;</span><span class="z-l-2 z-d-6">5432:5432</span><span class="z-l-2 z-d-6">&quot;</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    volumes:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">      -</span><span class="z-l-2 z-d-6"> data:/var/lib/postgresql/data</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    environment:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">      POSTGRES_USER:</span><span class="z-l-2 z-d-6"> postgres</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">      POSTGRES_PASSWORD:</span><span class="z-l-2 z-d-6"> postgres</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">volumes:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">  data:</span></span></code></pre>
+<p>We are now ready to configure our database:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> docker-compose</span><span class="z-l-2 z-d-6"> up</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">d</span><span class="z-l-2 z-d-6"> db</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> docker</span><span class="z-l-2 z-d-6"> cp</span><span class="z-l-2 z-d-6"> household_power_consumption.csv</span><span class="z-l-2 z-d-6"> db_1:/var/lib/postgresql/data/household_power_consumption.csv</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> docker-compose</span><span class="z-l-2 z-d-6"> run</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">-rm</span><span class="z-l-2 z-d-6"> db</span><span class="z-l-2 z-d-6"> psql</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">h</span><span class="z-l-2 z-d-6"> db</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">p</span><span class="z-l-1 z-d-4"> 5432</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">U</span><span class="z-l-2 z-d-6"> postgres</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">-password</span></span>
+<span class="giallo-l"><span>  </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">CREATE</span><span class="z-l-2 z-d-6"> TABLE</span><span class="z-l-2 z-d-6"> power_consumption</span><span> (</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    Date</span><span class="z-l-2 z-d-6"> character</span><span class="z-l-2 z-d-6"> varying</span><span>(</span><span class="z-l-6 z-d-7">50</span><span>)</span><span class="z-l-2 z-d-6">,</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    Time</span><span class="z-l-2 z-d-6"> character</span><span class="z-l-2 z-d-6"> varying</span><span>(</span><span class="z-l-6 z-d-7">50</span><span>)</span><span class="z-l-2 z-d-6">,</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    Global_active_power</span><span class="z-l-2 z-d-6"> character</span><span class="z-l-2 z-d-6"> varying</span><span>(</span><span class="z-l-6 z-d-7">50</span><span>)</span><span class="z-l-2 z-d-6">,</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    Global_reactive_power</span><span class="z-l-2 z-d-6"> character</span><span class="z-l-2 z-d-6"> varying</span><span>(</span><span class="z-l-6 z-d-7">50</span><span>)</span><span class="z-l-2 z-d-6">,</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    Voltage</span><span class="z-l-2 z-d-6"> character</span><span class="z-l-2 z-d-6"> varying</span><span>(</span><span class="z-l-6 z-d-7">50</span><span>)</span><span class="z-l-2 z-d-6">,</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    Global_intensity</span><span class="z-l-2 z-d-6"> character</span><span class="z-l-2 z-d-6"> varying</span><span>(</span><span class="z-l-6 z-d-7">50</span><span>)</span><span class="z-l-2 z-d-6">,</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    Sub_metering_1</span><span class="z-l-2 z-d-6"> character</span><span class="z-l-2 z-d-6"> varying</span><span>(</span><span class="z-l-6 z-d-7">50</span><span>)</span><span class="z-l-2 z-d-6">,</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    Sub_metering_2</span><span class="z-l-2 z-d-6"> character</span><span class="z-l-2 z-d-6"> varying</span><span>(</span><span class="z-l-6 z-d-7">50</span><span>)</span><span class="z-l-2 z-d-6">,</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">    Sub_metering_3</span><span class="z-l-2 z-d-6"> character</span><span class="z-l-2 z-d-6"> varying</span><span>(</span><span class="z-l-6 z-d-7">50</span><span>)</span></span>
+<span class="giallo-l"><span>);</span></span></code></pre>
+<p>Finally, we can load the data into our newly created table:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">\timing</span><span class="z-l-2 z-d-6"> on</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">COPY</span><span class="z-l-2 z-d-6"> power_consumption</span><span>(</span><span class="z-l-6 z-d-7">Date,Time,Global_active_power,Global_reactive_power,Voltage,Global_intensity,Sub_metering_1,Sub_metering_2,Sub_metering_3</span><span>)</span><span class="z-l-2 z-d-6"> FROM</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">/var/lib/postgresql/data/household_power_consumption.csv</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6"> DELIMITER</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">;</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6"> CSV</span><span class="z-l-2 z-d-6"> HEADER</span><span>;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">Time:</span><span class="z-l-1 z-d-4"> 7906.845</span><span class="z-l-2 z-d-6"> ms</span></span></code></pre>
+<p>It took roughly 8 seconds to insert 2 075 259 records. This operation works best if there are not any indexes or foreign keys present that may introduce overhead in each insert. It is usually preferred to create them after.</p>
+
+            </section>
+        </article>
+    </main>
+</div>
+
+
+
+            
+                
+            
+
+            
+        </div>
+
+        <div class="right-content">
+            
+    
+    
+
+        </div>
+        
+
+<style>
+    body { flex-wrap: wrap; }
+    .site-footer {
+        flex-basis: 100%;
+        width: 100%;
+        max-width: 920px;
+        margin: 0.5rem auto 0;
+        padding: 0 0.9rem;
+        text-align: center;
+        opacity: 0.7;
+        font-size: 0.9em;
+    }
+</style>
+<footer class="site-footer">
+    <p>Copyright &copy; 2026 Alexandre Pinto</p>
+</footer>
+
+    </body>
+
+</html>

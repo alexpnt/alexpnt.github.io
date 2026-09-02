@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title>Alexandre Pinto - scikit-learn</title>
+      <link>https://alexandrept.com</link>
+      <description>Software engineer, from Portugal. Mostly interested in backend development and machine learning.</description>
+      <generator>Zola</generator>
+      <language>en</language>
+      <atom:link href="https://alexandrept.com/tags/scikit-learn/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Sun, 10 Sep 2017 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>Building a machine-learning pipeline with scikit-learn and Qt - Part VI</title>
+          <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
+          <author>Alexandre Pinto</author>
+          <link>https://alexandrept.com/blog/ml-pipeline-6/</link>
+          <guid>https://alexandrept.com/blog/ml-pipeline-6/</guid>
+          <description xml:base="https://alexandrept.com/blog/ml-pipeline-6/">&lt;p&gt;In the learning phase a set of examples are shown to the classifier, with class labels (supervised learning) or without them (unsupervised learning). As a result, the classifier is then able to categorize, with a certain accuracy, new unseen data. Experimental evaluation is also an important step to assess the effectiveness of a classifier, i.e, the quality of the decisions made by a predictive model on unseen data. This post is a follow up from the &lt;a href=&quot;/blog/ml-pipeline-5/&quot;&gt;previous post&lt;/a&gt; and describes some classical and well-known learning methods available and how to evaluate their performance.&lt;/p&gt;
+&lt;h2 id=&quot;classifiers&quot;&gt;Classifiers&lt;/h2&gt;
+&lt;p&gt;Some common learning algorithms are described bellow:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Minimum Distance Classifier&lt;/strong&gt; - Minimum Distance Classifiers are template matching system where unseen feature vectors are matched against template prototypes (vectors) representing the classes. This matching usually involves computing the matching error between both feature vectors using for example the euclidean distance as the error metric. This matching distance can simply be stated as: $$ || x - m_k|| $$ where &lt;em&gt;x&lt;/em&gt; is the unseen feature vector and &lt;em&gt;m&lt;sub&gt;k&lt;/sub&gt;&lt;/em&gt; is the feature prototype for class &lt;em&gt;k&lt;/em&gt;, usually consisting in a feature vector with feature mean values obtained during the training phase. After &lt;em&gt;k&lt;/em&gt; tests are performed, the class belonging to the prototype with the minimum distance is chosen.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;k-Nearest Neighbor (kNN)&lt;/strong&gt; - The kNN is a simple and fast unsupervised algorithm that classifies unknown instances based on the majority class from &lt;em&gt;k&lt;/em&gt; neighbors. This method starts by constructing a distance matrix between the training samples and the new test sample and chooses the nearest &lt;em&gt;k&lt;/em&gt; neighbors. Afterwards, the majority label from these neighbors is assigned to the new data. For two-class problems, &lt;em&gt;k&lt;/em&gt; is usually an odd number to prevent ties.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Naive Bayes&lt;/strong&gt; - The Naive Bayes Classifier is a simple supervised probabilistic model based on the Bayes’ theorem. The posterior probabilities are computed for each class w&lt;sub&gt;j&lt;/sub&gt; and the class with largest outcome is chosen to classify the feature vector &lt;em&gt;x&lt;/em&gt;. To achieve this result, the likelihood, prior and evidence probabilities must be calculated, as shown below: $$ posterior , probability =  { likelihood \times prior ; probability \over evidence} $$ $$ P(w_j | x) =  { p(x|w_j) \times P(w_j)  \over  p(x) } $$ The main difficulty is to compute the likelihoods &lt;em&gt;p(x|ω&lt;sub&gt;j&lt;/sub&gt;)&lt;/em&gt; since the other factors are obtained from the data. &lt;em&gt;P(ω&lt;sub&gt;j&lt;/sub&gt;)&lt;/em&gt; are the prior probabilities and &lt;em&gt;p(x)&lt;/em&gt; is a normalization factor which is sometimes omitted. Assuming independence of the features, the likelihoods can be obtained as shown bellow: $$ P(x | w_j) =  { \prod P(x_k | w_j) } $$ This simplification allows to compute the class conditional probabilities for each feature separately, reducing complexity and computational costs.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Support Vector Machines (SVM)&lt;/strong&gt; - Support vector machines are optimization methods for binary classification tasks that map the features to a higher dimensional space where an optimal linear hyperplane that separates the existing classes exists. The decision boundary is chosen with the help of some training examples, called the support vectors, that have the widest separation between them and help maximizing the margin between the boundaries of the different classes. The decision surface is in the “middle” of these vectors. During the training phase, the coefficient vector &lt;em&gt;w&lt;/em&gt; and the constant &lt;em&gt;b&lt;/em&gt; that define the separating hyperplane are searched such that the following error function is minimized: $$ minimize: {1 \over 2} ||w||^2 + C \sum ξ_i $$  $$  s.t. \quad y_i(φ(x_i) + b) \geq 1 - ξ_i $$ where &lt;em&gt;C&lt;/em&gt; is an arbitrary constant and &lt;em&gt;ξ&lt;/em&gt; are slack variables used to penalize misclassified instances that increase with the distance from the margin. If &lt;em&gt;C&lt;/em&gt; is large, the penalty for misclassification is greater. The vectors &lt;em&gt;x&lt;sub&gt;i&lt;/sub&gt;&lt;/em&gt; are the training instances. This method makes use of a kernel function &lt;em&gt;φ&lt;/em&gt; used to transform the input vectors into higher dimensional vectors. New instances are then classified according to which ”side” of the hyperplane they are located.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Decision Tree&lt;/strong&gt; - Decision Trees are supervised methods that learn rules based on the training data to classify new instances. The built trees are simple to understand and visualize. During training, each node of the tree is recursively split by the feature that provides, for example, the best information gain.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Random Forest&lt;/strong&gt; - Random forests are ensemble methods, i.e., they take into consideration the prediction of several classifiers in order to improve the accuracy and robustness of the prediction results. In the case of random forests, they train a set of random trees with bootstrapped samples (samples drawn with replacement) from the original training data. Each tree is grown by selecting m random features from the d features and recursively splitting the data by the best splits. The classification of new data is achieved by a majority vote.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Each classifier has its own advantages and disadvantages and the right technique should be chosen according to the requirements of the problem-at-hand.&lt;/p&gt;
+&lt;h2 id=&quot;evaluation-metrics&quot;&gt;Evaluation Metrics&lt;/h2&gt;
+&lt;p&gt;In classification tasks, predictions made by a classifier are either considered Positive or False (under some category) and the expected judgments are called True or False (again, under a certain category). Common metrics are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Accuracy&lt;/strong&gt; - This measure provides a proportion of correctly classified instances and correctly rejected instances (True Positives and True Negatives) among the whole dataset. $$ Acc = {TP + TN \over TP + TN + FP + FN}$$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Precision&lt;/strong&gt; - This measure provides a proportion of correctly classified instances (True Positives) among all the positive identified instances (True Positives and False Positives). $$ P = {TP \over TP + FP }$$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Recall&lt;/strong&gt; - This measure, sometimes called sensitivity, provides a proportion of correctly classified instances (True Positives) among the positive instances that were and should have been correctly identified, i.e., the whole positive part of the dataset (True Positives and False Negatives). $$ R = {TP \over TP + FN }$$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;F-measure&lt;/strong&gt; - This measure combines precision and recall and provides a balance between them. It is computed as the harmonic mean between the two metrics providing the same weight for both. $$ F_1 = {2 \times P \times R \over P +  R }$$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Stratified K-fold Cross Validation&lt;/strong&gt; - A popular technique to evaluate the performance of the system is to split the data into training and testing sets, using the later to estimate the true generalization performance of the classifier. However, this may bring some issues such as the trade-offs between the percentage splits or the representativity of the test set. A popular accepted approach is to split the entire dataset into k representative partitions, using k − 1 of these partitions for training and the remaining one for testing. This process is then repeated &lt;em&gt;k&lt;/em&gt; times, (each time using a different test partition) and the results averaged.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;/images/ml-pipeline/metrics.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;visualizing-the-performance&quot;&gt;Visualizing the performance&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Receiver Operating Characteristics (ROC)&lt;/strong&gt; - ROC curves are useful graphs to visualize the performance of binary classifiers. They are useful to compare the rates at which the classifier is making correct predictions (True Positive Rate plotted on the Y axis) against the rate of false alarms (False Positive Rate plotted on the X axis). Important points in this graph are the lower left point (0,0), representing a classifier that never classify positive instances, neither having False Positives or True Positives. On the other hand, the upper right point (1,1) represents a classifier that classifies every instance as positive, disregarding if it is a false positive or not. Finally, the point (0,1) represents the perfect classifier, where every instance was correctly classified. The area bellow the ROC curve is called Area Under the Curve (AUC) and is also a good evaluation measure. A perfect classifier would have an AUC of 1.0 while a random classifier would only have 0.5.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;/images/ml-pipeline/roc.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Precision-Recall Curves (PR)&lt;/strong&gt; - The Precision-Recall Curve plots the trade-off between the precision and recall achieved by a classifier, by showing the recall on the X axis and precision on the Y axis. An important point in this graph is the upper right point (1,1) which represents the ideal classifier having maximum precision and recall. Figure 2.4 shows three hypothetical classifiers and the areas of good and bad performance, which are above or below the line defined by a random classifier. The area bellow the PR curve is called Average Precision (AP) and is also a good measure. A perfect classifier would have an Average Precision of 1.0 while a random classifier would only have 0.5.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;/images/ml-pipeline/precision-recall.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;In this series of posts, a machine learning application was presented, showing a typical pipeline with the following steps:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Dataset Loading&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Feature Assessment where the distribution of features are inspected and visualized&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Preprocessing where data transformations are applied and issues such as dataset balancing are addressed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Feature Selection methods where features with he most discriminative power are selected&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Classifications performed by predictive models where their performance is evaluated using ROC curves, Precision-Recall Curves and generic metrics such as Accuracy, Precision, Recall and F1 measures.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The machine learning method is an iterative process, where one needs to go back and forth, setting different parameters, and different methods in order to see which combination works best and provides the best results. You can checkout this application and try it for yourself. The source code is available in &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https://github.com/AlexPnt/Default-Credit-Card-Prediction&quot;&gt;this repository&lt;/a&gt;.&lt;/p&gt;
+</description>
+      </item>
+      <item>
+          <title>Building a machine-learning pipeline with scikit-learn and Qt - Part IV</title>
+          <pubDate>Sat, 09 Sep 2017 00:00:00 +0000</pubDate>
+          <author>Alexandre Pinto</author>
+          <link>https://alexandrept.com/blog/ml-pipeline-4/</link>
+          <guid>https://alexandrept.com/blog/ml-pipeline-4/</guid>
+          <description xml:base="https://alexandrept.com/blog/ml-pipeline-4/">&lt;p&gt;&lt;a href=&quot;/blog/ml-pipeline-3/&quot;&gt;Part III&lt;/a&gt; explored data visualization and distribution methods. This article shows a list of common preprocessing methods that may be applied.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/ml-pipeline/preprocessing.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;dataset-transformation&quot;&gt;Dataset Transformation&lt;/h2&gt;
+&lt;p&gt;Some learning algorithms do not deal with certain types of data. In order to be able to use them, the type of the attributes might be transformed to another suitable type. For example converting symbolic features to equivalent numeric features, or the other way around. Another important issue to consider is the normalization of the data, such as converting different attributes to the same scale, avoiding the dominance of some attributes and decreasing the dispersion of the data.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Standardization&lt;/strong&gt; - Standardization transforms each feature by removing their mean and diving non-constant features by their standard deviation, obtaining data normally distributed with zero mean and unit variance (&lt;em&gt;ρ&lt;sub&gt;Xstd&lt;/sub&gt; = 0&lt;/em&gt;, &lt;em&gt;σ&lt;sub&gt;Xstd&lt;/sub&gt; = 1&lt;/em&gt;). $$ x&#39; = { x - ρX \over σX } $$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Normalization&lt;/strong&gt; - Normalization involves scaling samples/features vectors to have unit norm, usually achieved by diving by the euclidean norm of the vector. $$ x&#39; = { x  \over \sqrt \sum x_i^2 } $$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Scaling&lt;/strong&gt; - Scaling transform the features to lie between a minimum and a maximum value. Typical ranges are [0,1] or [-1,1]. $$ x&#39;_{[0,1]} = { x - min_x \over max_x - min_x } $$&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;dataset-balancing&quot;&gt;Dataset Balancing&lt;/h2&gt;
+&lt;p&gt;The original dataset contain an imbalance between the two classes, that is, there is 23364(∼78%) samples from class ’0’ and 6636(∼22%) from class ’1’, which can affect the classifier prediction ability. In order to address this issue, 2 groups of methods may be employed, i.e, methods based on the undersampling of the majority class and methods based on the oversampling of the minority class:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Undersampling&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Random Majority Undersampling&lt;/strong&gt; - Starts with a set consisting only of samples from the minority class and adds random samples from the majority classes (allowing duplicates).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;NearMiss-1&lt;/strong&gt; - Selects samples from the majority class that are close to the minority class samples, by choosing the ones whose average to three closest minority samples are the smallest.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;NearMiss-3&lt;/strong&gt; - Surround each minority sample with a number of majority samples and choose the ones which have the highest average distance to three closest minority samples.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Neighbor Cleaning Rule&lt;/strong&gt; - Remove noisy data (samples whose class differs from the majority class of at least two of its three nearest neighbor) and the three nearest neighbors that misclassify samples of the minority class.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Oversampling&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Random Majority Undersampling&lt;/strong&gt; - Starts with a set consisting only of samples from the majority class and adds random samples from the minority classes (allowing duplicates).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SMOTE&lt;/strong&gt; - Oversamples the minority data by creating ”synthetic” samples from the minority class.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Applying these transformations to the input data usually bring benefits to the final accuracy of the classifier. The &lt;a href=&quot;/blog/ml-pipeline-5/&quot;&gt;next post&lt;/a&gt; will be dedicated to feature selection/reduction methods.&lt;/p&gt;
+</description>
+      </item>
+      <item>
+          <title>Building a machine-learning pipeline with scikit-learn and Qt - Part V</title>
+          <pubDate>Sat, 09 Sep 2017 00:00:00 +0000</pubDate>
+          <author>Alexandre Pinto</author>
+          <link>https://alexandrept.com/blog/ml-pipeline-5/</link>
+          <guid>https://alexandrept.com/blog/ml-pipeline-5/</guid>
+          <description xml:base="https://alexandrept.com/blog/ml-pipeline-5/">&lt;p&gt;In &lt;a href=&quot;/blog/ml-pipeline-4/&quot;&gt;part IV&lt;/a&gt; some data preprocessing techniques were shown. After we have clean data, it is important to choose a set of features to use. This post presents an overview of some of the available methods that we can use.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/ml-pipeline/feature_selection.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;feature-selection&quot;&gt;Feature Selection&lt;/h2&gt;
+&lt;p&gt;Feature selection usually involves selecting a subset of the original set of features that provide the biggest discriminatory power, i.e., are able to provide the best separation between classes, result in the best performance of the classifier when trained and avoid the curse of dimensionality. In fact, it has been said that exists a critical feature dimension from where the performance degrades rapidly. Feature selection helps in removing irrelevant and redundant features and is usually divided into filter methods, where a subset of features is selected, without considering the predictive model and wrapper methods which use the classifier to rank and choose the best feature set. This step, in conjunction with feature reduction, is likely to be one of the most important steps in the pipeline. The following list shows common techniques employed in feature selection:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Information Gain&lt;/strong&gt; - Information gain ranks each attribute by its ability to discriminate the pattern classes. Features very informative will provoke the greatest decrease in entropy when the dataset is split by that feature. $$ IG(S,A) =  H(S) - { H(S) \over \sum { |S_v| \over |S|} H(S_v)} $$ The Information Gain &lt;em&gt;IG&lt;/em&gt; of a feature &lt;em&gt;A&lt;/em&gt; is then equal to the decrease in entropy achieved by splitting the dataset &lt;em&gt;S&lt;/em&gt; by feature values &lt;em&gt;v&lt;/em&gt; into smaller sets &lt;em&gt;Sv&lt;/em&gt; , and subtracting from the original entropy &lt;em&gt;H(S)&lt;/em&gt; the average entropy of the splits.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Gain Ratio&lt;/strong&gt; - The gain ratio is simply the information gain normalized with the entropy of the feature &lt;em&gt;H(A)&lt;/em&gt;. Since features with many values create lots of branches, creating a bias towards these features, the gain ratio corrects this by taking into account the number and size of branches of a split. $$ GR(S,A) = {IG(S,A) \over H(A) }$$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Fisher Score&lt;/strong&gt; - The Fisher’s score select features with high class-separability and low class-variability and is defined by: $$ F(x) = {|m_1 - m_2|^2 \over s_1^2 + s_2^2 }$$ where &lt;em&gt;m&lt;sub&gt;1&lt;/sub&gt;&lt;/em&gt; and &lt;em&gt;m&lt;sub&gt;2&lt;/sub&gt;&lt;/em&gt; are the means from the feature values (for a 2-class problem) and &lt;em&gt;s&lt;sub&gt;1&lt;/sub&gt;&lt;/em&gt; and &lt;em&gt;s&lt;sub&gt;2&lt;/sub&gt;&lt;/em&gt; are the standard deviations from the feature values of each class.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Pearson Correlation&lt;/strong&gt; - Pearson correlation can be used to select features that are highly correlated with the target class and features with low correlation between them. It is a useful measure to see how strongly related two features are. The Pearson correlation gives values between -1 and 1, where absolute values closer to 1 mean a high correlation. The sign indicates whether there is a positive relationship between the variables, that is, if a feature value increase or decreases, the other increases/decreases as well (positive correlation) or if one variable increases/decreases, the other decreases/increases with it (negative correlation). Naturally, we are interested in high absolute values for feature-class relationships and low values for feature-feature relationships. This Pearson correlation ρ is defined as: $$ ρ(a,b) = {covariance(a,b) \over  σ(a) \times σ(b) }$$ where a and b can be both feature vectors or a feature vector and a label vector.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Chi-Square Test&lt;/strong&gt; - The Chi-Square test ranks each attribute by computing the χ2 statistic relative to the target class. This statistic is useful to see if there is an independence relationship between the features and the target class. High values of this statistic means that there is a strong dependence between a particular feature and the target class leading to its selection for classification tasks.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;feature-reduction&quot;&gt;Feature Reduction&lt;/h2&gt;
+&lt;p&gt;Feature reduction is also an important step that helps further reducing the dimensionality of the problem, reduces the complexity of the problem and decreases the computational costs. In order to reduce the dimensionality, it is important to keep only the most relevant, informative and discriminative features. Techniques such as Principal Component Analysis (PCA) may be employed in this stage, by aggregating multiple features through linear combinations.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Principal Component Analysis (PCA)&lt;/strong&gt; - PCA is a popular unsupervised (ignores class labels) dimensionality reduction technique that uses linear transformations to find the directions (principal components) with the highest variance. It projects the original data into a lower dimensional space, with the new features retaining most of information. PCA works by finding vectors (called eigenvectors) with the highest amplitude (called eigenvalues) that represent the axes with the highest variance. The original data is then project onto these axes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Successful removal of noisy and redundant data typically improves the overall classification accuracy of the resulting model, reducing also overfitting. After every preprocessing and feature engineering step is completed, comes the learning and evaluation phase which will be discussed in the &lt;a href=&quot;/blog/ml-pipeline-6/&quot;&gt;next post&lt;/a&gt;.&lt;/p&gt;
+</description>
+      </item>
+      <item>
+          <title>Building a machine-learning pipeline with scikit-learn and Qt - Part III</title>
+          <pubDate>Sun, 03 Sep 2017 00:00:00 +0000</pubDate>
+          <author>Alexandre Pinto</author>
+          <link>https://alexandrept.com/blog/ml-pipeline-3/</link>
+          <guid>https://alexandrept.com/blog/ml-pipeline-3/</guid>
+          <description xml:base="https://alexandrept.com/blog/ml-pipeline-3/">&lt;p&gt;The assessment and visualization of the distribution of the features is an useful task to better get a sense of the discriminative capability of the features and how they relate with each other. In &lt;a href=&quot;/blog/ml-pipeline-2/&quot;&gt;part II&lt;/a&gt; we talked about the dataset and the data collecting process. In this post we take a look at some common tasks such as:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Normalized Histogram Distribution&lt;/strong&gt; - A normalized histogram (bin counts divided by total sum) showing the proportion of each feature value is shown for a certain feature where bars are grouped by class.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;/images/ml-pipeline/feature-inspection-hist.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Box Plot&lt;/strong&gt; - A box plot for visualizing the distribution of the feature values of each feature grouped by class.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;/images/ml-pipeline/feature-inspection-boxplot.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Pairwise Relationships&lt;/strong&gt; - A graph plotting the distribution relationships between two features, resulting in a 2 × 2 matrix where each diagonal element showed either the histogram distribution or the kernel density estimation of each feature distribution. Non-diagonal elements included a scatter plot of the two features grouped by class.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;/images/ml-pipeline/feature-inspection-pairwise.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Empirical Cumulative vs Standard Normal Density Functions&lt;/strong&gt; - The Empirical Cumulative Density Functions are also shown against the standard Normal curve, along with the Kolmogorov–Smirnov statistic useful to test if the two functions are drawn from the same distribution (Standard Normal, in this case).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;/images/ml-pipeline/feature-inspection-edf.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Pearson Correlations&lt;/strong&gt; - In order to see how strongly related two features are, the Pearson Correlation matrix is also shown, giving values between -1 and 1, where absolute values closer to 1 mean a high correlation. The sign indicates whether there is a positive relationship between the variables, that is, if a feature value increase or decreases, the other increases/decreases as well (positive correlation) or if one variable increases/decreases, the other decreases/increases with it (negative correlation).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;/images/ml-pipeline/feature-inspection-pearson.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Two-Dimensional Principal Components Analysis&lt;/strong&gt; - A visualization of the two main principal components (directions with the highest variance).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;/images/ml-pipeline/feature-inspection-pca.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Two-Dimensional Linear Discriminant Analysis&lt;/strong&gt; - A visualization of the two first linear discriminant directions (directions with highest class-separability and lowest inner-class variance).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;/images/ml-pipeline/feature-inspection-lda.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&quot;/blog/ml-pipeline-4/&quot;&gt;next post&lt;/a&gt; will be about preprocessing methods that we can apply to our data. Stay tuned.&lt;/p&gt;
+</description>
+      </item>
+      <item>
+          <title>Building a machine-learning pipeline with scikit-learn and Qt - Part I</title>
+          <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
+          <author>Alexandre Pinto</author>
+          <link>https://alexandrept.com/blog/ml-pipeline-1/</link>
+          <guid>https://alexandrept.com/blog/ml-pipeline-1/</guid>
+          <description xml:base="https://alexandrept.com/blog/ml-pipeline-1/">&lt;p&gt;In machine learning problems, we usually describe the objects that we wish to recognize by a set of variables called features, consisting of information that we extract from the study objects. Such features are then collected in vectors of dimension d, called feature vectors, usually denoted by x. They represent points in a d dimensional space, called feature space. Each point belongs to a class, usually denoted by w and the combination of the feature vectors and their corresponding class are called patterns. If we only have two target classes, we are in the presence of a binary classification problem. Classification problems may be trivial for humans but are usually quite challenging for automated systems, since we need to deal with a lot of issues such as finding a reasonable number of distinguishing features good enough for classification, that are able to separate the target classes, or finding models that have good generalization capabilities (perform well on unseen data), avoiding overfitting of the model to the training data. The main goal is then to find the best decision boundary that results in the best generalization on testing data.&lt;/p&gt;
+&lt;p&gt;The figure below shows an hypothetical problem with two classes and two features. The main goal is then to find the best decision boundary that results in the best generalization on testing data.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/ml-pipeline/decision_boundary.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;The next figure shows the workflow of a typical machine learning application. Usually, classification involves steps such as data gathering, preprocessing, feature selection/reduction, training, testing and the final evaluation. The main goal is to assign, with the best accuracy possible, new labels to new instances.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/ml-pipeline/ml-pipeline.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;In this post, we will see how we can recognize credit card frauds using classic algorithms. Default credit cards are an important issue that bring negative consequences to both sides, i.e, banks and customer. If a customer does not pay his obligations, banks loose money, the customer will lose credibility in future payments, collection calls start to be made and in last resort, the case may go into the court. In order to avoid all of that trouble, effective methods that are able to predict the default of credit cards are needed. Therefore, default credit card prediction is an important, challenging and useful task that should be addressed.&lt;/p&gt;
+&lt;p&gt;Python is a great choice for the development of this kind of applications, along with a series of helpful packages containing statistical and learning methods, namely the &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;http://www.numpy.org/&quot;&gt;numpy&lt;/a&gt; and &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https://www.scipy.org/&quot;&gt;scipy&lt;/a&gt; packages for numerical computations, &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;http://matplotlib.org/&quot;&gt;matplotlib&lt;/a&gt; , &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;http://pandas.pydata.org/&quot;&gt;pandas&lt;/a&gt; and &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;http://seaborn.pydata.org/&quot;&gt;seaborn&lt;/a&gt; for data visualization, &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;http://scikit-learn.org/stable/&quot;&gt;sklearn&lt;/a&gt;, &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https://github.com/rasbt/mlxtend&quot;&gt;mlxtend&lt;/a&gt; and &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https://github.com/scikit-learn-contrib/imbalanced-learn&quot;&gt;unbalanced dataset&lt;/a&gt; for the learning and feature selection / reduction methods and finally the &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https://www.riverbankcomputing.com/software/pyqt/intro&quot;&gt;PyQt5&lt;/a&gt; and &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;http://doc.qt.io/qt-5/qtdesigner-manual.html&quot;&gt;Qt Designer&lt;/a&gt; for the Graphical User Interface (GUI).&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/blog/ml-pipeline-2/&quot;&gt;Part II will look at the first step of the process: Data Gathering&lt;/a&gt;.&lt;/p&gt;
+</description>
+      </item>
+      <item>
+          <title>Building a machine-learning pipeline with scikit-learn and Qt - Part II</title>
+          <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
+          <author>Alexandre Pinto</author>
+          <link>https://alexandrept.com/blog/ml-pipeline-2/</link>
+          <guid>https://alexandrept.com/blog/ml-pipeline-2/</guid>
+          <description xml:base="https://alexandrept.com/blog/ml-pipeline-2/">&lt;p&gt;In order to run experiments, we need a &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https://archive.ics.uci.edu/ml/datasets/default+of+credit+card+clients&quot;&gt;data&lt;/a&gt;. This dataset was the same used in a &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;http://www.sciencedirect.com/science/article/pii/S0957417407006719&quot;&gt;research study&lt;/a&gt;, consisting of data payments gathered during October, 2005, from a bank in Taiwan, using the credit card holders from that bank as the study targets.&lt;/p&gt;
+&lt;p&gt;In the &lt;a href=&quot;/blog/ml-pipeline-1/&quot;&gt;first part&lt;/a&gt; we talked about the process of machine learning. This post will discuss data gathering and the dataset.&lt;/p&gt;
+&lt;h2 id=&quot;data-gathering&quot;&gt;Data Gathering&lt;/h2&gt;
+&lt;p&gt;The first step is to collect the training and testing data such as sufficient and representative data. This usually implies tasks such as:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Data Integration&lt;/strong&gt; - The initial data might come from different sources, with different formats or duplicated data. This step is important to create a single repository of data.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Data Balancing&lt;/strong&gt; - As is often the case with real data, the data is usually not uniformly distributed across the different classes. Consequently, the trained models tend to predict new data with the majority class. Techniques to artificially balance the data might be employed here, such as reducing (Undersampling) / increasing (Oversampling) the number of instances from the majority /minority classes. An other alternative might be performing a stratified sampling in order to keep a significant number of instances in each class.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Cleaning&lt;/strong&gt; - The quality of the data is important. Sometimes the data will have missing attributes or useless values. However, redundant or noisy data are important issues to be addressed, such as instances with very similar feature values, attributes easily deducted from others or outliers.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;the-dataset&quot;&gt;The dataset&lt;/h2&gt;
+&lt;p&gt;Each sample of the dataset contains 23 variables and a predictive binary label (Defaul payment: Yes = 1, No = 0). These 23 features are described as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;X1: Amount of the given credit&lt;/li&gt;
+&lt;li&gt;X2: Gender (1 = male; 2 = female)&lt;/li&gt;
+&lt;li&gt;X3: Education (1 = graduate school; 2 = university; 3 = high school; 4 = others).&lt;/li&gt;
+&lt;li&gt;X4: Marital status (1 = married; 2 = single; 3 = others)&lt;/li&gt;
+&lt;li&gt;X5: Age (age in years)&lt;/li&gt;
+&lt;li&gt;X6-X11: History of past payment (X6 = the repayment status in September, 2005 ; . . .; X11 = the repayment status in April, 2005), where x = -1 = pay duly and x = 1,2,3, ..9 = payment delay for x months&lt;/li&gt;
+&lt;li&gt;X12-X17: Amount of bill statement&lt;/li&gt;
+&lt;li&gt;X18–X23: Amount of previous payment&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;the-gui&quot;&gt;The GUI&lt;/h2&gt;
+&lt;p&gt;The resulting application has a tab designed to show a quick description of the loaded dataset, that is, the description of the features, the cardinality of each class and some statistical measures of each feature:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/ml-pipeline/loading.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;For the design of the interface, the &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;http://doc.qt.io/qt-5/qtdesigner-manual.html&quot;&gt;Qt Designer&lt;/a&gt; is a great tool to quickly generate our GUI. This tool generates a &lt;em&gt;.xml&lt;/em&gt; file describing the UI, which is then used to generate a python module which we can import and use to load the main interface.&lt;/p&gt;
+&lt;p&gt;The extraction of statistical metrics is useful to get a quick overview of how our data is distributed. We will talk about these metrics later in detail.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/blog/ml-pipeline-3/&quot;&gt;Part III will provide an overview of feature assessment and  visualization&lt;/a&gt;.&lt;/p&gt;
+</description>
+      </item>
+    </channel>
+</rss>

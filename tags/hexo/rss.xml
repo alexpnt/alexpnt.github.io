@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title>Alexandre Pinto - hexo</title>
+      <link>https://alexandrept.com</link>
+      <description>Software engineer, from Portugal. Mostly interested in backend development and machine learning.</description>
+      <generator>Zola</generator>
+      <language>en</language>
+      <atom:link href="https://alexandrept.com/tags/hexo/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Sat, 01 Jul 2017 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>A brave new blog</title>
+          <pubDate>Sat, 01 Jul 2017 00:00:00 +0000</pubDate>
+          <author>Alexandre Pinto</author>
+          <link>https://alexandrept.com/blog/this-blog/</link>
+          <guid>https://alexandrept.com/blog/this-blog/</guid>
+          <description xml:base="https://alexandrept.com/blog/this-blog/">&lt;p&gt;I always enjoyed the idea of keeping a journal where ideas, tips and tricks from my daily life could be shared. With this first post I intend to move forward this goal. By sharing knowledge, you grow a bit and help others improve. It also helps you to keep motivated, giving you a sense of purpose since you feel that you are contributing to the community.&lt;/p&gt;
+&lt;h2 id=&quot;the-hexo-framework&quot;&gt;The Hexo Framework&lt;/h2&gt;
+&lt;p&gt;This site is built using the awesome &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https://hexo.io/&quot;&gt;hexo framework&lt;/a&gt; with a slightly customized version of the &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https://github.com/probberechts/cactus-dark&quot;&gt;Cactus Dark&lt;/a&gt;  theme. In the light of the open source  movement, you can find the &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https://github.com/AlexPnt/hexo-site&quot;&gt;source code&lt;/a&gt; of this site in my github account.&lt;/p&gt;
+&lt;p&gt;The &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https://hexo.io&quot;&gt;hexo framework&lt;/a&gt; is a fast and simple static site generator. Rather than generating dynamic content depending on the user request, a set of raw content is matched against a set of templates and styles to produce the final static content, that never changes over time. This has some advantages such as simplicity and speed, since there is no need to perform complex queries to complex backends to retrieve and build the content that the user is requesting.&lt;/p&gt;
+&lt;h2 id=&quot;walkthrough&quot;&gt;Walkthrough&lt;/h2&gt;
+&lt;p&gt;In order to get started you need to have the Node.js package manager (&lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https://www.npmjs.com/&quot;&gt;npm&lt;/a&gt;) and the version control system &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https://git-scm.com/&quot;&gt;git&lt;/a&gt; installed.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Setting up hexo:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; npm&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; install&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; hexo-cli&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;g&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; hexo&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; init&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; mysite&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; cd&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; mysite&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; npm&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; install&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Installing the cactus-dark theme:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; git&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; clone&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; https://github.com/probberechts/cactus-dark.git&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; themes/cactus-dark&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; npm&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; install&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; hexo-pagination&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;-save&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In your config.yml file, change the theme setting:&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-3 z-d-5&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;z-l-3 z-d-5&quot;&gt;heme&lt;/span&gt;&lt;span&gt;:&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; c&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;actus-dark&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Start serving your new site:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; hexo&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; generate&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; hexo&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; serve&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Head over to http://localhost:4000 to see it in action!
+After this, go ahead and customize it to your needs. There is a basic folder structure that you have to keep in mind.&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;plain&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;├── _config.yml - (configuration settings) &lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;├── public      - (static files, which may be deployed to a live server)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;├── scaffolds   - (pages and posts will be based on these scaffolds)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;├── source      - (raw source content of your site)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;└── themes      - (custom themes of your site)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Deploy:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The last step is to deploy your generated static site to a remote server and start serving it. In my case, I simply push the public folder to my github repository.&lt;/p&gt;
+&lt;p&gt;For more details, head over to the great &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https://hexo.io/docs/&quot;&gt;hexo documentation&lt;/a&gt;.&lt;/p&gt;
+</description>
+      </item>
+    </channel>
+</rss>

@@ -1,0 +1,576 @@
+
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+    
+<head>
+    
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="base" content="https://alexandrept.com" />
+
+    
+
+    
+
+    
+    
+    
+        <title>
+            
+                Performance tips for Django applications
+            
+        </title>
+
+        
+            <meta property="og:title"
+                  content="Performance tips for Django applications" />
+        
+    
+
+    
+        
+            <meta property="og:description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+        
+            <meta name="description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+    
+        <link rel="icon"
+              type="image/png"
+              href="https://alexandrept.com/favicon.ico" />
+    
+
+    
+    
+        <link href=https://alexandrept.com/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/codeblock.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/toc.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/note.js></script>
+    
+
+    
+
+    
+    
+        
+            
+                <link rel="alternate"
+                      type="application/rss+xml"
+                      title="
+Alexandre Pinto
+"
+                      href="https://alexandrept.com/rss.xml" />
+            
+        
+    
+
+
+    
+
+    
+    
+        
+            <link id="syntaxLightStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-light.css" />
+            <link id="syntaxDarkStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-dark.css"
+                  disabled />
+        
+    
+
+    
+    
+        <link rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/light.css" />
+        <link id="darkModeStyle"
+              rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/dark.css" />
+    
+
+    
+        
+            <script>
+                var themeToggleMode = "toggle";
+            </script>
+        
+        <script src=https://alexandrept.com/js/themetoggle.js></script>
+
+        
+            <script>
+                setTheme(getSavedTheme());
+            </script>
+        
+    
+
+
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="https://alexandrept.com/main.css" />
+
+    
+        
+            <link rel="stylesheet" href="https://alexandrept.com/custom.css" />
+        
+    
+
+    
+        <script defer
+                src="https://alexandrept.com/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="e09f570a-4ee8-4bd0-81a1-c219559d337c"></script>
+
+</head>
+
+
+    <body>
+        
+
+        <div class="left-content">
+            
+            
+        </div>
+
+        <div class="content">
+            <nav>
+    <div class="left-nav">
+        
+            <a href=https://alexandrept.com>Alexandre Pinto</a>
+        
+
+
+        <div class="socials">
+            
+                
+            
+            
+                <a rel='me noopener' target='_blank' href="https://github.com/alexpnt" class="social">
+                    <img alt="github"
+                         src="https://alexandrept.com/icons/social/github.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://www.linkedin.com/in/alexandre-pinto" class="social">
+                    <img alt="linkedin"
+                         src="https://alexandrept.com/icons/social/linkedin.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://stackoverflow.com/users/3242636/alexpnt" class="social">
+                    <img alt="stackoverflow"
+                         src="https://alexandrept.com/icons/social/stack-overflow.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://twitter.com/alxpnto" class="social">
+                    <img alt="twitter"
+                         src="https://alexandrept.com/icons/social/twitter.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="mailto:contact@alexandrept.com" class="social">
+                    <img alt="email"
+                         src="https://alexandrept.com/icons/social/email.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="/rss.xml" class="social">
+                    <img alt="rss"
+                         src="https://alexandrept.com/icons/social/rss.svg" />
+                </a>
+            
+        </div>
+    </div>
+
+    <div class="right-nav">
+        
+            <a href=https://alexandrept.com style="margin-right: 0.5em">Home</a>
+        
+            <a href=https://alexandrept.com/cv style="margin-right: 0.5em">CV</a>
+        
+            <a href=https://alexandrept.com/blog style="margin-right: 0.5em">Blog</a>
+        
+            <a href=https://alexandrept.com/publications style="margin-right: 0.5em">Publications</a>
+        
+            <a href=https://alexandrept.com/tags style="margin-right: 0.5em">Tags</a>
+        
+
+        
+            <button id="search-button"
+                    class="search-button"
+                    title="$SHORTCUT to open search">
+                <img src="https://alexandrept.com/icons/search.svg"
+                     alt="Search"
+                     class="search-icon" />
+            </button>
+
+            <div id="searchModal"
+                 class="search-modal js"
+                 role="dialog"
+                 aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">
+                        Search
+                    </h1>
+                    <div id="searchBar">
+                        <input id="searchInput"
+                               role="combobox"
+                               autocomplete="off"
+                               spellcheck="false"
+                               aria-expanded="false"
+                               aria-controls="results-container"
+                               placeholder="Search..." />
+                        <button id="clear-search" class="clear-button" title="Clear search">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+        
+            <a id="dark-mode-toggle"
+               onclick="toggleTheme(); event.preventDefault();"
+               href="#">
+                <img src="https://alexandrept.com/icons/sun.svg" id="sun-icon" alt="Light" />
+                <img src="https://alexandrept.com/icons/moon.svg"
+                     id="moon-icon"
+                     style="filter: invert(1)"
+                     alt="Dark" />
+                
+            </a>
+
+            <!-- Initialize the theme toggle icons -->
+            <script>
+                updateItemToggleTheme()
+            </script>
+        
+    </div>
+</nav>
+
+
+            
+            
+    
+<div class="visible-element-observer-root" data-selector="main article p">
+    <main>
+        <article>
+            <div class="title">
+                
+                
+
+    <div class="page-header">
+        Performance tips for Django applications
+    </div>
+
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2017-08-18</time>
+                    
+
+
+                    
+
+                    
+
+                    
+
+                    
+                    
+
+                    
+                    
+
+                    
+                    
+                        <span class="tags-label">::</span>
+                        <span class="tags">
+                                <a href="https://alexandrept.com/tags/django/"
+                                   class="post-tag">django</a>
+                            
+                                <a href="https://alexandrept.com/tags/performance/"
+                                   class="post-tag">performance</a>
+                            
+                                <a href="https://alexandrept.com/tags/python/"
+                                   class="post-tag">python</a>
+                            
+                        </span>
+                    
+
+                    
+
+                </div>
+            </div>
+
+            
+
+            <section class="body">
+                <p>Performance is an typical concern when developing applications. In order to have a good back-end performance it is important to be aware of memory footprints that our programs uses, CPU usage, database handling, etc. If no precaution measures are taken, these can quickly become bottlenecks and hurt the general performance of our system. This post shows a collection of performance tips that we can use in our Django application in order to save us from headaches in the future.</p>
+<h2 id="use-count-instead-of-len-in-querysets">Use .count() instead of len() in querysets</h2>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span>musics</span><span class="z-l-8 z-d-10"> =</span><span> Music</span><span>.</span><span>objects</span><span>.</span><span>all</span><span>(</span><span>)</span></span>
+<span class="giallo-l"><span>n_records</span><span class="z-l-8 z-d-10"> =</span><span> musics</span><span>.</span><span>count</span><span>(</span><span>)</span></span></code></pre>
+<p>Using the <em>.count()</em> is faster since it uses the <em>COUNT()</em> function at a database level. The <em>len()</em> method forces the queryset to be evaluated and retrieve results that you we will not use if all we want to do is count how many objects are there.</p>
+<h2 id="use-a-combination-of-filter-and-exists-to-test-existence-and-membership">Use a combination of .filter() and .exists() to test existence and membership</h2>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span>musics</span><span class="z-l-8 z-d-10"> =</span><span> Music</span><span>.</span><span>objects</span><span>.</span><span>filter</span><span>(</span><span class="z-l-9 z-d-12">title</span><span class="z-l-8 z-d-10">=</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Django rocks</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">if</span><span> musics</span><span>.</span><span>exists</span><span>(</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">    ...</span></span></code></pre>
+<p>Django provides an .exists() method that we can use instead of counting objects with <em>.count()</em> or testing entries for inclusion with <em>obj in queryset</em> .</p>
+<h2 id="delay-queryset-evaluations">Delay queryset evaluations</h2>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span>musics</span><span class="z-l-8 z-d-10"> =</span><span> Music</span><span>.</span><span>objects</span><span>.</span><span>all</span><span>(</span><span>)</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-5 z-d-3">#</span><span class="z-l-5 z-d-3"> typical case of fetching all data from database into memory</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">for</span><span> music</span><span class="z-l-8 z-d-10"> in</span><span> musics</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">    ...</span></span></code></pre>
+<p>Django querysets are lazy, i.e, they are only evaluated (database hits) when strictly necessary, so we should create and combine querysets before performing certain operations such as iteration, <em>len()</em> or slicing which force the results to be fetched from the database. Trips to the database are more time consuming.</p>
+<h2 id="avoid-caching-mechanisms-for-one-time-operations">Avoid caching mechanisms for one time operations</h2>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span>musics</span><span class="z-l-8 z-d-10"> =</span><span> Music</span><span>.</span><span>objects</span><span>.</span><span>all</span><span>(</span><span>)</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-5 z-d-3">#</span><span class="z-l-5 z-d-3"> avoids queryset caching</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">for</span><span> music</span><span class="z-l-8 z-d-10"> in</span><span> musics</span><span>.</span><span>iterator</span><span>(</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">    ...</span></span></code></pre>
+<p>The <em>.iterator()</em> method bypasses the internal caching mechanisms and might be useful if we know we are not going to use these objects anymore. Also, this largely reduces the memory footprint, which can be useful if we are loading millions of rows from the database.</p>
+<h2 id="fetch-only-the-required-columns">Fetch only the required columns</h2>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span class="z-l-5 z-d-3">#</span><span class="z-l-5 z-d-3"> returns a dict</span></span>
+<span class="giallo-l"><span>musics</span><span class="z-l-8 z-d-10"> =</span><span> Music</span><span>.</span><span>objects</span><span>.</span><span>values</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">title</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">album</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span></code></pre>
+<p>or</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span class="z-l-5 z-d-3">#</span><span class="z-l-5 z-d-3"> returns a list</span></span>
+<span class="giallo-l"><span>musics</span><span class="z-l-8 z-d-10"> =</span><span> Music</span><span>.</span><span>objects</span><span>.</span><span>value_list</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">title</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">album</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span></code></pre>
+<p>These methods avoid creating full model instances and retrieve only the desired field values, avoiding the extra work of fetching the extra columns.</p>
+<h2 id="fetch-related-objects-in-a-single-batch">Fetch related objects in a single batch</h2>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span class="z-l-5 z-d-3">#</span><span class="z-l-5 z-d-3"> fetches related many-to-many and many-to-one objects</span></span>
+<span class="giallo-l"><span>musics</span><span class="z-l-8 z-d-10"> =</span><span> Music</span><span>.</span><span>objects</span><span>.</span><span>all</span><span>(</span><span>)</span><span>.</span><span>prefetch_related</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">genres</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span></code></pre><pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span class="z-l-5 z-d-3">#</span><span class="z-l-5 z-d-3"> fetches foreign key relations and one-to-one objects</span></span>
+<span class="giallo-l"><span>musics</span><span class="z-l-8 z-d-10"> =</span><span> Music</span><span>.</span><span>objects</span><span>.</span><span>all</span><span>(</span><span>)</span><span>.</span><span>select_related</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">author</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span></code></pre>
+<p>These methods retrieve additional objects, to avoid fetching them later. This also caches all the results into memory, which may or not be desirable.</p>
+<h2 id="page-results">Page results</h2>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span>musics</span><span class="z-l-8 z-d-10"> =</span><span> Music</span><span>.</span><span>objects</span><span>.</span><span>all</span><span>(</span><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>paginator</span><span class="z-l-8 z-d-10"> =</span><span> Paginator</span><span>(</span><span>musics</span><span>,</span><span class="z-l-9 z-d-12"> per_page</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-1 z-d-4"> 2000</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">for</span><span> page</span><span class="z-l-8 z-d-10"> in</span><span> paginator</span><span>.</span><span>page_range</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">    for</span><span> obj</span><span class="z-l-8 z-d-10"> in</span><span> paginator</span><span>.</span><span>page</span><span>(</span><span>page</span><span>)</span><span>.</span><span>object_list</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">    	...</span></span></code></pre>
+<p>Pagination avoids loading all the objects into memory. This will drastically reduce the memory usage since it fetches slices of our dataset, one chunk of rows at a time, from the database.</p>
+<h2 id="use-bulk-create-to-insert-a-batch-of-records">Use bulk_create() to insert a batch of records</h2>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span>Music</span><span>.</span><span>objects</span><span>.</span><span>bulk_create</span><span>(</span><span>musics</span><span>)</span></span></code></pre>
+<p>Each time we call the <em>.save()</em> method on a model instance, a round trip to the database is performed. Besides, signals are sent for each save operation. This can quickly bring an huge overhead when dealing with thousands or millions of records. A possible workaround is to use the <em>bulk_create</em> method which inserts records in a single query. We only need to give the list of objects we wish to write back to disk in a single database round trip. However, it is important to note that custom <em>save()</em> methods and signals will not be called.</p>
+<h2 id="use-distributed-and-asynchronous-processing">Use distributed and asynchronous processing</h2>
+<p>External concurrency libraries such as <a rel="noopener external" target="_blank" href="http://www.tornadoweb.org/en/stable/">Tornado</a>, <a rel="noopener external" target="_blank" href="https://twisted.org/">Twisted</a> or <a rel="noopener external" target="_blank" href="https://docs.python.org/3/library/asyncio.html">Asyncio</a> provide non-blocking behavior and asynchronous I/O, great for performing I/O bound tasks such as reading and writing to disk/network. <a rel="noopener external" target="_blank" href="http://www.celeryproject.org/">Celery</a> is also great to perform distributed and CPU bound background tasks.</p>
+<p>Here is an example of an hypothetical processing of electronic consumption bills, using the backport version of asyncio for Python 2.7.</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> django</span><span>.</span><span>conf</span><span class="z-l-8 z-d-10"> import</span><span> settings</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> django</span><span>.</span><span>core</span><span>.</span><span>management</span><span>.</span><span>base</span><span class="z-l-8 z-d-10"> import</span><span> BaseCommand</span><span>,</span><span> CommandError</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> django</span><span>.</span><span>db</span><span class="z-l-8 z-d-10"> import</span><span> transaction</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> consumption</span><span>.</span><span>models</span><span class="z-l-8 z-d-10"> import</span><span> ElectricConsumption</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">import</span><span> trollius</span><span class="z-l-8 z-d-10"> as</span><span> asyncio</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">from</span><span> trollius</span><span class="z-l-8 z-d-10"> import</span><span> From</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">COUNTER</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-1 z-d-4"> 0</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">@</span><span class="z-l-6 z-d-7">asyncio</span><span class="z-l-6 z-d-7">.</span><span class="z-l-6 z-d-7">coroutine</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">def</span><span class="z-l-6 z-d-7"> process_client</span><span>(</span><span>all_events</span><span>,</span><span> client_number</span><span>,</span><span> total</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">    try</span><span>:</span></span>
+<span class="giallo-l"><span>        client_events</span><span class="z-l-8 z-d-10"> =</span><span> all_events</span><span>.</span><span>filter</span><span>(</span><span class="z-l-9 z-d-12">client_number</span><span class="z-l-8 z-d-10">=</span><span>client_number</span><span>)</span><span>.</span><span>order_by</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">timestamp</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">        print</span><span class="z-l-2 z-d-6"> &quot;</span><span class="z-l-2 z-d-6">Scheduled processing of client </span><span class="z-l-1 z-d-4">{}</span><span class="z-l-2 z-d-6">&quot;</span><span>.</span><span>format</span><span>(</span><span>client_number</span><span>)</span></span>
+<span class="giallo-l"><span> 		</span></span>
+<span class="giallo-l"><span class="z-l-5 z-d-3">        #</span><span class="z-l-5 z-d-3">specify that a context switch can happen here</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">        yield</span><span> From</span><span>(</span><span>asyncio</span><span>.</span><span>sleep</span><span>(</span><span class="z-l-1 z-d-4">1</span><span>)</span><span>)</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-5 z-d-3">        #</span><span class="z-l-5 z-d-3"> Compute bills (I/O bound task)</span></span>
+<span class="giallo-l"><span>        ElectricConsumption</span><span>.</span><span>set_bill</span><span>(</span><span>client_events</span><span>)</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">        global</span><span class="z-l-1 z-d-4"> COUNTER</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">        COUNTER</span><span class="z-l-8 z-d-10"> +=</span><span class="z-l-1 z-d-4"> 1</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">        print</span><span class="z-l-2 z-d-6"> &quot;</span><span class="z-l-2 z-d-6">Finished processing client </span><span class="z-l-1 z-d-4">{}</span><span class="z-l-2 z-d-6">: </span><span class="z-l-2 z-d-6">&quot;</span><span> \</span></span>
+<span class="giallo-l"><span class="z-l-2 z-d-6">              &quot;</span><span class="z-l-2 z-d-6">(</span><span class="z-l-1 z-d-4">{}</span><span class="z-l-2 z-d-6"> of </span><span class="z-l-1 z-d-4">{}</span><span class="z-l-2 z-d-6"> = </span><span class="z-l-1 z-d-4">{}</span><span class="z-l-2 z-d-6"> %))</span><span class="z-l-2 z-d-6">&quot;</span><span>.</span><span>format</span><span>(</span><span>client_number</span><span>,</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">                                          COUNTER</span><span>,</span><span> total</span><span>,</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">                                          str</span><span>(</span><span class="z-l-1 z-d-4">COUNTER</span><span class="z-l-8 z-d-10"> /</span><span class="z-l-1 z-d-4"> float</span><span>(</span><span>total</span><span>)</span><span class="z-l-8 z-d-10"> *</span><span class="z-l-1 z-d-4"> 100</span><span>)</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">    except</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">        print</span><span class="z-l-2 z-d-6"> &quot;</span><span class="z-l-2 z-d-6">Error processing client </span><span class="z-l-1 z-d-4">{}</span><span class="z-l-2 z-d-6">)</span><span class="z-l-2 z-d-6">&quot;</span><span>.</span><span>format</span><span>(</span><span>client_number</span><span>)</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">class</span><span class="z-l-6 z-d-7"> Command</span><span>(</span><span class="z-l-6 z-d-7">BaseCommand</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">    help</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">Process electric consumptions</span><span class="z-l-2 z-d-6">&#39;</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-5 z-d-3">    #</span><span class="z-l-5 z-d-3"> Process clients</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">    def</span><span class="z-l-6 z-d-7"> handle</span><span>(</span><span>self</span><span>,</span><span class="z-l-8 z-d-10"> *</span><span>args</span><span>,</span><span class="z-l-8 z-d-10"> **</span><span>options</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span>        all_events</span><span class="z-l-8 z-d-10"> =</span><span> ElectricConsumption</span><span>.</span><span>objects</span><span>.</span><span>all</span><span>(</span><span>)</span></span>
+<span class="giallo-l"><span>        clients</span><span class="z-l-8 z-d-10"> =</span><span> all_events</span><span>.</span><span>values</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">client_number</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span>        total</span><span class="z-l-8 z-d-10"> =</span><span> clients</span><span>.</span><span>count</span><span>(</span><span>)</span></span>
+<span class="giallo-l"><span>			</span></span>
+<span class="giallo-l"><span class="z-l-5 z-d-3">        #</span><span class="z-l-5 z-d-3">gets the event loop that manages the execution flow of our future tasks</span></span>
+<span class="giallo-l"><span>        loop</span><span class="z-l-8 z-d-10"> =</span><span> asyncio</span><span>.</span><span>get_event_loop</span><span>(</span><span>)</span></span>
+<span class="giallo-l"><span>        tasks</span><span class="z-l-8 z-d-10"> =</span><span> [</span><span>]</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">        with</span><span> transaction</span><span>.</span><span>atomic</span><span>(</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">            for</span><span> client</span><span class="z-l-8 z-d-10"> in</span><span> clients</span><span>:</span></span>
+<span class="giallo-l"><span>                client_number</span><span class="z-l-8 z-d-10"> =</span><span> client</span><span>[</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">client_number</span><span class="z-l-2 z-d-6">&#39;</span><span>]</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-5 z-d-3">                #</span><span class="z-l-5 z-d-3">register our asynchronous tasks</span></span>
+<span class="giallo-l"><span>                tasks</span><span class="z-l-8 z-d-10"> +=</span><span> [</span><span>asyncio</span><span>.</span><span>ensure_future</span><span>(</span><span>process_client</span><span>(</span><span>all_events</span><span>,</span><span> client_number</span><span>,</span><span> total</span><span>)</span><span>)</span><span>]</span></span>
+<span class="giallo-l"><span>					</span></span>
+<span class="giallo-l"><span>            loop</span><span>.</span><span>run_until_complete</span><span>(</span><span>asyncio</span><span>.</span><span>wait</span><span>(</span><span>tasks</span><span>)</span><span>)</span></span>
+<span class="giallo-l"><span>            loop</span><span>.</span><span>close</span><span>(</span><span>)</span></span></code></pre><pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">$</span><span class="z-l-2 z-d-6"> python</span><span class="z-l-2 z-d-6"> manage.py</span><span class="z-l-2 z-d-6"> electric_bills.py</span></span>
+<span class="giallo-l"><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">Scheduled</span><span class="z-l-2 z-d-6"> processing</span><span class="z-l-2 z-d-6"> of</span><span class="z-l-2 z-d-6"> client</span><span class="z-l-1 z-d-4"> 4521</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">Scheduled</span><span class="z-l-2 z-d-6"> processing</span><span class="z-l-2 z-d-6"> of</span><span class="z-l-2 z-d-6"> client</span><span class="z-l-1 z-d-4"> 4174</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">Scheduled</span><span class="z-l-2 z-d-6"> processing</span><span class="z-l-2 z-d-6"> of</span><span class="z-l-2 z-d-6"> client</span><span class="z-l-1 z-d-4"> 7531</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">Scheduled</span><span class="z-l-2 z-d-6"> processing</span><span class="z-l-2 z-d-6"> of</span><span class="z-l-2 z-d-6"> client</span><span class="z-l-1 z-d-4"> 7584</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">Scheduled</span><span class="z-l-2 z-d-6"> processing</span><span class="z-l-2 z-d-6"> of</span><span class="z-l-2 z-d-6"> client</span><span class="z-l-1 z-d-4"> 7419</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">Finished</span><span class="z-l-2 z-d-6"> processing</span><span class="z-l-2 z-d-6"> client</span><span class="z-l-2 z-d-6"> 7584:</span><span> (1</span><span class="z-l-2 z-d-6"> of</span><span class="z-l-1 z-d-4"> 5</span><span class="z-l-2 z-d-6"> =</span><span class="z-l-1 z-d-4"> 20.0</span><span class="z-l-2 z-d-6"> %</span><span>))</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">Finished</span><span class="z-l-2 z-d-6"> processing</span><span class="z-l-2 z-d-6"> client</span><span class="z-l-2 z-d-6"> 4174:</span><span> (2</span><span class="z-l-2 z-d-6"> of</span><span class="z-l-1 z-d-4"> 5</span><span class="z-l-2 z-d-6"> =</span><span class="z-l-1 z-d-4"> 40.0</span><span class="z-l-2 z-d-6"> %</span><span>))</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">Finished</span><span class="z-l-2 z-d-6"> processing</span><span class="z-l-2 z-d-6"> client</span><span class="z-l-2 z-d-6"> 7531:</span><span> (3</span><span class="z-l-2 z-d-6"> of</span><span class="z-l-1 z-d-4"> 5</span><span class="z-l-2 z-d-6"> =</span><span class="z-l-1 z-d-4"> 60.0</span><span class="z-l-2 z-d-6"> %</span><span>))</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">Finished</span><span class="z-l-2 z-d-6"> processing</span><span class="z-l-2 z-d-6"> client</span><span class="z-l-2 z-d-6"> 7419:</span><span> (4</span><span class="z-l-2 z-d-6"> of</span><span class="z-l-1 z-d-4"> 5</span><span class="z-l-2 z-d-6"> =</span><span class="z-l-1 z-d-4"> 80.0</span><span class="z-l-2 z-d-6"> %</span><span>))</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">Finished</span><span class="z-l-2 z-d-6"> processing</span><span class="z-l-2 z-d-6"> client</span><span class="z-l-2 z-d-6"> 4521:</span><span> (5</span><span class="z-l-2 z-d-6"> of</span><span class="z-l-1 z-d-4"> 5</span><span class="z-l-2 z-d-6"> =</span><span class="z-l-1 z-d-4"> 100.0</span><span class="z-l-2 z-d-6"> %</span><span>))</span></span></code></pre>
+<p>These small tips make a noticeably difference when dealing with huge datasets and are good investments, regarding performance, in the long term.</p>
+
+            </section>
+        </article>
+    </main>
+</div>
+
+
+
+            
+                
+            
+
+            
+        </div>
+
+        <div class="right-content">
+            
+    
+    
+        <div class="toc">
+    <div class="heading">
+        Table of Contents
+    </div>
+    <ul class="toc-list">
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/django-performance-tips/#use-count-instead-of-len-in-querysets">Use .count() instead of len() in querysets</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/django-performance-tips/#use-a-combination-of-filter-and-exists-to-test-existence-and-membership">Use a combination of .filter() and .exists() to test existence and membership</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/django-performance-tips/#delay-queryset-evaluations">Delay queryset evaluations</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/django-performance-tips/#avoid-caching-mechanisms-for-one-time-operations">Avoid caching mechanisms for one time operations</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/django-performance-tips/#fetch-only-the-required-columns">Fetch only the required columns</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/django-performance-tips/#fetch-related-objects-in-a-single-batch">Fetch related objects in a single batch</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/django-performance-tips/#page-results">Page results</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/django-performance-tips/#use-bulk-create-to-insert-a-batch-of-records">Use bulk_create() to insert a batch of records</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/django-performance-tips/#use-distributed-and-asynchronous-processing">Use distributed and asynchronous processing</a>
+
+                
+            </li>
+        
+    </ul>
+</div>
+
+    
+
+        </div>
+        
+
+<style>
+    body { flex-wrap: wrap; }
+    .site-footer {
+        flex-basis: 100%;
+        width: 100%;
+        max-width: 920px;
+        margin: 0.5rem auto 0;
+        padding: 0 0.9rem;
+        text-align: center;
+        opacity: 0.7;
+        font-size: 0.9em;
+    }
+</style>
+<footer class="site-footer">
+    <p>Copyright &copy; 2026 Alexandre Pinto</p>
+</footer>
+
+    </body>
+
+</html>

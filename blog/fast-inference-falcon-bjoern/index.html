@@ -1,0 +1,533 @@
+
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+    
+<head>
+    
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="base" content="https://alexandrept.com" />
+
+    
+
+    
+
+    
+    
+    
+        <title>
+            
+                Building a fast inference service with falcon and bjoern
+            
+        </title>
+
+        
+            <meta property="og:title"
+                  content="Building a fast inference service with falcon and bjoern" />
+        
+    
+
+    
+        
+            <meta property="og:description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+        
+            <meta name="description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+    
+        <link rel="icon"
+              type="image/png"
+              href="https://alexandrept.com/favicon.ico" />
+    
+
+    
+    
+        <link href=https://alexandrept.com/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/codeblock.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/toc.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/note.js></script>
+    
+
+    
+
+    
+    
+        
+            
+                <link rel="alternate"
+                      type="application/rss+xml"
+                      title="
+Alexandre Pinto
+"
+                      href="https://alexandrept.com/rss.xml" />
+            
+        
+    
+
+
+    
+
+    
+    
+        
+            <link id="syntaxLightStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-light.css" />
+            <link id="syntaxDarkStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-dark.css"
+                  disabled />
+        
+    
+
+    
+    
+        <link rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/light.css" />
+        <link id="darkModeStyle"
+              rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/dark.css" />
+    
+
+    
+        
+            <script>
+                var themeToggleMode = "toggle";
+            </script>
+        
+        <script src=https://alexandrept.com/js/themetoggle.js></script>
+
+        
+            <script>
+                setTheme(getSavedTheme());
+            </script>
+        
+    
+
+
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="https://alexandrept.com/main.css" />
+
+    
+        
+            <link rel="stylesheet" href="https://alexandrept.com/custom.css" />
+        
+    
+
+    
+        <script defer
+                src="https://alexandrept.com/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="e09f570a-4ee8-4bd0-81a1-c219559d337c"></script>
+
+</head>
+
+
+    <body>
+        
+
+        <div class="left-content">
+            
+            
+        </div>
+
+        <div class="content">
+            <nav>
+    <div class="left-nav">
+        
+            <a href=https://alexandrept.com>Alexandre Pinto</a>
+        
+
+
+        <div class="socials">
+            
+                
+            
+            
+                <a rel='me noopener' target='_blank' href="https://github.com/alexpnt" class="social">
+                    <img alt="github"
+                         src="https://alexandrept.com/icons/social/github.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://www.linkedin.com/in/alexandre-pinto" class="social">
+                    <img alt="linkedin"
+                         src="https://alexandrept.com/icons/social/linkedin.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://stackoverflow.com/users/3242636/alexpnt" class="social">
+                    <img alt="stackoverflow"
+                         src="https://alexandrept.com/icons/social/stack-overflow.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://twitter.com/alxpnto" class="social">
+                    <img alt="twitter"
+                         src="https://alexandrept.com/icons/social/twitter.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="mailto:contact@alexandrept.com" class="social">
+                    <img alt="email"
+                         src="https://alexandrept.com/icons/social/email.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="/rss.xml" class="social">
+                    <img alt="rss"
+                         src="https://alexandrept.com/icons/social/rss.svg" />
+                </a>
+            
+        </div>
+    </div>
+
+    <div class="right-nav">
+        
+            <a href=https://alexandrept.com style="margin-right: 0.5em">Home</a>
+        
+            <a href=https://alexandrept.com/cv style="margin-right: 0.5em">CV</a>
+        
+            <a href=https://alexandrept.com/blog style="margin-right: 0.5em">Blog</a>
+        
+            <a href=https://alexandrept.com/publications style="margin-right: 0.5em">Publications</a>
+        
+            <a href=https://alexandrept.com/tags style="margin-right: 0.5em">Tags</a>
+        
+
+        
+            <button id="search-button"
+                    class="search-button"
+                    title="$SHORTCUT to open search">
+                <img src="https://alexandrept.com/icons/search.svg"
+                     alt="Search"
+                     class="search-icon" />
+            </button>
+
+            <div id="searchModal"
+                 class="search-modal js"
+                 role="dialog"
+                 aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">
+                        Search
+                    </h1>
+                    <div id="searchBar">
+                        <input id="searchInput"
+                               role="combobox"
+                               autocomplete="off"
+                               spellcheck="false"
+                               aria-expanded="false"
+                               aria-controls="results-container"
+                               placeholder="Search..." />
+                        <button id="clear-search" class="clear-button" title="Clear search">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+        
+            <a id="dark-mode-toggle"
+               onclick="toggleTheme(); event.preventDefault();"
+               href="#">
+                <img src="https://alexandrept.com/icons/sun.svg" id="sun-icon" alt="Light" />
+                <img src="https://alexandrept.com/icons/moon.svg"
+                     id="moon-icon"
+                     style="filter: invert(1)"
+                     alt="Dark" />
+                
+            </a>
+
+            <!-- Initialize the theme toggle icons -->
+            <script>
+                updateItemToggleTheme()
+            </script>
+        
+    </div>
+</nav>
+
+
+            
+            
+    
+<div class="visible-element-observer-root" data-selector="main article p">
+    <main>
+        <article>
+            <div class="title">
+                
+                
+
+    <div class="page-header">
+        Building a fast inference service with falcon and bjoern
+    </div>
+
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2018-01-06</time>
+                    
+
+
+                    
+
+                    
+
+                    
+
+                    
+                    
+
+                    
+                    
+
+                    
+                    
+                        <span class="tags-label">::</span>
+                        <span class="tags">
+                                <a href="https://alexandrept.com/tags/machine-learning/"
+                                   class="post-tag">machine-learning</a>
+                            
+                                <a href="https://alexandrept.com/tags/performance/"
+                                   class="post-tag">performance</a>
+                            
+                                <a href="https://alexandrept.com/tags/python/"
+                                   class="post-tag">python</a>
+                            
+                        </span>
+                    
+
+                    
+
+                </div>
+            </div>
+
+            
+
+            <section class="body">
+                <p>A good portion of time in building supervised machine learning models is spent into training, that is, finding the best set of parameters that will give us the best accuracies on unseen data. Once we are satisfied with the obtained results, we often need to deploy and make it available to answer queries from a wide range of sources.</p>
+<p>We can elaborate complex scenarios that are able to scale and answer to thousands of requests. However, let us consider that we need to prototype and showcase a quick solution, without sacrificing performance and scalability.</p>
+<p>For this scenario we can combine the <a rel="noopener external" target="_blank" href="https://falconframework.org">Falcon</a> framework, which is a highly optimized and reliable web framework with <a rel="noopener external" target="_blank" href="https://github.com/jonashaag/bjoern">bjoern</a>, a very lightweight and fast WSGI server. This post shows a possible use of these tools. For the inference model, we will use a pre-trained model built with the <a rel="noopener external" target="_blank" href="https://fasttext.cc">fasttext</a> classification tool. This model is able to classify text according to its polarity.</p>
+<h2 id="installing-dependencies">Installing dependencies</h2>
+<ul>
+<li>Optional virtual environment</li>
+</ul>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="plain"><span class="giallo-l"><span>virtualenv -p python3 venv</span></span></code></pre>
+<ul>
+<li>Falcon and Bjoern</li>
+</ul>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="plain"><span class="giallo-l"><span>pip install ujson</span></span>
+<span class="giallo-l"><span>pip install cython</span></span>
+<span class="giallo-l"><span>pip install --no-binary :all: falcon </span></span>
+<span class="giallo-l"><span>pip install bjoern</span></span></code></pre>
+<ul>
+<li>FastText</li>
+</ul>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="plain"><span class="giallo-l"><span>git clone https://github.com/facebookresearch/fastText.git</span></span>
+<span class="giallo-l"><span>cd fastText</span></span>
+<span class="giallo-l"><span>pip install pybind11</span></span>
+<span class="giallo-l"><span>python setup.py install</span></span>
+<span class="giallo-l"><span>cd ..</span></span></code></pre><h2 id="download-the-pre-trained-model">Download the pre-trained model</h2>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="plain"><span class="giallo-l"><span>mkdir models</span></span>
+<span class="giallo-l"><span>wget --directory-prefix=models https://s3-us-west-1.amazonaws.com/fasttext-vectors/supervised_models/amazon_review_full.ftz</span></span></code></pre><h2 id="creating-a-rest-resource">Creating a REST resource</h2>
+<p>In order to serve requests by answering with polarity predictions (number of stars), let's define a resource by specifying a REST endpoint.</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="python"><span class="giallo-l"><span class="z-l-8 z-d-10">import</span><span> fastText</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">import</span><span> falcon</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">import</span><span> bjoern</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">import</span><span> ujson</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">REVIEW_MODEL</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">models/amazon_review_full.ftz</span><span class="z-l-2 z-d-6">&#39;</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">WEB_HOST</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">127.0.0.1</span><span class="z-l-2 z-d-6">&#39;</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">PORT</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-1 z-d-4"> 9000</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">print</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Loading amazon review polarity model ...</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span>review_classifier</span><span class="z-l-8 z-d-10"> =</span><span> fastText</span><span>.</span><span>load_model</span><span>(</span><span class="z-l-1 z-d-4">REVIEW_MODEL</span><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">class</span><span class="z-l-6 z-d-7"> ReviewResource</span><span>(</span><span class="z-l-1 z-d-4">object</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">	def</span><span class="z-l-6 z-d-7"> on_post</span><span>(</span><span>self</span><span>,</span><span> req</span><span>,</span><span> resp</span><span>)</span><span>:</span></span>
+<span class="giallo-l"><span>		form</span><span class="z-l-8 z-d-10"> =</span><span> req</span><span>.</span><span>params</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">		if</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">text</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-8 z-d-10"> in</span><span> form</span><span class="z-l-8 z-d-10"> and</span><span> form</span><span>[</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">text</span><span class="z-l-2 z-d-6">&#39;</span><span>]</span><span>:</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">			try</span><span>:</span></span>
+<span class="giallo-l"><span>				classification</span><span>,</span><span> confidence</span><span class="z-l-8 z-d-10"> =</span><span> review_classifier</span><span>.</span><span>predict</span><span>(</span><span>form</span><span>[</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">text</span><span class="z-l-2 z-d-6">&#39;</span><span>]</span><span>)</span></span>
+<span class="giallo-l"><span>				resp</span><span>.</span><span>body</span><span class="z-l-8 z-d-10"> =</span><span> ujson</span><span>.</span><span>dumps</span><span>(</span><span>{</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-1 z-d-4">{}</span><span class="z-l-2 z-d-6"> star</span><span class="z-l-2 z-d-6">&#39;</span><span>.</span><span>format</span><span>(</span><span>classification</span><span>[</span><span class="z-l-1 z-d-4">0</span><span>]</span><span>[</span><span class="z-l-8 z-d-10">-</span><span class="z-l-1 z-d-4">1</span><span>]</span><span>)</span><span> :</span><span> confidence</span><span>[</span><span class="z-l-1 z-d-4">0</span><span>]</span><span>}</span><span>)</span></span>
+<span class="giallo-l"><span>				resp</span><span>.</span><span>status</span><span class="z-l-8 z-d-10"> =</span><span> falcon</span><span>.</span><span class="z-l-1 z-d-4">HTTP_200</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">			except</span><span>:</span></span>
+<span class="giallo-l"><span>				resp</span><span>.</span><span>body</span><span class="z-l-8 z-d-10"> =</span><span> ujson</span><span>.</span><span>dumps</span><span>(</span><span>{</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Error</span><span class="z-l-2 z-d-6">&#39;</span><span>:</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">An internal server error has occurred</span><span class="z-l-2 z-d-6">&#39;</span><span>}</span><span>)</span></span>
+<span class="giallo-l"><span>				resp</span><span>.</span><span>status</span><span class="z-l-8 z-d-10"> =</span><span> falcon</span><span>.</span><span class="z-l-1 z-d-4">HTTP_500</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">		else</span><span>:</span></span>
+<span class="giallo-l"><span>		    resp</span><span>.</span><span>body</span><span class="z-l-8 z-d-10"> =</span><span> ujson</span><span>.</span><span>dumps</span><span>(</span><span>{</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Error</span><span class="z-l-2 z-d-6">&#39;</span><span>:</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">param </span><span class="z-l-1 z-d-4">\&#39;</span><span class="z-l-2 z-d-6">text</span><span class="z-l-1 z-d-4">\&#39;</span><span class="z-l-2 z-d-6"> is mandatory</span><span class="z-l-2 z-d-6">&#39;</span><span>}</span><span>)</span></span>
+<span class="giallo-l"><span>		    resp</span><span>.</span><span>status</span><span class="z-l-8 z-d-10"> =</span><span> falcon</span><span>.</span><span class="z-l-1 z-d-4">HTTP_400</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-5 z-d-3">#</span><span class="z-l-5 z-d-3"> instantiate a callable WSGI app</span></span>
+<span class="giallo-l"><span>app</span><span class="z-l-8 z-d-10"> =</span><span> falcon</span><span>.</span><span>API</span><span>(</span><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-5 z-d-3">#</span><span class="z-l-5 z-d-3"> long-lived resource class instance</span></span>
+<span class="giallo-l"><span>infer_review</span><span class="z-l-8 z-d-10"> =</span><span> ReviewResource</span><span>(</span><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-5 z-d-3">#</span><span class="z-l-5 z-d-3"> handle all requests to the &#39;/inferreview&#39; URL path</span></span>
+<span class="giallo-l"><span>app</span><span>.</span><span>req_options</span><span>.</span><span>auto_parse_form_urlencoded</span><span class="z-l-8 z-d-10"> =</span><span class="z-l-1 z-d-4"> True</span></span>
+<span class="giallo-l"><span>app</span><span>.</span><span>add_route</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">/inferreview</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span> infer_review</span><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">print</span><span>(</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-2 z-d-6">Listening on</span><span class="z-l-2 z-d-6">&#39;</span><span>,</span><span class="z-l-1 z-d-4"> WEB_HOST</span><span class="z-l-8 z-d-10"> +</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">:</span><span class="z-l-2 z-d-6">&#39;</span><span class="z-l-8 z-d-10"> +</span><span class="z-l-1 z-d-4"> str</span><span>(</span><span class="z-l-1 z-d-4">PORT</span><span>)</span><span class="z-l-8 z-d-10"> +</span><span class="z-l-2 z-d-6"> &#39;</span><span class="z-l-2 z-d-6">/inferreview</span><span class="z-l-2 z-d-6">&#39;</span><span>)</span></span>
+<span class="giallo-l"><span>bjoern</span><span>.</span><span>run</span><span>(</span><span>app</span><span>,</span><span class="z-l-1 z-d-4"> WEB_HOST</span><span>,</span><span class="z-l-1 z-d-4"> PORT</span><span>,</span><span class="z-l-9 z-d-12"> reuse_port</span><span class="z-l-8 z-d-10">=</span><span class="z-l-1 z-d-4">True</span><span>)</span></span></code></pre>
+<p>In the above code, we define an handler for POST requests, instantiate the application, configure routing and finally run the bjoern WSGI server.</p>
+<h2 id="making-queries">Making queries</h2>
+<p>The command bellow allow us to make queries to our web server. As an example, the request asks for a rating of the following review: 'I love this product.'</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="plain"><span class="giallo-l"><span>curl -X POST http://localhost:9000/inferreview -H &#39;Content-Type: application/x-www-form-urlencoded&#39; -d text=&quot;I love this product.&quot;</span></span></code></pre>
+<p>which gives the desired classification, along with its confidence:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="json"><span class="giallo-l"><span>{</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">    &quot;</span><span class="z-l-1 z-d-4">5 star</span><span class="z-l-1 z-d-4">&quot;</span><span>:</span><span class="z-l-1 z-d-4"> 0.7544972301</span></span>
+<span class="giallo-l"><span>}</span></span></code></pre><h2 id="how-does-it-scale">How does it scale ?</h2>
+<p>We have a server answering to client queries. We can make a quick test in order assess the scalability of our system. The <a rel="noopener external" target="_blank" href="https://github.com/giltene/wrk2">wrk2</a> tool is perfect for this since it allows to record the latency distribution for different throughput (request per second) values.</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="plain"><span class="giallo-l"><span>git clone https://github.com/giltene/wrk2.git</span></span>
+<span class="giallo-l"><span>cd wrk2</span></span>
+<span class="giallo-l"><span>make</span></span>
+<span class="giallo-l"><span>./wrk -t4 -c400 -d30s -R25000 -L -s scripts/post.lua http://127.0.0.1:9000/inferreview</span></span></code></pre>
+<p>The above command tests our server using 4 client threads, keeping 400 connections open, during 30 seconds and with a constant throughput of 20000 per second. The file scripts/post.lua is also modified as follows:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="plain"><span class="giallo-l"><span>wrk.method = &quot;POST&quot;</span></span>
+<span class="giallo-l"><span>wrk.body   = &quot;text=&#39;awesome product&#39;&quot;</span></span>
+<span class="giallo-l"><span>wrk.headers[&quot;Content-Type&quot;] = &quot;application/x-www-form-urlencoded&quot;</span></span>
+<span class="giallo-l"><span>wrk.headers[&quot;Cache-Control&quot;] = &quot;no-cache&quot;</span></span></code></pre>
+<p>The wrk2 tool generates a large output, containing a complete report with statistics in the <a rel="noopener external" target="_blank" href="https://github.com/HdrHistogram/HdrHistogram">HdrHistogram</a> (High Dynamic Range Histogram) format, which we can use to make a plot of different throughput rates, as shown in the figure bellow:</p>
+<p><img src="/images/falcon-bjoern/falcon-bjoern-latency.png" alt="" /></p>
+<p>We can see the server handles 99% of all requests under 60 milliseconds, even when the throughput is 20000 requests per second, which is a fairly good performance. As a further comparison, the plot bellow shows a comparison with the popular wsgi server <a rel="noopener external" target="_blank" href="http://gunicorn.org">gunicorn</a>, with the same constant throughput rate.</p>
+<p><img src="/images/falcon-bjoern/bjoern-gunicorn.png" alt="" /></p>
+<p>The gunicorn server ran with 9 asynchronous worker processes, based on <a rel="noopener external" target="_blank" href="http://www.gevent.org">gevent</a> threads and it was called with the following command:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="plain"><span class="giallo-l"><span>gunicorn polarity_server:app -w 9 -k gevent</span></span></code></pre>
+<p>It is clear that the bjoern server handled requests faster than gunicorn, and thus is a strong and faster alternative. These tests were performed on a standard laptop with 4 cores.</p>
+<h2 id="final-remarks">Final remarks</h2>
+<p>Falcon  and Bjoern make a great combination to quickly serve thousands of requests with low effort and also make a good starting point for more complex scenarios. This speedup is justified since Falcon itself was compiled with <a rel="noopener external" target="_blank" href="http://cython.org">Cython</a>. We could have used the <a rel="noopener external" target="_blank" href="http://pypy.org">pypy</a> python implementation alternative for even faster results. On the other hand, Bjoern is a very lightweight wsgi server, with a very low memory footprint, and single-threaded, which avoids locking overheads such as the <a rel="noopener external" target="_blank" href="https://wiki.python.org/moin/GlobalInterpreterLock">GIL</a>. The right combination of tools, allow us to worry less on performance issues and focus more on implementing the task that we want to provide. Finally, the source code is available <a rel="noopener external" target="_blank" href="https://github.com/AlexPnt/falcon-polarity-inference">here</a>.</p>
+
+            </section>
+        </article>
+    </main>
+</div>
+
+
+
+            
+                
+            
+
+            
+        </div>
+
+        <div class="right-content">
+            
+    
+    
+        <div class="toc">
+    <div class="heading">
+        Table of Contents
+    </div>
+    <ul class="toc-list">
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/fast-inference-falcon-bjoern/#installing-dependencies">Installing dependencies</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/fast-inference-falcon-bjoern/#download-the-pre-trained-model">Download the pre-trained model</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/fast-inference-falcon-bjoern/#creating-a-rest-resource">Creating a REST resource</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/fast-inference-falcon-bjoern/#making-queries">Making queries</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/fast-inference-falcon-bjoern/#how-does-it-scale">How does it scale ?</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/fast-inference-falcon-bjoern/#final-remarks">Final remarks</a>
+
+                
+            </li>
+        
+    </ul>
+</div>
+
+    
+
+        </div>
+        
+
+<style>
+    body { flex-wrap: wrap; }
+    .site-footer {
+        flex-basis: 100%;
+        width: 100%;
+        max-width: 920px;
+        margin: 0.5rem auto 0;
+        padding: 0 0.9rem;
+        text-align: center;
+        opacity: 0.7;
+        font-size: 0.9em;
+    }
+</style>
+<footer class="site-footer">
+    <p>Copyright &copy; 2026 Alexandre Pinto</p>
+</footer>
+
+    </body>
+
+</html>

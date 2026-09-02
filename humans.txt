@@ -1,17 +1,17 @@
 /* TEAM */
 	Alexandre Pinto
-	Site: alexpnt.github.io
-	From: Coimbra, Portugal
+	Site: alexandrept.com
+	From: Portugal
 
 /* THANKS */
-	
-	Hexo: A fast, simple & powerful blog framework
-	https://hexo.io/
 
-	https://probberechts.github.io/cactus-dark/: a theme for the Hexo blogging framework
+	Zola: A fast static site generator
+	https://www.getzola.org/
+
+	Apollo: a theme for the Zola static site generator
+	https://github.com/not-matthias/apollo
 
 /* SITE */
-	Last update: 08/2020
 	Language: English
-	Technologies: HTML5, CSS, javascript
-	Tools: Sublime Text 3, Markdown, git, javascript
+	Technologies: HTML5, CSS3, Sass/SCSS, JavaScript
+	Tools: Zola, Tera, Markdown, Git

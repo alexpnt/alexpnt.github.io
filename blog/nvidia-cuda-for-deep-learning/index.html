@@ -1,0 +1,650 @@
+
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+    
+<head>
+    
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="base" content="https://alexandrept.com" />
+
+    
+
+    
+
+    
+    
+    
+        <title>
+            
+                Setting up tensorflow to run on a nvidia gpu
+            
+        </title>
+
+        
+            <meta property="og:title"
+                  content="Setting up tensorflow to run on a nvidia gpu" />
+        
+    
+
+    
+        
+            <meta property="og:description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+        
+            <meta name="description" content="Software engineer, from Portugal. Mostly interested in backend development and machine learning." />
+        
+    
+
+    
+    
+        <link rel="icon"
+              type="image/png"
+              href="https://alexandrept.com/favicon.ico" />
+    
+
+    
+    
+        <link href=https://alexandrept.com/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/codeblock.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/toc.js></script>
+    
+
+    
+    
+        <script defer src=https://alexandrept.com/js/note.js></script>
+    
+
+    
+
+    
+    
+        
+            
+                <link rel="alternate"
+                      type="application/rss+xml"
+                      title="
+Alexandre Pinto
+"
+                      href="https://alexandrept.com/rss.xml" />
+            
+        
+    
+
+
+    
+
+    
+    
+        
+            <link id="syntaxLightStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-light.css" />
+            <link id="syntaxDarkStyle"
+                  rel="stylesheet"
+                  type="text/css"
+                  href="https://alexandrept.com/giallo-dark.css"
+                  disabled />
+        
+    
+
+    
+    
+        <link rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/light.css" />
+        <link id="darkModeStyle"
+              rel="stylesheet"
+              type="text/css"
+              href="https://alexandrept.com/theme/dark.css" />
+    
+
+    
+        
+            <script>
+                var themeToggleMode = "toggle";
+            </script>
+        
+        <script src=https://alexandrept.com/js/themetoggle.js></script>
+
+        
+            <script>
+                setTheme(getSavedTheme());
+            </script>
+        
+    
+
+
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="https://alexandrept.com/main.css" />
+
+    
+        
+            <link rel="stylesheet" href="https://alexandrept.com/custom.css" />
+        
+    
+
+    
+        <script defer
+                src="https://alexandrept.com/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="e09f570a-4ee8-4bd0-81a1-c219559d337c"></script>
+
+</head>
+
+
+    <body>
+        
+
+        <div class="left-content">
+            
+            
+        </div>
+
+        <div class="content">
+            <nav>
+    <div class="left-nav">
+        
+            <a href=https://alexandrept.com>Alexandre Pinto</a>
+        
+
+
+        <div class="socials">
+            
+                
+            
+            
+                <a rel='me noopener' target='_blank' href="https://github.com/alexpnt" class="social">
+                    <img alt="github"
+                         src="https://alexandrept.com/icons/social/github.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://www.linkedin.com/in/alexandre-pinto" class="social">
+                    <img alt="linkedin"
+                         src="https://alexandrept.com/icons/social/linkedin.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://stackoverflow.com/users/3242636/alexpnt" class="social">
+                    <img alt="stackoverflow"
+                         src="https://alexandrept.com/icons/social/stack-overflow.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="https://twitter.com/alxpnto" class="social">
+                    <img alt="twitter"
+                         src="https://alexandrept.com/icons/social/twitter.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="mailto:contact@alexandrept.com" class="social">
+                    <img alt="email"
+                         src="https://alexandrept.com/icons/social/email.svg" />
+                </a>
+            
+                <a rel='me noopener' target='_blank' href="/rss.xml" class="social">
+                    <img alt="rss"
+                         src="https://alexandrept.com/icons/social/rss.svg" />
+                </a>
+            
+        </div>
+    </div>
+
+    <div class="right-nav">
+        
+            <a href=https://alexandrept.com style="margin-right: 0.5em">Home</a>
+        
+            <a href=https://alexandrept.com/cv style="margin-right: 0.5em">CV</a>
+        
+            <a href=https://alexandrept.com/blog style="margin-right: 0.5em">Blog</a>
+        
+            <a href=https://alexandrept.com/publications style="margin-right: 0.5em">Publications</a>
+        
+            <a href=https://alexandrept.com/tags style="margin-right: 0.5em">Tags</a>
+        
+
+        
+            <button id="search-button"
+                    class="search-button"
+                    title="$SHORTCUT to open search">
+                <img src="https://alexandrept.com/icons/search.svg"
+                     alt="Search"
+                     class="search-icon" />
+            </button>
+
+            <div id="searchModal"
+                 class="search-modal js"
+                 role="dialog"
+                 aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">
+                        Search
+                    </h1>
+                    <div id="searchBar">
+                        <input id="searchInput"
+                               role="combobox"
+                               autocomplete="off"
+                               spellcheck="false"
+                               aria-expanded="false"
+                               aria-controls="results-container"
+                               placeholder="Search..." />
+                        <button id="clear-search" class="clear-button" title="Clear search">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+        
+            <a id="dark-mode-toggle"
+               onclick="toggleTheme(); event.preventDefault();"
+               href="#">
+                <img src="https://alexandrept.com/icons/sun.svg" id="sun-icon" alt="Light" />
+                <img src="https://alexandrept.com/icons/moon.svg"
+                     id="moon-icon"
+                     style="filter: invert(1)"
+                     alt="Dark" />
+                
+            </a>
+
+            <!-- Initialize the theme toggle icons -->
+            <script>
+                updateItemToggleTheme()
+            </script>
+        
+    </div>
+</nav>
+
+
+            
+            
+    
+<div class="visible-element-observer-root" data-selector="main article p">
+    <main>
+        <article>
+            <div class="title">
+                
+                
+
+    <div class="page-header">
+        Setting up tensorflow to run on a nvidia gpu
+    </div>
+
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2018-01-27</time>
+                    
+
+
+                    
+
+                    
+
+                    
+
+                    
+                    
+
+                    
+                    
+
+                    
+                    
+                        <span class="tags-label">::</span>
+                        <span class="tags">
+                                <a href="https://alexandrept.com/tags/cuda/"
+                                   class="post-tag">cuda</a>
+                            
+                                <a href="https://alexandrept.com/tags/deep-learning/"
+                                   class="post-tag">deep-learning</a>
+                            
+                                <a href="https://alexandrept.com/tags/gpu/"
+                                   class="post-tag">gpu</a>
+                            
+                                <a href="https://alexandrept.com/tags/machine-learning/"
+                                   class="post-tag">machine-learning</a>
+                            
+                                <a href="https://alexandrept.com/tags/nvidia/"
+                                   class="post-tag">nvidia</a>
+                            
+                                <a href="https://alexandrept.com/tags/performance/"
+                                   class="post-tag">performance</a>
+                            
+                                <a href="https://alexandrept.com/tags/tensorflow/"
+                                   class="post-tag">tensorflow</a>
+                            
+                        </span>
+                    
+
+                    
+
+                </div>
+            </div>
+
+            
+
+            <section class="body">
+                <p>Nowadays, there are have massive amounts of structured and unstructured data and good hardware resources, which makes it ideal for resource-hungry algorithms, such as deep neural networks, that usually need huge amounts of data. Furthermore, libraries such as <a rel="noopener external" target="_blank" href="https://www.tensorflow.org">Tensorflow</a> are a great boost in the development and deploy of accurate models. While Tensorflow can run on a typical CPU, for the best performance and reduced training/inference time we may run it on a GPU. Libraries such as NVIDIA CUDA Deep Neural Network library (cuDNN) greatly optimize low-level computations, such as complex matrix operations and deliver very good performance speedups.
+Before we can use Tensorflow we need to setup the cuDNN library. This post demonstrates a common scenario where we setup an Amazon GPU instance (p3.2xlarge), running a Ubuntu 16.04 x86_64 distribution with a NVIDIA Tesla V100.</p>
+<h2 id="install-the-cuda-toolkit">Install the CUDA Toolkit</h2>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">mkdir</span><span class="z-l-2 z-d-6"> cuda</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">cd</span><span class="z-l-2 z-d-6"> cuda</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">wget</span><span class="z-l-2 z-d-6"> http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.0.176-1_amd64.deb</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">sudo</span><span class="z-l-2 z-d-6"> dpkg</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">i</span><span class="z-l-2 z-d-6"> cuda-repo-ubuntu1604_9.0.176-1_amd64.deb</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">sudo</span><span class="z-l-2 z-d-6"> apt-key</span><span class="z-l-2 z-d-6"> adv</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">-fetch-keys</span><span class="z-l-2 z-d-6"> http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">sudo</span><span class="z-l-2 z-d-6"> apt-get</span><span class="z-l-2 z-d-6"> update</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">sudo</span><span class="z-l-2 z-d-6"> apt-get</span><span class="z-l-2 z-d-6"> install</span><span class="z-l-2 z-d-6"> cuda-9-0</span></span></code></pre><h2 id="setup-the-environment-variables">Setup the environment variables</h2>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-8 z-d-10">export</span><span> PATH</span><span class="z-l-8 z-d-10">=</span><span>/</span><span>usr</span><span>/</span><span>local</span><span>/</span><span>cuda-9</span><span>.</span><span>0</span><span>/</span><span>bin</span><span>$</span><span>{</span><span>PATH</span><span class="z-l-8 z-d-10">:</span><span>+</span><span class="z-l-8 z-d-10">:</span><span>$</span><span>{</span><span>PATH</span><span>}</span><span>}</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">export</span><span> LD_LIBRARY_PATH</span><span class="z-l-8 z-d-10">=</span><span>/</span><span>usr</span><span>/</span><span>local</span><span>/</span><span>cuda-9</span><span>.</span><span>0</span><span>/</span><span>lib64</span><span>$</span><span>{</span><span>LD_LIBRARY_PATH</span><span class="z-l-8 z-d-10">:</span><span>+</span><span class="z-l-8 z-d-10">:</span><span>$</span><span>{</span><span>LD_LIBRARY_PATH</span><span>}</span><span>}</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">export</span><span> CUDA_HOME</span><span class="z-l-8 z-d-10">=</span><span>/</span><span>usr</span><span>/</span><span>local</span><span>/</span><span>cuda-9</span><span>.</span><span>0</span><span>/</span></span></code></pre><h2 id="compile-samples-and-test-them">Compile samples and test them</h2>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">cp</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">r</span><span class="z-l-2 z-d-6"> /usr/local/cuda-9.0/samples</span><span> $</span><span>HOME</span><span class="z-l-2 z-d-6">/cuda</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">cd</span><span class="z-l-2 z-d-6"> samples</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">make</span><span class="z-l-2 z-d-6"> clean</span><span> &amp;&amp;</span><span class="z-l-6 z-d-7"> make</span></span></code></pre><h2 id="check-installation-by-running-devicequery-and-bandwidthtest">Check installation by running <em>deviceQuery</em> and <em>bandwidthTest</em></h2>
+<p>You should see an output similar to these ones:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="plain"><span class="giallo-l"><span>cd bin/</span></span>
+<span class="giallo-l"><span>./deviceQuery</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>	./deviceQuery Starting...</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>	 CUDA Device Query (Runtime API) version (CUDART static linking)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>	Detected 1 CUDA Capable device(s)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>	Device 0: &quot;Tesla V100-SXM2-16GB&quot;</span></span>
+<span class="giallo-l"><span>	  CUDA Driver Version / Runtime Version          9.0 / 9.0</span></span>
+<span class="giallo-l"><span>	  CUDA Capability Major/Minor version number:    7.0</span></span>
+<span class="giallo-l"><span>	  Total amount of global memory:                 16160 MBytes (16945512448 bytes)</span></span>
+<span class="giallo-l"><span>	  (80) Multiprocessors, ( 64) CUDA Cores/MP:     5120 CUDA Cores</span></span>
+<span class="giallo-l"><span>	  GPU Max Clock rate:                            1530 MHz (1.53 GHz)</span></span>
+<span class="giallo-l"><span>	  Memory Clock rate:                             877 Mhz</span></span>
+<span class="giallo-l"><span>	  Memory Bus Width:                              4096-bit</span></span>
+<span class="giallo-l"><span>	  L2 Cache Size:                                 6291456 bytes</span></span>
+<span class="giallo-l"><span>	  Maximum Texture Dimension Size (x,y,z)         1D=(131072), 2D=(131072, 65536), 3D=(16384, 16384, 16384)</span></span>
+<span class="giallo-l"><span>	  Maximum Layered 1D Texture Size, (num) layers  1D=(32768), 2048 layers</span></span>
+<span class="giallo-l"><span>	  Maximum Layered 2D Texture Size, (num) layers  2D=(32768, 32768), 2048 layers</span></span>
+<span class="giallo-l"><span>	  Total amount of constant memory:               65536 bytes</span></span>
+<span class="giallo-l"><span>	  Total amount of shared memory per block:       49152 bytes</span></span>
+<span class="giallo-l"><span>	  Total number of registers available per block: 65536</span></span>
+<span class="giallo-l"><span>	  Warp size:                                     32</span></span>
+<span class="giallo-l"><span>	  Maximum number of threads per multiprocessor:  2048</span></span>
+<span class="giallo-l"><span>	  Maximum number of threads per block:           1024</span></span>
+<span class="giallo-l"><span>	  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)</span></span>
+<span class="giallo-l"><span>	  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)</span></span>
+<span class="giallo-l"><span>	  Maximum memory pitch:                          2147483647 bytes</span></span>
+<span class="giallo-l"><span>	  Texture alignment:                             512 bytes</span></span>
+<span class="giallo-l"><span>	  Concurrent copy and kernel execution:          Yes with 2 copy engine(s)</span></span>
+<span class="giallo-l"><span>	  Run time limit on kernels:                     No</span></span>
+<span class="giallo-l"><span>	  Integrated GPU sharing Host Memory:            No</span></span>
+<span class="giallo-l"><span>	  Support host page-locked memory mapping:       Yes</span></span>
+<span class="giallo-l"><span>	  Alignment requirement for Surfaces:            Yes</span></span>
+<span class="giallo-l"><span>	  Device has ECC support:                        Enabled</span></span>
+<span class="giallo-l"><span>	  Device supports Unified Addressing (UVA):      Yes</span></span>
+<span class="giallo-l"><span>	  Supports Cooperative Kernel Launch:            Yes</span></span>
+<span class="giallo-l"><span>	  Supports MultiDevice Co-op Kernel Launch:      Yes</span></span>
+<span class="giallo-l"><span>	  Device PCI Domain ID / Bus ID / location ID:   0 / 0 / 30</span></span>
+<span class="giallo-l"><span>	  Compute Mode:</span></span>
+<span class="giallo-l"><span>	     &lt; Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) &gt;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>	deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 9.0, CUDA Runtime Version = 9.0, NumDevs = 1</span></span>
+<span class="giallo-l"><span>	Result = PASS</span></span></code></pre><pre class="giallo z-l-code z-d-code" ><code data-lang="plain"><span class="giallo-l"><span>./bandwidthTest</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>	[CUDA Bandwidth Test] - Starting...</span></span>
+<span class="giallo-l"><span>	Running on...</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>	 Device 0: Tesla V100-SXM2-16GB</span></span>
+<span class="giallo-l"><span>	 Quick Mode</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>	 Host to Device Bandwidth, 1 Device(s)</span></span>
+<span class="giallo-l"><span>	 PINNED Memory Transfers</span></span>
+<span class="giallo-l"><span>	   Transfer Size (Bytes)	Bandwidth(MB/s)</span></span>
+<span class="giallo-l"><span>	   33554432			10817.1</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>	 Device to Host Bandwidth, 1 Device(s)</span></span>
+<span class="giallo-l"><span>	 PINNED Memory Transfers</span></span>
+<span class="giallo-l"><span>	   Transfer Size (Bytes)	Bandwidth(MB/s)</span></span>
+<span class="giallo-l"><span>	   33554432			12143.6</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>	 Device to Device Bandwidth, 1 Device(s)</span></span>
+<span class="giallo-l"><span>	 PINNED Memory Transfers</span></span>
+<span class="giallo-l"><span>	   Transfer Size (Bytes)	Bandwidth(MB/s)</span></span>
+<span class="giallo-l"><span>	   33554432			742271.1</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>	Result = PASS</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>	NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.</span></span></code></pre><h2 id="install-cudnn">Install cuDNN</h2>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">wget</span><span class="z-l-2 z-d-6"> https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v7.1.1/prod/9.1_20180214/Ubuntu16_04-x64/libcudnn7_7.1.1.5-1+cuda9.1_amd64</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">wget</span><span class="z-l-2 z-d-6"> https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v7.1.1/prod/9.1_20180214/Ubuntu16_04-x64/libcudnn7-dev_7.1.1.5-1+cuda9.1_amd64</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">wget</span><span class="z-l-2 z-d-6"> https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v7.1.1/prod/9.1_20180214/Ubuntu16_04-x64/libcudnn7-doc_7.1.1.5-1+cuda9.1_amd64</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">sudo</span><span class="z-l-2 z-d-6"> dpkg</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">i</span><span class="z-l-2 z-d-6"> libcudnn7_7.1.1.5-1+cuda9.1_amd64.deb</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">sudo</span><span class="z-l-2 z-d-6"> dpkg</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">i</span><span class="z-l-2 z-d-6"> libcudnn7-dev_7.1.1.5-1+cuda9.1_amd64.deb</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">sudo</span><span class="z-l-2 z-d-6"> dpkg</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">i</span><span class="z-l-2 z-d-6"> libcudnn7-doc_7.1.1.5-1+cuda9.1_amd64.deb</span></span></code></pre><h2 id="compile-samples-and-test-them-1">Compile samples and test them</h2>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">cp</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">r</span><span class="z-l-2 z-d-6"> /usr/src/cudnn_samples_v7/</span><span> $</span><span>HOME</span><span class="z-l-2 z-d-6">/cuda</span></span>
+<span class="giallo-l"><span class="z-l-1 z-d-4">cd</span><span class="z-l-2 z-d-6"> cudnn_samples_v7/mnistCUDNN/</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">make</span><span class="z-l-2 z-d-6"> clean</span><span> &amp;&amp;</span><span class="z-l-6 z-d-7"> make</span></span></code></pre><h2 id="check-installation-by-running-mnistcudnn">Check installation by running <em>mnistCUDNN</em></h2>
+<p>You should see an output similar to these ones:</p>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">./mnistCUDNN</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	cudnnGetVersion</span><span>(</span><span>)</span><span class="z-l-1 z-d-4"> :</span><span> 7101 , CUDNN_VERSION from cudnn.h </span><span class="z-l-1 z-d-4">:</span><span> 7101 </span><span>(</span><span class="z-l-6 z-d-7">7.1.1</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Host</span><span class="z-l-2 z-d-6"> compiler</span><span class="z-l-2 z-d-6"> version</span><span class="z-l-2 z-d-6"> :</span><span class="z-l-2 z-d-6"> GCC</span><span class="z-l-1 z-d-4"> 5.4.0</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	There</span><span class="z-l-2 z-d-6"> are</span><span class="z-l-1 z-d-4"> 1</span><span class="z-l-2 z-d-6"> CUDA</span><span class="z-l-2 z-d-6"> capable</span><span class="z-l-2 z-d-6"> devices</span><span class="z-l-2 z-d-6"> on</span><span class="z-l-2 z-d-6"> your</span><span class="z-l-2 z-d-6"> machine</span><span class="z-l-2 z-d-6"> :</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	device</span><span class="z-l-1 z-d-4"> 0</span><span class="z-l-2 z-d-6"> :</span><span class="z-l-2 z-d-6"> sms</span><span class="z-l-1 z-d-4"> 80</span><span class="z-l-2 z-d-6">  Capabilities</span><span class="z-l-2 z-d-6"> 7.0,</span><span class="z-l-2 z-d-6"> SmClock</span><span class="z-l-1 z-d-4"> 1530.0</span><span class="z-l-2 z-d-6"> Mhz,</span><span class="z-l-2 z-d-6"> MemSize</span><span> (Mb</span><span>) 16160, MemClock 877.0 Mhz,</span><span> Ecc</span><span class="z-l-8 z-d-10">=</span><span class="z-l-2 z-d-6">1</span><span class="z-l-2 z-d-6">,</span><span> boardGroupID</span><span class="z-l-8 z-d-10">=</span><span class="z-l-2 z-d-6">0</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Using</span><span class="z-l-2 z-d-6"> device</span><span class="z-l-1 z-d-4"> 0</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Testing</span><span class="z-l-2 z-d-6"> single</span><span class="z-l-2 z-d-6"> precision</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Loading</span><span class="z-l-2 z-d-6"> image</span><span class="z-l-2 z-d-6"> data/one_28x28.pgm</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Performing</span><span class="z-l-2 z-d-6"> forward</span><span class="z-l-2 z-d-6"> propagation</span><span class="z-l-2 z-d-6"> ...</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Testing</span><span class="z-l-2 z-d-6"> cudnnGetConvolutionForwardAlgorithm</span><span class="z-l-2 z-d-6"> ...</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Fastest</span><span class="z-l-2 z-d-6"> algorithm</span><span class="z-l-2 z-d-6"> is</span><span class="z-l-2 z-d-6"> Algo</span><span class="z-l-1 z-d-4"> 5</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Testing</span><span class="z-l-2 z-d-6"> cudnnFindConvolutionForwardAlgorithm</span><span class="z-l-2 z-d-6"> ...</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	^^^^</span><span class="z-l-2 z-d-6"> CUDNN_STATUS_SUCCESS</span><span class="z-l-2 z-d-6"> for</span><span class="z-l-2 z-d-6"> Algo</span><span class="z-l-2 z-d-6"> 0:</span><span class="z-l-1 z-d-4"> 0.026624</span><span class="z-l-2 z-d-6"> time</span><span class="z-l-2 z-d-6"> requiring</span><span class="z-l-1 z-d-4"> 0</span><span class="z-l-2 z-d-6"> memory</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	^^^^</span><span class="z-l-2 z-d-6"> CUDNN_STATUS_SUCCESS</span><span class="z-l-2 z-d-6"> for</span><span class="z-l-2 z-d-6"> Algo</span><span class="z-l-2 z-d-6"> 1:</span><span class="z-l-1 z-d-4"> 0.046080</span><span class="z-l-2 z-d-6"> time</span><span class="z-l-2 z-d-6"> requiring</span><span class="z-l-1 z-d-4"> 3464</span><span class="z-l-2 z-d-6"> memory</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	^^^^</span><span class="z-l-2 z-d-6"> CUDNN_STATUS_SUCCESS</span><span class="z-l-2 z-d-6"> for</span><span class="z-l-2 z-d-6"> Algo</span><span class="z-l-2 z-d-6"> 2:</span><span class="z-l-1 z-d-4"> 0.046080</span><span class="z-l-2 z-d-6"> time</span><span class="z-l-2 z-d-6"> requiring</span><span class="z-l-1 z-d-4"> 57600</span><span class="z-l-2 z-d-6"> memory</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	^^^^</span><span class="z-l-2 z-d-6"> CUDNN_STATUS_SUCCESS</span><span class="z-l-2 z-d-6"> for</span><span class="z-l-2 z-d-6"> Algo</span><span class="z-l-2 z-d-6"> 7:</span><span class="z-l-1 z-d-4"> 0.062464</span><span class="z-l-2 z-d-6"> time</span><span class="z-l-2 z-d-6"> requiring</span><span class="z-l-1 z-d-4"> 2057744</span><span class="z-l-2 z-d-6"> memory</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	^^^^</span><span class="z-l-2 z-d-6"> CUDNN_STATUS_SUCCESS</span><span class="z-l-2 z-d-6"> for</span><span class="z-l-2 z-d-6"> Algo</span><span class="z-l-2 z-d-6"> 5:</span><span class="z-l-1 z-d-4"> 0.078848</span><span class="z-l-2 z-d-6"> time</span><span class="z-l-2 z-d-6"> requiring</span><span class="z-l-1 z-d-4"> 203008</span><span class="z-l-2 z-d-6"> memory</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Resulting</span><span class="z-l-2 z-d-6"> weights</span><span class="z-l-2 z-d-6"> from</span><span class="z-l-2 z-d-6"> Softmax:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	0.0000000</span><span class="z-l-1 z-d-4"> 0.9999399</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 0.0000561</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 0.0000012</span><span class="z-l-1 z-d-4"> 0.0000017</span><span class="z-l-1 z-d-4"> 0.0000010</span><span class="z-l-1 z-d-4"> 0.0000000</span><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Loading</span><span class="z-l-2 z-d-6"> image</span><span class="z-l-2 z-d-6"> data/three_28x28.pgm</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Performing</span><span class="z-l-2 z-d-6"> forward</span><span class="z-l-2 z-d-6"> propagation</span><span class="z-l-2 z-d-6"> ...</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Resulting</span><span class="z-l-2 z-d-6"> weights</span><span class="z-l-2 z-d-6"> from</span><span class="z-l-2 z-d-6"> Softmax:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	0.0000000</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 0.9999288</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 0.0000711</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 0.0000000</span><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Loading</span><span class="z-l-2 z-d-6"> image</span><span class="z-l-2 z-d-6"> data/five_28x28.pgm</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Performing</span><span class="z-l-2 z-d-6"> forward</span><span class="z-l-2 z-d-6"> propagation</span><span class="z-l-2 z-d-6"> ...</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Resulting</span><span class="z-l-2 z-d-6"> weights</span><span class="z-l-2 z-d-6"> from</span><span class="z-l-2 z-d-6"> Softmax:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	0.0000000</span><span class="z-l-1 z-d-4"> 0.0000008</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 0.0000002</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 0.9999820</span><span class="z-l-1 z-d-4"> 0.0000154</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 0.0000012</span><span class="z-l-1 z-d-4"> 0.0000006</span><span> </span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Result</span><span class="z-l-2 z-d-6"> of</span><span class="z-l-2 z-d-6"> classification:</span><span class="z-l-1 z-d-4"> 1</span><span class="z-l-1 z-d-4"> 3</span><span class="z-l-1 z-d-4"> 5</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Test</span><span class="z-l-2 z-d-6"> passed!</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Testing</span><span class="z-l-2 z-d-6"> half</span><span class="z-l-2 z-d-6"> precision</span><span> (math</span><span class="z-l-2 z-d-6"> in</span><span class="z-l-2 z-d-6"> single</span><span class="z-l-2 z-d-6"> precision</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Loading</span><span class="z-l-2 z-d-6"> image</span><span class="z-l-2 z-d-6"> data/one_28x28.pgm</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Performing</span><span class="z-l-2 z-d-6"> forward</span><span class="z-l-2 z-d-6"> propagation</span><span class="z-l-2 z-d-6"> ...</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Testing</span><span class="z-l-2 z-d-6"> cudnnGetConvolutionForwardAlgorithm</span><span class="z-l-2 z-d-6"> ...</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Fastest</span><span class="z-l-2 z-d-6"> algorithm</span><span class="z-l-2 z-d-6"> is</span><span class="z-l-2 z-d-6"> Algo</span><span class="z-l-1 z-d-4"> 5</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Testing</span><span class="z-l-2 z-d-6"> cudnnFindConvolutionForwardAlgorithm</span><span class="z-l-2 z-d-6"> ...</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	^^^^</span><span class="z-l-2 z-d-6"> CUDNN_STATUS_SUCCESS</span><span class="z-l-2 z-d-6"> for</span><span class="z-l-2 z-d-6"> Algo</span><span class="z-l-2 z-d-6"> 0:</span><span class="z-l-1 z-d-4"> 0.024576</span><span class="z-l-2 z-d-6"> time</span><span class="z-l-2 z-d-6"> requiring</span><span class="z-l-1 z-d-4"> 0</span><span class="z-l-2 z-d-6"> memory</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	^^^^</span><span class="z-l-2 z-d-6"> CUDNN_STATUS_SUCCESS</span><span class="z-l-2 z-d-6"> for</span><span class="z-l-2 z-d-6"> Algo</span><span class="z-l-2 z-d-6"> 2:</span><span class="z-l-1 z-d-4"> 0.044032</span><span class="z-l-2 z-d-6"> time</span><span class="z-l-2 z-d-6"> requiring</span><span class="z-l-1 z-d-4"> 28800</span><span class="z-l-2 z-d-6"> memory</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	^^^^</span><span class="z-l-2 z-d-6"> CUDNN_STATUS_SUCCESS</span><span class="z-l-2 z-d-6"> for</span><span class="z-l-2 z-d-6"> Algo</span><span class="z-l-2 z-d-6"> 1:</span><span class="z-l-1 z-d-4"> 0.048128</span><span class="z-l-2 z-d-6"> time</span><span class="z-l-2 z-d-6"> requiring</span><span class="z-l-1 z-d-4"> 3464</span><span class="z-l-2 z-d-6"> memory</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	^^^^</span><span class="z-l-2 z-d-6"> CUDNN_STATUS_SUCCESS</span><span class="z-l-2 z-d-6"> for</span><span class="z-l-2 z-d-6"> Algo</span><span class="z-l-2 z-d-6"> 7:</span><span class="z-l-1 z-d-4"> 0.058368</span><span class="z-l-2 z-d-6"> time</span><span class="z-l-2 z-d-6"> requiring</span><span class="z-l-1 z-d-4"> 2057744</span><span class="z-l-2 z-d-6"> memory</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	^^^^</span><span class="z-l-2 z-d-6"> CUDNN_STATUS_SUCCESS</span><span class="z-l-2 z-d-6"> for</span><span class="z-l-2 z-d-6"> Algo</span><span class="z-l-2 z-d-6"> 5:</span><span class="z-l-1 z-d-4"> 0.077824</span><span class="z-l-2 z-d-6"> time</span><span class="z-l-2 z-d-6"> requiring</span><span class="z-l-1 z-d-4"> 203008</span><span class="z-l-2 z-d-6"> memory</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Resulting</span><span class="z-l-2 z-d-6"> weights</span><span class="z-l-2 z-d-6"> from</span><span class="z-l-2 z-d-6"> Softmax:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	0.0000001</span><span class="z-l-1 z-d-4"> 1.0000000</span><span class="z-l-1 z-d-4"> 0.0000001</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 0.0000558</span><span class="z-l-1 z-d-4"> 0.0000001</span><span class="z-l-1 z-d-4"> 0.0000011</span><span class="z-l-1 z-d-4"> 0.0000017</span><span class="z-l-1 z-d-4"> 0.0000010</span><span class="z-l-1 z-d-4"> 0.0000001</span><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Loading</span><span class="z-l-2 z-d-6"> image</span><span class="z-l-2 z-d-6"> data/three_28x28.pgm</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Performing</span><span class="z-l-2 z-d-6"> forward</span><span class="z-l-2 z-d-6"> propagation</span><span class="z-l-2 z-d-6"> ...</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Resulting</span><span class="z-l-2 z-d-6"> weights</span><span class="z-l-2 z-d-6"> from</span><span class="z-l-2 z-d-6"> Softmax:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	0.0000000</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 1.0000000</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 0.0000703</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 0.0000000</span><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Loading</span><span class="z-l-2 z-d-6"> image</span><span class="z-l-2 z-d-6"> data/five_28x28.pgm</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Performing</span><span class="z-l-2 z-d-6"> forward</span><span class="z-l-2 z-d-6"> propagation</span><span class="z-l-2 z-d-6"> ...</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Resulting</span><span class="z-l-2 z-d-6"> weights</span><span class="z-l-2 z-d-6"> from</span><span class="z-l-2 z-d-6"> Softmax:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	0.0000000</span><span class="z-l-1 z-d-4"> 0.0000008</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 0.0000002</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 1.0000000</span><span class="z-l-1 z-d-4"> 0.0000154</span><span class="z-l-1 z-d-4"> 0.0000000</span><span class="z-l-1 z-d-4"> 0.0000012</span><span class="z-l-1 z-d-4"> 0.0000006</span><span> </span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Result</span><span class="z-l-2 z-d-6"> of</span><span class="z-l-2 z-d-6"> classification:</span><span class="z-l-1 z-d-4"> 1</span><span class="z-l-1 z-d-4"> 3</span><span class="z-l-1 z-d-4"> 5</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Test</span><span class="z-l-2 z-d-6"> passed!</span></span></code></pre><h2 id="install-final-command-line-utilities-and-setup-ld-library-path">Install final command line utilities and setup LD_LIBRARY_PATH</h2>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">sudo</span><span class="z-l-2 z-d-6"> apt-get</span><span class="z-l-2 z-d-6"> install</span><span class="z-l-2 z-d-6"> cuda-command-line-tools-9-1</span></span>
+<span class="giallo-l"><span class="z-l-8 z-d-10">export</span><span> LD_LIBRARY_PATH</span><span class="z-l-8 z-d-10">=</span><span>$</span><span>LD_LIBRARY_PATH</span><span>:/</span><span>usr</span><span>/</span><span>local</span><span>/</span><span>cuda</span><span>/</span><span>extras</span><span>/</span><span>CUPTI</span><span>/</span><span>lib64</span></span></code></pre><h2 id="check-tensorflow-is-running-on-a-gpu">Check tensorflow is running on a GPU</h2>
+<pre class="giallo z-l-code z-d-code" ><code data-lang="shellscript"><span class="giallo-l"><span class="z-l-6 z-d-7">pip</span><span class="z-l-2 z-d-6"> install</span><span class="z-l-1 z-d-4"> -</span><span class="z-l-1 z-d-4">-upgrade</span><span class="z-l-2 z-d-6"> tensorflow-gpu</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">python</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">import</span><span class="z-l-2 z-d-6"> tensorflow</span><span class="z-l-2 z-d-6"> as</span><span class="z-l-2 z-d-6"> tf</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">sess</span><span class="z-l-2 z-d-6"> =</span><span class="z-l-2 z-d-6"> tf.Session</span><span>(</span><span>config</span><span class="z-l-8 z-d-10">=</span><span class="z-l-2 z-d-6">t</span><span class="z-l-2 z-d-6">f</span><span class="z-l-2 z-d-6">.</span><span class="z-l-2 z-d-6">C</span><span class="z-l-2 z-d-6">o</span><span class="z-l-2 z-d-6">n</span><span class="z-l-2 z-d-6">f</span><span class="z-l-2 z-d-6">i</span><span class="z-l-2 z-d-6">g</span><span class="z-l-2 z-d-6">P</span><span class="z-l-2 z-d-6">r</span><span class="z-l-2 z-d-6">o</span><span class="z-l-2 z-d-6">t</span><span class="z-l-2 z-d-6">o</span><span>(</span><span>log_device_placement</span><span class="z-l-8 z-d-10">=</span><span class="z-l-2 z-d-6">T</span><span class="z-l-2 z-d-6">r</span><span class="z-l-2 z-d-6">u</span><span class="z-l-2 z-d-6">e</span><span>)</span><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	2018-03-20</span><span class="z-l-2 z-d-6"> 16:43:50.112739:</span><span class="z-l-2 z-d-6"> I</span><span class="z-l-2 z-d-6"> tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:898]</span><span class="z-l-2 z-d-6"> successful</span><span class="z-l-2 z-d-6"> NUMA</span><span class="z-l-2 z-d-6"> node</span><span class="z-l-2 z-d-6"> read</span><span class="z-l-2 z-d-6"> from</span><span class="z-l-2 z-d-6"> SysFS</span><span class="z-l-2 z-d-6"> had</span><span class="z-l-2 z-d-6"> negative</span><span class="z-l-2 z-d-6"> value</span><span> (-1</span><span>), but there must be at least one NUMA node, so returning NUMA node zero</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	2018-03-20</span><span class="z-l-2 z-d-6"> 16:43:50.112955:</span><span class="z-l-2 z-d-6"> I</span><span class="z-l-2 z-d-6"> tensorflow/core/common_runtime/gpu/gpu_device.cc:1212]</span><span class="z-l-2 z-d-6"> Found</span><span class="z-l-2 z-d-6"> device</span><span class="z-l-1 z-d-4"> 0</span><span class="z-l-2 z-d-6"> with</span><span class="z-l-2 z-d-6"> properties:</span><span> </span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	name:</span><span class="z-l-2 z-d-6"> Tesla</span><span class="z-l-2 z-d-6"> V100-SXM2-16GB</span><span class="z-l-2 z-d-6"> major:</span><span class="z-l-1 z-d-4"> 7</span><span class="z-l-2 z-d-6"> minor:</span><span class="z-l-1 z-d-4"> 0</span><span class="z-l-2 z-d-6"> memoryClockRate</span><span>(</span><span class="z-l-6 z-d-7">GHz</span><span>)</span><span class="z-l-2 z-d-6">:</span><span class="z-l-1 z-d-4"> 1.53</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	pciBusID:</span><span class="z-l-2 z-d-6"> 0000:00:1e.0</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	totalMemory:</span><span class="z-l-2 z-d-6"> 15.78GiB</span><span class="z-l-2 z-d-6"> freeMemory:</span><span class="z-l-2 z-d-6"> 307.94MiB</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	2018-03-20</span><span class="z-l-2 z-d-6"> 16:43:50.112982:</span><span class="z-l-2 z-d-6"> I</span><span class="z-l-2 z-d-6"> tensorflow/core/common_runtime/gpu/gpu_device.cc:1312]</span><span class="z-l-2 z-d-6"> Adding</span><span class="z-l-2 z-d-6"> visible</span><span class="z-l-2 z-d-6"> gpu</span><span class="z-l-2 z-d-6"> devices:</span><span class="z-l-1 z-d-4"> 0</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	2018-03-20</span><span class="z-l-2 z-d-6"> 16:43:50.802739:</span><span class="z-l-2 z-d-6"> I</span><span class="z-l-2 z-d-6"> tensorflow/core/common_runtime/gpu/gpu_device.cc:993]</span><span class="z-l-2 z-d-6"> Creating</span><span class="z-l-2 z-d-6"> TensorFlow</span><span class="z-l-2 z-d-6"> device</span><span> (/job:localhost/replica:0/task:0/device:GPU:0</span><span class="z-l-2 z-d-6"> with</span><span class="z-l-1 z-d-4"> 10</span><span class="z-l-2 z-d-6"> MB</span><span class="z-l-2 z-d-6"> memory</span><span>) -</span><span class="z-l-8 z-d-10">&gt;</span><span> physical GPU (</span><span class="z-l-6 z-d-7">device:</span><span class="z-l-2 z-d-6"> 0,</span><span class="z-l-2 z-d-6"> name:</span><span class="z-l-2 z-d-6"> Tesla</span><span class="z-l-2 z-d-6"> V100-SXM2-16GB,</span><span class="z-l-2 z-d-6"> pci</span><span class="z-l-2 z-d-6"> bus</span><span class="z-l-2 z-d-6"> id:</span><span class="z-l-2 z-d-6"> 0000:00:1e.0,</span><span class="z-l-2 z-d-6"> compute</span><span class="z-l-2 z-d-6"> capability:</span><span class="z-l-1 z-d-4"> 7.0</span><span>)</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	Device</span><span class="z-l-2 z-d-6"> mapping:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	/job:localhost/replica:0/task:0/device:GPU:0</span><span> -</span><span class="z-l-8 z-d-10">&gt;</span><span class="z-l-2 z-d-6"> device:</span><span class="z-l-2 z-d-6"> 0,</span><span class="z-l-2 z-d-6"> name:</span><span class="z-l-2 z-d-6"> Tesla</span><span class="z-l-2 z-d-6"> V100-SXM2-16GB,</span><span class="z-l-2 z-d-6"> pci</span><span class="z-l-2 z-d-6"> bus</span><span class="z-l-2 z-d-6"> id:</span><span class="z-l-2 z-d-6"> 0000:00:1e.0,</span><span class="z-l-2 z-d-6"> compute</span><span class="z-l-2 z-d-6"> capability:</span><span class="z-l-1 z-d-4"> 7.0</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	2018-03-20</span><span class="z-l-2 z-d-6"> 16:43:50.805298:</span><span class="z-l-2 z-d-6"> I</span><span class="z-l-2 z-d-6"> tensorflow/core/common_runtime/direct_session.cc:297]</span><span class="z-l-2 z-d-6"> Device</span><span class="z-l-2 z-d-6"> mapping:</span></span>
+<span class="giallo-l"><span class="z-l-6 z-d-7">	/job:localhost/replica:0/task:0/device:GPU:0</span><span> -</span><span class="z-l-8 z-d-10">&gt;</span><span class="z-l-2 z-d-6"> device:</span><span class="z-l-2 z-d-6"> 0,</span><span class="z-l-2 z-d-6"> name:</span><span class="z-l-2 z-d-6"> Tesla</span><span class="z-l-2 z-d-6"> V100-SXM2-16GB,</span><span class="z-l-2 z-d-6"> pci</span><span class="z-l-2 z-d-6"> bus</span><span class="z-l-2 z-d-6"> id:</span><span class="z-l-2 z-d-6"> 0000:00:1e.0,</span><span class="z-l-2 z-d-6"> compute</span><span class="z-l-2 z-d-6"> capability:</span><span class="z-l-1 z-d-4"> 7.0</span></span></code></pre>
+<p>From the output logs, we can see that Tensorflow detected our GPU device. We can now train our models on the GPU and accelerate the training time.</p>
+
+            </section>
+        </article>
+    </main>
+</div>
+
+
+
+            
+                
+            
+
+            
+        </div>
+
+        <div class="right-content">
+            
+    
+    
+        <div class="toc">
+    <div class="heading">
+        Table of Contents
+    </div>
+    <ul class="toc-list">
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/nvidia-cuda-for-deep-learning/#install-the-cuda-toolkit">Install the CUDA Toolkit</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/nvidia-cuda-for-deep-learning/#setup-the-environment-variables">Setup the environment variables</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/nvidia-cuda-for-deep-learning/#compile-samples-and-test-them">Compile samples and test them</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/nvidia-cuda-for-deep-learning/#check-installation-by-running-devicequery-and-bandwidthtest">Check installation by running deviceQuery and bandwidthTest</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/nvidia-cuda-for-deep-learning/#install-cudnn">Install cuDNN</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/nvidia-cuda-for-deep-learning/#compile-samples-and-test-them-1">Compile samples and test them</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/nvidia-cuda-for-deep-learning/#check-installation-by-running-mnistcudnn">Check installation by running mnistCUDNN</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/nvidia-cuda-for-deep-learning/#install-final-command-line-utilities-and-setup-ld-library-path">Install final command line utilities and setup LD_LIBRARY_PATH</a>
+
+                
+            </li>
+        
+            <li class="parent">
+                
+                <a href="https://alexandrept.com/blog/nvidia-cuda-for-deep-learning/#check-tensorflow-is-running-on-a-gpu">Check tensorflow is running on a GPU</a>
+
+                
+            </li>
+        
+    </ul>
+</div>
+
+    
+
+        </div>
+        
+
+<style>
+    body { flex-wrap: wrap; }
+    .site-footer {
+        flex-basis: 100%;
+        width: 100%;
+        max-width: 920px;
+        margin: 0.5rem auto 0;
+        padding: 0 0.9rem;
+        text-align: center;
+        opacity: 0.7;
+        font-size: 0.9em;
+    }
+</style>
+<footer class="site-footer">
+    <p>Copyright &copy; 2026 Alexandre Pinto</p>
+</footer>
+
+    </body>
+
+</html>

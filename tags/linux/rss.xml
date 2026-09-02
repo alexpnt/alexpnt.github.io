@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title>Alexandre Pinto - linux</title>
+      <link>https://alexandrept.com</link>
+      <description>Software engineer, from Portugal. Mostly interested in backend development and machine learning.</description>
+      <generator>Zola</generator>
+      <language>en</language>
+      <atom:link href="https://alexandrept.com/tags/linux/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Tue, 15 Aug 2017 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>Reattaching shell sessions</title>
+          <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
+          <author>Alexandre Pinto</author>
+          <link>https://alexandrept.com/blog/reattaching-sessions/</link>
+          <guid>https://alexandrept.com/blog/reattaching-sessions/</guid>
+          <description xml:base="https://alexandrept.com/blog/reattaching-sessions/">&lt;p&gt;Ever started a shell session running a process, quickly realizing that will take longer than you expected to finish? For instance, a remote ssh session where you do not want to leave your computer turned on just to keep the session open. Fortunately, there is a workaround by using a combination of &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https://www.gnu.org/software/screen/&quot;&gt;screen&lt;/a&gt; and &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https://github.com/nelhage/reptyr&quot;&gt;reptyr&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For example, imagine that we are running this hypothetic slow process that prints in each second the next number of the Fibonacci sequence:&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;python&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-5 z-d-3&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;z-l-5 z-d-3&quot;&gt;!/usr/bin/env python&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-5 z-d-3&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;z-l-5 z-d-3&quot;&gt; -*- coding: utf-8 -*-&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-8 z-d-10&quot;&gt;import&lt;/span&gt;&lt;span&gt; time&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-8 z-d-10&quot;&gt;def&lt;/span&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt; fibo&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;span&gt;:&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;	prev&lt;/span&gt;&lt;span class=&quot;z-l-8 z-d-10&quot;&gt; =&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; sum&lt;/span&gt;&lt;span class=&quot;z-l-8 z-d-10&quot;&gt; =&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; 0&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;	actual&lt;/span&gt;&lt;span class=&quot;z-l-8 z-d-10&quot;&gt; =&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; 1&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;        print&lt;/span&gt;&lt;span&gt; actual&lt;/span&gt;&lt;span&gt;	&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-8 z-d-10&quot;&gt;	while&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; True&lt;/span&gt;&lt;span&gt;:&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;		next&lt;/span&gt;&lt;span class=&quot;z-l-8 z-d-10&quot;&gt; =&lt;/span&gt;&lt;span&gt; prev&lt;/span&gt;&lt;span class=&quot;z-l-8 z-d-10&quot;&gt; +&lt;/span&gt;&lt;span&gt; actual&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;		prev&lt;/span&gt;&lt;span class=&quot;z-l-8 z-d-10&quot;&gt; =&lt;/span&gt;&lt;span&gt; actual&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;		actual&lt;/span&gt;&lt;span class=&quot;z-l-8 z-d-10&quot;&gt; =&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; next&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;		print&lt;/span&gt;&lt;span&gt; actual&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;		time&lt;/span&gt;&lt;span&gt;.&lt;/span&gt;&lt;span&gt;sleep&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;1&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-8 z-d-10&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; __name__&lt;/span&gt;&lt;span class=&quot;z-l-8 z-d-10&quot;&gt; ==&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; &amp;quot;&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;__main__&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span&gt;:&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;    fibo&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; python&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; fibo.py&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;1&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;1&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;2&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;3&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;5&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;8&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;13&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;21&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;34&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;55&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;89&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;144&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;233&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;377&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;610&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;987&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;1597&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;2584&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;4181&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;6765&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;10946&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;17711&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;28657&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We are now interested in moving this job to another session where we can attach and detach any time, while leaving the job running. In order to achieve this, we start by creating a new screen session in a new window:&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; screen&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; fibonacci&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The screen tool lets us create multiple windows with shells inside. We can also leave those windows at anytime and reenter them later, always leaving their internal programs running. Once we have this new screen session, we can move our running job to this new shell:&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; ps&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;z-l-8 z-d-10&quot;&gt; |&lt;/span&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt; grep&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; fibo.py&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;alexpnt&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;  10776&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;  0.0&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;  0.1&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;  25540&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;  6204&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; pts/4&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;    S+&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;   14:00&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;   0:00&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; python&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; fibo.py&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; sudo&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;i&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; echo&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; 0&lt;/span&gt;&lt;span class=&quot;z-l-8 z-d-10&quot;&gt; &amp;gt;&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; /proc/sys/kernel/yama/ptrace_scope&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; exit&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; reptyr&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; 10776&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;46368&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;75025&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;121393&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;196418&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;317811&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;514229&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;832040&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;1346269&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;2178309&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;3524578&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;5702887&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;9227465&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;14930352&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We temporarily enable the ability to attach programs, as root. Then, we grab the process id and pass it to the reptyr tool, which does a great job in moving our old process back to this new shell. We can now detach from this screen session by typing &lt;em&gt;Ctrl + Shift + D&lt;/em&gt; and confirming the session is saved:&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; screen&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;ls&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;There&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; is&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; a&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; screen&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; on:&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;	10822.fibo&lt;/span&gt;&lt;span&gt;	(Detached&lt;/span&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; Socket&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; in&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; /run/screens/S-alexpnt.&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Later, when can reattach to the screen:&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; screen&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; fibo&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;24157817&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;39088169&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;63245986&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;102334155&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;165580141&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;267914296&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;433494437&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;701408733&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;1134903170&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;1836311903&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;2971215073&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;4807526976&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;7778742049&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;12586269025&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;PS: You might need to run &lt;code&gt;bash echo 0 &amp;gt; /proc/sys/kernel/yama/ptrace_scope&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This is a very simple example with a trivial job running just to illustrate the idea of moving random jobs to new screen sessions. We can avoid this by always starting long running process in new screen sessions. In case we forget, we can use this process to rescue us.&lt;/p&gt;
+</description>
+      </item>
+      <item>
+          <title>Free up memory by cleaning caches</title>
+          <pubDate>Sat, 12 Aug 2017 00:00:00 +0000</pubDate>
+          <author>Alexandre Pinto</author>
+          <link>https://alexandrept.com/blog/clear-cache/</link>
+          <guid>https://alexandrept.com/blog/clear-cache/</guid>
+          <description xml:base="https://alexandrept.com/blog/clear-cache/">&lt;p&gt;Running out of memory can be an issue when you are running a lot services on your development box, such as web services, databases, editors, etc. Over time, the caching system eats up a good portion of your memory resources. Event though Linux has a good memory management system, the kernel also has a useful mechanism to free up caches.&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;sync&lt;/span&gt;&lt;span&gt;;&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; echo&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; 3&lt;/span&gt;&lt;span class=&quot;z-l-8 z-d-10&quot;&gt; &amp;gt;&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; /proc/sys/vm/drop_caches&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Basically,  the initial &lt;em&gt;sync&lt;/em&gt; command writes pending data in memory back to disk. After this synchronization, we can release memory by dropping cached objects.  The value &#39;3&#39; is just an internal argument used to specify the type of caches that will be freed. The writing event triggers the cleaning task.
+You can see its effects by checking your memory in real time:&lt;/p&gt;
+&lt;p&gt;Before:&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; free&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;t&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;              total&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        used&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        free&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;      shared&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;  buff/cache&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;   available&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;Mem:&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;           3.8G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        2.0G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        1.1G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        134M&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        622M&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        1.4G&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;Swap:&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;          2.0G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        531M&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        1.5G&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;Total:&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;         5.8G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        2.5G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        2.6G&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After:&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; free&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;t&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;              total&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        used&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        free&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;      shared&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;  buff/cache&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;   available&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;Mem:&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;           3.8G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        2.0G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        1.4G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        133M&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        375M&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        1.4G&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;Swap:&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;          2.0G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        532M&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        1.5G&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;Total:&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;         5.8G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        2.5G&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt;        2.9G&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It is important to note that this will cause objects to be recreated later, which may lead to some intense CPU/IO usage. However, it is still an approach you can use if you feel you are running out of memory and want to reclaim back some portions of it.&lt;/p&gt;
+</description>
+      </item>
+      <item>
+          <title>Mouting CIFS shares on a Linux/UNIX box</title>
+          <pubDate>Sun, 23 Jul 2017 00:00:00 +0000</pubDate>
+          <author>Alexandre Pinto</author>
+          <link>https://alexandrept.com/blog/mount-cifs-shares/</link>
+          <guid>https://alexandrept.com/blog/mount-cifs-shares/</guid>
+          <description xml:base="https://alexandrept.com/blog/mount-cifs-shares/">&lt;p&gt;Occasionally, there is the need to access files from a remote host which uses a diferent operating system or is located in a different network. The CIFS (Common Internet File System) is a sharing protocol that lets users share files across different systems.&lt;/p&gt;
+&lt;p&gt;On a Linux/UNIX box we can mount our shared folder as follows:&lt;/p&gt;
+&lt;pre class=&quot;giallo z-l-code z-d-code&quot; &gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-l-6 z-d-7&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; sudo&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; mount&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; cifs&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; //remoteserver/shared&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; /mnt/shared/&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;z-l-2 z-d-6&quot;&gt; username=myusername,password=mypassword&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt; -&lt;/span&gt;&lt;span class=&quot;z-l-1 z-d-4&quot;&gt;-verbose&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;where:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;-t cifs&lt;/em&gt; is the filesystem type (cifs in our case)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;//remoteserver/shared&lt;/em&gt; is our remote host (&#39;shared&#39; is the shared folder)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;/mnt/shared/&lt;/em&gt; is the local folder that will be mounted&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;-o username=myusername,password=mypassword&lt;/em&gt;  are the authentication credentials&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; You might need to install CIFS utilities before attempting to run the above command.&lt;/p&gt;
+</description>
+      </item>
+    </channel>
+</rss>
